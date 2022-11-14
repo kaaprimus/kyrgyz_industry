@@ -33,7 +33,7 @@ if 'rosetta' in settings.INSTALLED_APPS:
         re_path(r'^rosetta/', include('rosetta.urls'))
     ]
 
-if settings.DEBUG:
+elif settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
 
