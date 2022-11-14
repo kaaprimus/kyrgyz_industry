@@ -17,9 +17,13 @@ from django.contrib import messages
 from .models import *
 from .forms import *
 from django.contrib.auth.backends import UserModel
-
+from django.core.mail import BadHeaderError, send_mail
+from django.core import mail
+from django.core.mail import send_mail, BadHeaderError
 from django.utils.translation import gettext as _
 from django.utils.translation import get_language, activate, gettext
+from django.conf import settings
+
 
 def index(request):
     trans = translate(language='ru')
@@ -45,6 +49,39 @@ def error_500(request):
 def error_503(request):
     return render(request, '503.html')
 
+
+
+def send_message(request):
+    
+    sucs=True
+    if request.method == 'POST':
+        settings.EMAIL_HOST_USER=request.POST.get('email', '')
+        settings.EMAIL_HOST_PASSWORD=''
+        Name = request.POST.get('name', '')
+        
+        message = request.POST.get('message', '')
+        from_email = request.POST.get('email', '')
+        subject = "Сообщение от пользователей" 
+        try:
+            
+            body = {
+			    'Name: ': "От кого: "+ Name, 
+                'from_email': "Эл.адрес: " + from_email,
+			    'message': "Сообщение: " + message,
+		    }
+	    
+            messageAll = "\n".join(body.values())
+            send_mail(subject, messageAll, from_email, ['To'])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+        except:
+            messages.add_message(request, messages.ERROR, 'Неправильный эл.адрес')
+            sucs=False
+    if(sucs==True):
+        messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
+    return redirect ('/')
+
+    
 
 """ 
     Таски:
