@@ -1,0 +1,188 @@
+{% extends 'admin/admin_base.html' %}   
+{% load static %}
+{% block plugin_css %}
+<!-- Plugin css for this page -->
+<link rel="stylesheet" href="{% static 'admin-panel/vendors/daterangepicker/daterangepicker.css' %}">
+<link rel="stylesheet" href="{% static 'admin-panel/vendors/chartist/chartist.min.css' %}">
+<!-- End plugin css for this page -->
+{% endblock plugin_css %}
+  {% block content %}
+  <div id="spinner-box" class="spinner-box text-center mt-3 mb-3 ml-auto pr-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Загрузка...</span>
+    </div>
+  </div>
+          <div class="content-wrapper">
+            <div class="row purchace-popup" id="purchace-popup">
+              <div class="col-12 stretch-card grid-margin">
+                <div class="card card-secondary">
+                  <span class="card-body d-lg-flex align-items-center">
+                    <p class="mb-lg-0">
+                      <span class="text-dark" style="margin-right: 5px; font-weight: 600;">Полезные советы:</span>
+                        <ul id="suggestion">
+                          <li class="item"> Добавьте сначала фотографии потом добавьте новость</li>
+                          <li class="item"> Сначало познакомтесь с инструкциями пользователя</li>
+                          <li class="item"> Была была была</li>
+                        </ul>  
+                    </p>
+                    <a href="add/" class="btn btn-success purchase-button btn-sm my-1 my-sm-0 ml-auto">Читать инструкцию</a>
+                    <button id="close-btn" class="close popup-dismiss ml-2">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- Quick Action Toolbar Starts-->
+            <div class="row quick-action-toolbar">
+              <div class="col-md-12 grid-margin">
+                <div class="card">
+                  <div class="card-header d-block d-md-flex">
+                    <h5 class="mb-0">Быстрые действии</h5>
+                    <p class="ml-auto mb-0"><i class="icon-bulb"></i></p>
+                  </div>
+                  <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <a href="{% url "news_create" %}" class="btn px-0"> <i class="icon-book-open mr-2"></i>Добавить новости</a>
+                    </div>
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <a href="#" class="btn px-0"><i class="icon-folder mr-2"></i>Добавить проект</a>
+                    </div>
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <a href="{% url "contests_create" %}" class="btn px-0"><i class="icon-folder mr-2"></i>Добавить Конкурсы</a>
+                    </div>
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <a href="#" class="btn px-0"><i class="icon-user mr-2"></i>Добавить сотрудника</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Quick Action Toolbar Ends-->
+
+            <div class="row">
+              <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-sm-flex align-items-center mb-4">
+                      <h4 class="card-title mb-sm-0">Последние проекты</h4>
+                      <a href="#" class="text-dark ml-auto mb-3 mb-sm-0"> Все проекты</a>
+                    </div>
+                    <div class="table-responsive border rounded p-1">
+                      {% if last_project %}
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th class="font-weight-bold">Store ID</th>
+                            <th class="font-weight-bold">Amount</th>
+                            <th class="font-weight-bold">Gateway</th>
+                            <th class="font-weight-bold">Created at</th>
+                            <th class="font-weight-bold">Paid at</th>
+                            <th class="font-weight-bold">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img class="img-sm rounded-circle" src="{% static 'admin-panel/images/faces/face1.jpg' %}" alt="profile image"> Katie Holmes
+                            </td>
+                            <td>$3621</td>
+                            <td><img src="{% static 'admin-panel/images/dashboard/alipay.png' %}" alt="alipay" class="gateway-icon mr-2"> alipay</td>
+                            <td>04 Jun 2019</td>
+                            <td>18 Jul 2019</td>
+                            <td>
+                              <div class="badge badge-success p-2">Paid</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="img-sm rounded-circle" src="{% static 'admin-panel/images/faces/face2.jpg' %}" alt="profile image"> Minnie Copeland
+                            </td>
+                            <td>$6245</td>
+                            <td><img src="{% static 'admin-panel/images/dashboard/paypal.png' %}" alt="alipay" class="gateway-icon mr-2"> Paypal</td>
+                            <td>25 Sep 2019</td>
+                            <td>07 Oct 2019</td>
+                            <td>
+                              <div class="badge badge-danger p-2">Pending</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="img-sm rounded-circle" src="{% static 'admin-panel/images/faces/face3.jpg' %}" alt="profile image"> Rodney Sims
+                            </td>
+                            <td>$9265</td>
+                            <td><img src="{% static 'admin-panel/images/dashboard/alipay.png' %}" alt="alipay" class="gateway-icon mr-2"> alipay</td>
+                            <td>12 dec 2019</td>
+                            <td>26 Aug 2019</td>
+                            <td>
+                              <div class="badge badge-warning p-2">Failed</div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img class="img-sm rounded-circle" src="{% static 'admin-panel/images/faces/face4.jpg' %}" alt="profile image"> Carolyn Barker
+                            </td>
+                            <td>$2263</td>
+                            <td><img src="{% static 'admin-panel/images/dashboard/alipay.png' %}" alt="alipay" class="gateway-icon mr-2"> alipay</td>
+                            <td>30 Sep 2019</td>
+                            <td>20 Oct 2019</td>
+                            <td>
+                              <div class="badge badge-success p-2">Paid</div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    {% else %}
+                    <h2>Нет записей!</h2>
+                    {% endif %}
+                    </div>
+                    <div class="d-flex mt-4 flex-wrap">
+                      <p class="text-muted">Showing 1 to 10 of 57 entries</p>
+                      <nav class="ml-auto">
+                        <ul class="pagination separated pagination-info">
+                          <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
+                          <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                          <li class="page-item"><a href="#" class="page-link">2</a></li>
+                          <li class="page-item"><a href="#" class="page-link">3</a></li>
+                          <li class="page-item"><a href="#" class="page-link">4</a></li>
+                          <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-right"></i></a></li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+
+          <script>
+            let clsBtn = document.getElementById("close-btn");
+            let row = document.getElementById('purchace-popup');
+            clsBtn.onclick = function(){
+              row.style.display = "none";
+            }
+          </script>
+    {% endblock content %}
+    
+   
+    {% block custom_js %}
+    
+    <!-- plugins:js -->
+    <script src="{% static 'admin-panel/vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'admin-panel/js/off-canvas.js' %}"></script>
+    <script src="{% static 'admin-panel/js/misc.js' %}"></script>
+    <!-- endinject -->
+    <script src="{% static 'admin-panel/js/jquery.ticker.js' %}"></script>
+
+    <!-- Custom js for this page -->
+    <script src="{% static 'admin-panel/js/dashboard.js' %}"></script>
+    <!-- Custom js for this page -->
+
+    <script src="{% static 'admin-panel/js/custom.js' %}"></script>
+    <!-- End custom js for this page -->
+    {% endblock custom_js %}

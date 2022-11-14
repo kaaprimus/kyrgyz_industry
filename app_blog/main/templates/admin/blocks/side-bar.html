@@ -1,0 +1,93 @@
+  {% load static %} 
+      <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+              <li class="nav-item nav-profile user-select-none">
+                <a class="nav-link">
+                  <div class="profile-image">
+                    <div class="dot-indicator bg-success"></div>
+                  </div>
+                  <div class="text-wrapper">
+                    <p class="profile-name">{{ user }}</p>
+                    <p class="designation">Администратор</p>
+                  </div>
+                  <div class="icon-container">
+                    <i class="icon-support"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item nav-category">
+                <span class="nav-link">Панель</span>
+              </li>
+              <li class="nav-item" id="main-panel">
+                <a class="nav-link" href="{% url 'admin_panel' %}">
+                  <span class="menu-title">Панель-Управление</span>
+                  <i class="icon-screen-desktop menu-icon"></i>
+                </a>
+              </li>
+              <li class="nav-item nav-category"><span class="nav-link">Управление контента</span></li>
+           
+           
+              
+              <li class="nav-item" id="news-panel">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="{% if expand_news %}true{% else %}false{% endif %}" aria-controls="ui-basic">
+                  <span class="menu-title">Новости</span>
+                  <i class="icon-book-open menu-icon"></i>
+                </a>
+                <div class="collapse{% if expand_news %}show{% endif %}" id="ui-basic">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link {% if active_news_gallery %}active{% endif %}" href="{% url 'newsgallery_all' %}">Галерея</a></li>
+                    <li class="nav-item"> <a class="nav-link {% if active_news_image %}active{% endif %}" href="{% url 'newsimage_all' %}">Фотографии</a></li>
+                    <li class="nav-item"> <a class="nav-link {% if active_news %}active{% endif %}" href="{% url 'news_all' %}">Статьи</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item" id="projects-panel">
+                <a class="nav-link" data-toggle="collapse" href="#projects" aria-expanded="{% if expand_projects %}true{% else %}false{% endif %}" aria-controls="projects">
+                  <span class="menu-title">Проекты</span>
+                  <i class="icon-layers menu-icon"></i>
+                </a>
+                <div class="collapse{% if expand_projects %}show{% endif %}" id="projects">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link {% if active_image_news %}active{% endif %}" href="{% url 'newsimage_all' %}">Галерея</a></li>
+                    <li class="nav-item"> <a class="nav-link {% if active_create_gallerynews %}active{% endif %}" href="{% url 'newsgallery_create' %}">Фотографии</a></li>
+                    <li class="nav-item"> <a class="nav-link {% if active_create_gallerynews %}active{% endif %}" href="{% url 'newsgallery_create' %}">Проекты</a></li>
+                  </ul>
+                </div>
+              </li>
+              
+              <li class="nav-item" id="contests-panel">
+                <a class="nav-link" data-toggle="collapse" href="#contests" aria-expanded="{% if expand_contests %}true{% else %}false{% endif %}" aria-controls="contests">
+                  <span class="menu-title">Конкурсы</span>
+                  <i class="icon-chart menu-icon"></i>
+                </a>
+                <div class="collapse{% if expand_contests %}show{% endif %}" id="contests">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link {% if active_contests %}active{% endif %}" href="{% url 'contests_all' %}">Все Конкурсы</a></li>
+                  </ul>
+                </div>
+              </li>
+              
+              <li class="nav-item nav-category"><span class="nav-link">Руководство</span></li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                  <span class="menu-title">Персоналы</span>
+                  <i class="icon-doc menu-icon"></i>
+                </a>
+                <div class="collapse" id="auth">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item pro-upgrade">
+                <span class="nav-link">
+                  <a class="btn btn-block px-0 btn-rounded btn-upgrade" href="{% url 'index' %} " target="_blank"> <i class="icon-badge mx-2"></i> Открыть Сайт</a>
+                </span>
+              </li>
+            </ul>
+          </nav>
