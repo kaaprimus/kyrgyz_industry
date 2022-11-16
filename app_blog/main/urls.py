@@ -34,4 +34,14 @@ urlpatterns = [
     path('admin-panel/contests/create/', views.ContestCreateView.as_view(), name='contests_create'),
     path('admin-panel/contests/update/<int:pk>/', views.ContestUpdateView.as_view(), name='contests_update'),
     path('admin-panel/contests/delete/<int:id>/', views.contests_delete, name='contests_delete'),
+
+    # Static Pages
+    path('about_company', views.about_company, name='about_company'),
+    path('president', views.president, name='president'),
+    path('gallery', views.gallery, name='gallery'),
+    path('contests', views.contests, name='contests'),
+    path('news', views.news, name='news'),
+    path('news_detail', views.news_detail, name='news_detail'),
+    path('projects', views.projects, name='projects'),
+    path('project_detail', views.project_detail, name='project_detail'),
 ]

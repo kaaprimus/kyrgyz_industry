@@ -1,5 +1,5 @@
 import os
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout 
 from django.shortcuts import get_object_or_404
 from django.db.models.deletion import RestrictedError
@@ -25,11 +25,89 @@ from django.utils.translation import get_language, activate, gettext
 from django.conf import settings
 
 
+
+""" 
+    Таски:
+        Client:
+            Вывод Новостей+
+            Архив новостей
+            Вывод Проекта
+            Вывод Конкурса
+            Вывод Вакансии
+            Вывод Структуры
+            Страницы для Детально
+            Создать страницу для Галереи
+            Создать карту сайта
+            Обратная связь+
+            Страница для вакансии и вывод активных вакансии
+            
+        Админ:
+            Страница авторизации
+            CRUD Операции - Для Новостей
+            CRUD Операции - Для Галерея-Новости
+            CRUD Операции - Для Изображения-Новости
+            
+            CRUD Операции - Для Проекта
+            CRUD Операции - Для Галерея-Проект
+            CRUD Операции - Для Изображения-Новости
+            
+            CRUD Операции - Для Конкурса
+            CRUD Операции - Для Галерея-Конкурс
+            CRUD Операции - Для Изображения-Конкурс
+            
+            Создать - Модель Сотрудники
+            Создать - Модель Вакансии
+"""
+
 def index(request):
     trans = translate(language='ru')
-    last_news = News.objects.all().order_by("-id")[:4]
-    context = {'last_news': last_news, 'trans':trans}
-    return render(request, "index.html", context)
+    context = {'trans':trans}
+    return render(request, "client/index.html", context)
+
+def about_company(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/about_company.html", context)
+
+def blog_detail(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/blog_detail.html", context)
+
+def president(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/president.html", context)
+
+def gallery(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/gallery.html", context)
+
+def contests(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/contests.html", context)
+
+def news(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/news.html", context)
+
+def news_detail(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/news_detail.html", context)
+
+def projects(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/projects.html", context)
+
+def project_detail(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/project_detail.html", context)
 
 def translate(language):
     cur_language = get_language()
@@ -40,15 +118,17 @@ def translate(language):
         activate(cur_language)
     return text
 
-def error_404(request):
-    return render(request, '404.html')
+def error_404(request, exception):
+   context = {}
+   return render(request,'admin/404.html', context)
 
 def error_500(request):
-    return render(request, '500.html')
+   context = {}
+   return render(request,'admin/500.html', context)
 
 def error_503(request):
-    return render(request, '503.html')
-
+   context = {}
+   return render(request,'admin/503.html', context)
 
 
 def send_message(request):
@@ -80,45 +160,6 @@ def send_message(request):
     if(sucs==True):
         messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
     return redirect ('/')
-
-    
-
-""" 
-    Таски:
-        Client:
-            Вывод Новостей
-            Архив новостей
-            Вывод Проекта
-            Вывод Конкурса
-            Вывод Вакансии
-            Вывод Структуры
-            Страницы для Детально
-            Создать страницу для Галереи
-            Создать карту сайта
-            Обратная связь
-            Страница для вакансии и вывод активных вакансии
-            
-        Админ:
-            Страница авторизации
-            CRUD Операции - Для Новостей
-            CRUD Операции - Для Галерея-Новости
-            CRUD Операции - Для Изображения-Новости
-            
-            CRUD Операции - Для Проекта
-            CRUD Операции - Для Галерея-Проект
-            CRUD Операции - Для Изображения-Новости
-            
-            CRUD Операции - Для Конкурса
-            CRUD Операции - Для Галерея-Конкурс
-            CRUD Операции - Для Изображения-Конкурс
-            
-            Создать - Модель Сотрудники
-            Создать - Модель Вакансии
-"""
-def index(request):
-    template_name = "client/index.html"
-    return render(request, template_name, {})
-
 
 def detail(request):
     template_name = "client/pages/blog_detail.html"

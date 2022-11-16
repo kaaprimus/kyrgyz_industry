@@ -394,6 +394,21 @@ h6 {
   border: 2px solid #3498db;
 }
 
+#more-news {
+  margin-left: 42.5%;
+  margin-top: 20px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: #3498db;
+  border: 2px solid #3498db;
+}
+
 #hero .btn-get-started:hover {
   background: #3498db;
   color: #fff;
@@ -454,7 +469,7 @@ h6 {
     width: 80%;
   }
 }
-
+section
 @-webkit-keyframes up-down {
   0% {
     transform: translateY(10px);
@@ -479,7 +494,7 @@ h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 40px 0;
   overflow: hidden;
 }
 

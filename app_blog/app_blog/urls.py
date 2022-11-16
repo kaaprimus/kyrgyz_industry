@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include, re_path
+from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
+from django.conf.urls import handler400, handler500, handler403
 
 urlpatterns = [
     path(_('admin/'), admin.site.urls),
@@ -36,4 +37,8 @@ if 'rosetta' in settings.INSTALLED_APPS:
 elif settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
+
+handler404 = 'main.views.error_404'
+handler500 = 'main.views.error_500'
+handler503 = 'main.views.error_503'
 
