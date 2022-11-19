@@ -23,7 +23,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.utils.translation import gettext as _
 from django.utils.translation import get_language, activate, gettext
 from django.conf import settings
-
+from django.core.paginator import Paginator
 
 
 """ 
@@ -60,8 +60,18 @@ from django.conf import settings
 """
 
 def index(request):
+    news= News.objects.order_by('-id')[:4]
+    contest= Contests.objects.order_by('-id')[:4]
+    project_ON_PROCCESS=Projects.objects.order_by('-id').filter(Status='В процессе')[:4]
+    project_HAS_FINISHED=Projects.objects.order_by('-id').filter(Status='Реализован')[:4]
+    project_NOT_FINISHED=Projects.objects.order_by('-id').filter(Status='Не реализован')[:4]
+    project_all=Projects.objects.order_by('-id')[:8]
+    photo=PhotosProject.objects.all()
     trans = translate(language='ru')
-    context = {'trans':trans}
+    context = {'trans':trans,'news_page':news,'contest_page':contest,
+        'project_ON_PROCCESS':project_ON_PROCCESS,'project_HAS_FINISHED':project_HAS_FINISHED,
+        'project_NOT_FINISHED':project_NOT_FINISHED,'project_all':project_all,'photo': photo
+        }
     return render(request, "client/index.html", context)
 
 def about_company(request):
@@ -84,25 +94,59 @@ def gallery(request):
     context = {'trans':trans}
     return render(request, "client/pages/gallery.html", context)
 
-def contests(request):
+def contests(request,number_page=1):
     trans = translate(language='ru')
-    context = {'trans':trans}
+    contest= Contests.objects.order_by('-id')
+    currunt_page_news = Paginator(contest,2)
+    context = {'contest_page': currunt_page_news.page(number_page),'trans':trans}
     return render(request, "client/pages/contests.html", context)
 
-def news(request):
+def news(request,number_page=1):
+    news= News.objects.order_by('-id')
+    currunt_page_news = Paginator(news,4)
     trans = translate(language='ru')
-    context = {'trans':trans}
+    context = {'news_page': currunt_page_news.page(number_page),'trans':trans}
     return render(request, "client/pages/news.html", context)
 
-def news_detail(request):
+
+def projects(request,number_page=1):
+    project= Projects.objects.order_by('-id')
+    currunt_page_news = Paginator(project,2)
+    photo=PhotosProject.objects.all()
     trans = translate(language='ru')
-    context = {'trans':trans}
+    context = {'project_page':currunt_page_news.page(number_page),'photo':photo,'trans':trans}
+    return render(request, "client/pages/projects.html", context)
+
+def get_news(request,title):
+    trans = translate(language='ru')
+    news_detail=News.objects.filter(Title=title)
+    news_title=News.objects.get(Title=title)
+    photo=PhotosNews.objects.filter(Gallery_id=get_id_Gallery_News(title))
+    context = {'news_detail': news_detail,'photo':photo,'news_title':news_title,'trans':trans}
     return render(request, "client/pages/news_detail.html", context)
 
-def projects(request):
+def get_project(request,title):
     trans = translate(language='ru')
-    context = {'trans':trans}
-    return render(request, "client/pages/projects.html", context)
+    project_detail=Projects.objects.filter(Title=title)
+    project_title=Projects.objects.get(Title=title)
+    photo=PhotosProject.objects.filter(Gallery_id=get_id_Gallery_project(title))
+    context = {'project_detail': project_detail,'photo':photo,'project_title':project_title,'trans':trans}
+    return render(request, "client/pages/project_detail.html", context)
+
+def get_id_Gallery_News(title):
+    news_detail=News.objects.filter(Title=title)
+    id=0
+    for val in news_detail:
+        id=val.Gallery_id
+    return id
+
+def get_id_Gallery_project(title):
+    project_detail=Projects.objects.filter(Title=title)
+    id=0
+    for val in project_detail:
+        id=val.Gallery_id
+    return id
+
 
 def project_detail(request):
     trans = translate(language='ru')
@@ -160,6 +204,8 @@ def send_message(request):
     if(sucs==True):
         messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
     return redirect ('/')
+
+
 
 def detail(request):
     template_name = "client/pages/blog_detail.html"

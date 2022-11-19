@@ -6,11 +6,9 @@
 {% block content %}
 
 <main id="main">
-
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-
         <div class="d-flex justify-content-between align-items-center">
           <h2>{% translate "Новости" %}</h2>
           <ol>
@@ -18,57 +16,62 @@
             <li>{% translate "Новости"%}</li>
           </ol>
         </div>
-
       </div>
-    </section><!-- End Breadcrumbs -->
-
-         <!-- ======= More Services Section ======= -->
-         <section id="more-services" class="more-services">
-            <div class="container">
-      
+    </section>
+    <section id="more-services" class="more-services">
+    <div class="container">
               <div class="row">
+                {% for value in news_page %}
                 <div class="col-md-6 d-flex align-items-stretch">
                   <div class="card" style='background-image: url("{% static 'client/img/news/22-300x200.jpg' %}");' data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-body">
-                      <h5 class="card-title"><a href="">{% translate "Инвестиционные возможности регионов Кыргызстана" %}</a></h5>
-                      <p class="card-text">{% translate "Инвестиционные возможности регионов Кыргызстана     8 октября 2022 года президент ОАО «Кыргызиндустрия» принял участие в Российско-Кыргызском инвестиционном форуме, который" %}</p>
-                      <div class="read-more"><a href="{% url 'news_detail' %}"><i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                  <div class="card" style='background-image: url("{% static 'client/img/news/japon.jpg' %}");' data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-body">
-                      <h5 class="card-title"><a href="">{% translate "Установление сотрудничества с японским бизнесом" %}</a></h5>
-                      <p class="card-text">{% translate "Установление сотрудничества с японским бизнесом      7 октября 2022 года состоялась встреча вице-президента ОАО «Кыргызиндустрия» Сарбанова С.Т. с президентом" %}</p>
-                      <div class="read-more"><a href="{% url 'news_detail' %}"><i class="bi bi-arrow-right"></i> Читать</a></div>
-                    </div>
-                  </div>
-      
-                </div>
-                <div class="col-md-6 d-flex align-items-stretch mt-4">
-                  <div class="card" style='background-image: url("{% static 'client/img/news/italy.jpg' %}");' data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-body">
-                      <h5 class="card-title"><a href="">{% translate "Сотрудничество ОАО «Кыргызиндустрия» с бизнес-кругами Италии" %}</a></h5>
-                      <p class="card-text">{% translate "Сотрудничество ОАО «Кыргызиндустрия» с бизнес-кругами Италии      5 октября 2022 года при содействии Посольства Кыргызской Республики в Италии сотрудники" %}</p>
-                      <div class="read-more"><a href="{% url 'news_detail' %}"><i class="bi bi-arrow-right"></i> Читать</a></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 d-flex align-items-stretch mt-4">
-                  <div class="card" style='background-image: url("{% static 'client/img/news/data-center.jpg' %}");' data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-body">
-                      <h5 class="card-title"><a href="">{% translate "В Кыргызстане планируется создать Дата-центр" %}</a></h5>
-                      <p class="card-text">{% translate "В Кыргызстане планируется создать Дата-центр      28 сентября 2022 года состоялась встреча президента ОАО «Кыргызиндустрия» Ж.О. Абдураимова с делегацией" %}</p>
-                      <div class="read-more"><a href="{% url 'news_detail' %}"><i class="bi bi-arrow-right"></i> Читать</a></div>
+                  <div class="card-body">
+                      <h5 class="card-title"><a href="">{{ value.Title }}</a></h5>
+                      <p class="card-text">{{ value.Short_Description }}</p>
+                    <div class="read-more"><a href="{% url 'detail_news' value.Title %}">
+                      <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
                     </div>
                   </div>
                 </div>
               </div>
-      
-            </div>
-          </section><!-- End More Services Section -->
-
-    </main><!-- End #main -->
+                {% endfor %}
+              </div>
+    </div>
+    <div class="d-flex mt-4 flex-wrap justify-content-center">
+              <nav class="ml-auto">
+                <ul class="pagination separated pagination-info">
+                  {% if news_page.has_previous %}
+                    <li class="page-item">
+                      <a href="/page_news/{{ news_page.previous_page_number }}/" class="page-link">&laquo;</a>
+                    </li>
+                  {% else %}
+                    <li class="page-item disabled">
+                      <a href="" class="page-link">&laquo;</a>
+                    </li>
+                  {% endif %}
+                  {% for page in news_page.paginator.page_range %}
+                    {% if page == news_page.number %}
+                      <li class="page-item active">
+                        <a href="/page_news/{{ page }}/" class="page-link">{{ page }}</a>
+                      </li>
+                    {% else %}
+                      <li>
+                        <a href="/page_news/{{ page }}/" class="page-link">{{ page }}</a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                  {% if news_page.has_next %}
+                    <li class="page-item">
+                      <a href="/page_news/{{ news_page.next_page_number }}/" class="page-link">&raquo;</a>
+                    </li>
+                  {% else %}
+                    <li class="page-item disabled">         
+                      <a href="" class="page-link">&raquo;</a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </nav>
+    </div>
+    </section>
+</main>
 
 {% endblock content %}

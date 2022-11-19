@@ -136,6 +136,9 @@ class ContestForm(ModelForm):
             'Title' : TextInput(
                     attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Описание конкурса","size" : 180, 'required': True}
                 ),
+            'Short_Description' : TextInput(
+                attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 110, 'required': True}
+            ),
             'Date_added' : DateTimeInput(
                     attrs={'type': 'datetime-local', "class" : "form-control", "id" : "date_created", "required" : False}
                     ),

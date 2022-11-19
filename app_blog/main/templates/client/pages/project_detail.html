@@ -1,10 +1,8 @@
-
 {% extends 'client/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block page_title %}Detail{% endblock page_title %}
 
-
+{% block page_title %}{{ project_title.Title }}{% endblock page_title %}
 
 {% block content %}
   <main id="main">
@@ -14,69 +12,53 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Project Details</h2>
+          <h2>{{ project_title.Title }}</h2>
           <ol>
-            <li><a href="{% url 'index'%}#portfolio">Главная</a></li>
+            <li><a href="{% url 'index'%}">Главная</a></li>
             <li><a href="{% url 'projects'%}">Проекты</a></li>
-            <li>Project Details</li>
+            <li>{{ project_title.Title }}</li>
           </ol>
         </div>
-
       </div>
     </section><!-- End Breadcrumbs -->
-
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
-
         <div class="row gy-4">
-
           <div class="col-lg-8">
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
-
+                {% for value in photo %}
                 <div class="swiper-slide">
-                  <img src="{% static 'client/img/portfolio/portfolio-details-1.jpg' %}" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="{% static 'client/img/portfolio/portfolio-details-2.jpg' %}" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="{% static 'client/img/portfolio/portfolio-details-3.jpg' %}" alt="">
-                </div>
-
+                    <img src="/{{ value.URL }}" alt="{{ value.Caption }}">
+                  </div>
+                  {% endfor %}        
               </div>
               <div class="swiper-pagination"></div>
             </div>
           </div>
-
+          {% for value in project_detail %}
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Project information</h3>
+              <h3>Информация про новость</h3>
               <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Заголовок</strong>: {{ value.Title }}</li>
+                <li><strong>Язык</strong>: {{ value.Language }}</li>
+                <li><strong>Дата публикации</strong>: {{ value.Date_added }}</li>
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
+              <h2>Описание новости</h2>
               <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
+                {{ value.Description }}
+            </p>
             </div>
           </div>
-
+          {% endfor %}
         </div>
 
       </div>
     </section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->
-
-
-
   {% endblock content %}

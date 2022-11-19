@@ -1,7 +1,7 @@
 {% extends 'client/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block page_title %}{% translate "Архив проведенных конкурсов" %}{% endblock page_title %}
+{% block page_title %}{% translate "Архив конкурсов" %}{% endblock page_title %}
 
 {% block content %}
 
@@ -27,45 +27,59 @@
         <div class="container">
   
           <div class="section-title" data-aos="fade-up">
-            <h2>{% translate "Архив проведенных конкурсов" %}</h2>
+            <h2>{% translate "Архив конкурсов" %}</h2>
           </div>
   
           <div class="row">
+            {% for contest in contest_page %}
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
               <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
                 <div class="icon"><i class="bx bx-file"></i></div>
-                <h4 class="title"><a href="">{% translate "Конкурс не состялся" %}</a></h4>
-                <p class="description">{% translate "Услуг по выполнению строительно-монтажных работ, ремонтных работ и составлению проектно-сметной документации" %}</p>
+                <h4 class="title"><a href="">{{ contest.Status }}</a></h4>
+                <p class="description">{{ contest.Short_Description }}</p>
+                <div class="read-more"><a href="/{{contest.Document }}">
+                  <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
+                </div>
               </div>
             </div>
-  
-            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-              <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-                <div class="icon"><i class="bx bx-file"></i></div>
-                <h4 class="title"><a href="">{% translate "Конкурс не состоялся" %}</a></h4>
-                <p class="description">{% translate "Услуг по выполнению строительно-монтажных работ, ремонтных работ и составлению проектно-сметной документации" %}</p>
-              </div>
-            </div>
-  
-            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-              <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-                <div class="icon"><i class="bx bx-file"></i></div>
-                <h4 class="title"><a href="">{% translate "Конкурс состоялся. Победитель определен" %}</a></h4>
-                <p class="description">{% translate "Конкурс на закупку легкового электромобиля" %}</p>
-              </div>
-            </div>
-  
-            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-              <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-                <div class="icon"><i class="bx bx-world"></i></div>
-                <h4 class="title"><a href="">{% translate "Конкурс не состоялся" %}</a></h4>
-                <p class="description">{% translate "Конкурс на закупку технологической линии по производству пенаполистирола в блоках и панелей для ОсОО “Кыргызбетонкурулуш”" %}</p>
-              </div>
-            </div>
-  
+            {% endfor %}
           </div>
-  
         </div>
+        <div class="d-flex mt-4 flex-wrap justify-content-center">
+          <nav class="ml-auto">
+            <ul class="pagination separated pagination-info">
+              {% if contest_page.has_previous %}
+                <li class="page-item">
+                  <a href="/page_contest/{{ contest_page.previous_page_number }}/" class="page-link">&laquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a href="" class="page-link">&laquo;</a>
+                </li>
+              {% endif %}
+              {% for page in contest_page.paginator.page_range %}
+                {% if page == contest_page.number %}
+                  <li class="page-item active">
+                    <a href="/page_contest/{{ page }}/" class="page-link">{{ page }}</a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a href="/page_contest/{{ page }}/" class="page-link">{{ page }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              {% if contest_page.has_next %}
+                <li class="page-item">
+                  <a href="/page_contest/{{ contest_page.next_page_number }}/" class="page-link">&raquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">         
+                  <a href="" class="page-link">&raquo;</a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+</div>
       </section><!-- End Services Section -->
 
     </main><!-- End #main -->

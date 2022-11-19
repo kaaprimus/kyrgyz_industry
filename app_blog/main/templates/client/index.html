@@ -3,9 +3,14 @@
 {% load i18n %}
 
 
-{% block page_title %}Кыргызиндустрия{% endblock page_title%}
+{% block page_title %}Кыргызиндустрия
+
+{% endblock page_title%}
 
 {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
@@ -100,50 +105,27 @@
      <!-- ======= More Services Section ======= -->
      <section id="more-services" class="more-services">
       <div class="container">
-
+        <div class="section-title" data-aos="fade-up">
+          <h2>{% translate "Новости" %}</h2>
+          <p>{% translate "Архив новостей" %}</p>
+        </div>
         <div class="row">
-          <div class="col-md-6 d-flex align-items-stretch">
+          {% for news in news_page %}
+          <div class="col-md-6 d-flex align-items-stretch mt-lg-0">
             <div class="card" style='background-image: url("{% static 'client/img/news/22-300x200.jpg' %}");' data-aos="fade-up" data-aos-delay="100">
               <div class="card-body">
-                <h5 class="card-title"><a href="">{% translate "Инвестиционные возможности регионов Кыргызстана" %}</a></h5>
-                <p class="card-text">{% translate "Инвестиционные возможности регионов Кыргызстана     8 октября 2022 года президент ОАО «Кыргызиндустрия» принял участие в Российско-Кыргызском инвестиционном форуме, который" %}</p>
-                <div class="read-more"><a href="{% url 'news_detail' %}"><i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a></div>
+                <h5 class="card-title"><a href="">{{ news.Title }}</a></h5>
+                <p class="card-text">{{ news.Short_Description }}</p>
+                <div class="read-more"><a href="{% url 'detail_news' news.Title %}">
+                <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="card" style='background-image: url("{% static 'client/img/news/japon.jpg' %}");' data-aos="fade-up" data-aos-delay="200">
-              <div class="card-body">
-                <h5 class="card-title"><a href="">{% translate "Установление сотрудничества с японским бизнесом" %}</a></h5>
-                <p class="card-text">{% translate "Установление сотрудничества с японским бизнесом      7 октября 2022 года состоялась встреча вице-президента ОАО «Кыргызиндустрия» Сарбанова С.Т. с президентом" %}</p>
-                <div class="read-more"><a href="{% url 'news_detail' %}"><i class="bi bi-arrow-right"></i> Читать</a></div>
-              </div>
-            </div>
-
-          </div>
-          <div class="col-md-6 d-flex align-items-stretch mt-4">
-            <div class="card" style='background-image: url("{% static 'client/img/news/italy.jpg' %}");' data-aos="fade-up" data-aos-delay="100">
-              <div class="card-body">
-                <h5 class="card-title"><a href="">{% translate "Сотрудничество ОАО «Кыргызиндустрия» с бизнес-кругами Италии" %}</a></h5>
-                <p class="card-text">{% translate "Сотрудничество ОАО «Кыргызиндустрия» с бизнес-кругами Италии      5 октября 2022 года при содействии Посольства Кыргызской Республики в Италии сотрудники" %}</p>
-                <div class="read-more"><a href="{% url 'news_detail' %}"><i class="bi bi-arrow-right"></i> Читать</a></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 d-flex align-items-stretch mt-4">
-            <div class="card" style='background-image: url("{% static 'client/img/news/data-center.jpg' %}");' data-aos="fade-up" data-aos-delay="200">
-              <div class="card-body">
-                <h5 class="card-title"><a href="">{% translate "В Кыргызстане планируется создать Дата-центр" %}</a></h5>
-                <p class="card-text">{% translate "В Кыргызстане планируется создать Дата-центр      28 сентября 2022 года состоялась встреча президента ОАО «Кыргызиндустрия» Ж.О. Абдураимова с делегацией" %}</p>
-                <div class="read-more"><a href="{% url 'news_detail' %}"><i class="bi bi-arrow-right"></i> Читать</a></div>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
-
-      </div>
-
-      <a href="{% url 'news' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
+        <a href="{% url 'news' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
+        </div>
 
     </section><!-- End More Services Section -->
 
@@ -268,203 +250,67 @@
 
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "Конкурсы" %}</h2>
-          <p>{% translate "Архив проведенных конкурсов" %}</p>
+          <p>{% translate "Архив конкурсов" %}</p>
         </div>
-
         <div class="row">
+          {% for contest in contest_page %}
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">{% translate "Конкурс не состялся" %}</a></h4>
-              <p class="description">{% translate "Услуг по выполнению строительно-монтажных работ, ремонтных работ и составлению проектно-сметной документации" %}</p>
+              <div class="icon"><i class="bx bx-file"></i>
+              </div>
+              <h4 class="title"><a href="">{{ contest.Status }}</a></h4>
+              <p class="description">{{ contest.Short_Description }}</p>
+              <div class="read-more"><a href="/{{contest.Document }}">
+                <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
+              </div>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">{% translate "Конкурс не состоялся" %}</a></h4>
-              <p class="description">{% translate "Услуг по выполнению строительно-монтажных работ, ремонтных работ и составлению проектно-сметной документации" %}</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">{% translate "Конкурс состоялся. Победитель определен" %}</a></h4>
-              <p class="description">{% translate "Конкурс на закупку легкового электромобиля" %}</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">{% translate "Конкурс не состоялся" %}</a></h4>
-              <p class="description">{% translate "Конкурс на закупку технологической линии по производству пенаполистирола в блоках и панелей для ОсОО “Кыргызбетонкурулуш”" %}</p>
-            </div>
-          </div>
-
+          {% endfor %}
         </div>
-
         <a href="{% url 'contests' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
-
       </div>
-
     </section><!-- End Services Section -->
 
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
       <div class="container">
-
         <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "ПРОЕКТЫ" %}</h2>
+          <h2>{% translate "Проекты" %}</h2>
         </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-12 d-flex justify-content-center">
+        <div class="row" data-aos="fade-up" data-aos-delay="200" >
+          <div class="col-lg-12 d-flex justify-content-center" id="myBtnContainer">
             <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">{% translate "Все" %}</li>
-              <li data-filter=".filter-app">{% translate "Реализованные" %}</li>
-              <li data-filter=".filter-card">{% translate "Не Реализованные" %}</li>
-              <li data-filter=".filter-web">{% translate "В процессе" %}</li>
+              <li class="btn active" onclick="filterSelection('all')">{% translate "Все" %}</li>
+              <li class="btn" onclick="filterSelection('Реализован')">{% translate "Реализованные" %}</li>
+              <li class="btn" onclick="filterSelection('Не реализован')">{% translate "Не Реализованные" %}</li>
+              <li class="btn" onclick="filterSelection('В процессе')">{% translate "В процессе" %}</li>
             </ul>
           </div>
         </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
-
-       
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400" id="myDIV">
+          {% for project in project_all %}
+          {% for ph in photo %}
+          {% if ph.Gallery == project.Gallery %}
+          <div class="col-lg-4 col-md-6 portfolio-item">
             <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-1.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
+              <img src="/{{ph.URL}}" class="img-fluid" alt="">
+              <div class="portfolio-info filterDiv {{ project.Status }}">
+                <h4>{{ project.Title }}</h4>
+                <h4 class="filterDiv">{{ project.Status }}</h4>
+                <p>{{ project.Short_Description }}</p>
                 <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-1.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class='bx bx-collapse-alt'></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
+                  <a href="/{{ph.URL}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ph.Caption}}"><i class="bx bx-plus"></i></a>
+                  <a href="{% url 'detail_project' project.Title %}" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
                 </div>
               </div>
             </div>
           </div>
-
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-2.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-2.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class='bx bx-collapse-alt'></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-3.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-3.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-4.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 2</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-4.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-5.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 2</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-5.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-6.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-6.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-7.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 1</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-7.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-8.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Card 3</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-8.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="{% static 'client/img/portfolio/portfolio-9.jpg' %}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'client/img/portfolio/portfolio-9.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'project_detail' %}" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
         </div>
-
         <a href="{% url 'projects' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
-
       </div>
     </section><!-- End Portfolio Section -->
 
@@ -682,5 +528,61 @@
     </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
+  
+  <script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myDIV *").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    
 
+    function filterSelection(c) {
+      alert(c);
+      var x, i;
+      x = document.getElementsByClassName("filterDiv");
+      alert(x);
+      if (c == "all") c = "";
+      for (i = 0; i < x.length; i++) {
+        w3RemoveClass(x[i], "show");
+        if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+      }
+    }
+    
+    function w3AddClass(element, name) {
+      var i, arr1, arr2;
+      arr1 = element.className.split(" ");
+      arr2 = name.split(" ");
+      for (i = 0; i < arr2.length; i++) {
+        if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+      }
+    }
+    
+    function w3RemoveClass(element, name) {
+      var i, arr1, arr2;
+      arr1 = element.className.split(" ");
+      arr2 = name.split(" ");
+      for (i = 0; i < arr2.length; i++) {
+        while (arr1.indexOf(arr2[i]) > -1) {
+          arr1.splice(arr1.indexOf(arr2[i]), 1);     
+        }
+      }
+      element.className = arr1.join(" ");
+    }
+    
+    // Добавьте активный класс к текущей кнопке (выделите его)
+    var btnContainer = document.getElementById("myBtnContainer");
+    var btns = btnContainer.getElementsByClassName("btn");
+    alert(btns);
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function(){
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+    }
+    </script>
   {% endblock content %}

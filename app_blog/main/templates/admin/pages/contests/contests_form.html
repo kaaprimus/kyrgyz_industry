@@ -35,10 +35,14 @@
                 {{ form.Title.errors }}
             </div>
             <div class="form-group">
+                <label for="{{ form.Short_Description.id_for_label }}" class="font-weight-bold">Краткое описание</label>
+                {{ form.Short_Description }}
+                {{ form.Short_Description.errors }}
+            </div>
+            <div class="form-group">
                 {{ form.Document }}
                 {{ form.Document.errors }}
             </div>
-            
             <div class="form-row">
                 <div class="col form-group">
                     <label for="{{ form.Date_added.id_for_label }}" class="font-weight-bold">Выберите дату:</label>

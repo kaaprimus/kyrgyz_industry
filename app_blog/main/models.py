@@ -70,7 +70,7 @@ class PhotosProject(models.Model):
         
     def __str__(self) -> str:
         return self.Caption 
-     
+    
 
 class PhotosNews(models.Model):
     URL=models.ImageField(verbose_name="Путь картинки", 
@@ -98,6 +98,7 @@ class Project_Status_Choice(models.TextChoices):
 # Проекты
 class Projects(models.Model):
     Title=models.CharField(max_length=70,verbose_name="Заголовок проекта")
+    Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
     Description=models.TextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
     # Язык проекта
@@ -128,6 +129,7 @@ class Projects(models.Model):
 
 class Contests(models.Model):
     Title=models.CharField(max_length=180,verbose_name="Описание конкурса")
+    Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
     Document = models.FileField(
                                 verbose_name="Документ", 
                                 upload_to=get_file_path, 
