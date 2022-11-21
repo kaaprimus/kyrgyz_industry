@@ -20,6 +20,9 @@
     </section>
     <section id="more-services" class="more-services">
     <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>{% translate "Архив новостей" %}</h2>
+      </div>
               <div class="row">
                 {% for value in news_page %}
                 <div class="col-md-6 d-flex align-items-stretch">
@@ -33,9 +36,14 @@
                   </div>
                 </div>
               </div>
+              {% empty %}
+            <div class="section-title" data-aos="fade-up">
+              <h4>{% translate "Нет новостей" %}</h4>
+            </div>
                 {% endfor %}
               </div>
     </div>
+    {% if news_page %}
     <div class="d-flex mt-4 flex-wrap justify-content-center">
               <nav class="ml-auto">
                 <ul class="pagination separated pagination-info">
@@ -71,6 +79,7 @@
                 </ul>
               </nav>
     </div>
+    {% endif %}
     </section>
 </main>
 
