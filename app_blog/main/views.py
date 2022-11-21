@@ -64,6 +64,7 @@ from django.core.paginator import Paginator
 def index(request):
     news= News.objects.order_by('-id')[:4]
     contest= Contests.objects.order_by('-id')[:4]
+    
     project_ON_PROCCESS=Projects.objects.order_by('-id').filter(Status='В процессе')[:4]
     project_HAS_FINISHED=Projects.objects.order_by('-id').filter(Status='Реализован')[:4]
     project_NOT_FINISHED=Projects.objects.order_by('-id').filter(Status='Не реализован')[:4]
@@ -110,6 +111,7 @@ def contests(request,number_page=1):
 
 def news(request,number_page=1):
     news= News.objects.order_by('-id')
+    
     currunt_page_news = Paginator(news,4)
     trans = translate(language='ru')
     context = {'news_page': currunt_page_news.page(number_page),'trans':trans}

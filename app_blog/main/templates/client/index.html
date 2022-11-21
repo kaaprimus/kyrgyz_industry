@@ -107,7 +107,7 @@
       <div class="container">
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "Новости" %}</h2>
-          <p>{% translate "Архив новостей" %}</p>
+          <p id="titlenews">{% translate "Архив новостей" %}</p>
         </div>
         <div class="row">
           {% for news in news_page %}
@@ -122,11 +122,27 @@
               </div>
             </div>
           </div>
+          {% empty %}
+          <div class="section-title" data-aos="fade-up">
+            <h4>{% translate "Нет новостей" %}</h4>
+          </div>
+          <script type="text/javascript">
+            function func() {
+        if (document.getElementById("titlenews")) { 
+            //Записываем ссылку на элемент в переменную obj
+            var obj = document.getElementById("titlenews"); 
+            //Если css-свойство display не block, то: 
+              obj.style.display = "none";
+        }
+        }
+          func();
+        </script>
           {% endfor %}
         </div>
+        {% if news_page %}
         <a href="{% url 'news' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
-        </div>
-
+        {% endif %}
+      </div>
     </section><!-- End More Services Section -->
 
 
@@ -250,7 +266,7 @@
 
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "Конкурсы" %}</h2>
-          <p>{% translate "Архив конкурсов" %}</p>
+          <p id="titlecontets">{% translate "Архив конкурсов" %}</p>
         </div>
         <div class="row">
           {% for contest in contest_page %}
@@ -265,9 +281,26 @@
               </div>
             </div>
           </div>
+          {% empty %}
+          <div class="section-title" data-aos="fade-up">
+            <h4>{% translate "Нет конкурсов" %}</h4>
+          </div>
+          <script type="text/javascript">
+            function func() {
+        if (document.getElementById("titlecontets")) { 
+            //Записываем ссылку на элемент в переменную obj
+            var obj = document.getElementById("titlecontets"); 
+            //Если css-свойство display не block, то: 
+              obj.style.display = "none";
+        }
+        }
+          func();
+        </script>
           {% endfor %}
         </div>
+        {% if contest_page %}
         <a href="{% url 'contests' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
+        {% endif %}
       </div>
     </section><!-- End Services Section -->
 
@@ -277,22 +310,21 @@
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "Проекты" %}</h2>
         </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="200" >
-          <div class="col-lg-12 d-flex justify-content-center" id="myBtnContainer">
+        <div class="row" data-aos="fade-up" data-aos-delay="200" id="titleprojects">
+          <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-              <li class="btn active" onclick="filterSelection('all')">{% translate "Все" %}</li>
-              <li class="btn" onclick="filterSelection('Реализован')">{% translate "Реализованные" %}</li>
-              <li class="btn" onclick="filterSelection('Не реализован')">{% translate "Не Реализованные" %}</li>
-              <li class="btn" onclick="filterSelection('В процессе')">{% translate "В процессе" %}</li>
+              <li data-filter="*" class="filter-active">Все</li>
+              <li data-filter=".Реализован">Реализованные</li>
+              <li data-filter=".Не">Не Реализованные</li>
+              <li data-filter=".процессе">В процессе</li>
             </ul>
           </div>
         </div>
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400" id="myDIV">
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
           {% for project in project_all %}
           {% for ph in photo %}
           {% if ph.Gallery == project.Gallery %}
-          <div class="col-lg-4 col-md-6 portfolio-item">
+          <div class="col-lg-4 col-md-6 portfolio-item fi {{ project.Status }}">
             <div class="portfolio-wrap">
               <img src="/{{ph.URL}}" class="img-fluid" alt="">
               <div class="portfolio-info filterDiv {{ project.Status }}">
@@ -308,16 +340,31 @@
           </div>
           {% endif %}
           {% endfor %}
+          {% empty %}
+          <div class="section-title" data-aos="fade-up">
+            <h4>{% translate "Нет проектов" %}</h4>
+          </div>
+          <script type="text/javascript">
+            function func() {
+        if (document.getElementById("titleprojects")) { 
+            //Записываем ссылку на элемент в переменную obj
+            var obj = document.getElementById("titleprojects");
+              obj.style.display = "none";
+        }
+        }
+          func();
+        </script>
           {% endfor %}
         </div>
+        {% if project_all %}
         <a href="{% url 'projects' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
+        {% endif %}
       </div>
     </section><!-- End Portfolio Section -->
 
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container">
-
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "Руководство" %}</h2>
         </div>
@@ -528,61 +575,4 @@
     </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
-  
-  <script>
-    $(document).ready(function(){
-      $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#myDIV *").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
-    });
-    
-
-    function filterSelection(c) {
-      alert(c);
-      var x, i;
-      x = document.getElementsByClassName("filterDiv");
-      alert(x);
-      if (c == "all") c = "";
-      for (i = 0; i < x.length; i++) {
-        w3RemoveClass(x[i], "show");
-        if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-      }
-    }
-    
-    function w3AddClass(element, name) {
-      var i, arr1, arr2;
-      arr1 = element.className.split(" ");
-      arr2 = name.split(" ");
-      for (i = 0; i < arr2.length; i++) {
-        if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-      }
-    }
-    
-    function w3RemoveClass(element, name) {
-      var i, arr1, arr2;
-      arr1 = element.className.split(" ");
-      arr2 = name.split(" ");
-      for (i = 0; i < arr2.length; i++) {
-        while (arr1.indexOf(arr2[i]) > -1) {
-          arr1.splice(arr1.indexOf(arr2[i]), 1);     
-        }
-      }
-      element.className = arr1.join(" ");
-    }
-    
-    // Добавьте активный класс к текущей кнопке (выделите его)
-    var btnContainer = document.getElementById("myBtnContainer");
-    var btns = btnContainer.getElementsByClassName("btn");
-    alert(btns);
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", function(){
-        var current = document.getElementsByClassName("active");
-        current[0].className = current[0].className.replace(" active", "");
-        this.className += " active";
-      });
-    }
-    </script>
   {% endblock content %}
