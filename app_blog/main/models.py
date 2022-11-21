@@ -95,6 +95,10 @@ class Project_Status_Choice(models.TextChoices):
     HAS_FINISHED = "Реализован", "Реализован"
     NOT_FINISHED = "Не реализован", "Не реализован"
 
+class Vacancy_Status_Choice(models.TextChoices):
+    TRUE = "Актуально", "Актуально"
+    FALSE = "Данная вакансия не актуальна", "Данная вакансия не актуальна"
+
 # Проекты
 class Projects(models.Model):
     Title=models.CharField(max_length=70,verbose_name="Заголовок проекта")
@@ -168,4 +172,26 @@ class News(models.Model):
                                verbose_name = "Язык"
                                )
     Gallery=models.ForeignKey("galleryNews",on_delete=models.RESTRICT,verbose_name="Галерея")
+
+# Вакансии
+class Vacancies(models.Model):
+    title = models.CharField(max_length=255, verbose_name="Заголовок")
+    company = models.CharField(max_length=70, verbose_name = "Компания")
+    Language=models.CharField(
+                               max_length = 10, 
+                               choices = LanguageChoice.choices,
+                               default = LanguageChoice.RU,
+                               verbose_name = "Язык"
+                               )
+    pub_date = models.DateTimeField(verbose_name="Дата размещения", default=now)
+    positions = models.CharField(max_length = 70, verbose_name="Должность")
+    salary = models.CharField(max_length=70, verbose_name="Оклад")
+    description = models.TextField(verbose_name = "Описание")
+    status = models.CharField(
+        max_length = 30,
+        choices = Vacancy_Status_Choice.choices,
+        default = Vacancy_Status_Choice.TRUE,
+        verbose_name = "Статус"
+    )
+    email_company = models.EmailField(max_length = 254)
 

@@ -116,7 +116,7 @@
               <div class="card-body">
                 <h5 class="card-title"><a href="">{{ news.Title }}</a></h5>
                 <p class="card-text">{{ news.Short_Description }}</p>
-                <div class="read-more"><a href="{% url 'detail_news' news.Title %}">
+                <div class="read-more"><a href="{% url 'news_detail' news.Title %}">
                 <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
                 </div>
               </div>

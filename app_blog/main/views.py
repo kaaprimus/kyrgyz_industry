@@ -27,8 +27,9 @@ from django.core.paginator import Paginator
 
 
 """ 
+
     Таски:
-        Client:
+        Клиент:
             Вывод Новостей+
             Архив новостей
             Вывод Проекта
@@ -57,6 +58,7 @@ from django.core.paginator import Paginator
             
             Создать - Модель Сотрудники
             Создать - Модель Вакансии
+
 """
 
 def index(request):
@@ -88,6 +90,11 @@ def president(request):
     trans = translate(language='ru')
     context = {'trans':trans}
     return render(request, "client/pages/president.html", context)
+
+def inner_page(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/inner-page.html", context)
 
 def gallery(request):
     trans = translate(language='ru')
@@ -152,6 +159,25 @@ def project_detail(request):
     trans = translate(language='ru')
     context = {'trans':trans}
     return render(request, "client/pages/project_detail.html", context)
+
+def veep(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/veep.html", context)
+
+def vacancies(request, number_page=1):
+    trans = translate(language='ru')
+    contest= Vacancies.objects.order_by('-id')
+    currunt_page_vacancies = Paginator(contest,4)
+    context = {'currunt_page_vacancies': currunt_page_vacancies.page(number_page),'trans':trans}
+    return render(request, "client/pages/vacancies.html", context)
+
+def get_vacancy(request,title):
+    trans = translate(language='ru')
+    vacancy_detail=Vacancies.objects.filter(title=title)
+    vacancy_title=Vacancies.objects.get(title=title)
+    context = {'vacancy_detail': vacancy_detail,'vacancy_title':vacancy_title,'trans':trans}
+    return render(request, "client/pages/vacancy_detail.html", context)
 
 def translate(language):
     cur_language = get_language()
@@ -650,3 +676,71 @@ def get_last_projects(request):
     }
     
     return render(request, template_name, context)
+
+class VacanciesView(View):
+    model = Vacancies
+    form_class = VacanciesForm
+    active_panel = "vacancies-panel"
+    extra_context = {
+        "is_active" : active_panel,
+        "active_vacancies" : "active",
+        "expand_vacancies" : "show",
+        }
+    
+class VacanciesListView(LoginRequiredMixin, VacanciesView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/vacancies/vacancies_list.html"
+    
+
+class VacanciesCreateView(LoginRequiredMixin, SuccessMessageMixin, VacanciesView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/vacancies/vacancies_form.html'
+    redirect_field_name = "vacancies_create"
+    def get(self, request, *args, **kwargs):
+        form = VacanciesForm()
+        context = {
+            "form" : form,
+            "is_active" : self.active_panel,
+            "active_vacancies" : "active",
+            "expand_vacancies" : "show",
+        }
+        return render(request, self.template_name, context=context)
+    
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            form = VacanciesForm(request.POST)
+            try:
+                form.save()
+                messages.success(request, "Запись успешно добавлено!")
+                return redirect(self.redirect_field_name)
+            except Exception as e:
+                messages.error(request, e)
+                return redirect(self.redirect_field_name)
+        else:
+            messages.error(request, "Invalid Method")
+            return redirect(self.redirect_field_name)     
+        
+class VacanciesUpdateView(LoginRequiredMixin, SuccessMessageMixin, VacanciesView, UpdateView):
+    login_url = 'login_page'
+    success_url = reverse_lazy("vacancies_all")
+    template_name = 'admin/pages/vacancies/vacancies_edit.html'
+    success_message = "Запись успешно обновлена!"
+    
+    
+def vacancies_delete(request, id):
+    context = {}
+    obj = get_object_or_404(Vacancies, id = id)
+    if request.method =="POST":
+        
+        try:
+            # delete object
+            obj.delete()
+            # after deleting redirect to
+            # home page
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("vacancies_all")
+        except Exception as e:
+            messages.error(request, "Не удалось удалить запись, повторите попытку!")
+            return redirect("vacancies_all")
+ 
+    return render(request, "admin/pages/vacancies/vacancies_confirm_delete.html", context)      

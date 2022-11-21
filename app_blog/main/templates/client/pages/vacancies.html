@@ -1,0 +1,85 @@
+{% extends 'client/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}{% translate "Вакансии" %}{% endblock page_title %}
+
+{% block content %}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{% translate "Вакансии" %}</h2>
+          <ol>
+            <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
+            <li>{% translate "Вакансии"%}</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+<!-- ======= Services Section ======= -->
+<section id="contests" class="services">
+  <div class="container">
+
+    <div class="section-title" data-aos="fade-up">
+      <h2>{% translate "Вакансии" %}</h2>
+    </div>
+
+    <div class="row">
+      {% for vacancy in currunt_page_vacancies %}
+      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon"><i class="ri-currency-line"></i></div>
+          <h4 class="title"><a href="{% url 'vacancy_detail' vacancy.title %}">{{ vacancy.title }}</a></h4>
+          <p class="description">{{ vacancy.position }}</p>
+          <p class="description">{{ vacancy.salary }} сом</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="d-flex mt-4 flex-wrap justify-content-center">
+    <nav class="ml-auto">
+      <ul class="pagination separated pagination-info">
+        {% if currunt_page_vacancies.has_previous %}
+          <li class="page-item">
+            <a href="/page_vacancies/{{ currunt_page_vacancies.previous_page_number }}/" class="page-link">&laquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a href="" class="page-link">&laquo;</a>
+          </li>
+        {% endif %}
+        {% for page in currunt_page_vacancies.paginator.page_range %}
+          {% if page == currunt_page_vacancies.number %}
+            <li class="page-item active">
+              <a href="/page_vacancies/{{ page }}/" class="page-link">{{ page }}</a>
+            </li>
+          {% else %}
+            <li>
+              <a href="/page_vacancies/{{ page }}/" class="page-link">{{ page }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        {% if currunt_page_vacancies.has_next %}
+          <li class="page-item">
+            <a href="/page_vacancies/{{ currunt_page_vacancies.next_page_number }}/" class="page-link">&raquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">         
+            <a href="" class="page-link">&raquo;</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+</div>
+</section><!-- End Services Section -->
+
+</main><!-- End #main -->
+
+{% endblock content %}
