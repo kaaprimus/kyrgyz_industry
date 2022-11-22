@@ -112,9 +112,9 @@
         <div class="row">
           {% for news in news_page %}
           <div class="col-md-6 d-flex align-items-stretch mt-lg-0">
-            <div class="card" style='background-image: url("{% static 'client/img/news/22-300x200.jpg' %}");' data-aos="fade-up" data-aos-delay="100">
+            <div class="card" style='background-image: url("{{ news.URL }}");' data-aos="fade-up" data-aos-delay="100">
               <div class="card-body">
-                <h5 class="card-title"><a href="">{{ news.Title }}</a></h5>
+                <h5 class="card-title"><a href="{% url 'news_detail' news.Title %}">{{ news.Title }}</a></h5>
                 <p class="card-text">{{ news.Short_Description }}</p>
                 <div class="read-more"><a href="{% url 'news_detail' news.Title %}">
                 <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
@@ -333,7 +333,7 @@
                 <p>{{ project.Short_Description }}</p>
                 <div class="portfolio-links">
                   <a href="/{{ph.URL}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ph.Caption}}"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'detail_project' project.Title %}" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
+                  <a href="{% url 'project_detail' project.Title %}" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
                 </div>
               </div>
             </div>

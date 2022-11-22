@@ -44,7 +44,8 @@ urlpatterns = [
     # Static Pages
     path('about_company', views.about_company, name='about_company'),
     path('president', views.president, name='president'),
-    path('gallery', views.gallery, name='gallery'),
+    path('gallery/', views.gallery_page, name='gallery'),
+    path('gallery_page/<int:number_page>/', views.gallery_page, name='gallery'),
     path('news/', views.news, name='news'),
     path('projects/', views.projects, name='projects'),
     path('contests', views.contests, name='contests'),
@@ -59,4 +60,5 @@ urlpatterns = [
     path('page_news/<int:number_page>/', views.news, name='news'),
     path('page_contest/<int:number_page>/', views.contests, name='contests'),
     path('page_project/<int:number_page>/', views.projects, name='projects'),
+    path('documents_npa', views.npa, name='documents_npa'),
 ]

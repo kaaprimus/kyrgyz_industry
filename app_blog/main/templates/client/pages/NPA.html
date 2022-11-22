@@ -1,0 +1,48 @@
+{% extends 'client/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}{% translate "Нормативно правовые акты" %}{% endblock page_title %}
+
+{% block content %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{{vacancy_title.title}}</h2>
+          <ol>
+            <li><a href="{% url 'index'%}">Главная</a></li>
+            <li><a href="{% url 'documents_npa'%}">Нормативно правовые акты</a></li>
+          </ol>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4" style="margin: auto; width: 80%;">
+            <div class="portfolio-info" style="text-align: center;">
+              <h3>Нормативно правовые акты</h3>
+              <p>Типовой порядок организации и осуществления закупок государственными и муниципальными предприятиями, хозяйственными 
+                обществами, где 50 и более процентов доли участия в уставном капитале принадлежит государству, в том числе их дочерними 
+                хозяйственными обществами</p>
+              <p>
+                
+            </p>
+            <a href="{% static 'documents/Типовой-порядок.pdf' %}" class="btn-learn-more">{% translate "Документ" %}</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+
+
+  {% endblock content %}

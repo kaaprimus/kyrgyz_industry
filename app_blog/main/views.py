@@ -111,10 +111,10 @@ def contests(request,number_page=1):
 
 def news(request,number_page=1):
     news= News.objects.order_by('-id')
-    
+    photo=PhotosNews.objects.all()
     currunt_page_news = Paginator(news,4)
     trans = translate(language='ru')
-    context = {'news_page': currunt_page_news.page(number_page),'trans':trans}
+    context = {'news_page': currunt_page_news.page(number_page),'trans':trans, 'photo':photo}
     return render(request, "client/pages/news.html", context)
 
 
@@ -167,6 +167,11 @@ def veep(request):
     context = {'trans':trans}
     return render(request, "client/pages/veep.html", context)
 
+def npa(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/NPA.html", context)
+
 def vacancies(request, number_page=1):
     trans = translate(language='ru')
     contest= Vacancies.objects.order_by('-id')
@@ -180,6 +185,14 @@ def get_vacancy(request,title):
     vacancy_title=Vacancies.objects.get(title=title)
     context = {'vacancy_detail': vacancy_detail,'vacancy_title':vacancy_title,'trans':trans}
     return render(request, "client/pages/vacancy_detail.html", context)
+
+def gallery_page(request,number_page=1):
+    trans = translate(language='ru')
+    news_photo=PhotosNews.objects.order_by('-id')
+    projects_photo=PhotosProject.objects.order_by('-id')
+    gallery_page = Paginator(news_photo,4)
+    context = {'gallery_page': gallery_page.page(number_page),'trans':trans, 'news_photo':news_photo}
+    return render(request, "client/pages/gallery.html", context)
 
 def translate(language):
     cur_language = get_language()
