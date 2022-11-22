@@ -24,12 +24,14 @@ from django.utils.translation import gettext as _
 from django.utils.translation import get_language, activate, gettext
 from django.conf import settings
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView
+
 
 
 """ 
-
     Таски:
-        Клиент:
+        Client:
             Вывод Новостей+
             Архив новостей
             Вывод Проекта
@@ -41,25 +43,24 @@ from django.core.paginator import Paginator
             Создать карту сайта
             Обратная связь+
             Страница для вакансии и вывод активных вакансии
-            
+            Карта Сайта +
         Админ:
-            Страница авторизации
-            CRUD Операции - Для Новостей
-            CRUD Операции - Для Галерея-Новости
-            CRUD Операции - Для Изображения-Новости
+            Страница авторизации +
+            CRUD Операции - Для Новостей +
+            CRUD Операции - Для Галерея-Новости +
+            CRUD Операции - Для Изображения-Новости +
             
-            CRUD Операции - Для Проекта
-            CRUD Операции - Для Галерея-Проект
-            CRUD Операции - Для Изображения-Новости
+            CRUD Операции - Для Проекта +
+            CRUD Операции - Для Галерея-Проект +
+            CRUD Операции - Для Изображения-Проект +
+            CRUD Операции - Для Категория-Проект +
             
-            CRUD Операции - Для Конкурса
-            CRUD Операции - Для Галерея-Конкурс
-            CRUD Операции - Для Изображения-Конкурс
+            CRUD Операции - Для Конкурса +
             
-            Создать - Модель Сотрудники
-            Создать - Модель Вакансии
-
+            Создать - Модель Сотрудники +
+            Создать - Модель Вакансии +
 """
+
 
 def index(request):
     news= News.objects.order_by('-id')[:4]
@@ -116,7 +117,6 @@ def news(request,number_page=1):
     trans = translate(language='ru')
     context = {'news_page': currunt_page_news.page(number_page),'trans':trans, 'photo':photo}
     return render(request, "client/pages/news.html", context)
-
 
 def projects(request,number_page=1):
     project= Projects.objects.order_by('-id')
@@ -194,6 +194,10 @@ def gallery_page(request,number_page=1):
     context = {'gallery_page': gallery_page.page(number_page),'trans':trans, 'news_photo':news_photo}
     return render(request, "client/pages/gallery.html", context)
 
+# Карта сайта 
+def sitemap(request):
+    return render(request, "client/pages/sitemap.html", {})
+
 def translate(language):
     cur_language = get_language()
     try:
@@ -246,12 +250,6 @@ def send_message(request):
         messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
     return redirect ('/')
 
-
-
-def detail(request):
-    template_name = "client/pages/blog_detail.html"
-    return render(request, template_name, {})
-
 @csrf_exempt
 def login_page(request):
     success_url = reverse_lazy('admin_panel')
@@ -267,7 +265,10 @@ def authorization(request):
     success_url = reverse_lazy('admin_panel')
     username = request.POST['username']
     password = request.POST['password']
+<<<<<<< HEAD
     
+=======
+>>>>>>> f487f2a1128f3138e00908cf523b6d9ead9edea1
     try:
         account = authenticate(username=UserModel.objects.get(email=username).username, password=password)
         if account is not None and request.method == 'POST':
@@ -296,6 +297,27 @@ def authorization(request):
 def logout_page(request):
     logout(request)
     return redirect('login_page')
+
+class ProfileView(View):
+    model = User
+    form_class = UpdateUserForm
+    success_url = reverse_lazy('update_profile')
+    
+    
+class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProfileView, UpdateView):
+    login_url = "login_page"
+    success_message = "Данные успешно изменены"
+    template_name = 'admin/pages/user/update.html'
+    def get_object(self, queryset=None):
+        '''This method will load the object
+           that will be used to load the form
+           that will be edited'''
+        return self.request.user
+    
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'admin/pages/user/change_password.html'
+    success_message = "Пароль успешно изменён"
+    success_url = reverse_lazy('update_profile') 
 
 # Admin-Panel Views
 @login_required
@@ -419,6 +441,7 @@ class NewsGalleryCreateView(LoginRequiredMixin, NewsGalleryView, CreateView):
             "form" : form,
             "is_active" : "news-panel",
             "expand_news" : "show",
+            "active_news_gallery" : "active",
         }
         return render(request, self.template_name, context=context)
     
@@ -487,6 +510,7 @@ class NewsImageCreateView(LoginRequiredMixin, NewsImageView, CreateView):
             "form" : form,
             "is_active" : "news-panel",
             "expand_news" : "show",
+            "active_news_image" : "active",
         }
         return render(request, self.template_name, context=context)
 
@@ -517,7 +541,11 @@ class NewsImageDeleteView(LoginRequiredMixin, NewsGalleryView, DeleteView):
     success_message = "Запись успешно удалено!"
     
 def newsimage_delete(request, id):
-    context = {}
+    context = {
+         "is_active" : "news-panel",
+         "expand_news" : "show",
+         "active_news_image" : "active",
+    }
     obj = get_object_or_404(PhotosNews, id = id)
     if request.method =="POST":
         try:
@@ -535,6 +563,61 @@ def newsimage_delete(request, id):
 ---- End News-Image Views
 """    
 
+"""
+---- Project-Category Views
+""" 
+class ProjectCategoryView(View):
+    model = ProjectCategory
+    form_class = ProjectCategoryForm
+    success_url = reverse_lazy("projectcategory_all")
+    active_panel = "projects-panel"
+    extra_context = {
+        "is_active" : active_panel,
+        "active_project_category" : "active",
+        "expand_projects" : "show",
+    }
+    
+class ProjectCategoryListView(LoginRequiredMixin, ProjectCategoryView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/project-category/category_list.html"
+    paginate_by = 10
+ 
+class ProjectCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectCategoryView, CreateView):
+    login_url = "login_page"
+    template_name = "admin/pages/project-category/category_form.html" 
+    success_message = "Запись успешно Добавлено!" 
+    
+class ProjectCategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectCategoryView, UpdateView):
+    login_url = "login_page"
+    template_name = "admin/pages/project-category/category_form.html"
+    success_message = "Запись успешно обновлено!" 
+    
+def projectcategory_delete(request, id):
+    context = {
+        "is_active" : "projects-panel",
+        "active_project_gallery" : "active",
+        "expand_projects" : "show",
+    }
+    obj = get_object_or_404(ProjectCategory, id = id)
+    if request.method =="POST":
+        try:
+        # delete object
+            obj.delete()
+        # after deleting redirect to
+        # home page
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("projectcategory_all")
+        except RestrictedError:
+            messages.error(request, "Вы не сможете удалить эту категорию, так как это связано с одним или несколькими проектами")
+            return redirect("projectcategory_all")
+        except Exception as e:
+            messages.error(request, e)
+            return redirect("projectcategory_all")
+    return render(request, "admin/pages/project-category/category_confirm_delete.html", context)
+
+"""
+---- End Project-Category Views
+""" 
 
 """
 ---- Project-Gallery Views
@@ -552,20 +635,20 @@ class ProjectGalleryView(View):
 class ProjectGalleryListView(LoginRequiredMixin, ProjectGalleryView, ListView):
     login_url = "login_page"
     template_name = "admin/pages/project-gallery/gallery_list.html"
-
+    paginate_by = 10
+    
 class ProjectGalleryCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectGalleryView, CreateView):
     login_url = "login_page"
-    template_name = "admin/pages/project-gallery/gallery_create.html"
-    redirect_field_name = "newsgallery_create"
+    template_name = "admin/pages/project-gallery/gallery_form.html"
+    redirect_field_name = "projectgallery_create"
     def get(self, request, *args, **kwargs):
         
         form = ProjectGalleryForm()
         context = {
             "form" : form,
-            "is_active" : "gallery-panel",
-            "expand_gallery" : "show",
-            "active_create_gallerynews" : "active"
-            
+            "is_active" : "projects-panel",
+            "active_project_gallery" : "active",
+            "expand_projects" : "show",
         }
         return render(request, self.template_name, context=context)
     
@@ -585,12 +668,17 @@ class ProjectGalleryCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectG
         
 
 class ProjectGalleryUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectGalleryView, UpdateView):
+    login_url = "login_page"
     template_name = 'admin/pages/project-gallery/gallery_form.html'
     success_message = "Запись успешно обновлено!"      
     
 
 def projectgallery_delete(request, id):
-    context = {}
+    context = {
+        "is_active" : "projects-panel",
+        "active_project_gallery" : "active",
+        "expand_projects" : "show",
+    }
     obj = get_object_or_404(GalleryProject, id = id)
     if request.method =="POST":
         try:
@@ -609,7 +697,156 @@ def projectgallery_delete(request, id):
 """    
 
 
+"""
+---- Project-Image Views
+""" 
+class ProjectImageView(View):
+    login_url = "login_page"
+    model = PhotosProject
+    form_class = ProjectImageForm
+    success_url = reverse_lazy("newsimage_all")
+    active_panel = "projects-panel"
+    extra_context = {
+        "is_active" : active_panel,
+        "active_project_image" : "active",
+        "expand_projects" : "show",
+        }
+class ProjectImageListView(LoginRequiredMixin, ProjectImageView, ListView):
+    template_name = 'admin/pages/project-image/image_list.html'
+    paginate_by = 10
+    
 
+class ProjectImageCreateView(LoginRequiredMixin, SuccessMessageMixin,ProjectImageView, CreateView):
+    template_name = 'admin/pages/project-image/image_form.html'
+    redirect_field_name = "projectimage_create"
+    def get(self, request, *args, **kwargs):
+        form = ProjectImageForm()
+        context = {
+            "form" : form,
+            "is_active" : self.active_panel,
+            "active_project_image" : "active",
+            "expand_projects" : "show",
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            form = ProjectImageForm(request.POST, request.FILES)
+            try:
+                form.save()
+                messages.success(request, "Изображение Успешно добавлено!")
+                return redirect(self.redirect_field_name)
+            except ValueError:
+                messages.error(request, "Выберите картинку в формате (jpg, jpeg, png, и т.д.)")
+                return redirect(self.redirect_field_name)
+            except Exception as e:
+                messages.error(request, e)
+                return redirect(self.redirect_field_name)
+        else:
+            messages.error(request, "Invalid Method")
+            return redirect(self.redirect_field_name) 
+
+class ProjectImageUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectImageView, UpdateView):
+    template_name = 'admin/pages/project-image/image_form.html'
+    success_message = "Запись успешно обновлено!"
+       
+    
+def projectimage_delete(request, id):
+    context = {
+        "is_active" : "projects-panel",
+        "active_project_image" : "active",
+        "expand_projects" : "show",
+    }
+    obj = get_object_or_404(PhotosProject, id = id)
+    if request.method =="POST":
+        try:
+            if len(obj.URL) > 0:
+                os.remove(obj.URL.path)
+            obj.delete()
+            
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("projectimage_all")
+        except Exception as e:
+            messages.error(request, e)
+            return redirect("projectimage_delete")
+    return render(request, "admin/pages/project-image/image_confirm_delete.html", context)
+
+"""
+---- End Project-Image Views
+""" 
+
+"""
+---- Project Views
+""" 
+class ProjectView(View):
+    model = Projects
+    form_class = ProjectForm
+    active_panel = "projects-panel"
+    extra_context = {
+        "is_active" : active_panel,
+        "active_projects" : "active",
+        "expand_projects" : "show",
+        }
+    
+class ProjectListView(LoginRequiredMixin, ProjectView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/project/project_list.html"
+    
+
+class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/project/project_form.html'
+    redirect_field_name = "projects_create"
+    def get(self, request, *args, **kwargs):
+        form = ProjectForm()
+        context = {
+            "form" : form,
+            "is_active" : self.active_panel,
+            "active_projects" : "active",
+            "expand_projects" : "show",
+        }
+        return render(request, self.template_name, context=context)
+    
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            form = ProjectForm(request.POST)
+            try:
+                form.save()
+                messages.success(request, "Запись успешно добавлено!")
+                return redirect(self.redirect_field_name)
+            except Exception as e:
+                messages.error(request, e)
+                return redirect(self.redirect_field_name)
+        else:
+            messages.error(request, "Invalid Method"        )
+            return redirect(self.redirect_field_name)     
+        
+class ProjectUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectView, UpdateView):
+    login_url = "login_page"
+    template_name = "admin/pages/project/project_form.html"
+    
+    
+def projects_delete(request, id):
+    context = {
+            "is_active" : "projects-panel",
+            "active_projects" : "active",
+            "expand_projects" : "show",
+    }
+    obj = get_object_or_404(Projects, id = id)
+    if request.method =="POST":
+        
+        try:
+            # delete object
+            obj.delete()
+            # after deleting redirect to
+            # home page
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("projects_all")
+        except Exception as e:
+            messages.error(request, "Не удалось удалить запись, повторите попытку!")
+            return redirect("projects_all")
+ 
+    return render(request, "admin/pages/projects/project_confirm_delete.html", context)      
 """
 ---- Contest Views
 """  
@@ -639,6 +876,7 @@ class ContestCreateView(LoginRequiredMixin, SuccessMessageMixin, ContestView, Li
         context = {
             "form" : form,
             "is_active" : "contests-panel",
+            "active_contests" : "active",
             "expand_contests" : "show",
         }
         return render(request, self.template_name, context=context)
@@ -679,8 +917,6 @@ def contests_delete(request, id):
             messages.error(request, e)
             return redirect("contests_delete")
     return render(request, "admin/pages/contests/contests_confirm_delete.html", context)
-
-
 
 def get_last_projects(request):
     last_ten = Projects.objects.all().order_by('-id')[:10]

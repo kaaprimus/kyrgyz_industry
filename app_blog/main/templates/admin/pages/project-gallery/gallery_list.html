@@ -25,7 +25,7 @@
                   <div class="card-body">
                     <div class="d-sm-flex align-items-center mb-4">
                       <h4 class="card-title mb-sm-0">Список всех Галереи</h4>
-                      <a href="{% url 'projectsgallery_create' %}" class="btn btn-primary btn-rounded my-1 my-sm-0 ml-auto">
+                      <a href="{% url 'projectgallery_create' %}" class="btn btn-primary btn-rounded my-1 my-sm-0 ml-auto">
                         Создать Галерею
                       </a>
                     </div>
@@ -44,8 +44,8 @@
                             <td>{{forloop.counter}}</td>
                             <td>{{projectsgallery.Name }}</td>
                             <td class="edit-delete-icons">
-                              <a href="{% url 'projectsgallery_update' projectsgallery.id %}"><i class="icon-pencil"></i></a> |
-                              <a href="{% url 'projectsgallery_delete' projectsgallery.id %}" class="text-danger"><i class="icon-trash"></i></a>
+                              <a href="{% url 'projectgallery_update' projectsgallery.id %}"><i class="icon-pencil"></i></a> |
+                              <a href="{% url 'projectgallery_delete' projectsgallery.id %}" class="text-danger"><i class="icon-trash"></i></a>
                             </td>
                           </tr>
                           {% endfor %}
@@ -95,6 +95,7 @@
             <script src="{% static 'admin-panel/vendors/js/vendor.bundle.base.js' %}"></script>
             <!-- endinject -->
             <!-- Plugin js for this page -->
+            <script src="{% static 'admin-panel/js/custom.js' %}"></script>
             <!-- End plugin js for this page -->
             <!-- inject:js -->
             <script src="{% static 'admin-panel/js/off-canvas.js' %}"></script>
