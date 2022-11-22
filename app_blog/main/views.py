@@ -117,7 +117,7 @@ def news(request,number_page=1):
     context = {'news_page': currunt_page_news.page(number_page),'trans':trans, 'photo':photo}
     return render(request, "client/pages/news.html", context)
 
-
+# Ajo
 def projects(request,number_page=1):
     project= Projects.objects.order_by('-id')
     currunt_page_news = Paginator(project,2)
