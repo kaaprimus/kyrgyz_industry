@@ -265,6 +265,10 @@ def authorization(request):
     success_url = reverse_lazy('admin_panel')
     username = request.POST['username']
     password = request.POST['password']
+<<<<<<< HEAD
+    
+=======
+>>>>>>> f487f2a1128f3138e00908cf523b6d9ead9edea1
     try:
         account = authenticate(username=UserModel.objects.get(email=username).username, password=password)
         if account is not None and request.method == 'POST':
