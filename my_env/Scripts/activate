@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\zenis\Рабочий стол\Работа\Последняя версия\kyrgyz_industry\my_env"
+VIRTUAL_ENV="F:\Projects\Кыргызиндустрия\Git version\kyrgyz_industry-2\my_env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

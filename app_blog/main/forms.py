@@ -3,6 +3,7 @@ from typing import Text
 from .models import *
 from django.forms import ModelForm, DateTimeInput, TextInput, Textarea
 from django import forms
+from django.contrib.auth.models import User
 
 
 # News
@@ -93,7 +94,6 @@ class ProjectImageForm(ModelForm):
         fields = ["URL", "Caption", "Gallery"]
         
         widgets = {
-            'URL' : forms.FileField(),
             'Caption' : TextInput(
                 attrs = {"type" : "text", "class" : "form-control", "id" : "image-caption", "placeholder" : "Описание изображении", "size" : 110, 'required': False}
             ),
@@ -108,7 +108,7 @@ class ProjectForm(ModelForm):
         fields = ['Title',  'Description', 'Date_added', 'Language', 'Gallery', 'Category', 'Status']
         widgets = {
             'Title' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название новости","size" : 70, 'required': True}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Заговолок проекта","size" : 70, 'required': True}
             ),
             'Description' : Textarea(
                 attrs = {"class" : "form-control", "id" : "description", "placeholder" : "Полное содержание", 'required': True}
@@ -123,18 +123,32 @@ class ProjectForm(ModelForm):
             'Gallery' : forms.Select(
                 attrs={"class": "form-control", 'required': True, "id" : "gallery"}
             ),
-            'Category' : forms.Select(), 
-            'Status' : forms.Select()
+            'Category' : forms.Select(
+                attrs= {"class": "form-control", 'required': True, "id" : "Category"}
+                ), 
+            'Status' : forms.Select(
+                attrs ={ "class": "form-control", 'required': True, "id" : "Status"},
+                choices= Project_Status_Choice.choices
+                )
         }
-        
 
+class ProjectCategoryForm(ModelForm):
+    class Meta:
+        model = ProjectCategory
+        fields = '__all__'    
+
+        widgets = {
+            'Name' : TextInput(  
+                    attrs= {"type" : "text", "class" : "form-control", "id" : "name", "placeholder" : "Название категории"}           
+                               )
+        } 
 class ContestForm(ModelForm):
     class Meta:
         model = Contests
         fields = '__all__'
         widgets = {
             'Title' : TextInput(
-                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Описание конкурса","size" : 180, 'required': True}
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название конкурса","size" : 40, 'required': True}
                 ),
             'Short_Description' : TextInput(
                 attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 110, 'required': True}
@@ -152,6 +166,7 @@ class ContestForm(ModelForm):
                     )
             
         }
+        
 
 # Vacancies
 class VacanciesForm(ModelForm):
@@ -190,3 +205,15 @@ class VacanciesForm(ModelForm):
                 attrs = {"type" : "mail", "class" : "form-control", "id" : "email_company", "placeholder" : "Почта компании", "size" : 254, 'required': True}
             ),
         }
+        
+        
+class UpdateUserForm(forms.ModelForm):
+    username = forms.CharField(max_length=100,
+                               required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control', "id" : "username", "placeholder" : "Введите Имя Пользователя"}))
+    email = forms.EmailField(required=True,
+                             widget=forms.TextInput(attrs={'class': 'form-control', "id" : "email", "placeholder" : "Введите E-mail"}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
