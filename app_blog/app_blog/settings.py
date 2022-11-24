@@ -82,13 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'KG_INDUSTRY',
-<<<<<<< HEAD
-        'USER': 'User',
-        'PASSWORD': '12345',
-=======
         'USER': 'ajo',
         'PASSWORD': '1330',
->>>>>>> f487f2a1128f3138e00908cf523b6d9ead9edea1
         'HOST': '127.0.0.1',
         'PORT': '1433',
         'OPTIONS': {

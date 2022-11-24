@@ -265,10 +265,7 @@ def authorization(request):
     success_url = reverse_lazy('admin_panel')
     username = request.POST['username']
     password = request.POST['password']
-<<<<<<< HEAD
-    
-=======
->>>>>>> f487f2a1128f3138e00908cf523b6d9ead9edea1
+
     try:
         account = authenticate(username=UserModel.objects.get(email=username).username, password=password)
         if account is not None and request.method == 'POST':
@@ -927,6 +924,81 @@ def get_last_projects(request):
     
     return render(request, template_name, context)
 
+
+class ManagementView(View):
+    model = Management
+    form_class = ManagementForm
+    active_panel = 'management-panel'
+    extra_context = {
+        "is_active" : active_panel,
+        "active_management" : "active",
+        "expand_management" : "show",
+        }
+    
+class ManagementListView(LoginRequiredMixin, ManagementView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/management/management_list.html"
+
+class ManagementCreateView(LoginRequiredMixin, SuccessMessageMixin, ManagementView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/management/management_form.html'
+    success_url = reverse_lazy("management_create")
+    success_message = "Запись успешно добавлена!"
+    # def get(self, request, *args, **kwargs):
+    #     form = ManagementForm()
+    #     context = {
+    #         "form" : form,
+    #         "is_active" : self.active_panel,
+    #         "active_management" : "active",
+    #         "expand_management" : "show",
+    #     }
+    #     return render(request, self.template_name, context=context)
+    
+    # def post(self, request, *args, **kwargs):
+    #     if request.method == 'POST':
+    #         form = ManagementForm(request.POST)
+    #         try:
+    #             form.save()
+    #             messages.success(request, "Запись успешно добавлено!")
+    #             return redirect(self.redirect_field_name)
+    #         except Exception as e:
+    #             messages.error(request, e)
+    #             return redirect(self.redirect_field_name)
+    #     else:
+    #         messages.error(request, "Invalid Method")
+    #         return redirect(self.redirect_field_name)  
+        
+        
+class ManagementUpdateView(LoginRequiredMixin, SuccessMessageMixin, ManagementView, UpdateView):
+    login_url = 'login_page'
+    success_url = reverse_lazy("management_all")
+    template_name = 'admin/pages/management/management_form.html'
+    success_message = "Запись успешно обновлена!"
+    
+    
+def management_delete(request, id):
+    context = {
+         "is_active" : "management-panel",
+         "active_management" : "active",
+         "expand_management" : "show",
+    }
+    obj = get_object_or_404(Management, id = id)
+    if request.method =="POST":
+        
+        try:
+            # delete object
+            obj.delete()
+            # after deleting redirect to
+            # home page
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("management_all")
+        except Exception as e:
+            messages.error(request, "Не удалось удалить запись, повторите попытку!")
+            return redirect("management_all")
+ 
+    return render(request, "admin/pages/management/management_confirm_delete.html", context)      
+
+    
 class VacanciesView(View):
     model = Vacancies
     form_class = VacanciesForm

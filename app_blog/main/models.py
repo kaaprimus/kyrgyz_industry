@@ -23,6 +23,8 @@ class ProjectCategory(models.Model):
         db_table="projectCategory" 
         ordering = ["-id"]
 
+    def __str__(self) -> str:
+        return self.Name
 
 #Галерея 
 class GalleryProject(models.Model):
@@ -193,7 +195,11 @@ class News(models.Model):
 class Management(models.Model):
     full_name = models.CharField(max_length = 40, verbose_name = "ФИО Сотрудника")
     position = models.CharField(max_length = 70, verbose_name = "Должность")
+    date_birth = models.DateField(verbose_name='Дата рождения', default=now)
+    education = models.CharField(max_length=60, verbose_name='Образования')
+    speciality = models.CharField(max_length=30, verbose_name='Специальность')
     about = RichTextField(verbose_name="Биография сотрудника")
+    
     picture = models.ImageField(
         verbose_name="Фотография", 
         upload_to=get_file_path, 

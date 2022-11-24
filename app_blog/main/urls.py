@@ -58,8 +58,15 @@ urlpatterns = [
     path('admin-panel/projects/create/', views.ProjectCreateView.as_view(), name='projects_create'),
     path('admin-panel/projects/update/<int:pk>/', views.ProjectUpdateView.as_view(), name='projects_update'),
     path('admin-panel/projects/delete/<int:id>/', views.projects_delete, name='projects_delete'),
-        
-      # Vacancies View
+    
+    # Management View
+    path('admin-panel/management/', views.ManagementListView.as_view(), name='management_all'),
+    path('admin-panel/management/create/', views.ManagementCreateView.as_view(), name='management_create'),
+    path('admin-panel/management/update/<int:pk>/', views.ManagementUpdateView.as_view(), name='management_update'),
+    path('admin-panel/management/delete/<int:id>/', views.management_delete, name='management_delete'),
+    
+    
+    # Vacancies View
     path('admin-panel/vacancies/', views.VacanciesListView.as_view(), name='vacancies_all'),
     path('admin-panel/vacancies/create/', views.VacanciesCreateView.as_view(), name='vacancies_create'),
     path('admin-panel/vacancies/update/<int:pk>/', views.VacanciesUpdateView.as_view(), name='vacancies_update'),
