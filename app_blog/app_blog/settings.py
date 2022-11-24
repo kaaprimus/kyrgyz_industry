@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'rosetta',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +128,7 @@ LANGUAGE_CODE = 'ru'
 LANGUAGES = (
     ('en', _('English')),
     ('ru', _('Russian')),
-    ('de', _('Deutsch')),
+    ('ky', _('Кыргызча')),
     ('zh-hans', _('简体中文')),
 )
 

@@ -215,7 +215,6 @@ msgstr ""
 "and transport infrastructure."
 
 #: .\main\templates\client\index.html:95
-#, python-format
 msgid ""
 "Открытое Акционерное ОбществоОАО “Кыргызиндустрия” создано решением Кабинета "
 "Министров со 100%% участием государства в его уставном капитале, который "
@@ -417,7 +416,6 @@ msgid "СВЯЖИТЕСЬ С НАМИ"
 msgstr "CONTACT US"
 
 #: .\main\templates\client\index.html:517
-#, python-format
 msgid ""
 "ОАО «Кыргызиндустрия» создано постановлением Кабинета Министров Кыргызской "
 "Республики за №341 от 24 декабря 2021 года со 100%% участием государства в "
@@ -492,7 +490,6 @@ msgid "Создано постановлением Кабинета Минист
 msgstr "Created by a resolution of the Cabinet of Ministers"
 
 #: .\main\templates\client\pages\about_company.html:55
-#, python-format
 msgid ""
 "Кыргызской Республики за №341 от 24 декабря 2021 года со 100%% участием "
 "государства в его уставном"
@@ -569,7 +566,6 @@ msgstr ""
 "unemployment and labor migration."
 
 #: .\main\templates\client\pages\about_company.html:63
-#, python-format
 msgid ""
 "Создание ОАО «Кыргызиндустрия» позволяет решить целый комплекс задач, "
 "диктуемых современными условиями ведения предпринимательства: повысит "
@@ -844,27 +840,27 @@ msgstr ""
 #: .\main\templates\client\pages\news_detail.html:52
 #: .\main\templates\client\pages\project_detail.html:51
 msgid "Описание новости"
-msgstr ""
+msgstr "News Description"
 
 #: .\main\templates\client\pages\president.html:56
 msgid "Должность"
-msgstr ""
+msgstr "Position"
 
 #: .\main\templates\client\pages\president.html:57
 msgid "Дата рождения"
-msgstr ""
+msgstr "Date of Birth"
 
 #: .\main\templates\client\pages\president.html:58
 msgid "Гражданство"
-msgstr ""
+msgstr "Citizenship"
 
 #: .\main\templates\client\pages\president.html:59
 msgid "Образования"
-msgstr ""
+msgstr "Education"
 
 #: .\main\templates\client\pages\president.html:60
 msgid "Специальность"
-msgstr ""
+msgstr "Speciality"
 
 #: .\main\templates\client\pages\president.html:67
 msgid ""
@@ -875,6 +871,13 @@ msgid ""
 "директора по развитию местного снабжения и руководил Проектом промышленного "
 "развития и создания рабочих мест на Иссык-Куле.<br><br>Был начальником"
 msgstr ""
+"Abduraimov Zharasul Osmonalievich graduated from the Ural Polytechnic"
+"Institute them. Kirov in Sverdlovsk with a degree"
+"in Mechanical Engineer of Electronic equipment. Since the 1990s,"
+"he has been in charge of the largest factories in the country."
+"From 2013 to 2015, he worked at Kumtor Gold Company CJSC"
+"as a Deputy Director of Local Procurement Development and led the"
+"Industrial development and job creation in Issyk-Kul. Was the boss"
 
 #: .\main\templates\client\pages\president.html:68
 msgid ""
@@ -884,6 +887,11 @@ msgid ""
 "рисками».<br><br>С мая по сентябрь 2019 года являлся общественным советником "
 "министра экономики.<br><br>С октября 2020 года по"
 msgstr ""
+"department of technical regulation of the Ministry of Economic Development"
+"Worked as an expert on industrial development of Kyrgyzstan"
+"in the project of the Asian Development Bank"
+"«Joining the Eurasian Economic Union - managing opportunities and risks»."
+"From May to September 2019 he was a public adviser Minister of Economy. From October 2020 to"
 
 #: .\main\templates\client\pages\president.html:69
 msgid ""
@@ -892,26 +900,29 @@ msgid ""
 "экономики и торговли.<br><br>В настоящее время является главой ОАО "
 "«Кыргызиндустрия».<br><br>"
 msgstr ""
+"July 2021 worked as a government plenipotentiary in Osh region. FROM"
+"July 2021 to January 2022 served as Deputy Minister economy and trade."
+"Currently he is the head of JSC «Kyrgyzindustry»."
 
 #: .\main\templates\client\pages\projects.html:32
 msgid "Реализованные"
-msgstr ""
+msgstr "Implemented"
 
 #: .\main\templates\client\pages\projects.html:33
 msgid "Не Реализованные"
-msgstr ""
+msgstr "Not Realized"
 
 #: .\main\templates\client\pages\projects.html:34
 msgid "В процессе"
-msgstr ""
+msgstr "In the process"
 
 #: .\main\templates\client\pages\vacancy_detail.html:31
 msgid "Информация про вакансию"
-msgstr ""
+msgstr "Information about the vacancy"
 
 #: .\main\templates\client\pages\vacancy_detail.html:39
 msgid "Описание вакансии"
-msgstr ""
+msgstr "Vacancy description"
 
 #: .\main\views.py:201
 msgid "hello"

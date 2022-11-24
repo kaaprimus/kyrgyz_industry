@@ -37,7 +37,7 @@
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <img class="img-xs rounded-circle ml-2" src="{% static 'admin-panel/images/requirements/admin.png' %}" alt="Profile image"> <span class="font-weight-normal">Администратор </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> Профиль</a>
+                <a class="dropdown-item" href="{% url 'update_profile' %}"><i class="dropdown-item-icon icon-user text-primary"></i> Профиль</a>
                 <a class="dropdown-item" href="{% url 'logout_page' %}"><i class="dropdown-item-icon icon-power text-primary"></i>Выйти</a>
               </div>
             </li>

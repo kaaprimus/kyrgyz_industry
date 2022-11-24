@@ -46,12 +46,15 @@
                 <li><strong>{% translate "Заголовок"%}</strong>: {{ value.Title }}</li>
                 <li><strong>{% translate "Язык"%}</strong>: {{ value.Language }}</li>
                 <li><strong>{% translate "Дата публикации"%}</strong>: {{ value.Date_added }}</li>
+                <li><strong>Заголовок</strong>: {{ value.Title }}</li>
+                <li><strong>Язык</strong>: {{ value.Language }}</li>
+                <li><strong>Дата публикации</strong>: {{ value.Date_added|date:'j E Y'}} года</li>
               </ul>
             </div>
             <div class="portfolio-description">
               <h2>{% translate "Описание новости"%}</h2>
               <p>
-                {{ value.Description }}
+                {{ value.Description|safe }}
             </p>
             </div>
           </div>

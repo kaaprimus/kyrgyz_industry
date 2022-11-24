@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-{% url "projectsgallery_create"  as url_path %}
+{% url "projectgallery_create"  as url_path %}
 <div class="content-wrapper">
     <div class="page-header">
       <h3 class="page-title">{% if request.path == url_path %}Добавление{% else%}Изменение{% endif %}  Галереи</h3>
@@ -32,7 +32,7 @@
                 {{ form.Name }}
                 {{ form.Name.errors }}
             </div>
-            {% url 'projectsgallery_all' as gallery_all %}
+            {% url 'projectgallery_all' as gallery_all %}
             <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
             <a href="{{gallery_all}}"  class="btn btn-light">Отменить</a>
             </form>
