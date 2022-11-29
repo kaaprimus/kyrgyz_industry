@@ -44,6 +44,8 @@ from django.contrib.auth.views import PasswordChangeView
             Обратная связь+
             Страница для вакансии и вывод активных вакансии
             Карта Сайта +
+            Горячие событии
+            Настроить главную страницу
         Админ:
             Страница авторизации +
             CRUD Операции - Для Новостей +
@@ -57,14 +59,22 @@ from django.contrib.auth.views import PasswordChangeView
             
             CRUD Операции - Для Конкурса +
             
+            CRUD Операции - Для Галерея - Горячих событии
+            CRUD Операции - Для Изображение - Горячих событии 
+            CRUD Операции - Для Горячих событии 
+            
             Создать - Модель Сотрудники +
             Создать - Модель Вакансии +
+            Создать - Модель Горячие событии
+            
+            Оптимизация Кода
 """
 
 
 def index(request):
     news= News.objects.order_by('-id')[:4]
     contest= Contests.objects.order_by('-id')[:4]
+    hot_news = HotNews.objects.order_by('-id')[:5]
     
     project_ON_PROCCESS=Projects.objects.order_by('-id').filter(Status='В процессе')[:4]
     project_HAS_FINISHED=Projects.objects.order_by('-id').filter(Status='Реализован')[:4]
@@ -72,9 +82,16 @@ def index(request):
     project_all=Projects.objects.order_by('-id')[:8]
     photo=PhotosProject.objects.all()
     trans = translate(language='ru')
-    context = {'trans':trans,'news_page':news,'contest_page':contest,
-        'project_ON_PROCCESS':project_ON_PROCCESS,'project_HAS_FINISHED':project_HAS_FINISHED,
-        'project_NOT_FINISHED':project_NOT_FINISHED,'project_all':project_all,'photo': photo
+    context = {
+        'trans':trans,
+        'news_page':news,
+        'contest_page':contest,
+        'project_ON_PROCCESS':project_ON_PROCCESS,
+        'project_HAS_FINISHED':project_HAS_FINISHED,
+        'project_NOT_FINISHED':project_NOT_FINISHED,
+        'project_all':project_all,
+        'photo': photo,
+        'hot_news' : hot_news
         }
     return render(request, "client/index.html", context)
 
@@ -178,7 +195,7 @@ def vacancies(request, number_page=1):
     currunt_page_vacancies = Paginator(contest,4)
     context = {'currunt_page_vacancies': currunt_page_vacancies.page(number_page),'trans':trans}
     return render(request, "client/pages/vacancies.html", context)
-
+# 703 47 05 64
 def get_vacancy(request,title):
     trans = translate(language='ru')
     vacancy_detail=Vacancies.objects.filter(title=title)
@@ -338,8 +355,6 @@ def admin_form_page(request):
     return render(request, template_name, context)
 
 
-
-
 class NewsView(View):
     model = News
     form_class = NewsForm
@@ -355,7 +370,7 @@ class NewsListView(LoginRequiredMixin, NewsView, ListView):
     template_name = 'admin/pages/news/news-all.html'
     paginate_by = 10
     
-class NewsCreateView(LoginRequiredMixin, NewsView, CreateView):
+class NewsCreateView(LoginRequiredMixin, SuccessMessageMixin, NewsView, CreateView):
     login_url = 'login_page'
     template_name = 'admin/pages/news/news-add.html'
     redirect_field_name = "news_create"
@@ -365,6 +380,7 @@ class NewsCreateView(LoginRequiredMixin, NewsView, CreateView):
         context = {
             "form" : form,
             "is_active" : "news-panel",
+            "active_news" : "active",
             "expand_news" : "show",
         }
         return render(request, self.template_name, context=context)
@@ -944,29 +960,7 @@ class ManagementCreateView(LoginRequiredMixin, SuccessMessageMixin, ManagementVi
     template_name = 'admin/pages/management/management_form.html'
     success_url = reverse_lazy("management_create")
     success_message = "Запись успешно добавлена!"
-    # def get(self, request, *args, **kwargs):
-    #     form = ManagementForm()
-    #     context = {
-    #         "form" : form,
-    #         "is_active" : self.active_panel,
-    #         "active_management" : "active",
-    #         "expand_management" : "show",
-    #     }
-    #     return render(request, self.template_name, context=context)
-    
-    # def post(self, request, *args, **kwargs):
-    #     if request.method == 'POST':
-    #         form = ManagementForm(request.POST)
-    #         try:
-    #             form.save()
-    #             messages.success(request, "Запись успешно добавлено!")
-    #             return redirect(self.redirect_field_name)
-    #         except Exception as e:
-    #             messages.error(request, e)
-    #             return redirect(self.redirect_field_name)
-    #     else:
-    #         messages.error(request, "Invalid Method")
-    #         return redirect(self.redirect_field_name)  
+   
         
         
 class ManagementUpdateView(LoginRequiredMixin, SuccessMessageMixin, ManagementView, UpdateView):
@@ -1066,3 +1060,189 @@ def vacancies_delete(request, id):
             return redirect("vacancies_all")
  
     return render(request, "admin/pages/vacancies/vacancies_confirm_delete.html", context)      
+
+"""
+---- End Vacancies Views
+"""  
+
+"""
+---- HotNews-Gallery Views
+"""  
+class HotNewsGalleryView(View):
+    model = HotNewsGallery
+    form_class = HotNewsGalleryForm
+    success_url = reverse_lazy("hotnewsgallery_all")
+    extra_context = {
+        "is_active" : "hotnews-panel",
+        "active_hotnews_gallery" : "active",
+        "expand_hotnews" : "show",
+        }
+    
+class HotNewsGalleryListView(LoginRequiredMixin, HotNewsGalleryView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/hotnews-gallery/gallery_list.html"
+    paginate_by = 10
+    
+class HotNewsGalleryCreateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsGalleryView, CreateView):
+    login_url = "login_page"
+    template_name = "admin/pages/hotnews-gallery/gallery_form.html"
+    redirect_field_name = "hotnewsgallery_create"
+    success_message = "Запись успешно Добавлена!"
+class HotNewsGalleryUpdateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsGalleryView, UpdateView):
+    login_url = "login_page"
+    template_name = 'admin/pages/hotnews-gallery/gallery_form.html'
+    success_message = "Запись успешно обновлено!"      
+    
+
+def hotnewsgallery_delete(request, id):
+    context = {
+        "is_active" : "hotnews-panel",
+        "active_hotnews_gallery" : "active",
+        "expand_hotnews" : "show",
+    }
+    obj = get_object_or_404(HotNewsGallery, id = id)
+    if request.method =="POST":
+        try:
+        # delete object
+            obj.delete()
+        # after deleting redirect to
+        # home page
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("hotnewsgallery_all")
+        except RestrictedError:
+            messages.error(request, "Вы не сможете удалить эту галерею, так как это связано с одной или несколькими новостями или фотографиями")
+            return redirect("hotnewsgallery_all")
+    return render(request, "admin/pages/hotnews-gallery/gallery_confirm_delete.html", context)
+
+"""
+---- End Project-Gallery Views
+"""    
+
+"""
+---- Project-Image Views
+""" 
+class HotNewsImageView(View):
+    login_url = "login_page"
+    model = HotNewsPhoto
+    form_class = HotNewsImageForm
+    success_url = reverse_lazy("hotnewsimage_all")
+    active_panel = "hotnews-panel"
+    extra_context = {
+        "is_active" : active_panel,
+        "active_hotnews_image" : "active",
+        "expand_hotnews" : "show",
+        }
+class HotNewsImageListView(LoginRequiredMixin, HotNewsImageView, ListView):
+    template_name = 'admin/pages/hotnews-image/image_list.html'
+    paginate_by = 10
+    
+
+class HotNewsImageCreateView(LoginRequiredMixin, SuccessMessageMixin,HotNewsImageView, CreateView):
+    template_name = 'admin/pages/hotnews-image/image_form.html'
+    redirect_field_name = "hotnewsimage_create"
+    def get(self, request, *args, **kwargs):
+        form = HotNewsImageForm()
+        context = {
+            "form" : form,
+            "is_active" : self.active_panel,
+            "active_hotnews_image" : "active",
+            "expand_hotnews" : "show",
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            form = HotNewsImageForm(request.POST, request.FILES)
+            try:
+                form.save()
+                messages.success(request, "Изображение Успешно добавлено!")
+                return redirect(self.redirect_field_name)
+            except ValueError:
+                messages.error(request, "Выберите картинку в формате (jpg, jpeg, png, и т.д.)")
+                return redirect(self.redirect_field_name)
+            except Exception as e:
+                messages.error(request, e)
+                return redirect(self.redirect_field_name)
+        else:
+            messages.error(request, "Invalid Method")
+            return redirect(self.redirect_field_name) 
+
+class HotNewsImageUpdateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsImageView, UpdateView):
+    template_name = 'admin/pages/hotnews-image/image_form.html'
+    success_message = "Запись успешно обновлено!"
+       
+    
+def hotnewsimage_delete(request, id):
+    context = {
+        "is_active" : "projects-panel",
+        "active_project_image" : "active",
+        "expand_projects" : "show",
+    }
+    obj = get_object_or_404(PhotosProject, id = id)
+    if request.method =="POST":
+        try:
+            if len(obj.url) > 0:
+                os.remove(obj.url.path)
+            obj.delete()
+            
+            messages.success(request, "Запись успешно удалена!")
+            return redirect("hotnewsimage_all")
+        except Exception as e:
+            messages.error(request, e)
+            return redirect("hotnewsimage_delete")
+    return render(request, "admin/pages/hotnews-image/image_confirm_delete.html", context)
+
+"""
+---- End Project-Image Views
+""" 
+
+"""
+---- Project Views
+""" 
+class HotNewsView(View):
+    model = HotNews
+    form_class = HotNewsForm
+    active_panel = "hotnews-panel"
+    extra_context = {
+        "is_active" : active_panel,
+        "active_hotnews" : "active",
+        "expand_hotnews" : "show",
+        }
+    
+class HotNewsListView(LoginRequiredMixin, HotNewsView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/hotnews/hotnews_list.html"
+    
+
+class HotNewsCreateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/hotnews/hotnews_form.html'
+    redirect_field_name = "projects_create"
+    success_message = "Запись успешно Добавлена!"  
+class HotNewsUpdateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsView, UpdateView):
+    login_url = "login_page"
+    template_name = "admin/pages/hotnews/hotnews_form.html"
+    success_message = "Запись успешно Обновлена!"  
+    
+def hotnews_delete(request, id):
+    context = {
+            "is_active" : "hotnews-panel",
+            "active_hotnews" : "active",
+            "expand_hotnews" : "show",
+    }
+    obj = get_object_or_404(HotNews, id = id)
+    if request.method =="POST":
+        
+        try:
+            # delete object
+            obj.delete()
+            # after deleting redirect to
+            # home page
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("hotnews_all")
+        except Exception as e:
+            messages.error(request, "Не удалось удалить запись, повторите попытку!")
+            return redirect("hotnews_delete")
+ 
+    return render(request, "admin/pages/hotnews/hotnews_confirm_delete.html", context)   
+
