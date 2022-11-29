@@ -44,8 +44,8 @@
                           {% for hotnews in hotnews_list %}
                           <tr>
                             <td>{{forloop.counter}}</td>
-                            <td class="td-title" >{{hotnews.Title }}</td>
-                            <td class="text-danger">{{hotnews.Date_added}}</td>
+                            <td class="td-title" >{{hotnews.title }}</td>
+                            <td class="text-danger">{{hotnews.pub_date}}</td>
                             <td><label class="badge badge-warning">{{hotnews.Language}}</label></td>
                             <td class="edit-delete-icons">
                               <a href="{% url 'hotnews_update' hotnews.id %}"><i class="icon-pencil"></i></a> |

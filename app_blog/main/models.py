@@ -193,13 +193,14 @@ class News(models.Model):
     
 # Руководство    
 class Management(models.Model):
-    full_name = models.CharField(max_length = 40, verbose_name = "ФИО Сотрудника")
+    full_name = models.CharField(max_length = 60, verbose_name = "ФИО Сотрудника")
     position = models.CharField(max_length = 70, verbose_name = "Должность")
     date_birth = models.DateField(verbose_name='Дата рождения', default=now)
     education = models.CharField(max_length=60, verbose_name='Образования')
-    speciality = models.CharField(max_length=30, verbose_name='Специальность')
+    speciality = models.CharField(max_length=
+                                  40, verbose_name='Специальность')
     about = RichTextField(verbose_name="Биография сотрудника")
-    Language=models.CharField(
+    language=models.CharField(
                                max_length = 10, 
                                choices = LanguageChoice.choices,
                                default = LanguageChoice.RU,
@@ -267,8 +268,8 @@ class HotNewsPhoto(models.Model):
         ordering = ['-id']
         
 class HotNews(models.Model):
-    title = models.CharField(verbose_name='Название событии', max_length=50)
-    short_description = models.CharField(verbose_name='Краткое описание', max_length=100)
+    title = models.CharField(verbose_name='Название событии', max_length=70)
+    short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
     description = RichTextField()
     Language=models.CharField(
                                max_length = 10, 

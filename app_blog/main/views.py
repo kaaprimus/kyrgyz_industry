@@ -375,7 +375,6 @@ class NewsCreateView(LoginRequiredMixin, SuccessMessageMixin, NewsView, CreateVi
     template_name = 'admin/pages/news/news-add.html'
     redirect_field_name = "news_create"
     def get(self, request, *args, **kwargs):
-        
         form = NewsForm()
         context = {
             "form" : form,
@@ -390,8 +389,10 @@ class NewsCreateView(LoginRequiredMixin, SuccessMessageMixin, NewsView, CreateVi
             form = NewsForm(request.POST)
             if form.is_valid():
                 form.save()
+                messages.error(request, "Запись успешно добавлена!")
                 return redirect(self.redirect_field_name)
             else:
+                messages.error(request, "Введите валидные данные")
                 return redirect(self.redirect_field_name)
         else:
             messages.error(request, "Invalid Method")
@@ -1115,11 +1116,11 @@ def hotnewsgallery_delete(request, id):
     return render(request, "admin/pages/hotnews-gallery/gallery_confirm_delete.html", context)
 
 """
----- End Project-Gallery Views
+---- End HotNews-Gallery Views
 """    
 
 """
----- Project-Image Views
+---- HotNews-Image Views
 """ 
 class HotNewsImageView(View):
     login_url = "login_page"
@@ -1193,11 +1194,11 @@ def hotnewsimage_delete(request, id):
     return render(request, "admin/pages/hotnews-image/image_confirm_delete.html", context)
 
 """
----- End Project-Image Views
+---- End HotNews-Image Views
 """ 
 
 """
----- Project Views
+---- HotNews Views
 """ 
 class HotNewsView(View):
     model = HotNews
@@ -1212,13 +1213,13 @@ class HotNewsView(View):
 class HotNewsListView(LoginRequiredMixin, HotNewsView, ListView):
     login_url = "login_page"
     template_name = "admin/pages/hotnews/hotnews_list.html"
-    
+    paginate_by = 10
 
 class HotNewsCreateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsView, CreateView):
     login_url = 'login_page'
     template_name = 'admin/pages/hotnews/hotnews_form.html'
-    redirect_field_name = "projects_create"
     success_message = "Запись успешно Добавлена!"  
+
 class HotNewsUpdateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsView, UpdateView):
     login_url = "login_page"
     template_name = "admin/pages/hotnews/hotnews_form.html"

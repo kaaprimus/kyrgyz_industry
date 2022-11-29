@@ -13,15 +13,8 @@
         </ol>
       </nav>
     </div>
-    {% if messages %} 
-        {% for message in messages %}
-            {% if message.tags == "error" %}
-                <div class="alert alert-danger" role="alert">{{message}}</div>
-            {% elif message.tags == "success" %}
-            <div class="alert alert-success" role="alert">{{message}}</div>
-            {% endif %}
-         {% endfor %}
-     {% endif %}
+
+ 
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
@@ -51,10 +44,12 @@
                 <div class="col form-group">
                     <label for="{{ form.pub_date.id_for_label }}" class="font-weight-bold">Выберите дату:</label>
                     {{ form.pub_date }}
+                    {{ form.pub_date.errors }}
                 </div>
                 <div class="col form-group">
-                    <label for="{{ form.language.id_for_label }}" class="font-weight-bold">Выберите Язык:</label>
-                    {{ form.language }}
+                    <label for="{{ form.Language.id_for_label }}" class="font-weight-bold">Выберите Язык:</label>
+                    {{ form.Language }}
+                    {{ form.Language.errors }}
                 </div>
             </div>
            
