@@ -73,7 +73,6 @@
                     <div class="d-flex mt-4 flex-wrap">
                       <p class="text-muted">Страница: {{page_obj.number}}-{{page_obj.paginator.num_pages}}</p>
                       <nav class="ml-auto">
-                      
                         <ul class="pagination separated pagination-info">
                           {% if page_obj.has_previous %}
                               <li class="page-item"><a href="?page={{page_obj.previous_page_number}}" class="page-link"><i class="icon-arrow-left"></i></a></li>

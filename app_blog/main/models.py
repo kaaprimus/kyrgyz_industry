@@ -180,7 +180,7 @@ class Contests(models.Model):
 
 class News(models.Model):
     Title=models.CharField(max_length=70,verbose_name="Заголовок новости")
-    Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
+    Short_Description = models.CharField(max_length=150,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
     Language= models.CharField(
@@ -191,6 +191,10 @@ class News(models.Model):
                                )
     Gallery=models.ForeignKey("galleryNews",on_delete=models.RESTRICT,verbose_name="Галерея")
     
+    class Meta:
+        ordering = ['-id']
+    def __str__(self) -> str:
+        return self.Title
 # Руководство    
 class Management(models.Model):
     full_name = models.CharField(max_length = 60, verbose_name = "ФИО Сотрудника")

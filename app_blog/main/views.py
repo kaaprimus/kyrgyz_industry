@@ -70,11 +70,32 @@ from django.contrib.auth.views import PasswordChangeView
             Оптимизация Кода
 """
 
-
+# Функция для тестировки
+def test_method(request):
+    news= News.objects.order_by('-id')[:4]
+    print(news)
+    arr = []
+    for s in news:
+        img = PhotosNews.objects.filter(Gallery = s.Gallery).first()
+        arr.append(img.URL)
+    mix = zip(news, arr)
+    print(arr)
+    context = {
+        "news" : mix,
+    }
+    
+    return render(request, 'client/pages/img.html', context)
 def index(request):
     news= News.objects.order_by('-id')[:4]
     contest= Contests.objects.order_by('-id')[:4]
     hot_news = HotNews.objects.order_by('-id')[:5]
+    
+    # Получаем первую фотографию под новостями
+    first_image = []
+    for post in news:
+        img = PhotosNews.objects.filter(Gallery = post.Gallery).first()
+        first_image.append(img.URL)
+    news_image_mixed = zip(news, first_image)   
     
     project_ON_PROCCESS=Projects.objects.order_by('-id').filter(Status='В процессе')[:4]
     project_HAS_FINISHED=Projects.objects.order_by('-id').filter(Status='Реализован')[:4]
@@ -84,7 +105,7 @@ def index(request):
     trans = translate(language='ru')
     context = {
         'trans':trans,
-        'news_page':news,
+        'news_page':news_image_mixed,
         'contest_page':contest,
         'project_ON_PROCCESS':project_ON_PROCCESS,
         'project_HAS_FINISHED':project_HAS_FINISHED,
@@ -334,13 +355,30 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     success_url = reverse_lazy('update_profile') 
 
 # Admin-Panel Views
-@login_required
-def admin_index_page(request):
+class AdminMain(LoginRequiredMixin, ListView):
+    login_url = 'login_page'
+    model = HotNews
+    paginate_by = 5
     template_name = "admin/admin.html"
-    context = {
-        "is_active" : "main-panel"
+    count = HotNews.objects.count()
+    extra_context = {
+           "is_active" : "main-panel",
+           "all_entries" : count,
     }
-    return render(request, template_name, context)
+# @login_required
+# def admin_index_page(request, page):
+#     template_name = "admin/admin.html"
+#     last_hot_news = HotNews.objects.all() 
+    
+#     paginator = Paginator(last_hot_news, per_page=2)
+#     page_object = paginator.get_page(page)
+#     page_object.adjusted_elided_pages = paginator.get_elided_page_range(page)
+#     context = {
+#         "is_active" : "main-panel",
+#         "page_object" : page_object,
+        
+#     }
+#     return render(request, template_name, context)
 
 @login_required
 def admin_form_page(request):

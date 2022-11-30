@@ -4,12 +4,13 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('img/', views.test_method, name='img'),
     path('accounts/login/', views.login_page, name='login_page'),
     path('accounts/login/success/', views.authorization, name='authorizate'),
     path('accounts/logout/', views.logout_page, name = 'logout_page'),
     path(r'admin-panel/profile/update/^', views.ProfileUpdateView.as_view(), name = 'update_profile'),
     path(r'admin-panel/profile/update/^/change_password/', views.ChangePasswordView.as_view(), name = 'change_password'),
-    path('admin-panel/main/', views.admin_index_page, name='admin_panel'),
+    path('admin-panel/main/', views.AdminMain.as_view(), name='admin_panel'),
     
     # News View
     path('admin-panel/news/all/', views.NewsListView.as_view(), name='news_all'),

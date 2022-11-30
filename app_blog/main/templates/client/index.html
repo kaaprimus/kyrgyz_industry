@@ -124,9 +124,9 @@
           <p id="titlenews">{% translate "Архив новостей" %}</p>
         </div>
         <div class="row">
-          {% for news in news_page %}
+          {% for news, img in news_page %}
           <div class="col-md-6 d-flex align-items-stretch mt-lg-0">
-            <div class="card" style='background-image: url("{{ news.URL }}");' data-aos="fade-up" data-aos-delay="100">
+            <div class="card" style='background-image: url("/{{ img }}");' data-aos="fade-up" data-aos-delay="100">
               <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'news_detail' news.Title %}">{{ news.Title }}</a></h5>
                 <p class="card-text">{{ news.Short_Description }}</p>
@@ -579,4 +579,7 @@
   </main><!-- End #main -->
 
   <script src="{% static 'client/js/jquery.ticker.js' %}"></script>
+  <script>
+    $("#suggestion").ticker();
+  </script>
   {% endblock content %}

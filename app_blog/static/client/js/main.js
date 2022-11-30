@@ -7,7 +7,7 @@
    */
 
   const spinnerBox = document.getElementById("spinner-box");
-  $("#suggestion").ticker();
+
   /**
    * Easy selector helper function
    */

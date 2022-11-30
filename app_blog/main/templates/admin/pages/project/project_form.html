@@ -2,14 +2,14 @@
 {% load static %}
 {% block content %}
 
-
+{% url 'projects_create' as path_url %}
 <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">Добавление новых новостей</h3>
+      <h3 class="page-title">Проекты</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Новости</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Добавить новую запись</li>
+          <li class="breadcrumb-item"><a href="{% url 'projects_all' %}">Проекты</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{% if request.path == path_url %}Добавить новую{% else %}Изменить{% endif %} запись</li>
         </ol>
       </nav>
     </div>
@@ -24,7 +24,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Добавить новую запись</h4>
+            <h4 class="card-title">{% if request.path == path_url %}Добавление нового{% else %}Изменение{% endif %} Проекта</h4>
             <form class="forms-sample" method="POST">
             {% csrf_token %}
 
