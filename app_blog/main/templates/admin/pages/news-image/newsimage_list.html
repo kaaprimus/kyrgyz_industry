@@ -3,7 +3,7 @@
   {% block content %}
       <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title">Таблица Галерея</h3>
+              <h3 class="page-title">Новости - Фотография</h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{% url 'newsgallery_all' %}">Галерея</a></li>
@@ -35,7 +35,7 @@
                         <thead>
                           <tr>
                             <th class="font-weight-bold">#</th>
-                            <th class="font-weight-bold">Название фото</th>
+                            <th class="font-weight-bold">Название Фотографии</th>
                             <th class="font-weight-bold">Название Галереи</th>
                           </tr>
                         </thead>
@@ -44,7 +44,7 @@
                           <tr>
                             <td>{{forloop.counter}}</td>
                             <td class="td-title">{{newsimage.Caption }}</td>
-                            <td>{{newsimage.Gallery }}</td>
+                            <td class="td-title">{{newsimage.Gallery }}</td>
                             <td class="edit-delete-icons">
                               <a href="{% url 'newsimage_update' newsimage.id %}"><i class="icon-pencil"></i></a> |
                               <a href="{% url 'newsimage_delete' newsimage.id %}" class="text-danger"><i class="icon-trash"></i></a>

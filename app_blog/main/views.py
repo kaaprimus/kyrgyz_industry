@@ -23,7 +23,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.utils.translation import gettext as _
 from django.utils.translation import get_language, activate, gettext
 from django.conf import settings
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
 
@@ -126,6 +126,8 @@ def blog_detail(request):
     context = {'trans':trans}
     return render(request, "client/pages/blog_detail.html", context)
 
+def team(request):
+    return render(request, "client/pages/team.html", {})
 def president(request):
     trans = translate(language='ru')
     context = {'trans':trans}
@@ -148,12 +150,42 @@ def contests(request,number_page=1):
     context = {'contest_page': currunt_page_news.page(number_page),'trans':trans}
     return render(request, "client/pages/contests.html", context)
 
-def news(request,number_page=1):
+
+
+def news(request):
     news= News.objects.order_by('-id')
-    photo=PhotosNews.objects.all()
-    currunt_page_news = Paginator(news,4)
+    # Получаем первую фотографию под новостями
+    first_image = []
+    for post in news:
+        img = PhotosNews.objects.filter(Gallery = post.Gallery).first()
+        first_image.append(img.URL)
+    
+    current_page_news = Paginator(news, per_page=10)
+    current_page_img = Paginator(first_image, per_page=10)
+    
+    page_num = current_page_news.num_pages
+    try:
+        page = request.GET.get("page", 1)
+        posts = current_page_news.page(page)
+        page = request.GET.get("page", 1)
+        images = current_page_img.page(page)
+
+    except (PageNotAnInteger, TypeError):
+        posts = current_page_news.page(1)
+        images = current_page_img.page(1)
+        
+    except EmptyPage:
+        posts = current_page_news.page(current_page_news.num_pages)
+        images = current_page_img.page(current_page_img.num_pages)
+    
+    news_image_mixed = zip(posts, images)   
     trans = translate(language='ru')
-    context = {'news_page': currunt_page_news.page(number_page),'trans':trans, 'photo':photo}
+    context = { 
+               'news_page': posts,
+               'trans':trans, 
+               'all_news' : news_image_mixed,
+               'page_num' : page_num
+               }
     return render(request, "client/pages/news.html", context)
 
 def projects(request,number_page=1):
@@ -396,7 +428,7 @@ def admin_form_page(request):
 class NewsView(View):
     model = News
     form_class = NewsForm
-    success_url = reverse_lazy('news_all')
+    success_url = reverse_lazy('news_create')
     extra_context = {
         "is_active" : "news-panel",
         "active_news" : "active",
@@ -411,30 +443,7 @@ class NewsListView(LoginRequiredMixin, NewsView, ListView):
 class NewsCreateView(LoginRequiredMixin, SuccessMessageMixin, NewsView, CreateView):
     login_url = 'login_page'
     template_name = 'admin/pages/news/news-add.html'
-    redirect_field_name = "news_create"
-    def get(self, request, *args, **kwargs):
-        form = NewsForm()
-        context = {
-            "form" : form,
-            "is_active" : "news-panel",
-            "active_news" : "active",
-            "expand_news" : "show",
-        }
-        return render(request, self.template_name, context=context)
-    
-    def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            form = NewsForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.error(request, "Запись успешно добавлена!")
-                return redirect(self.redirect_field_name)
-            else:
-                messages.error(request, "Введите валидные данные")
-                return redirect(self.redirect_field_name)
-        else:
-            messages.error(request, "Invalid Method")
-            return redirect(self.redirect_field_name) 
+    success_message = 'Запись успешно добавлено'    
 
 
     
@@ -483,33 +492,12 @@ class NewsGalleryListView(LoginRequiredMixin, NewsGalleryView, ListView):
     template_name = 'admin/pages/news-gallery/newsgallery_list.html'
     paginate_by = 10
 
-class NewsGalleryCreateView(LoginRequiredMixin, NewsGalleryView, CreateView):
+class NewsGalleryCreateView(LoginRequiredMixin,SuccessMessageMixin, NewsGalleryView, CreateView):
     login_url = 'login_page'
     template_name = 'admin/pages/news-gallery/newsgallery_form.html'
-    redirect_field_name = "newsgallery_create"
-    def get(self, request, *args, **kwargs):
-        form = NewsGalleryForm()
-        context = {
-            "form" : form,
-            "is_active" : "news-panel",
-            "expand_news" : "show",
-            "active_news_gallery" : "active",
-        }
-        return render(request, self.template_name, context=context)
-    
-    def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            form = NewsGalleryForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Запись Успешно добавлено!")
-                return redirect(self.redirect_field_name)
-            else:
-                messages.error(request, "Введите корректные данные!!")
-                return redirect(self.redirect_field_name)
-        else:
-            messages.error(request, "Invalid Method")
-            return redirect(self.redirect_field_name) 
+    success_url = reverse_lazy("newsgallery_create")
+    success_message = 'Запись успеншо добавлена!'
+
 
 class NewsGalleryUpdateView(LoginRequiredMixin, SuccessMessageMixin, NewsGalleryView, UpdateView):
     template_name = 'admin/pages/news-gallery/newsgallery_form.html'
@@ -583,7 +571,7 @@ class NewsImageCreateView(LoginRequiredMixin, NewsImageView, CreateView):
             messages.error(request, "Invalid Method")
             return redirect(self.redirect_field_name) 
 
-class NewsImageUpdateView(LoginRequiredMixin, NewsImageView, UpdateView):
+class NewsImageUpdateView(LoginRequiredMixin,SuccessMessageMixin, NewsImageView, UpdateView):
     template_name = 'admin/pages/news-image/newsimage_form.html'
     success_message = "Запись успешно обновлено!"
        
@@ -692,31 +680,8 @@ class ProjectGalleryListView(LoginRequiredMixin, ProjectGalleryView, ListView):
 class ProjectGalleryCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectGalleryView, CreateView):
     login_url = "login_page"
     template_name = "admin/pages/project-gallery/gallery_form.html"
-    redirect_field_name = "projectgallery_create"
-    def get(self, request, *args, **kwargs):
-        
-        form = ProjectGalleryForm()
-        context = {
-            "form" : form,
-            "is_active" : "projects-panel",
-            "active_project_gallery" : "active",
-            "expand_projects" : "show",
-        }
-        return render(request, self.template_name, context=context)
-    
-    def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            form = ProjectGalleryForm(request.POST)
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Запись Успешно добавлено!")
-                return redirect(self.redirect_field_name)
-            else:
-                messages.error(request, "Введите валидные данные!")
-                return redirect(self.redirect_field_name)
-        else:
-            messages.error(request, "Invalid Method")
-            return redirect(self.redirect_field_name) 
+    success_url = reverse_lazy("projectgallery_create")
+    success_message = "Запись успешно добавлена!"
         
 
 class ProjectGalleryUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectGalleryView, UpdateView):
@@ -741,7 +706,7 @@ def projectgallery_delete(request, id):
             messages.success(request, "Запись успешно удалено!")
             return redirect("newsgallery_all")
         except RestrictedError:
-            messages.error(request, "Вы не сможете удалить эту галерею, так как это связано с одной или несколькими проектами или фотографиями")
+            messages.error(request, "Вы не сможете удалить эту галерею, так как это связано с одним или несколькими проектами или фотографиями")
             return redirect("newsgallery_all")
     return render(request, "admin/pages/news-gallery/newsgallery_confirm_delete.html", context)
 """
@@ -848,30 +813,8 @@ class ProjectListView(LoginRequiredMixin, ProjectView, ListView):
 class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectView, CreateView):
     login_url = 'login_page'
     template_name = 'admin/pages/project/project_form.html'
-    redirect_field_name = "projects_create"
-    def get(self, request, *args, **kwargs):
-        form = ProjectForm()
-        context = {
-            "form" : form,
-            "is_active" : self.active_panel,
-            "active_projects" : "active",
-            "expand_projects" : "show",
-        }
-        return render(request, self.template_name, context=context)
-    
-    def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            form = ProjectForm(request.POST)
-            try:
-                form.save()
-                messages.success(request, "Запись успешно добавлено!")
-                return redirect(self.redirect_field_name)
-            except Exception as e:
-                messages.error(request, e)
-                return redirect(self.redirect_field_name)
-        else:
-            messages.error(request, "Invalid Method"        )
-            return redirect(self.redirect_field_name)     
+    success_url = reverse_lazy("projects_create")
+    success_message = "Запись успеншо добавлена!"
         
 class ProjectUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectView, UpdateView):
     login_url = "login_page"
@@ -921,39 +864,14 @@ class ContestListView(LoginRequiredMixin, ContestView, ListView):
 class ContestCreateView(LoginRequiredMixin, SuccessMessageMixin, ContestView, ListView):
     login_url = "login_page"
     template_name = "admin/pages/contests/contests_form.html"
-    redirect_field_name = "contests_create"
-    def get(self, request, *args, **kwargs):
-        
-        form = ContestForm()
-        context = {
-            "form" : form,
-            "is_active" : "contests-panel",
-            "active_contests" : "active",
-            "expand_contests" : "show",
-        }
-        return render(request, self.template_name, context=context)
-    
-    def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            form = ContestForm(request.POST, request.FILES)
-            try:
-                form.save()
-                messages.success(request, "Успешно добавлено!")
-                return redirect(self.redirect_field_name)
-            except ValueError:
-                messages.error(request, "Выберите файлы в формате (.pdf, .docx, .doc)")
-                return redirect(self.redirect_field_name)
-            except Exception as e:
-                messages.error(request, e)
-                return redirect(self.redirect_field_name)
-        else:
-            messages.error(request, "Invalid Method")
-            return redirect(self.redirect_field_name) 
+    success_url = reverse_lazy("contests_create")
+    success_message = "Запись успешно добавлена!"
         
 class ContestUpdateView(LoginRequiredMixin, SuccessMessageMixin, ContestView, UpdateView):
     login_url = "login_page"
     template_name = "admin/pages/contests/contests_form.html"
-
+    success_message = "Запись успешно обновлена!"
+    
 def contests_delete(request, id):
     context = {}
     obj = get_object_or_404(Contests, id = id)
@@ -969,15 +887,6 @@ def contests_delete(request, id):
             messages.error(request, e)
             return redirect("contests_delete")
     return render(request, "admin/pages/contests/contests_confirm_delete.html", context)
-
-def get_last_projects(request):
-    last_ten = Projects.objects.all().order_by('-id')[:10]
-    template_name = "admin/admin.html"
-    context = {
-        "last_projects" : last_ten
-    }
-    
-    return render(request, template_name, context)
 
 
 class ManagementView(View):
@@ -1050,30 +959,8 @@ class VacanciesListView(LoginRequiredMixin, VacanciesView, ListView):
 class VacanciesCreateView(LoginRequiredMixin, SuccessMessageMixin, VacanciesView, CreateView):
     login_url = 'login_page'
     template_name = 'admin/pages/vacancies/vacancies_form.html'
-    redirect_field_name = "vacancies_create"
-    def get(self, request, *args, **kwargs):
-        form = VacanciesForm()
-        context = {
-            "form" : form,
-            "is_active" : self.active_panel,
-            "active_vacancies" : "active",
-            "expand_vacancies" : "show",
-        }
-        return render(request, self.template_name, context=context)
-    
-    def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            form = VacanciesForm(request.POST)
-            try:
-                form.save()
-                messages.success(request, "Запись успешно добавлено!")
-                return redirect(self.redirect_field_name)
-            except Exception as e:
-                messages.error(request, e)
-                return redirect(self.redirect_field_name)
-        else:
-            messages.error(request, "Invalid Method")
-            return redirect(self.redirect_field_name)     
+    success_url = reverse_lazy("vacancies_create")
+    success_message = "Запись успешно добавлена!"
         
 class VacanciesUpdateView(LoginRequiredMixin, SuccessMessageMixin, VacanciesView, UpdateView):
     login_url = 'login_page'

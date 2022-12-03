@@ -3,7 +3,7 @@
   {% block content %}
       <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title">Таблица Новости</h3>
+              <h3 class="page-title">Новости</h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Новости</a></li>
@@ -45,7 +45,7 @@
                           <tr>
                             <td>{{forloop.counter}}</td>
                             <td class="td-title" >{{news.Title }}</td>
-                            <td class="text-danger">{{news.Date_added}}</td>
+                            <td class="text-danger">{{news.Date_added|date:'j E Y'}} года</td>
                             <td><label class="badge badge-warning">{{news.Language}}</label></td>
                             <td class="edit-delete-icons">
                               <a href="{% url 'news_update' news.id %}"><i class="icon-pencil"></i></a> |

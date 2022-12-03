@@ -82,50 +82,17 @@
       </div>
     </section><!-- End Clients Section -->
 
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "О НАС" %}</h2>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
-            <p>
-              {% translate "Основными направлениями промышленной политики, реализуемой ОАО являются:" %}
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> {% translate "Формирование благоприятного инвестиционного и предпринимательского климата." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Инновационно-технологическое развитие промышленности." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Обеспечение промышленных предприятий востребованными кадрами." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Продвижение продукции промышленных предприятий на рынках сбыта." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Создание промышленных кластеров." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Оснащение промышленных предприятий энергоресурсами, инженерной и транспортной инфраструктурой." %}</li>
-            </ul>
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
-            <p>
-              {% translate "Открытое Акционерное ОбществоОАО “Кыргызиндустрия” создано решением Кабинета Министров со 100% участием государства в его уставном капитале, который составляет 1 млрд. сомов." %}
-              {% translate "Учредителем и единственным акционером Общества является Кабинет Министров Кыргызской Республики. ОАО «Кыргызиндустрия» является коммерческой организацией, имеет юридический статус (обладает обособленным имуществом, имеет самостоятельный баланс, корреспондентские, расчетные, валютные и другие счета в банках Кыргызской Республики и за ее пределами)." %}
-            </p>
-            <a href="{% url 'about_company' %}" class="btn-learn-more">{% translate "Узнать Больше" %}</a>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Us Section -->
-
-     <!-- ======= More Services Section ======= -->
+    
+     <!-- ======= News Section ======= -->
      <section id="more-services" class="more-services">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "Новости" %}</h2>
-          <p id="titlenews">{% translate "Архив новостей" %}</p>
+          <p id="titlenews">{% translate "Последние новости" %}</p>
         </div>
         <div class="row">
           {% for news, img in news_page %}
-          <div class="col-md-6 d-flex align-items-stretch mt-lg-0">
+          <div class="col-md-6 d-flex align-items-stretch mt-3">
             <div class="card" style='background-image: url("/{{ img }}");' data-aos="fade-up" data-aos-delay="100">
               <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'news_detail' news.Title %}">{{ news.Title }}</a></h5>
@@ -154,7 +121,7 @@
           {% endfor %}
         </div>
         {% if news_page %}
-        <a href="{% url 'news' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
+        <a href="{% url 'news' %}" id="more-news" class="btn-learn-more" data-aos="fade-up" data-aos-delay="300">{% translate "Показать больше" %}</a>
         {% endif %}
       </div>
     </section><!-- End More Services Section -->
@@ -170,52 +137,28 @@
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="300">
-          <div class="col-lg-3 col-md-4">
+          <div class="col-md-6 pb-4">
             <div class="icon-box">
               <i class="ri-store-line" style="color: #ffbb2c;"></i>
               <h3><a href="#">{% translate "производство технической, строительной и других видов продукции" %}</a></h3>
             </div>
           </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+          <div class="col-md-6">
             <div class="icon-box">
               <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
               <h3><a href="#">{% translate "производство товаров народного потребления" %}</a></h3>
             </div>
           </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+          <div class="col-md-6">
             <div class="icon-box">
               <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
               <h3><a href="#">{% translate "производство продуктов питания" %}</a></h3>
             </div>
           </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
+          <div class="col-md-6">
             <div class="icon-box">
               <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
               <h3><a href="#">{% translate "полиграфические услуги, организации средств массовой информации" %}</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-database-2-line" style="color: #47aeff;"></i>
-              <h3><a href="#">{% translate "профессиональная деятельность на рынке ценных бумаг" %}</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-              <h3><a href="#">{% translate "дополнительная деятельность, направленная на поддержание бизнеса" %}</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
-              <h3><a href="#">{% translate "Виды деятельности, на которые требуются специальные разрешения" %}</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
-              <h3><a href="#">{% translate "Иные виды деятельности, не противоречащие законодательству КР" %}</a></h3>
             </div>
           </div>
         </div>
@@ -318,62 +261,7 @@
       </div>
     </section><!-- End Services Section --> {% endcomment %}
 
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-      <div class="container">
-        <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "Проекты" %}</h2>
-        </div>
-        <div class="row" data-aos="fade-up" data-aos-delay="200" id="titleprojects">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter=".Реализован" class="filter-active">Реализованные</li>
-              <li data-filter=".Не">В Перспективе</li>
-            </ul>
-          </div>
-        </div>
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
-          {% for project in project_all %}
-          {% for ph in photo %}
-          {% if ph.Gallery == project.Gallery %}
-          <div class="col-lg-4 col-md-6 portfolio-item fi {{ project.Status }}">
-            <div class="portfolio-wrap">
-              <img src="/{{ph.URL}}" class="img-fluid" alt="">
-              <div class="portfolio-info filterDiv {{ project.Status }}">
-                <h4>{{ project.Title }}</h4>
-                <h4 class="filterDiv">{{ project.Status }}</h4>
-                <p>{{ project.Short_Description }}</p>
-                <div class="portfolio-links">
-                  <a href="/{{ph.URL}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ph.Caption}}"><i class="bx bx-plus"></i></a>
-                  <a href="{% url 'project_detail' project.Title %}" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          {% endfor %}
-          {% empty %}
-          <div class="section-title" data-aos="fade-up">
-            <h4>{% translate "Нет проектов" %}</h4>
-          </div>
-          <script type="text/javascript">
-            function func() {
-        if (document.getElementById("titleprojects")) { 
-            //Записываем ссылку на элемент в переменную obj
-            var obj = document.getElementById("titleprojects");
-              obj.style.display = "none";
-        }
-        }
-          func();
-        </script>
-          {% endfor %}
-        </div>
-        {% if project_all %}
-        <a href="{% url 'projects' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
-        {% endif %}
-      </div>
-    </section><!-- End Portfolio Section -->
-
+    
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container">
@@ -381,9 +269,7 @@
           <h2>{% translate "Руководство" %}</h2>
           <p>Президент</p>
         </div>
-
         <div class="row gy-4">
-
           <div class="col-lg-4" style="margin:auto; width: 100%;" >
             <section id="team" class="team section-bg">
                 <div class="container">
@@ -405,9 +291,11 @@
                         </div>
                       </div>
                     </div>
-      </div>
-    </section><!-- End Team Section -->
-          
+                 </div>
+                </div>
+              </div>
+           </section><!-- End Team Section -->
+          </section> 
               <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container">
@@ -496,11 +384,7 @@
       </div>
     </section><!-- End Team Section -->
 
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Details Section -->
+   
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -518,9 +402,9 @@
               <p>{% translate "ОАО «Кыргызиндустрия» создано постановлением Кабинета Министров Кыргызской Республики за №341 от 24 декабря 2021 года со 100% участием государства в его уставном капитале, который составляет 1 млрд. сомов." %}</p>
               <div class="social-links">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.facebook.com/KyrgyzIndustry" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/kyrgyzindustry" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCnHPUWY4Q-bPm2EMt-99-9g" class="youtube"><i class="bi bi-youtube"></i></a>
               </div>
             </div>
           </div>

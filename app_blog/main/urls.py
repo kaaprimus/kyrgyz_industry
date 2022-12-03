@@ -112,4 +112,7 @@ urlpatterns = [
     path('page_project/<int:number_page>/', views.projects, name='projects'),
     path('documents_npa', views.npa, name='documents_npa'),
     path('sitemap/', views.sitemap, name = 'sitemap'),
+    
+    # Новые добавленные страницы
+    path('team/', views.team, name = 'team'),
 ]
