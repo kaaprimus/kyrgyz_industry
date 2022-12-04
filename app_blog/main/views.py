@@ -162,7 +162,7 @@ def contests(request,number_page=1):
 
 def news(request):
     news= News.objects.order_by('-id')
-    per_page = 10
+    per_page = 2
     error = None
     count=news.count()
     
@@ -289,6 +289,8 @@ def sitemap(request):
 def hot_news(request):
     news_all = HotNews.objects.order_by('-id')
     error = False
+    
+    per_page = 1
      # Получаем первую фотографию под новостями
     first_image = []
     for post in news_all:
@@ -298,8 +300,8 @@ def hot_news(request):
         else:
             first_image.append(img.url)
     
-    current_page_news = Paginator(news_all, per_page=10)
-    current_page_img = Paginator(first_image, per_page=10)
+    current_page_news = Paginator(news_all, per_page=per_page)
+    current_page_img = Paginator(first_image, per_page=per_page)
     
     page_num = current_page_news.num_pages
     try:
@@ -424,7 +426,7 @@ def authorization(request):
             return redirect('login_page')
     except:
         if username == "":
-            messages.error(request, "Введите ваш Логин или E-mail")
+            messages.error(request, "Введите Username или E-mail")
             return redirect('login_page')
         elif password == "":
             messages.error(request, "Введите пароль")

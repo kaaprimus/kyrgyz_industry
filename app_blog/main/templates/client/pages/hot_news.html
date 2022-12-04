@@ -67,7 +67,8 @@
                     <li class="page-item disabled">
                       <a href="" class="page-link">&laquo;</a>
                     </li>
-                    <!-- Если количество странцы больше чем 3-->
+                  {% endif %}
+                    <!-- Если номер текущей странцы больше чем 3-->
                     {% if news_page.number > 3%}
                     <li class="page-item">
                       <a class="page-link" href="?&page=1">1</a>
@@ -79,7 +80,6 @@
                         </li>
                         {% endif %}
                     {% endif %}
-                 {% endif %}
 
                   {% for page in news_page.paginator.page_range  %}
                     {% if news_page.number  == page %}
@@ -93,10 +93,9 @@
                     {% endif %}
                   {% endfor %}
                   {% if news_page.has_next %}
-                  <li class="page-item">
-                    <a href="?&page={{news_page.next_page_number}}" class="page-link">&raquo;</a>
-                  </li>
-                    {% if news_page.number < news_page.paginator.num_pages|add:'-3' %}
+
+                  {% comment %}номер текущей стр - news_page.number {% endcomment %}
+                  {% if news_page.number < news_page.paginator.num_pages|add:'-3' %}
                     <li class="page-item">
                       <a class="page-link">...</a>
                     </li>
@@ -109,11 +108,14 @@
                     </li>
                     
                     {% endif %}
-                  {% else %}
-                    <li class="page-item disabled">         
-                      <a href="" class="page-link">&raquo;</a>
+                    <li class="page-item">
+                      <a href="?&page={{news_page.next_page_number}}" class="page-link">&raquo;</a>
                     </li>
-                  {% endif %}
+                    {% else %}
+                      <li class="page-item disabled">         
+                        <a href="" class="page-link">&raquo;</a>
+                      </li>
+                    {% endif %}
                 </ul>
               </nav>
     </div>
