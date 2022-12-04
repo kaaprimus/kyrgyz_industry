@@ -179,8 +179,8 @@ class Contests(models.Model):
 # Новости
 
 class News(models.Model):
-    Title=models.CharField(max_length=70,verbose_name="Заголовок новости")
-    Short_Description = models.CharField(max_length=150,verbose_name="Краткое описание")
+    Title=models.CharField(max_length=100,verbose_name="Заголовок новости")
+    Short_Description = models.CharField(max_length=170,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
     Language= models.CharField(

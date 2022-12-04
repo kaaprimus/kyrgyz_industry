@@ -32,7 +32,7 @@ h6 {
   font-family: "Raleway", sans-serif;
 }
 /*--------------------------------------------------------------
-# Spinner Box
+# Custom css
 --------------------------------------------------------------*/
 
 .spinner-box{
@@ -41,7 +41,9 @@ h6 {
 .not-visible{
     display:none;
 }
-
+.img-team{
+  width: 100%;
+}
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -469,7 +471,6 @@ h6 {
     width: 80%;
   }
 }
-section
 @-webkit-keyframes up-down {
   0% {
     transform: translateY(10px);

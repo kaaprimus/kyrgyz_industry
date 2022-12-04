@@ -32,7 +32,8 @@
         </li>
         <li class="dropdown"><a href="#"><span>{% translate "Пресс-центр" %}</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="{% url 'index' %}#more-services">{% translate "Пресс-релизы (новости)" %}</a></li>
+            <li><a href="{% url 'hot_news' %}">{% translate "Главные Событий" %}</a></li>
+            <li><a href="{% url 'news' %}">{% translate "Пресс-релизы (новости)" %}</a></li>
             <li><a href="#team">{% translate "Интервью" %}</a></li>
             <li><a href="{% url 'gallery' %}">{% translate "Фотогалерея" %}</a></li>
             <li><a href="#about">{% translate "Брифинг" %}</a></li>

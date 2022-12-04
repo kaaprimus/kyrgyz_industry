@@ -6,9 +6,9 @@
 {% block page_title %}Кыргызиндустрия{% endblock page_title%}
 
 {% block content %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
@@ -25,10 +25,10 @@
             </li>
             {% for hotnews in hot_news%}
             <li class="item"> 
-              <h1 data-aos="fade-up">{{ hotnews.Title}}</h1>
+              <h1 data-aos="fade-up">{{ hotnews.title}}</h1>
               <h2 data-aos="fade-up" data-aos-delay="400">{{ hotnews.short_description}}</h2>
               <div data-aos="fade-up" data-aos-delay="800">
-                <a href="#portfolio" class="btn-get-started scrollto">{% translate "Читать дальше" %}</a>
+                <a href="{% url 'hot_news_detail' hotnews.title %}" class="btn-get-started scrollto">{% translate "Читать дальше" %}</a>
               </div>
             </li>
             {% endfor %}
@@ -91,36 +91,42 @@
           <p id="titlenews">{% translate "Последние новости" %}</p>
         </div>
         <div class="row">
-          {% for news, img in news_page %}
-          <div class="col-md-6 d-flex align-items-stretch mt-3">
-            <div class="card" style='background-image: url("/{{ img }}");' data-aos="fade-up" data-aos-delay="100">
-              <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'news_detail' news.Title %}">{{ news.Title }}</a></h5>
-                <p class="card-text">{{ news.Short_Description }}</p>
-                <div class="read-more"><a href="{% url 'news_detail' news.Title %}">
-                <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
+          {% if not error %}
+            {% for news, img in news_page %}
+            <div class="col-md-6 d-flex align-items-stretch mt-3">
+              <div class="card" style='background-image: url("/{{ img }}");' data-aos="fade-up" data-aos-delay="100">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="{% url 'news_detail' news.Title %}">{{ news.Title }}</a></h5>
+                  <p class="card-text">{{ news.Short_Description }}</p>
+                  <div class="read-more"><a href="{% url 'news_detail' news.Title %}">
+                  <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          {% empty %}
-          <div class="section-title" data-aos="fade-up">
-            <h4>{% translate "Нет новостей" %}</h4>
-          </div>
-          <script type="text/javascript">
-            function func() {
-        if (document.getElementById("titlenews")) { 
-            //Записываем ссылку на элемент в переменную obj
-            var obj = document.getElementById("titlenews"); 
-            //Если css-свойство display не block, то: 
-              obj.style.display = "none";
-        }
-        }
-          func();
-        </script>
-          {% endfor %}
-        </div>
-        {% if news_page %}
+            {% empty %}
+            <div class="section-title" data-aos="fade-up">
+              <h4>{% translate "Нет новостей" %}</h4>
+            </div>
+            <script type="text/javascript">
+              function func() {
+          if (document.getElementById("titlenews")) { 
+              //Записываем ссылку на элемент в переменную obj
+              var obj = document.getElementById("titlenews"); 
+              //Если css-свойство display не block, то: 
+                obj.style.display = "none";
+          }
+          }
+            func();
+          </script>
+            {% endfor %}
+            {% else %}
+            <div class="section-title" data-aos="fade-up">
+              <h5 class="text-danger">{% translate "Ошибка: В какой-то галереи не добавлены не одной фотографии" %}</h5>
+            </div>
+            {% endif %}
+          </div> 
+        {% if news_page  and not error %}
         <a href="{% url 'news' %}" id="more-news" class="btn-learn-more" data-aos="fade-up" data-aos-delay="300">{% translate "Показать больше" %}</a>
         {% endif %}
       </div>
@@ -269,15 +275,13 @@
           <h2>{% translate "Руководство" %}</h2>
           <p>Президент</p>
         </div>
-        <div class="row gy-4">
-          <div class="col-lg-4" style="margin:auto; width: 100%;" >
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-4">
             <section id="team" class="team section-bg">
                 <div class="container">
-          
-                    <div style="margin:auto; width: 23%" class="col-lg-3 col-md-6 d-flex align-items-stretch">
                       <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
-                          <img src="{% static 'client/img/team/president.jpeg' %}" class="img-fluid" alt="">
+                          <img src="{% static 'client/img/team/president.jpeg' %}" class="img-fluid img-team" alt="">
                           <div class="social">
                             <a href=""><i class="bi bi-twitter"></i></a>
                             <a href=""><i class="bi bi-facebook"></i></a>
@@ -290,7 +294,6 @@
                           <span>{% translate "Президент ОАО “Кыргызиндустрия”" %}</span>
                         </div>
                       </div>
-                    </div>
                  </div>
                 </div>
               </div>
@@ -309,7 +312,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
-                <img src="{% static 'client/img/team/team-2.jpg' %}" class="img-fluid" alt="">
+                <img src="{% static 'client/img/team/team-2.jpg' %}" class="img-fluid img-team" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -462,8 +465,17 @@
 
   </main><!-- End #main -->
 
-  <script src="{% static 'client/js/jquery.ticker.js' %}"></script>
-  <script>
-    $("#suggestion").ticker();
-  </script>
   {% endblock content %}
+  {% block custom_js%}
+  <script src="{% static 'client/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'client/js/jquery.ticker.js' %}"></script>
+   
+  <script type="text/javascript">
+
+      
+  $(function () {
+    $('#suggestion').ticker();
+  });	
+</script>
+
+  {% endblock custom_js%}

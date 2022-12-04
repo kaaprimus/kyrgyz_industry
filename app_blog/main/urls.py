@@ -115,4 +115,7 @@ urlpatterns = [
     
     # Новые добавленные страницы
     path('team/', views.team, name = 'team'),
+    path('main_events/', views.hot_news, name='hot_news'),
+    path('main_events_detail/<str:title>', views.hot_news_detail, name='hot_news_detail'),
+    
 ]

@@ -14,10 +14,10 @@ class NewsForm(ModelForm):
     
         widgets = {
             'Title' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название новости","size" : 70, 'required': True}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название новости","size" : 100, 'required': True}
             ),
             'Short_Description' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 110, 'required': True}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 170, 'required': True}
             ),
             'Description' : Textarea(
                 attrs = {"class" : "form-control", "id" : "description", "placeholder" : "Полное содержание", 'required': True}

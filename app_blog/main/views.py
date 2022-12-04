@@ -90,11 +90,15 @@ def index(request):
     contest= Contests.objects.order_by('-id')[:4]
     hot_news = HotNews.objects.order_by('-id')[:5]
     
+    error = False
     # Получаем первую фотографию под новостями
     first_image = []
     for post in news:
         img = PhotosNews.objects.filter(Gallery = post.Gallery).first()
-        first_image.append(img.URL)
+        if img is None:
+            error = True
+        else:
+            first_image.append(img.URL)
     news_image_mixed = zip(news, first_image)   
     
     project_ON_PROCCESS=Projects.objects.order_by('-id').filter(Status='В процессе')[:4]
@@ -112,7 +116,8 @@ def index(request):
         'project_NOT_FINISHED':project_NOT_FINISHED,
         'project_all':project_all,
         'photo': photo,
-        'hot_news' : hot_news
+        'hot_news' : hot_news,
+        "error" : error
         }
     return render(request, "client/index.html", context)
 
@@ -128,6 +133,8 @@ def blog_detail(request):
 
 def team(request):
     return render(request, "client/pages/team.html", {})
+
+
 def president(request):
     trans = translate(language='ru')
     context = {'trans':trans}
@@ -154,14 +161,19 @@ def contests(request,number_page=1):
 
 def news(request):
     news= News.objects.order_by('-id')
+    per_page = 10
+    error = None
     # Получаем первую фотографию под новостями
     first_image = []
     for post in news:
         img = PhotosNews.objects.filter(Gallery = post.Gallery).first()
-        first_image.append(img.URL)
+        if img is None:
+            error = True
+        else:
+            first_image.append(img.URL)
     
-    current_page_news = Paginator(news, per_page=10)
-    current_page_img = Paginator(first_image, per_page=10)
+    current_page_news = Paginator(news, per_page=per_page)
+    current_page_img = Paginator(first_image, per_page=per_page)
     
     page_num = current_page_news.num_pages
     try:
@@ -184,7 +196,8 @@ def news(request):
                'news_page': posts,
                'trans':trans, 
                'all_news' : news_image_mixed,
-               'page_num' : page_num
+               'page_num' : page_num,
+               "error" : error
                }
     return render(request, "client/pages/news.html", context)
 
@@ -267,6 +280,67 @@ def gallery_page(request,number_page=1):
 # Карта сайта 
 def sitemap(request):
     return render(request, "client/pages/sitemap.html", {})
+
+def hot_news(request):
+    news_all = HotNews.objects.order_by('-id')
+    error = False
+     # Получаем первую фотографию под новостями
+    first_image = []
+    for post in news_all:
+        img = HotNewsPhoto.objects.filter(gallery = post.gallery).first()
+        if img is None:
+            error = True
+        else:
+            first_image.append(img.url)
+    
+    current_page_news = Paginator(news_all, per_page=10)
+    current_page_img = Paginator(first_image, per_page=10)
+    
+    page_num = current_page_news.num_pages
+    try:
+        page = request.GET.get("page", 1)
+        posts = current_page_news.page(page)
+        page = request.GET.get("page", 1)
+        images = current_page_img.page(page)
+
+    except (PageNotAnInteger, TypeError):
+        posts = current_page_news.page(1)
+        images = current_page_img.page(1)
+        
+    except EmptyPage:
+        posts = current_page_news.page(current_page_news.num_pages)
+        images = current_page_img.page(current_page_img.num_pages)
+    
+    news_image_mixed = zip(posts, images)   
+    trans = translate(language='ru')
+    context = { 
+               'news_page': posts,
+               'trans':trans, 
+               'all_news' : news_image_mixed,
+               'page_num' : page_num,
+               "error" : error
+               }
+    return render(request, "client/pages/hot_news.html", context)
+
+def hot_news_detail(request, title):
+    trans = translate(language='ru')
+    news_detail=HotNews.objects.filter(title=title)
+    news_title=HotNews.objects.get(title=title)
+    photo=HotNewsPhoto.objects.filter(gallery_id=get_id_Gallery_HotNews(title))
+    context = {
+        'news_detail': news_detail,
+        'photo':photo,
+        'news_title':news_title,
+        'trans':trans
+        }
+    return render(request, "client/pages/hot_news_detail.html", context)
+ 
+def get_id_Gallery_HotNews(title):
+    news_detail=HotNews.objects.filter(title=title)
+    id=0
+    for val in news_detail:
+        id=val.gallery_id
+    return id
 
 def translate(language):
     cur_language = get_language()
@@ -1012,7 +1086,7 @@ class HotNewsGalleryListView(LoginRequiredMixin, HotNewsGalleryView, ListView):
 class HotNewsGalleryCreateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsGalleryView, CreateView):
     login_url = "login_page"
     template_name = "admin/pages/hotnews-gallery/gallery_form.html"
-    redirect_field_name = "hotnewsgallery_create"
+    success_url = reverse_lazy("hotnewsgallery_create")
     success_message = "Запись успешно Добавлена!"
 class HotNewsGalleryUpdateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsGalleryView, UpdateView):
     login_url = "login_page"
@@ -1129,6 +1203,7 @@ class HotNewsView(View):
     model = HotNews
     form_class = HotNewsForm
     active_panel = "hotnews-panel"
+    success_url = reverse_lazy("hotnews_create")
     extra_context = {
         "is_active" : active_panel,
         "active_hotnews" : "active",
@@ -1148,6 +1223,7 @@ class HotNewsCreateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsView, Cr
 class HotNewsUpdateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsView, UpdateView):
     login_url = "login_page"
     template_name = "admin/pages/hotnews/hotnews_form.html"
+    success_url = reverse_lazy("hotnews_all")
     success_message = "Запись успешно Обновлена!"  
     
 def hotnews_delete(request, id):

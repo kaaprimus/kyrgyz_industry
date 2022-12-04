@@ -1,7 +1,7 @@
 {% extends 'client/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block page_title %}{% translate "Пресс-релизы" %}{% endblock page_title %}
+{% block page_title %}{% translate "Главные События" %}{% endblock page_title %}
 
 {% block content %}
 
@@ -21,40 +21,43 @@
     <section id="more-services" class="more-services">
     <div class="container">
       <div class="section-title" data-aos="fade-up">
-        <h2>{% translate "Архив новостей" %}</h2>
+        <h2>{% translate "Архив Главных Событий" %}</h2>
       </div>
               <div class="row">
-              {% if not error %}
+                {% if error %}
+                <div class="section-title" data-aos="fade-up">
+                    <h4>{% translate "Возникла Ошибка!" %}</h4>
+                    <h5>{% translate "Причина этой ошибки: <span class='text-danger'> В одной или несколько галереи не загружено фотография! Добавьте Фотографию под Галереи </span> " %}</h5>
+                    <a href="{% url 'index' %}">Перейти на главную</a>
+                </div>
+                {% else %}
                 {% for value, img in all_news %}
-                  <div class="col-md-6 d-flex align-items-stretch mt-3">
-                    <div class="card" style='background-image: url("/{{img}}");' data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="">{{ value.Title }}</a></h5>
-                        <p class="card-text">{{ value.Short_Description }}</p>
-                      <div class="read-more"><a href="{% url 'detail_news' value.Title %}">
-                        <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
-                      </div>
+                <div class="col-md-6 d-flex align-items-stretch mt-3">
+                  <div class="card" style='background-image: url("/{{img}}");' data-aos="fade-up" data-aos-delay="100">
+                  <div class="card-body">
+                      <h5 class="card-title"><a href="">{{ value.title }}</a></h5>
+                      <p class="card-text">{{ value.short_description }}</p>
+                    <div class="read-more"><a href="{% url 'hot_news_detail' value.title %}">
+                      <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
                     </div>
                   </div>
                 </div>
-              {% empty %}
-                <div class="section-title" data-aos="fade-up">
-                  <h4>{% translate "Нет новостей" %}</h4>
-                </div>
-                {% endfor %}
-            {% else %}
-              <div class="section-title" data-aos="fade-up">
-                <h5 class="text-danger">{% translate "Ошибка: В какой-то галереи не добавлены не одной фотографии" %}</h5>
               </div>
-            {% endif %}
+              {% empty %}
+            <div class="section-title" data-aos="fade-up">
+              <h4>{% translate "Нет новостей" %}</h4>
+            </div>
+                {% endfor %}
+            {% endif%}
             </div>
     </div>
+
 
     <!-- Если Есть пагинация-->
     {% if page_num > 1 and not error %}
     <div class="d-flex mt-4 flex-wrap justify-content-center">
               <nav class="ml-auto">
-                <ul class="pagination separated pagination-info">
+                <ul class="pagination separated pagination-info" data-aos="fade-up">
                    <!-- Если Есть Предыдущая страница-->
                   {% if news_page.has_previous %}
                     <li class="page-item">

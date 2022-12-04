@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block page_title %}{{news_title.Title}}{% endblock page_title %}
+{% block page_title %}Описание новости{% endblock page_title %}
 
 {% block content %}
   <main id="main">
@@ -12,11 +12,11 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{{news_title.Title}}</h2>
+          <h2>Описание новости</h2>
           <ol>
             <li><a href="{% url 'index'%}">Главная</a></li>
-            <li><a href="{% url 'news'%}">Новости</a></li>
-            <li>{{news_title.Title}}</li>
+            <li><a href="{% url 'hot_news'%}">Все Событий</a></li>
+            <li>Детали Событий</li>
           </ol>
         </div>
       </div>
@@ -24,13 +24,13 @@
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
-        <div class="row gy-4">
+        <div class="row">
           <div class="col-lg-8">
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center" style="margin: auto;">
                 {% for value in photo %}
                 <div class="swiper-slide">
-                    <img src="/{{ value.URL }}" alt="{{ value.Caption }}">
+                    <img src="/{{ value.url }}" alt="{{ value.caption }}">
                   </div>
                   {% endfor %}
                                 
@@ -42,23 +42,22 @@
             <div class="portfolio-info">
               <h3>Информация про новость</h3>
               <ul>
-                <li><strong>Название: </strong>: {{ news_title.Title }}</li>
-                <li><strong>Дата публикации: </strong>: {{ news_title.Date_added|date:'j E Y'}} года</li>
+                <li><strong>Название: </strong>: {{ news_title.title }}</li>
+                <li><strong>Дата публикации:</strong>: {{ news_title.pub_date|date:'j E Y'}} года</li>
               </ul>
             </div>
-
           </div>
-          <div class="col-lg-12">
-            {% for value in news_detail %}
+          {% for value in news_detail %}
+            <div class="col-lg-12">
+              
               <div class="portfolio-description">
-                <h2>{{value.Title}}</h2>
+                <h2>{{value.title}}</h2>
                 <p>
-                  {{ value.Description|safe }}
-                </p>
+                  {{ value.description|safe }}
+              </p>
               </div>
-            {% endfor %}
-          </div>
-         
+            </div>
+          {% endfor %}
         </div>
 
       </div>
