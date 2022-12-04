@@ -44,6 +44,7 @@
               </div>
     </div>
     {% if news_page %}
+    {% if count > 8 %}
     <div class="d-flex mt-4 flex-wrap justify-content-center">
               <nav class="ml-auto">
                 <ul class="pagination separated pagination-info">
@@ -79,6 +80,7 @@
                 </ul>
               </nav>
     </div>
+    {% endif %}
     {% endif %}
     </section>
 </main>

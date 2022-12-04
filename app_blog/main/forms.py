@@ -1,7 +1,7 @@
 from dataclasses import fields
 from typing import Text
 from .models import *
-from django.forms import ModelForm, DateTimeInput, TextInput, Textarea
+from django.forms import ModelForm, DateTimeInput, TextInput, Textarea, DateInput
 from django import forms
 from django.contrib.auth.models import User
 
@@ -176,7 +176,7 @@ class VacanciesForm(ModelForm):
     
         widgets = {
             'title' : TextInput(
-                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Описание конкурса","size" : 255, 'required': True}
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название вакансии","size" : 110, 'required': True}
                 ),
             'company' : TextInput(
                 attrs = {"type" : "text", "class" : "form-control", "id" : "company", "placeholder" : "Название компании","size" : 70, 'required': True}
@@ -202,11 +202,12 @@ class VacanciesForm(ModelForm):
                 choices= Vacancy_Status_Choice.choices
                 ),
             'email_company' : TextInput(
-                attrs = {"type" : "mail", "class" : "form-control", "id" : "email_company", "placeholder" : "Почта компании", "size" : 254, 'required': True}
+                attrs = {"type" : "mail", "class" : "form-control", "id" : "email_company", "placeholder" : "Почта компании", "size" : 60, 'required': True}
             ),
         }
         
-        
+
+# Форма для профиля   
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(max_length=100,
                                required=True,
@@ -217,3 +218,52 @@ class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email']
+        
+    
+# Сотрудники    
+class ManagementForm(forms.ModelForm):
+    full_name = forms.CharField(max_length=40, required=True, widget=forms.TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "fullname", "placeholder" : "Введите ФИО Сотрудника", "size" : 40}
+    ))
+    position = forms.CharField(max_length=70, required=True, widget=forms.TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "position", "placeholder" : "Введите Должность", "size" : 70}
+    ))
+    
+    date_birth = forms.DateField(required=True, widget= DateInput(
+                    attrs = {"type" : "date", "class" : "form-control", "id" : "date_birth"}
+                ))
+    education = forms.CharField( max_length= 60, required=True, widget= TextInput(
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "education", "placeholder" : "Введите Образование","size" : 60, 'required': True}
+                ),
+    )
+    speciality = forms.CharField(max_length=30, required=True, widget= TextInput(
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "speciality", "placeholder" : "Введите Специальность","size" : 30, 'required': True}
+                ))
+    
+    about = forms.Textarea(attrs = {"class" : "form-control", "id" : "about", "placeholder" : "Биография",'required': True})
+    
+    class Meta:
+        model = Management
+        fields = '__all__'
+        
+        # widgets = {
+        #     'full_name' : TextInput(
+        #             attrs = {"type" : "text", "class" : "form-control", "id" : "fullname", "placeholder" : "Введите ФИО Сотрудника", "size" : 40, 'required': True}
+        #         ),
+        #     'position' : TextInput(
+        #             attrs = {"type" : "text", "class" : "form-control", "id" : "position", "placeholder" : "Введите Должность","size" : 70, 'required': True}
+        #         ),
+        #     'date_birth' : DateTimeInput(
+        #             attrs = {"type" : "datetime-local", "class" : "form-control", "id" : "date_birth"}
+        #         ),
+        #     'education' : TextInput(
+        #             attrs = {"type" : "text", "class" : "form-control", "id" : "education", "placeholder" : "Введите Образование","size" : 60, 'required': True}
+        #         ),
+        #     'speciality' : TextInput(
+        #             attrs = {"type" : "text", "class" : "form-control", "id" : "speciality", "placeholder" : "Введите Специальность","size" : 30, 'required': True}
+        #         ),
+        #     'about' : Textarea(
+        #             attrs = {"class" : "form-control", "id" : "about", "placeholder" : "Биография",'required': True}
+        #         ),
+            
+        # }
