@@ -32,17 +32,17 @@ from django.contrib.auth.views import PasswordChangeView
 """ 
     Таски:
         Client:
-            Вывод Новостей+
-            Архив новостей
-            Вывод Проекта
-            Вывод Конкурса
-            Вывод Вакансии
+            Вывод Новостей  +
+            Архив новостей  +
+            Вывод Проекта   +
+            Вывод Конкурса  +
+            Вывод Вакансии  +
             Вывод Структуры
-            Страницы для Детально
-            Создать страницу для Галереи
+            Страницы для Детально   
+            Создать страницу для Галереи    +
             Создать карту сайта
-            Обратная связь+
-            Страница для вакансии и вывод активных вакансии
+            Обратная связь  +
+            Страница для вакансии и вывод активных вакансии +
             Карта Сайта +
             Горячие событии
             Настроить главную страницу
@@ -153,8 +153,9 @@ def gallery(request):
 def contests(request,number_page=1):
     trans = translate(language='ru')
     contest= Contests.objects.order_by('-id')
-    currunt_page_news = Paginator(contest,2)
-    context = {'contest_page': currunt_page_news.page(number_page),'trans':trans}
+    count=contest.count()
+    currunt_page_news = Paginator(contest,8)
+    context = {'contest_page': currunt_page_news.page(number_page),'count':count,'trans':trans}
     return render(request, "client/pages/contests.html", context)
 
 
@@ -163,6 +164,8 @@ def news(request):
     news= News.objects.order_by('-id')
     per_page = 10
     error = None
+    count=news.count()
+    
     # Получаем первую фотографию под новостями
     first_image = []
     for post in news:
@@ -197,16 +200,18 @@ def news(request):
                'trans':trans, 
                'all_news' : news_image_mixed,
                'page_num' : page_num,
-               "error" : error
+               "error" : error,
+               'count':count
                }
     return render(request, "client/pages/news.html", context)
 
 def projects(request,number_page=1):
     project= Projects.objects.order_by('-id')
-    currunt_page_news = Paginator(project,2)
+    count=project.count()
+    currunt_page_news = Paginator(project,8)
     photo=PhotosProject.objects.all()
     trans = translate(language='ru')
-    context = {'project_page':currunt_page_news.page(number_page),'photo':photo,'trans':trans}
+    context = {'project_page':currunt_page_news.page(number_page),'photo':photo,'count':count,'trans':trans}
     return render(request, "client/pages/projects.html", context)
 
 def get_news(request,title):
@@ -409,7 +414,6 @@ def authorization(request):
     success_url = reverse_lazy('admin_panel')
     username = request.POST['username']
     password = request.POST['password']
-
     try:
         account = authenticate(username=UserModel.objects.get(email=username).username, password=password)
         if account is not None and request.method == 'POST':
@@ -471,20 +475,6 @@ class AdminMain(LoginRequiredMixin, ListView):
            "is_active" : "main-panel",
            "all_entries" : count,
     }
-# @login_required
-# def admin_index_page(request, page):
-#     template_name = "admin/admin.html"
-#     last_hot_news = HotNews.objects.all() 
-    
-#     paginator = Paginator(last_hot_news, per_page=2)
-#     page_object = paginator.get_page(page)
-#     page_object.adjusted_elided_pages = paginator.get_elided_page_range(page)
-#     context = {
-#         "is_active" : "main-panel",
-#         "page_object" : page_object,
-        
-#     }
-#     return render(request, template_name, context)
 
 @login_required
 def admin_form_page(request):

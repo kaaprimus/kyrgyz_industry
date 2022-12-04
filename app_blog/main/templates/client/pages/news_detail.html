@@ -14,8 +14,8 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>{{news_title.Title}}</h2>
           <ol>
-            <li><a href="{% url 'index'%}">Главная</a></li>
-            <li><a href="{% url 'news'%}">Новости</a></li>
+            <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
+            <li><a href="{% url 'news'%}">{% translate "Новости" %}</a></li>
             <li>{{news_title.Title}}</li>
           </ol>
         </div>
@@ -40,7 +40,7 @@
           </div>
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Информация про новость</h3>
+              <h3>{% translate "Информация про новость" %}</h3>
               <ul>
                 <li><strong>Название: </strong>: {{ news_title.Title }}</li>
                 <li><strong>Дата публикации: </strong>: {{ news_title.Date_added|date:'j E Y'}} года</li>

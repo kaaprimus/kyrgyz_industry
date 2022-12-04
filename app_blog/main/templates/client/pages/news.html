@@ -49,7 +49,8 @@
             {% endif %}
             </div>
     </div>
-
+    
+    {% if news_page %}
     <!-- Если Есть пагинация-->
     {% if page_num > 1 and not error %}
     <div class="d-flex mt-4 flex-wrap justify-content-center">
@@ -114,6 +115,7 @@
                 </ul>
               </nav>
     </div>
+    {% endif %}
     {% endif %}
     </section>
 </main>

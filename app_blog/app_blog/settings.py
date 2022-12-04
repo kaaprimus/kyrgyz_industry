@@ -82,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'KG_INDUSTRY',
-        'USER': 'ajo',
-        'PASSWORD': '1330',
+        'USER': 'Userr',
+        'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         'PORT': '1433',
         'OPTIONS': {
@@ -129,7 +129,7 @@ LANGUAGE_CODE = 'ru'
 LANGUAGES = (
     ('en', _('English')),
     ('ru', _('Russian')),
-    ('de', _('Deutsch')),
+    ('ky', _('Кыргызча')),
     ('zh-hans', _('简体中文')),
 )
 

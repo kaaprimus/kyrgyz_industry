@@ -1,0 +1,929 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-23 18:51+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\app_blog\settings.py:128
+msgid "English"
+msgstr ""
+
+#: .\app_blog\settings.py:129
+msgid "Russian"
+msgstr ""
+
+#: .\app_blog\settings.py:130
+msgid "Deutsch"
+msgstr ""
+
+#: .\app_blog\settings.py:131
+msgid "简体中文"
+msgstr ""
+
+#: .\app_blog\urls.py:25
+msgid "admin/"
+msgstr ""
+
+#: .\main\templates\client\blocks\header.html:7
+msgid "Открытое Акционерное Общество"
+msgstr "Open Joint Stock Company"
+
+#: .\main\templates\client\blocks\header.html:15
+msgid "О нас"
+msgstr "About us"
+
+#: .\main\templates\client\blocks\header.html:17
+#: .\main\templates\client\pages\about_company.html:15
+#: .\main\templates\client\pages\about_company.html:18
+msgid "Об обществе"
+msgstr "About company"
+
+#: .\main\templates\client\blocks\header.html:18
+#: .\main\templates\client\index.html:369
+#: .\main\templates\client\pages\president.html:16
+#: .\main\templates\client\pages\team.html:4
+#: .\main\templates\client\pages\team.html:15
+#: .\main\templates\client\pages\team.html:18
+msgid "Руководство"
+msgstr "Team"
+
+#: .\main\templates\client\blocks\header.html:19
+msgid "Блоки"
+msgstr "Blocks"
+
+#: .\main\templates\client\blocks\header.html:20
+msgid "Наши пратнеры"
+msgstr "Our partners"
+
+#: .\main\templates\client\blocks\header.html:21
+msgid "Нормативно-правовая база"
+msgstr "Regulatory framework"
+
+#: .\main\templates\client\blocks\header.html:22
+#: .\main\templates\client\pages\vacancies.html:4
+#: .\main\templates\client\pages\vacancies.html:15
+#: .\main\templates\client\pages\vacancies.html:18
+#: .\main\templates\client\pages\vacancies.html:30
+#: .\main\templates\client\pages\vacancy_detail.html:18
+msgid "Вакансии"
+msgstr "Vacancies"
+
+#: .\main\templates\client\blocks\header.html:25
+msgid "Инвесторам и партнерам"
+msgstr "For investors and partners"
+
+#: .\main\templates\client\blocks\header.html:27
+msgid "Инвестиционный кейс"
+msgstr "Investment strategy"
+
+#: .\main\templates\client\blocks\header.html:28
+msgid "Стратегия развития"
+msgstr "Development strategy"
+
+#: .\main\templates\client\blocks\header.html:29
+msgid "Проекты и презентации"
+msgstr "Projects and presentations"
+
+#: .\main\templates\client\blocks\header.html:30
+msgid "Отчеты и результаты"
+msgstr "Reports and results"
+
+#: .\main\templates\client\blocks\header.html:33
+msgid "Пресс-центр"
+msgstr "Press Center"
+
+#: .\main\templates\client\blocks\header.html:35
+msgid "Пресс-релизы (новости)"
+msgstr "News"
+
+#: .\main\templates\client\blocks\header.html:36
+msgid "Интервью"
+msgstr "Interview"
+
+#: .\main\templates\client\blocks\header.html:37
+#: .\main\templates\client\pages\gallery.html:4
+#: .\main\templates\client\pages\gallery.html:15
+#: .\main\templates\client\pages\gallery.html:18
+msgid "Фотогалерея"
+msgstr "Gallery"
+
+#: .\main\templates\client\blocks\header.html:38
+msgid "Брифинг"
+msgstr "Briefing"
+
+#: .\main\templates\client\blocks\header.html:41
+msgid "Закупки"
+msgstr "Purchases"
+
+#: .\main\templates\client\blocks\header.html:43
+#: .\main\templates\client\index.html:268
+#: .\main\templates\client\pages\contests.html:15
+#: .\main\templates\client\pages\contests.html:18
+msgid "Конкурсы"
+msgstr "Contest"
+
+#: .\main\templates\client\blocks\header.html:44
+#: .\main\templates\client\index.html:269
+#: .\main\templates\client\pages\contests.html:4
+#: .\main\templates\client\pages\contests.html:29
+msgid "Архив конкурсов"
+msgstr "Archives of competition"
+
+#: .\main\templates\client\blocks\header.html:47
+msgid "Контакты"
+msgstr "Contacts"
+
+#: .\main\templates\client\blocks\header.html:48
+msgid "Админ-Панель"
+msgstr "Admin-panel"
+
+#: .\main\templates\client\index.html:20 .\main\templates\client\index.html:516
+msgid "ОАО «Кыргызиндустрия»"
+msgstr "OJSC «Kyrgyzindustry»"
+
+#: .\main\templates\client\index.html:21
+msgid ""
+"создано постановлением Кабинета Министров Кыргызской Республики за №341 от "
+"24 декабря 2021 года со 100%% участием государства в его уставном капитале, "
+"который составляет 1 млрд. сомов."
+msgstr ""
+"was created by the Decree of the Cabinet of Ministers of the KyrgyzRepublic "
+"No. 341 dated December 24, 2021 with 100% participationof the state in its "
+"authorized capital, which is 1 billion soms."
+
+#: .\main\templates\client\index.html:23
+msgid "Наши Проекты"
+msgstr "Our projects"
+
+#: .\main\templates\client\index.html:76
+msgid "О НАС"
+msgstr "ABOUT US"
+
+#: .\main\templates\client\index.html:82 .\main\templates\client\index.html:155
+#: .\main\templates\client\pages\about_company.html:151
+msgid ""
+"Основными направлениями промышленной политики, реализуемой ОАО являются:"
+msgstr "The main directions of the industrial policy implemented by OJSC are:"
+
+#: .\main\templates\client\index.html:85
+#: .\main\templates\client\pages\about_company.html:152
+msgid ""
+"Формирование благоприятного инвестиционного и предпринимательского климата."
+msgstr "Formation of a favorable investment and business climate."
+
+#: .\main\templates\client\index.html:86
+#: .\main\templates\client\pages\about_company.html:154
+msgid "Инновационно-технологическое развитие промышленности."
+msgstr "Innovation and technological development of industry."
+
+#: .\main\templates\client\index.html:87
+#: .\main\templates\client\pages\about_company.html:159
+msgid "Обеспечение промышленных предприятий востребованными кадрами."
+msgstr "Providing industrial enterprises with demanded personnel."
+
+#: .\main\templates\client\index.html:88
+#: .\main\templates\client\pages\about_company.html:167
+msgid "Продвижение продукции промышленных предприятий на рынках сбыта."
+msgstr "Promotion of products of industrial enterprises in the markets."
+
+#: .\main\templates\client\index.html:89
+#: .\main\templates\client\pages\about_company.html:171
+msgid "Создание промышленных кластеров."
+msgstr "Creation of industrial clusters."
+
+#: .\main\templates\client\index.html:90
+#: .\main\templates\client\pages\about_company.html:176
+msgid ""
+"Оснащение промышленных предприятий энергоресурсами, инженерной и "
+"транспортной инфраструктурой."
+msgstr ""
+"Equipping industrial enterprises with energy resources, engineering"
+"and transport infrastructure."
+
+#: .\main\templates\client\index.html:95
+msgid ""
+"Открытое Акционерное ОбществоОАО “Кыргызиндустрия” создано решением Кабинета "
+"Министров со 100%% участием государства в его уставном капитале, который "
+"составляет 1 млрд. сомов."
+msgstr ""
+"was created by the Decree of the Cabinet of Ministers of the KyrgyzRepublic "
+"No. 341 dated December 24, 2021 with 100% participationof the state in its "
+"authorized capital, which is 1 billion soms."
+
+#: .\main\templates\client\index.html:96
+msgid ""
+"Учредителем и единственным акционером Общества является Кабинет Министров "
+"Кыргызской Республики. ОАО «Кыргызиндустрия» является коммерческой "
+"организацией, имеет юридический статус (обладает обособленным имуществом, "
+"имеет самостоятельный баланс, корреспондентские, расчетные, валютные и "
+"другие счета в банках Кыргызской Республики и за ее пределами)."
+msgstr ""
+"The founder and sole shareholder of the Company is the Cabinet of Ministers"
+"of the Kyrgyz Republic. OJSC «Kyrgyzindustry» is a commercial"
+"organization, has a legal status (possesses separate property, "
+"has an independent balance sheet, correspondent, settlement, currency and "
+"other accounts in banks of the Kyrgyz Republic and beyond)."
+
+#: .\main\templates\client\index.html:98
+msgid "Узнать Больше"
+msgstr "More Information"
+
+#: .\main\templates\client\index.html:109
+#: .\main\templates\client\pages\gallery.html:33
+#: .\main\templates\client\pages\news.html:13
+#: .\main\templates\client\pages\news.html:16
+#: .\main\templates\client\pages\news_detail.html:18
+msgid "Новости"
+msgstr "News"
+
+#: .\main\templates\client\index.html:110
+#: .\main\templates\client\pages\news.html:24
+msgid "Архив новостей"
+msgstr "News archives"
+
+#: .\main\templates\client\index.html:120
+#: .\main\templates\client\index.html:280
+#: .\main\templates\client\pages\contests.html:39
+#: .\main\templates\client\pages\news.html:34
+msgid "Читать"
+msgstr "Read"
+
+#: .\main\templates\client\index.html:127
+#: .\main\templates\client\pages\news.html:41
+msgid "Нет новостей"
+msgstr "No news"
+
+#: .\main\templates\client\index.html:143
+#: .\main\templates\client\index.html:302
+#: .\main\templates\client\index.html:360
+msgid "Показать больше"
+msgstr "Show more"
+
+#: .\main\templates\client\index.html:154
+msgid "Направления деятельности"
+msgstr "Activities"
+
+#: .\main\templates\client\index.html:162
+msgid "производство технической, строительной и других видов продукции"
+msgstr "production of technical, construction and other types of products"
+
+#: .\main\templates\client\index.html:168
+msgid "производство товаров народного потребления"
+msgstr "production of consumer goods"
+
+#: .\main\templates\client\index.html:174
+msgid "производство продуктов питания"
+msgstr "food production"
+
+#: .\main\templates\client\index.html:180
+msgid "полиграфические услуги, организации средств массовой информации"
+msgstr "printing services, media organizations"
+
+#: .\main\templates\client\index.html:186
+msgid "профессиональная деятельность на рынке ценных бумаг"
+msgstr "professional activity in the securities market"
+
+#: .\main\templates\client\index.html:192
+msgid "дополнительная деятельность, направленная на поддержание бизнеса"
+msgstr "additional activities aimed at supporting the business"
+
+#: .\main\templates\client\index.html:198
+msgid "Виды деятельности, на которые требуются специальные разрешения"
+msgstr "Activities that require special permits"
+
+#: .\main\templates\client\index.html:204
+msgid "Иные виды деятельности, не противоречащие законодательству КР"
+msgstr "Other types of activities that do not contradict the legislation of the Kyrgyz Republic"
+
+#: .\main\templates\client\index.html:228
+#: .\main\templates\client\index.html:236
+#: .\main\templates\client\index.html:244
+#: .\main\templates\client\index.html:252
+msgid "Text"
+msgstr ""
+
+#: .\main\templates\client\index.html:228
+#: .\main\templates\client\index.html:236
+#: .\main\templates\client\index.html:244
+#: .\main\templates\client\index.html:252
+msgid "Some text"
+msgstr ""
+
+#: .\main\templates\client\index.html:286
+#: .\main\templates\client\pages\contests.html:45
+msgid "Нет конкурсов"
+msgstr "Empty"
+
+#: .\main\templates\client\index.html:311
+#: .\main\templates\client\pages\gallery.html:34
+#: .\main\templates\client\pages\project_detail.html:18
+#: .\main\templates\client\pages\projects.html:4
+#: .\main\templates\client\pages\projects.html:15
+#: .\main\templates\client\pages\projects.html:18
+msgid "Проекты"
+msgstr "Projects"
+
+#: .\main\templates\client\index.html:345
+msgid "Нет проектов"
+msgstr "Empty"
+
+#: .\main\templates\client\index.html:390
+#: .\main\templates\client\pages\president.html:4
+#: .\main\templates\client\pages\president.html:19
+#: .\main\templates\client\pages\president.html:54
+#: .\main\templates\client\pages\team.html:47
+msgid "Абдураимов Жарасул Осмоналиевич"
+msgstr "Abduraimov Zharasul Osmonalievich"
+
+#: .\main\templates\client\index.html:391
+#: .\main\templates\client\pages\president.html:56
+#: .\main\templates\client\pages\team.html:48
+msgid "Президент ОАО “Кыргызиндустрия”"
+msgstr "President of OJSC “Kyrgyzindustry”"
+
+#: .\main\templates\client\index.html:416
+#: .\main\templates\client\pages\team.html:73
+msgid "Сарбанов Советбек Талгарбекович"
+msgstr "Sarbanov Sovetbek Talgarbekovich"
+
+#: .\main\templates\client\index.html:417
+#: .\main\templates\client\pages\team.html:74
+msgid ""
+"Вице – президент ОАО “Кыргызиндустрия” по НИОКР и инновационным проектам "
+msgstr ""
+"Vice-President of JSC “Kyrgyzindustry” for R&D and innovation projects"
+
+#: .\main\templates\client\index.html:434
+#: .\main\templates\client\pages\team.html:91
+msgid "Байышбеков Азамат Байышбекович"
+msgstr "Baiyshbekov Azamat Baiyshbekovich"
+
+#: .\main\templates\client\index.html:435
+#: .\main\templates\client\pages\team.html:92
+msgid ""
+"Вице – президент ОАО “Кыргызиндустрия” по внешнеэкономическим связям и "
+"торговле"
+msgstr ""
+"Vice-President of OJSC “Kyrgyzindustry” for foreign economic relations and"
+"trade"
+
+#: .\main\templates\client\index.html:452
+#: .\main\templates\client\pages\team.html:109
+msgid "Сагынбаев Жиргалбек Калмуратович"
+msgstr "Sagynbaev Zhirgalbek Kalmuratovich"
+
+#: .\main\templates\client\index.html:453
+#: .\main\templates\client\pages\team.html:110
+msgid "Вице – президент ОАО “Кыргызиндустрия” по промышленным отраслям"
+msgstr "Vice-President of JSC “Kyrgyzindustry” for industrial sectors"
+
+#: .\main\templates\client\index.html:470
+#: .\main\templates\client\pages\team.html:127
+msgid "Асанов Тургун Эмилевич"
+msgstr "Asanov Turgun Emilevich"
+
+#: .\main\templates\client\index.html:471
+#: .\main\templates\client\pages\team.html:128
+msgid "Вице – президент ОАО “Кыргызиндустрия” по экономике и финансам "
+msgstr "Vice-President of OJSC “Kyrgyzindustry” for Economics and Finance"
+
+#: .\main\templates\client\index.html:488
+#: .\main\templates\client\pages\team.html:145
+msgid "FIO"
+msgstr ""
+
+#: .\main\templates\client\index.html:489
+#: .\main\templates\client\pages\team.html:146
+msgid "Руководитель аппарата"
+msgstr "Chief of Staff"
+
+#: .\main\templates\client\index.html:509
+msgid "СВЯЖИТЕСЬ С НАМИ"
+msgstr "CONTACT US"
+
+#: .\main\templates\client\index.html:517
+msgid ""
+"ОАО «Кыргызиндустрия» создано постановлением Кабинета Министров Кыргызской "
+"Республики за №341 от 24 декабря 2021 года со 100%% участием государства в "
+"его уставном капитале, который составляет 1 млрд. сомов."
+msgstr ""
+"was created by the Decree of the Cabinet of Ministers of the KyrgyzRepublic "
+"No. 341 dated December 24, 2021 with 100% participationof the state in its "
+"authorized capital, which is 1 billion soms."
+
+#: .\main\templates\client\index.html:531
+msgid "г. Бишкек, пр. Чуй, 106"
+msgstr "Bishkek, Chui Ave., 106"
+
+#: .\main\templates\client\index.html:552
+msgid "Имя"
+msgstr "Name"
+
+#: .\main\templates\client\index.html:555
+msgid "Номер Телефона"
+msgstr "Phone"
+
+#: .\main\templates\client\index.html:561
+msgid "Сообщение ..."
+msgstr "Message ..."
+
+#: .\main\templates\client\index.html:568
+msgid "Отправить"
+msgstr "Send"
+
+#: .\main\templates\client\pages\NPA.html:5
+#: .\main\templates\client\pages\NPA.html:18
+#: .\main\templates\client\pages\NPA.html:29
+msgid "Нормативно правовые акты"
+msgstr "Normative legal acts"
+
+#: .\main\templates\client\pages\NPA.html:17
+#: .\main\templates\client\pages\about_company.html:17
+#: .\main\templates\client\pages\contests.html:17
+#: .\main\templates\client\pages\gallery.html:17
+#: .\main\templates\client\pages\news.html:15
+#: .\main\templates\client\pages\news_detail.html:17
+#: .\main\templates\client\pages\project_detail.html:17
+#: .\main\templates\client\pages\projects.html:17
+#: .\main\templates\client\pages\team.html:17
+#: .\main\templates\client\pages\vacancies.html:17
+#: .\main\templates\client\pages\vacancy_detail.html:17
+msgid "Главная"
+msgstr "Main"
+
+#: .\main\templates\client\pages\NPA.html:30
+msgid ""
+"Типовой порядок организации и осуществления закупок государственными и "
+"муниципальными предприятиями, хозяйственными обществами, где 50 и более "
+"процентов доли участия в уставном капитале принадлежит государству, в том "
+"числе их дочерними хозяйственными обществами"
+msgstr ""
+"Standard procedure for the organization and implementation of procurement by state and"
+"municipal enterprises, business companies, where 50 or more "
+"percent of the share in the authorized capital belongs to the state, including "
+"including their subsidiaries"
+
+#: .\main\templates\client\pages\NPA.html:34
+msgid "Документ"
+msgstr "Document"
+
+#: .\main\templates\client\pages\about_company.html:54
+msgid "Открытое Акционерное Общество «Кыргызиндустрия"
+msgstr "Open Joint Stock Company «Kyrgyzindustry»"
+
+#: .\main\templates\client\pages\about_company.html:54
+msgid "Создано постановлением Кабинета Министров"
+msgstr "Created by a resolution of the Cabinet of Ministers"
+
+#: .\main\templates\client\pages\about_company.html:55
+msgid ""
+"Кыргызской Республики за №341 от 24 декабря 2021 года со 100%% участием "
+"государства в его уставном"
+msgstr ""
+"Kyrgyz Republic No. 341 dated December 24, 2021 with 100% participation"
+"the state in its charter"
+
+#: .\main\templates\client\pages\about_company.html:56
+msgid "капитале, который составляет 1 млрд. сомов."
+msgstr "capital, which is 1 billion soms."
+
+#: .\main\templates\client\pages\about_company.html:57
+msgid ""
+"Учредителем и единственным акционером настоящего ОАО «Кыргызиндустрия» "
+"является Кабинет Министров."
+msgstr ""
+"Founder and sole shareholder of this JSC «Kyrgyzindustry»"
+"is the Cabinet of Ministers."
+
+#: .\main\templates\client\pages\about_company.html:58
+msgid ""
+"Вместе с тем ОАО – коммерческая организация с юридическим статусом (обладает "
+"обособленным имуществом,"
+msgstr ""
+"At the same time, OJSC is a commercial organization with a legal status (possesses"
+"separate property"
+
+#: .\main\templates\client\pages\about_company.html:59
+msgid ""
+"имеет самостоятельный баланс, корреспондентские, расчетные, валютные и "
+"другие счета в банках Кыргызстана и за его пределами). В рамках своей "
+"компетенции ОАО оперативно и самостоятельно реализует мероприятия по "
+"привлечению инвестиций, взаимодействует с международными корпорациями и "
+"финансовыми институтами, создает совместные акционерные предприятия в рамках "
+"корпоративного управления."
+msgstr ""
+"has an independent balance sheet, correspondent, settlement, currency and "
+"other accounts in banks in Kyrgyzstan and beyond). As part of its "
+"competence JSC promptly and independently implements measures to "
+"attracting investments, interacting with international corporations and "
+"financial institutions, creates joint stock companies within the "
+"corporate governance."
+
+#: .\main\templates\client\pages\about_company.html:60
+msgid ""
+"Цели и задачи ОАО «Кыргызиндустрия» отвечают стратегии новой экономической "
+"политики, которая нацелена"
+msgstr ""
+"The goals and objectives of JSC «Kyrgyzindustry» meet the strategy of the new economic "
+"a policy that aims"
+
+#: .\main\templates\client\pages\about_company.html:61
+msgid ""
+"на использование экономического потенциала страны на базе инновационных "
+"методов и технологий в реальном секторе отечественной экономики."
+msgstr ""
+"to use the economic potential of the country on the basis of innovative "
+"methods and technologies in the real sector of the domestic economy."
+
+#: .\main\templates\client\pages\about_company.html:62
+msgid ""
+"На сегодня ОАО располагает целым рядом конкретных проектов, направленных на "
+"возрождение промышленности путем создания новых производственных мощностей, "
+"модернизации и расширения действующих производств, а также перезапуска "
+"простаивающих предприятий. Соответственно, основной задачей ОАО становится "
+"создание новых рабочих мест, влекущее за собой сокращение уровней "
+"безработицы и трудовой миграции."
+msgstr ""
+"Today, OJSC has a number of specific projects aimed at "
+"the revival of industry through the creation of new production facilities,"
+"modernization and expansion of existing production facilities, as well as restarting"
+"idle enterprises. Accordingly, the main task of the OJSC becomes "
+"the creation of new jobs, entailing a reduction in levels"
+"unemployment and labor migration."
+
+#: .\main\templates\client\pages\about_company.html:63
+msgid ""
+"Создание ОАО «Кыргызиндустрия» позволяет решить целый комплекс задач, "
+"диктуемых современными условиями ведения предпринимательства: повысит "
+"эффективность оперативного управления, увеличит инвестиционную "
+"привлекательность бизнеса, снизит производственные издержки, улучшит "
+"управление рисками и др. Присутствие государства в качестве акционера в "
+"предприятиях стратегических отраслей (до 49%%) непосредственно влияет на "
+"принимаемые топ-менеджментом решения, создает предпосылки для максимально "
+"эффективного использования государственных активов в соответствии с "
+"приоритетными направлениями"
+msgstr ""
+"Creation of OJSC «Kyrgyzindustry» allows to solve a whole range of tasks,"
+"dictated by modern business conditions: will increase "
+"operational management efficiency, will increase investment "
+"business attractiveness, reduce production costs, improve "
+"risk management, etc. The presence of the state as a shareholder in "
+"enterprises in strategic industries (up to 49%) directly affect "
+"the decisions made by top management creates the prerequisites for the maximum "
+"efficient use of public assets in accordance with"
+"priority areas"
+
+#: .\main\templates\client\pages\about_company.html:64
+msgid ""
+"развития предприятий. В конечном счете повысится эффективность их "
+"функционирования на основе"
+msgstr ""
+"development of enterprises. Ultimately, their efficiency will increase"
+"functioning based"
+
+#: .\main\templates\client\pages\about_company.html:65
+msgid "новой сформированной модели управления акционерной собственностью."
+msgstr "a new formed model of joint-stock property management."
+
+#: .\main\templates\client\pages\about_company.html:75
+msgid "Наши Цели и Задачи"
+msgstr "Our Goals and Objectives"
+
+#: .\main\templates\client\pages\about_company.html:85
+msgid "Привлечение и стимулирование инвестиций"
+msgstr "Attracting and stimulating investment"
+
+#: .\main\templates\client\pages\about_company.html:95
+msgid "Оздоровление неплатежаспособных хозяйствующих субъектов"
+msgstr "Attracting and stimulating investment"
+
+#: .\main\templates\client\pages\about_company.html:105
+msgid "Создание современных предприятий"
+msgstr "The creation of modern enterprises"
+
+#: .\main\templates\client\pages\about_company.html:115
+msgid "Разработка ТЭО"
+msgstr ""
+
+#: .\main\templates\client\pages\about_company.html:125
+msgid "Модернизация промышленности"
+msgstr "Modernization of industry"
+
+#: .\main\templates\client\pages\about_company.html:135
+msgid "Стимулирование деятельности промышленных предприятий"
+msgstr "Industrial promotion"
+
+#: .\main\templates\client\pages\about_company.html:153
+msgid ""
+"Наращивание промышленного производства неразрывно связано с объемами "
+"инвестиций, привлекаемыми в промышленный сектор. В качестве основных "
+"источников привлечения средств на ближайшую перспективу остаются средства "
+"юридических и физических лиц, поэтому деятельность ОАО направлена на "
+"привлечение инвестиций, снижение процедурной и административной нагрузки на "
+"инвесторов, уменьшение рисков при осуществлении запуска новых производств, "
+"стимулирование заинтересованности бизнес-сообщества в реализации "
+"инновационных проектов."
+msgstr ""
+"Increasing industrial production is inextricably linked with volumes"
+"investments attracted to the industrial sector. As the main "
+"sources of raising funds for the near future remain funds"
+"legal entities and individuals, therefore the activities of the JSC are aimed at "
+"attracting investments, reducing the procedural and administrative burden on "
+"investors, reducing risks in the implementation of the launch of new industries,"
+"stimulating the interest of the business community in the implementation of "
+"innovative projects."
+
+#: .\main\templates\client\pages\about_company.html:155
+msgid ""
+"В первую очередь внимание ОАО направлено на производство наукоемкой и "
+"высокотехнологичной продукции"
+msgstr ""
+"First of all, the attention of JSC is directed to the production of science-intensive and "
+"high-tech products"
+
+#: .\main\templates\client\pages\about_company.html:156
+msgid ""
+"несырьевого сектора экономики с высокой добавленной стоимостью. Поэтому ОАО "
+"ориентировано на"
+msgstr ""
+"non-primary sector of the economy with high added value. Therefore, OJSC "
+"focused on"
+
+#: .\main\templates\client\pages\about_company.html:157
+msgid ""
+"всестороннее сотрудничество с научно-образовательными учреждениями, "
+"технопарками, бизнес-инкубаторами"
+msgstr ""
+"всестороннее сотрудничество с научно-образовательными учреждениями, "
+"технопарками, бизнес-инкубаторами"
+
+#: .\main\templates\client\pages\about_company.html:158
+msgid ""
+"и предприятиями, активно занимающимися творческими изысканиями по созданию "
+"инновационной продукции."
+msgstr ""
+"and enterprises actively engaged in creative research to create "
+"innovative products."
+
+#: .\main\templates\client\pages\about_company.html:160
+msgid ""
+"ОАО ориентирует свою деятельность на тесное взаимодействие с "
+"образовательными учреждениями высшего"
+msgstr ""
+"OJSC focuses its activities on close cooperation with "
+"educational institutions of higher"
+
+
+#: .\main\templates\client\pages\about_company.html:161
+msgid ""
+"и среднего профессионального образования на базе долгосрочных договоров о "
+"сотрудничестве."
+msgstr ""
+"and secondary vocational education on the basis of long-term agreements on "
+"cooperation."
+
+#: .\main\templates\client\pages\about_company.html:162
+msgid ""
+"Инновационным производствам требуются работники с особыми навыками и "
+"умениями, которые можно"
+msgstr ""
+"Innovative industries require workers with special skills and "
+"skills that can"
+
+#: .\main\templates\client\pages\about_company.html:163
+msgid ""
+"обрести, введя соответствующие коррективы в учебные планы и программы, "
+"организовав производственные"
+msgstr ""
+"acquire by introducing appropriate adjustments to curricula and programs,"
+"organizing production"
+
+#: .\main\templates\client\pages\about_company.html:164
+msgid ""
+"практики на конкретных рабочих местах и сориентировав научно-"
+"исследовательскую работу студентов на"
+msgstr ""
+"practice in specific workplaces and orienting scientifically"
+"research work of students on"
+
+#: .\main\templates\client\pages\about_company.html:165
+msgid ""
+"решение задач по профилю предприятия, на котором они намерены трудиться. "
+"Предприятия со своей стороны"
+msgstr ""
+"solution of tasks according to the profile of the enterprise where they intend to work."
+"Enterprises for their part"
+
+#: .\main\templates\client\pages\about_company.html:166
+msgid ""
+"способны оплачивать стоимость обучения будущих или повышения квалификации "
+"действующих сотрудников."
+msgstr ""
+"capable of paying the cost of future training or advanced training"
+"current employees."
+
+#: .\main\templates\client\pages\about_company.html:168
+msgid ""
+"Маркетинговые исследования позволяют изучать конъюнктуру внутреннего и "
+"внешних рынков, потребности и"
+msgstr ""
+"Marketing research allows you to study the conjuncture of the internal and "
+"foreign markets, needs and"
+
+#: .\main\templates\client\pages\about_company.html:169
+msgid ""
+"запросы потребителей продукции и выявить перспективные отрасли и "
+"предприятия, способные решать вопросы"
+msgstr ""
+"inquiries of consumers of products and identify promising industries and "
+"enterprises capable of solving problems"
+
+#: .\main\templates\client\pages\about_company.html:170
+msgid "импортозамещения и поставки выпускаемых товаров на экспорт."
+msgstr "import substitution and supply of manufactured goods for export."
+
+#: .\main\templates\client\pages\about_company.html:172
+msgid ""
+"К наиболее распространенным механизмам реализации государственной и "
+"региональной промышленной политики"
+msgstr ""
+"To the most common mechanisms for the implementation of state and "
+"regional industrial policy"
+
+#: .\main\templates\client\pages\about_company.html:173
+msgid ""
+"относится кластерная политика, основной целью которой является "
+"диверсификация промышленности в"
+msgstr ""
+"refers to a cluster policy whose main purpose is "
+"industry diversification"
+
+#: .\main\templates\client\pages\about_company.html:174
+msgid ""
+"регионах, включая инновационные производства в машиностроении, "
+"электротехнике, электронике, фармацевтике,"
+msgstr ""
+"regions, including innovative production in mechanical engineering,"
+"electrical engineering, electronics, pharmaceuticals,"
+
+#: .\main\templates\client\pages\about_company.html:175
+msgid ""
+"химической промышленности и др., основанные на эффективном использовании "
+"внутренних ресурсов и сырья."
+msgstr ""
+"chemical industry, etc., based on the efficient use of "
+"domestic resources and raw materials."
+
+#: .\main\templates\client\pages\about_company.html:177
+msgid ""
+"ОАО первостепенное внимание уделяет вопросам снижения себестоимости "
+"транспортных перевозок, улучшению"
+msgstr ""
+"OJSC pays primary attention to the issues of cost reduction"
+"traffic improvement"
+
+#: .\main\templates\client\pages\about_company.html:178
+msgid ""
+"транспортных артерий в регионах и облегчению доступа к воде, системам "
+"канализации, электрификации и газификации промышленных объектов."
+msgstr ""
+"transport arteries in the regions and facilitating access to water systems"
+"sewerage, electrification and gasification of industrial facilities."
+
+#: .\main\templates\client\pages\gallery.html:32
+#: .\main\templates\client\pages\projects.html:31
+msgid "Все"
+msgstr "All"
+
+#: .\main\templates\client\pages\gallery.html:35
+msgid "Другое"
+msgstr "Another"
+
+#: .\main\templates\client\pages\news.html:4
+msgid "Пресс-релизы"
+msgstr "Press Releases"
+
+#: .\main\templates\client\pages\news_detail.html:44
+#: .\main\templates\client\pages\project_detail.html:43
+msgid "Информация про новость"
+msgstr "Information about news"
+
+#: .\main\templates\client\pages\news_detail.html:46
+#: .\main\templates\client\pages\project_detail.html:45
+msgid "Заголовок"
+msgstr "Title"
+
+#: .\main\templates\client\pages\news_detail.html:47
+#: .\main\templates\client\pages\project_detail.html:46
+msgid "Язык"
+msgstr "Languge"
+
+#: .\main\templates\client\pages\news_detail.html:48
+#: .\main\templates\client\pages\project_detail.html:47
+msgid "Дата публикации"
+msgstr ""
+
+#: .\main\templates\client\pages\news_detail.html:52
+#: .\main\templates\client\pages\project_detail.html:51
+msgid "Описание новости"
+msgstr "News Description"
+
+#: .\main\templates\client\pages\president.html:56
+msgid "Должность"
+msgstr "Position"
+
+#: .\main\templates\client\pages\president.html:57
+msgid "Дата рождения"
+msgstr "Date of Birth"
+
+#: .\main\templates\client\pages\president.html:58
+msgid "Гражданство"
+msgstr "Citizenship"
+
+#: .\main\templates\client\pages\president.html:59
+msgid "Образования"
+msgstr "Education"
+
+#: .\main\templates\client\pages\president.html:60
+msgid "Специальность"
+msgstr "Speciality"
+
+#: .\main\templates\client\pages\president.html:67
+msgid ""
+"Абдураимов Жарасул Осмоналиевич окончил Уральский политехнический институт "
+"им. Кирова в Свердловске по специальности «Инженер-механик электронной "
+"аппаратуры».<br><br>С 1990-х  руководил крупнейшими заводами страны."
+"<br><br>С 2013 по 2015 год работал в ЗАО «Кумтор Голд Компани» заместителем "
+"директора по развитию местного снабжения и руководил Проектом промышленного "
+"развития и создания рабочих мест на Иссык-Куле.<br><br>Был начальником"
+msgstr ""
+"Abduraimov Zharasul Osmonalievich graduated from the Ural Polytechnic"
+"Institute them. Kirov in Sverdlovsk with a degree"
+"in Mechanical Engineer of Electronic equipment. Since the 1990s,"
+"he has been in charge of the largest factories in the country."
+"From 2013 to 2015, he worked at Kumtor Gold Company CJSC"
+"as a Deputy Director of Local Procurement Development and led the"
+"Industrial development and job creation in Issyk-Kul. Was the boss"
+
+#: .\main\templates\client\pages\president.html:68
+msgid ""
+"отдела технического регулирования Минэкономразвития. Работал экспертом по "
+"промышленному развитию Кыргызстана в проекте Азиатского банка развития "
+"«Вступление в Евразийский экономический союз – управление возможностями и "
+"рисками».<br><br>С мая по сентябрь 2019 года являлся общественным советником "
+"министра экономики.<br><br>С октября 2020 года по"
+msgstr ""
+"department of technical regulation of the Ministry of Economic Development"
+"Worked as an expert on industrial development of Kyrgyzstan"
+"in the project of the Asian Development Bank"
+"«Joining the Eurasian Economic Union - managing opportunities and risks»."
+"From May to September 2019 he was a public adviser Minister of Economy. From October 2020 to"
+
+#: .\main\templates\client\pages\president.html:69
+msgid ""
+"июль 2021 года проработал полпредом правительства в Ошской области.<br><br>С "
+"июля 2021 года по январь 2022 года занимал должность заместителя министра "
+"экономики и торговли.<br><br>В настоящее время является главой ОАО "
+"«Кыргызиндустрия».<br><br>"
+msgstr ""
+"July 2021 worked as a government plenipotentiary in Osh region. FROM"
+"July 2021 to January 2022 served as Deputy Minister economy and trade."
+"Currently he is the head of JSC «Kyrgyzindustry»."
+
+#: .\main\templates\client\pages\projects.html:32
+msgid "Реализованные"
+msgstr "Implemented"
+
+#: .\main\templates\client\pages\projects.html:33
+msgid "Не Реализованные"
+msgstr "Not Realized"
+
+#: .\main\templates\client\pages\projects.html:34
+msgid "В процессе"
+msgstr "In the process"
+
+#: .\main\templates\client\pages\vacancy_detail.html:31
+msgid "Информация про вакансию"
+msgstr "Information about the vacancy"
+
+#: .\main\templates\client\pages\vacancy_detail.html:39
+msgid "Описание вакансии"
+msgstr "Vacancy description"
+
+#: .\main\views.py:201
+msgid "hello"
+msgstr ""

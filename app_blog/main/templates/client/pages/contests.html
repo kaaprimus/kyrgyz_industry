@@ -48,6 +48,7 @@
           </div>
         </div>
         {% if contest_page %}
+        {% if count > 8 %}
         <div class="d-flex mt-4 flex-wrap justify-content-center">
           <nav class="ml-auto">
             <ul class="pagination separated pagination-info">
@@ -79,6 +80,7 @@
                 <li class="page-item disabled">         
                   <a href="" class="page-link">&raquo;</a>
                 </li>
+                {% endif %}
               {% endif %}
             </ul>
           </nav>

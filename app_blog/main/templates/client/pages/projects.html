@@ -25,6 +25,16 @@
 <!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio">
     <div class="container">
+<<<<<<< HEAD
+      <div class="row" data-aos="fade-up" data-aos-delay="200" id="titleprojects">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">Все</li>
+            <li data-filter=".Реализован">Реализованные</li>
+            <li data-filter=".Не">Не Реализованные</li>
+            <li data-filter=".процессе">В процессе</li>
+          </ul>
+=======
         <div class="row" data-aos="fade-up" data-aos-delay="200">
             <div class="col-lg-12 d-flex justify-content-center">
               <ul id="portfolio-flters">
@@ -32,7 +42,9 @@
                 <li data-filter=".filter-card">{% translate "В Перспективе" %}</li>
               </ul>
             </div>
+>>>>>>> efd9e7b6440b367e731badfe38077c9ca52c8b47
         </div>
+      </div>
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400" id="myDIV">
           {% for project in project_page %}
@@ -54,8 +66,24 @@
           </div>
           {% endif %}
           {% endfor %}
+          {% empty %}
+          <div class="section-title" data-aos="fade-up">
+            <h4>{% translate "Нет проектов" %}</h4>
+          </div>
+          <script type="text/javascript">
+            function func() {
+        if (document.getElementById("titleprojects")) { 
+            //Записываем ссылку на элемент в переменную obj
+            var obj = document.getElementById("titleprojects");
+              obj.style.display = "none";
+        }
+        }
+          func();
+        </script>
           {% endfor %}
         </div>
+        {% if project_page %}
+        {% if count > 8 %}
 
         <div class="d-flex mt-4 flex-wrap justify-content-center">
           <nav class="ml-auto">
@@ -93,6 +121,8 @@
           </nav>
         </div>
     </div>
+    {% endif %}
+    {% endif %}
   </section><!-- End Portfolio Section -->
 
 </main><!-- End #main -->
