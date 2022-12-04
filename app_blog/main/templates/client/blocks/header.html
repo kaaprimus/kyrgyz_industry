@@ -12,11 +12,11 @@
 
     <nav id="navbar" class="navbar">
       <ul>
-        <li class="dropdown"><a href="#"><span>{% translate "О нас" %}</span> <i class="bi bi-chevron-down"></i></a>
+        <li class="dropdown"><a href="{% url 'about_company' %}"><span>{% translate "О нас" %}</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="{% url 'index'%}#about">{% translate "Об обществе" %}</a></li>
-            <li><a href="{% url 'index' %}#team">{% translate "Руководство" %}</a></li>
-            <li><a href="#about">{% translate "Блоки" %}</a></li>
+            <li><a href="{% url 'about_company' %}">{% translate "Об обществе" %}</a></li>
+            <li><a href="{% url 'team' %}">{% translate "Руководство" %}</a></li>
+            <li><a href="#activity">{% translate "Блоки" %}</a></li>
             <li><a href="#clients">{% translate "Наши пратнеры" %}</a></li>
             <li><a href="{% url 'documents_npa' %}">{% translate "Нормативно-правовая база" %}</a></li>
             <li><a href="{% url 'vacancies' %}">{% translate "Вакансии" %}</a></li>

@@ -180,7 +180,7 @@ class Contests(models.Model):
 
 class News(models.Model):
     Title=models.CharField(max_length=70,verbose_name="Заголовок новости")
-    Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
+    Short_Description = models.CharField(max_length=150,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
     Language= models.CharField(
@@ -191,15 +191,25 @@ class News(models.Model):
                                )
     Gallery=models.ForeignKey("galleryNews",on_delete=models.RESTRICT,verbose_name="Галерея")
     
+    class Meta:
+        ordering = ['-id']
+    def __str__(self) -> str:
+        return self.Title
 # Руководство    
 class Management(models.Model):
-    full_name = models.CharField(max_length = 40, verbose_name = "ФИО Сотрудника")
+    full_name = models.CharField(max_length = 60, verbose_name = "ФИО Сотрудника")
     position = models.CharField(max_length = 70, verbose_name = "Должность")
     date_birth = models.DateField(verbose_name='Дата рождения', default=now)
     education = models.CharField(max_length=60, verbose_name='Образования')
-    speciality = models.CharField(max_length=30, verbose_name='Специальность')
+    speciality = models.CharField(max_length=
+                                  40, verbose_name='Специальность')
     about = RichTextField(verbose_name="Биография сотрудника")
-    
+    language=models.CharField(
+                               max_length = 10, 
+                               choices = LanguageChoice.choices,
+                               default = LanguageChoice.RU,
+                               verbose_name = "Язык"
+                               )
     picture = models.ImageField(
         verbose_name="Фотография", 
         upload_to=get_file_path, 
@@ -213,7 +223,7 @@ class Management(models.Model):
 
 # Вакансии
 class Vacancies(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Заголовок")
+    title = models.CharField(max_length=70, verbose_name="Заголовок")
     company = models.CharField(max_length=70, verbose_name = "Компания")
     Language=models.CharField(
                                max_length = 10, 
@@ -231,5 +241,52 @@ class Vacancies(models.Model):
         default = Vacancy_Status_Choice.TRUE,
         verbose_name = "Статус"
     )
-    email_company = models.EmailField(max_length = 254)
+    email_company = models.EmailField(max_length = 40)
 
+# Горячие новости
+
+class HotNewsGallery(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Название галереи')
+
+    def __str__(self) -> str:
+        return self.name
+    
+    class Meta:
+        ordering = ['-id']
+        
+class HotNewsPhoto(models.Model):
+    caption = models.CharField(verbose_name='Название фотографии', max_length=50)
+    url = models.ImageField(
+        verbose_name='Путь картинки',
+        upload_to=get_file_path, 
+        validators=[validate_image_file_extension]
+        )
+    gallery = models.ForeignKey(HotNewsGallery, on_delete=models.RESTRICT, verbose_name='Галерея')
+    
+    
+    path_url = "static/client/img/hot_news/"
+    
+    def __str__(self) -> str:
+        return self.caption
+    class Meta: 
+        ordering = ['-id']
+        
+class HotNews(models.Model):
+    title = models.CharField(verbose_name='Название событии', max_length=70)
+    short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
+    description = RichTextField()
+    Language=models.CharField(
+                               max_length = 10, 
+                               choices = LanguageChoice.choices,
+                               default = LanguageChoice.RU,
+                               verbose_name = "Язык"
+                               )
+    pub_date = models.DateField(verbose_name="Дата публикации", default=now)
+    gallery = models.ForeignKey(HotNewsGallery, on_delete=models.RESTRICT, verbose_name='Галерея')
+    
+    def __str__(self) -> str:
+        return self.title
+    
+    class Meta: 
+        ordering = ['-id']
+    

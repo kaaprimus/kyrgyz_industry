@@ -242,28 +242,62 @@ class ManagementForm(forms.ModelForm):
     
     about = forms.Textarea(attrs = {"class" : "form-control", "id" : "about", "placeholder" : "Биография",'required': True})
     
+    language = forms.CharField(max_length=10,
+                                widget= forms.Select(
+                                        attrs={"class" : "form-control", "id" : "language"},
+                                        choices=LanguageChoice.choices
+                                    )
+                            )
+    
     class Meta:
         model = Management
         fields = '__all__'
         
-        # widgets = {
-        #     'full_name' : TextInput(
-        #             attrs = {"type" : "text", "class" : "form-control", "id" : "fullname", "placeholder" : "Введите ФИО Сотрудника", "size" : 40, 'required': True}
-        #         ),
-        #     'position' : TextInput(
-        #             attrs = {"type" : "text", "class" : "form-control", "id" : "position", "placeholder" : "Введите Должность","size" : 70, 'required': True}
-        #         ),
-        #     'date_birth' : DateTimeInput(
-        #             attrs = {"type" : "datetime-local", "class" : "form-control", "id" : "date_birth"}
-        #         ),
-        #     'education' : TextInput(
-        #             attrs = {"type" : "text", "class" : "form-control", "id" : "education", "placeholder" : "Введите Образование","size" : 60, 'required': True}
-        #         ),
-        #     'speciality' : TextInput(
-        #             attrs = {"type" : "text", "class" : "form-control", "id" : "speciality", "placeholder" : "Введите Специальность","size" : 30, 'required': True}
-        #         ),
-        #     'about' : Textarea(
-        #             attrs = {"class" : "form-control", "id" : "about", "placeholder" : "Биография",'required': True}
-        #         ),
-            
-        # }
+        
+class HotNewsGalleryForm(forms.ModelForm):
+    name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "name", "placeholder" : "Введите название галереи", "size" : 50}
+    ))
+    class Meta:
+        model = HotNewsGallery
+        fields = '__all__'
+
+class HotNewsImageForm(forms.ModelForm):
+    caption = forms.CharField(max_length=50, required=True, widget=TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "caption", "placeholder" : "Введите название фотографии", "size" : 50}
+    ))
+    gallery = forms.ModelChoiceField(queryset=HotNewsGallery.objects.all(), 
+                                     widget=forms.Select(attrs={"class" : "form-control", "id" : "gallery"}))
+                    
+    class Meta:
+        model = HotNewsPhoto
+        fields = '__all__'
+
+class HotNewsForm(forms.ModelForm):
+    title = forms.CharField(max_length=70, required=True, widget=TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Введите название новости", "size" : 70}
+    ))
+    short_description = forms.CharField(max_length=120, required=True, widget=TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Введите краткое описание", "size" : 120}
+    ))
+    
+    description = forms.Textarea(
+       
+        )
+    Language = forms.ChoiceField(
+                                choices=LanguageChoice.choices,
+                                widget= forms.Select(
+                                        attrs={"class" : "form-control", "id" : "language"}
+                                    ),
+                                required=True
+                            )
+    pub_date = forms.DateField(required=False, 
+                               widget=DateInput(
+                                   attrs={"type" : "date", "class" : "form-control", "id" : "pub_date"}
+                                   )
+                               )
+    gallery = forms.ModelChoiceField(queryset=HotNewsGallery.objects.all(), 
+                                     widget=forms.Select(attrs={"class" : "form-control", "id" : "gallery"}))
+    class Meta:
+        model = HotNews
+        fields = '__all__'

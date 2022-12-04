@@ -27,8 +27,41 @@
       <div class="container">
 
         <div class="row gy-4">
+          <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
 
-            <div class="col-lg-8" style="margin:auto; width: 40%; height: 20%;">
+        <div class="section-title" data-aos="fade-up">
+          <h2>{% translate "О НАС" %}</h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+            <p>
+              {% translate "Основными направлениями промышленной политики, реализуемой ОАО являются:" %}
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> {% translate "Формирование благоприятного инвестиционного и предпринимательского климата." %}</li>
+              <li><i class="ri-check-double-line"></i> {% translate "Инновационно-технологическое развитие промышленности." %}</li>
+              <li><i class="ri-check-double-line"></i> {% translate "Обеспечение промышленных предприятий востребованными кадрами." %}</li>
+              <li><i class="ri-check-double-line"></i> {% translate "Продвижение продукции промышленных предприятий на рынках сбыта." %}</li>
+              <li><i class="ri-check-double-line"></i> {% translate "Создание промышленных кластеров." %}</li>
+              <li><i class="ri-check-double-line"></i> {% translate "Оснащение промышленных предприятий энергоресурсами, инженерной и транспортной инфраструктурой." %}</li>
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
+            <p>
+              {% translate "Открытое Акционерное ОбществоОАО “Кыргызиндустрия” создано решением Кабинета Министров со 100% участием государства в его уставном капитале, который составляет 1 млрд. сомов." %}
+              {% translate "Учредителем и единственным акционером Общества является Кабинет Министров Кыргызской Республики. ОАО «Кыргызиндустрия» является коммерческой организацией, имеет юридический статус (обладает обособленным имуществом, имеет самостоятельный баланс, корреспондентские, расчетные, валютные и другие счета в банках Кыргызской Республики и за ее пределами)." %}
+            </p>
+            <a href="{% url 'about_company' %}" class="btn-learn-more">{% translate "Узнать Больше" %}</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+            {% comment %} <div class="col-lg-8" style="margin:auto; width: 40%; height: 20%;">
                 <div class="portfolio-details-slider swiper">
                   <div class="swiper-wrapper align-items-center">
     
@@ -47,7 +80,7 @@
                   </div>
                   <div class="swiper-pagination"></div>
                 </div>
-              </div>
+              </div> {% endcomment %}
 
           <div class="col-lg-4" style="margin:auto; width: 90%;" >
             <div class="portfolio-info">
@@ -180,6 +213,8 @@
           </div>
 
       </div>
+
+      
     </section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->

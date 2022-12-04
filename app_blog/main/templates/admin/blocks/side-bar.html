@@ -28,13 +28,26 @@
         <li class="nav-item nav-category"><span class="nav-link">Управление контента</span></li>
      
      
-        
+        <li class="nav-item" id="hotnews-panel">
+          <a class="nav-link" data-toggle="collapse" href="#hotnews" aria-expanded="{% if expand_hotnews %}true{% else %}false{% endif %}" aria-controls="ui-basic">
+            <span class="menu-title">Главные события</span>
+            <i class="icon-book-open menu-icon"></i>
+          </a>
+          <div class="collapse {% if expand_hotnews %}show{% endif %}" id="hotnews">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link {% if active_hotnews_gallery %}active{% endif %}" href="{% url 'hotnewsgallery_all' %}">Галерея</a></li>
+              <li class="nav-item"> <a class="nav-link {% if active_hotnews_image %}active{% endif %}" href="{% url 'hotnewsimage_all' %}">Фотографии</a></li>
+              <li class="nav-item"> <a class="nav-link {% if active_hotnews %}active{% endif %}" href="{% url 'hotnews_all' %}">Статьи</a></li>
+            </ul>
+          </div>
+        </li>
+
         <li class="nav-item" id="news-panel">
-          <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="{% if expand_news %}true{% else %}false{% endif %}" aria-controls="ui-basic">
+          <a class="nav-link" data-toggle="collapse" href="#news" aria-expanded="{% if expand_news %}true{% else %}false{% endif %}" aria-controls="ui-basic">
             <span class="menu-title">Новости</span>
             <i class="icon-book-open menu-icon"></i>
           </a>
-          <div class="collapse{% if expand_news %}show{% endif %}" id="ui-basic">
+          <div class="collapse{% if expand_news %}show{% endif %}" id="news">
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link {% if active_news_gallery %}active{% endif %}" href="{% url 'newsgallery_all' %}">Галерея</a></li>
               <li class="nav-item"> <a class="nav-link {% if active_news_image %}active{% endif %}" href="{% url 'newsimage_all' %}">Фотографии</a></li>

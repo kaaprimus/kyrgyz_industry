@@ -3,51 +3,52 @@
   {% block content %}
       <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title">Новости - Фотография</h3>
+              <h3 class="page-title">Проекты - Фотографии</h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{% url 'newsgallery_all' %}">Галерея</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'hotnewsimage_all' %}">Фотографии</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Все</li>
                 </ol>
               </nav>
             </div>
             <div class="row">
-                {% if messages %} {% for message in messages %}
-                    {% if message.tags == "error" %}
-                        <div class="alert alert-danger" role="alert">{{message}}</div>
-                    {% elif message.tags == "success" %}
-                    <div class="alert alert-success" role="alert">{{message}}</div>
-                    {% endif %}
-                    {% endfor %}
+                {% if messages %} 
+                  {% for message in messages %}
+                      {% if message.tags == "error" %}
+                          <div class="alert alert-danger" role="alert">{{message}}</div>
+                      {% elif message.tags == "success" %}
+                      <div class="alert alert-success" role="alert">{{message}}</div>
+                      {% endif %}
+                  {% endfor %}
                 {% endif %}
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-sm-flex align-items-center mb-4">
                       <h4 class="card-title mb-sm-0">Список всех фотографии</h4>
-                      <a href="{% url 'newsimage_create' %}" class="btn btn-primary btn-rounded my-1 my-sm-0 ml-auto">
+                      <a href="{% url 'hotnewsimage_create' %}" class="btn btn-primary btn-rounded my-1 my-sm-0 ml-auto">
                         Добавить фотографии
                       </a>
                     </div>
                     <div class="table-responsive border rounded p-1">
                       <table class="table table-hover">
-                        {% if photosnews_list %}
+                        {% if hotnewsphoto_list %}
                         <thead>
                           <tr>
                             <th class="font-weight-bold">#</th>
-                            <th class="font-weight-bold">Название Фотографии</th>
+                            <th class="font-weight-bold">Название фотографии</th>
                             <th class="font-weight-bold">Название Галереи</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {% for newsimage in photosnews_list %}
+                          {% for image in hotnewsphoto_list %}
                           <tr>
                             <td>{{forloop.counter}}</td>
-                            <td class="td-title">{{newsimage.Caption }}</td>
-                            <td class="td-title">{{newsimage.Gallery }}</td>
+                            <td class="td-title">{{image.caption }}</td>
+                            <td>{{image.gallery }}</td>
                             <td class="edit-delete-icons">
-                              <a href="{% url 'newsimage_update' newsimage.id %}"><i class="icon-pencil"></i></a> |
-                              <a href="{% url 'newsimage_delete' newsimage.id %}" class="text-danger"><i class="icon-trash"></i></a>
+                              <a href="{% url 'hotnewsimage_update' image.id %}" title="Изменить"><i class="icon-pencil"></i></a> |
+                              <a href="{% url 'hotnewsimage_delete' image.id %}" class="text-danger" title="Удалить"><i class="icon-trash"></i></a>
                             </td>
                           </tr>
                           {% endfor %}

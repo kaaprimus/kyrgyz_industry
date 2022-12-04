@@ -65,13 +65,20 @@
                 {{ form.about }}
                 {{ form.about.errors }}
             </div>
-           
-            <div class="form-group">
-                <p>
-                <label for="{{ form.picture.id_for_label }}" class="font-weight-bold">Выберите фотографию:</label>
-                </p>
-                {{ form.picture }}
-                {{ form.picture.errors }}
+
+            <div class="form-row">
+                 <div class="col form-group">
+                    <p>
+                    <label for="{{ form.picture.id_for_label }}" class="font-weight-bold">Выберите фотографию:</label>
+                    </p>
+                    {{ form.picture }}
+                    {{ form.picture.errors }}
+                 </div>
+                <div class="col form-group">
+                    <label for=" {{ form.language.id_for_label }}" class="font-weight-bold">Выберите язык:</label>
+                    {{ form.language }}
+                    {{ form.language.errors }}
+                </div>
             </div>
            
          

@@ -4,12 +4,13 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('img/', views.test_method, name='img'),
     path('accounts/login/', views.login_page, name='login_page'),
     path('accounts/login/success/', views.authorization, name='authorizate'),
     path('accounts/logout/', views.logout_page, name = 'logout_page'),
     path(r'admin-panel/profile/update/^', views.ProfileUpdateView.as_view(), name = 'update_profile'),
     path(r'admin-panel/profile/update/^/change_password/', views.ChangePasswordView.as_view(), name = 'change_password'),
-    path('admin-panel/main/', views.admin_index_page, name='admin_panel'),
+    path('admin-panel/main/', views.AdminMain.as_view(), name='admin_panel'),
     
     # News View
     path('admin-panel/news/all/', views.NewsListView.as_view(), name='news_all'),
@@ -72,6 +73,24 @@ urlpatterns = [
     path('admin-panel/vacancies/update/<int:pk>/', views.VacanciesUpdateView.as_view(), name='vacancies_update'),
     path('admin-panel/vacancies/delete/<int:id>/', views.vacancies_delete, name='vacancies_delete'),
     
+    # HotNews - Gallery  View
+    path('admin-panel/gallery/hotnews/', views.HotNewsGalleryListView.as_view(), name='hotnewsgallery_all'),
+    path('admin-panel/gallery/hotnews/create/', views.HotNewsGalleryCreateView.as_view(), name='hotnewsgallery_create'),
+    path('admin-panel/gallery/hotnews/update/<int:pk>/', views.HotNewsGalleryUpdateView.as_view(), name='hotnewsgallery_update'),
+    path('admin-panel/gallery/hotnews/delete/<int:id>/', views.hotnewsgallery_delete, name='hotnewsgallery_delete'),
+    
+    # HotNews - Image  View
+    path('admin-panel/image/hotnews/', views.HotNewsImageListView.as_view(), name='hotnewsimage_all'),
+    path('admin-panel/image/hotnews/create/', views.HotNewsImageCreateView.as_view(), name='hotnewsimage_create'),
+    path('admin-panel/image/hotnews/update/<int:pk>/', views.HotNewsImageUpdateView.as_view(), name='hotnewsimage_update'),
+    path('admin-panel/image/hotnews/delete/<int:id>/', views.hotnewsimage_delete, name='hotnewsimage_delete'),
+    
+    # HotNews View
+    path('admin-panel/hotnews/', views.HotNewsListView.as_view(), name='hotnews_all'),
+    path('admin-panel/hotnews/create/', views.HotNewsCreateView.as_view(), name='hotnews_create'),
+    path('admin-panel/hotnews/update/<int:pk>/', views.HotNewsUpdateView.as_view(), name='hotnews_update'),
+    path('admin-panel/hotnews/delete/<int:id>/', views.hotnews_delete, name='hotnews_delete'),
+    
     # Static Pages
     path('about_company', views.about_company, name='about_company'),
     path('president', views.president, name='president'),
@@ -93,4 +112,7 @@ urlpatterns = [
     path('page_project/<int:number_page>/', views.projects, name='projects'),
     path('documents_npa', views.npa, name='documents_npa'),
     path('sitemap/', views.sitemap, name = 'sitemap'),
+    
+    # Новые добавленные страницы
+    path('team/', views.team, name = 'team'),
 ]

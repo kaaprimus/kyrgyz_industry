@@ -12,7 +12,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>{% translate "Новости" %}</h2>
           <ol>
-            <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
+            <li><a href="{% url 'index' %}">{% translate "Главная" %}</a></li>
             <li>{% translate "Новости"%}</li>
           </ol>
         </div>
@@ -24,9 +24,9 @@
         <h2>{% translate "Архив новостей" %}</h2>
       </div>
               <div class="row">
-                {% for value in news_page %}
-                <div class="col-md-6 d-flex align-items-stretch">
-                  <div class="card" style='background-image: url("{% static 'client/img/news/22-300x200.jpg' %}");' data-aos="fade-up" data-aos-delay="100">
+                {% for value, img in all_news %}
+                <div class="col-md-6 d-flex align-items-stretch mt-3">
+                  <div class="card" style='background-image: url("/{{img}}");' data-aos="fade-up" data-aos-delay="100">
                   <div class="card-body">
                       <h5 class="card-title"><a href="">{{ value.Title }}</a></h5>
                       <p class="card-text">{{ value.Short_Description }}</p>
@@ -41,37 +41,70 @@
               <h4>{% translate "Нет новостей" %}</h4>
             </div>
                 {% endfor %}
-              </div>
+            </div>
     </div>
+<<<<<<< HEAD
     {% if news_page %}
     {% if count > 8 %}
+=======
+
+    <!-- Если Есть пагинация-->
+    {% if page_num > 1 %}
+>>>>>>> efd9e7b6440b367e731badfe38077c9ca52c8b47
     <div class="d-flex mt-4 flex-wrap justify-content-center">
               <nav class="ml-auto">
                 <ul class="pagination separated pagination-info">
+                   <!-- Если Есть Предыдущая страница-->
                   {% if news_page.has_previous %}
                     <li class="page-item">
-                      <a href="/page_news/{{ news_page.previous_page_number }}/" class="page-link">&laquo;</a>
+                      <a href="?&page={{news_page.previous_page_number}}" class="page-link">&laquo;</a>
                     </li>
                   {% else %}
                     <li class="page-item disabled">
                       <a href="" class="page-link">&laquo;</a>
                     </li>
-                  {% endif %}
-                  {% for page in news_page.paginator.page_range %}
-                    {% if page == news_page.number %}
-                      <li class="page-item active">
-                        <a href="/page_news/{{ page }}/" class="page-link">{{ page }}</a>
-                      </li>
-                    {% else %}
-                      <li>
-                        <a href="/page_news/{{ page }}/" class="page-link">{{ page }}</a>
-                      </li>
+                    <!-- Если количество странцы больше чем 3-->
+                    {% if news_page.number > 3%}
+                    <li class="page-item">
+                      <a class="page-link" href="?&page=1">1</a>
+                     </li>
+                        <!-- Если количество странцы больше чем 4-->
+                        {% if news_page.number > 4 %}
+                        <li class="page-item">
+                          <a class="page-link">...</a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+                 {% endif %}
+
+                  {% for page in news_page.paginator.page_range  %}
+                    {% if news_page.number  == page %}
+                    <li class="page-item {% if page == news_page.number %}active{% endif %}">
+                      <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                    </li>
+                   {% elif page > news_page.number|add:'-3' and page < news_page.number|add:'3' %}
+                   <li class="page-item {% if page == news_page.number %}active{% endif %}">
+                    <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                  </li>
                     {% endif %}
                   {% endfor %}
                   {% if news_page.has_next %}
+                  <li class="page-item">
+                    <a href="?&page={{news_page.next_page_number}}" class="page-link">&raquo;</a>
+                  </li>
+                    {% if news_page.number < news_page.paginator.num_pages|add:'-3' %}
                     <li class="page-item">
-                      <a href="/page_news/{{ news_page.next_page_number }}/" class="page-link">&raquo;</a>
+                      <a class="page-link">...</a>
                     </li>
+                      <li class="page-item">
+                        <a href="?&page={{ news_page.paginator.num_pages }}" class="page-link">{{ news_page.paginator.num_pages }}</a>
+                      </li>
+                    {% elif news_page.number < news_page.paginator.num_pages|add:'-2' %}
+                    <li class="page-item">
+                          <a href="?page={{ news_page.paginator.num_pages }}" class="page-link">{{ news_page.paginator.num_pages }}</a>
+                    </li>
+                    
+                    {% endif %}
                   {% else %}
                     <li class="page-item disabled">         
                       <a href="" class="page-link">&raquo;</a>

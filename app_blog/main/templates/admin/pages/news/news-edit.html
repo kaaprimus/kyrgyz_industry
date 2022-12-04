@@ -44,7 +44,10 @@
                 {{ form.Short_Description.errors }}
             </div>
             <div class="form-group">
+                <p>
                 <label for="{{ form.Description.id_for_label }}">Описание</label>
+                </p>
+                {{ form.media }}
                 {{ form.Description }}
                 {{ form.Description.errors }}
             </div>

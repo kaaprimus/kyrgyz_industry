@@ -7,7 +7,7 @@
    */
 
   const spinnerBox = document.getElementById("spinner-box");
-  
+
   /**
    * Easy selector helper function
    */
