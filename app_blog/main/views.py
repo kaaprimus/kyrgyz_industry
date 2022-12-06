@@ -286,6 +286,10 @@ def gallery_page(request,number_page=1):
 def sitemap(request):
     return render(request, "client/pages/sitemap.html", {})
 
+# Свяжитесь с нами
+def feedback(request):
+    return render(request, "client/pages/feedback.html", {})
+
 def hot_news(request):
     news_all = HotNews.objects.order_by('-id')
     error = False

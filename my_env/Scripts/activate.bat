@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=F:\Projects\Кыргызиндустрия\Git version\kyrgyz_industry-3\my_env
+set VIRTUAL_ENV=C:\Users\zenis\Рабочий стол\Работа\Последняя версия\После сдачи\kyrgyz_industry\my_env
 
 if not defined PROMPT set PROMPT=$P$G
 

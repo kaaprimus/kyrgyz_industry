@@ -112,7 +112,7 @@ urlpatterns = [
     path('page_project/<int:number_page>/', views.projects, name='projects'),
     path('documents_npa', views.npa, name='documents_npa'),
     path('sitemap/', views.sitemap, name = 'sitemap'),
-    
+    path('feedback', views.feedback, name = 'feedback'),
     # Новые добавленные страницы
     path('team/', views.team, name = 'team'),
     path('main_events/', views.hot_news, name='hot_news'),

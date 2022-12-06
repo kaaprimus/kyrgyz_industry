@@ -82,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'KG_INDUSTRY',
-        'USER': 'Userr',
-        'PASSWORD': '123456',
+        'USER': 'User',
+        'PASSWORD': '12345',
         'HOST': '127.0.0.1',
         'PORT': '1433',
         'OPTIONS': {
@@ -91,8 +91,6 @@ DATABASES = {
         },
     },
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
