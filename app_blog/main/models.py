@@ -200,9 +200,9 @@ class Management(models.Model):
     full_name = models.CharField(max_length = 60, verbose_name = "ФИО Сотрудника")
     position = models.CharField(max_length = 70, verbose_name = "Должность")
     date_birth = models.DateField(verbose_name='Дата рождения', default=now)
-    education = models.CharField(max_length=60, verbose_name='Образования')
+    education = models.CharField(max_length=255, verbose_name='Образования')
     speciality = models.CharField(max_length=
-                                  40, verbose_name='Специальность')
+                                  255, verbose_name='Специальность')
     about = RichTextField(verbose_name="Биография сотрудника")
     language=models.CharField(
                                max_length = 10, 

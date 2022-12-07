@@ -121,10 +121,23 @@ def index(request):
         }
     return render(request, "client/index.html", context)
 
-def about_company(request):
+def about_company(request, number_page=1):
     trans = translate(language='ru')
-    context = {'trans':trans}
+    vacancies= Vacancies.objects.order_by('-id')
+    management= Management.objects.order_by('-id')
+    president=Management.objects.get(position__startswith="Президент")
+    currunt_page_vacancies = Paginator(vacancies,4)
+    context = {
+        'currunt_page_vacancies': currunt_page_vacancies.page(number_page),
+        'trans':trans, 
+        'management':management,
+        'president':president
+        }
     return render(request, "client/pages/about_company.html", context)
+
+def about_us_full_info(request):
+    trans = translate(language='ru')
+    return render(request, "client/pages/about_us_full_info.html", context)
 
 def blog_detail(request):
     trans = translate(language='ru')
