@@ -36,7 +36,7 @@ urlpatterns = [
     path('admin-panel/contests/update/<int:pk>/', views.ContestUpdateView.as_view(), name='contests_update'),
     path('admin-panel/contests/delete/<int:id>/', views.contests_delete, name='contests_delete'),
     
-     # Project-Category View
+    # Project-Category View
     path('admin-panel/category/projects/', views.ProjectCategoryListView.as_view(), name='projectcategory_all'),
     path('admin-panel/category/projects/create/', views.ProjectCategoryCreateView.as_view(), name='projectcategory_create'),
     path('admin-panel/category/projects/update/<int:pk>/', views.ProjectCategoryUpdateView.as_view(), name='projectcategory_update'),
@@ -101,12 +101,13 @@ urlpatterns = [
     path('contests', views.contests, name='contests'),
     path('send_message/', views.send_message),
     path('news_detail/<str:title>', views.get_news, name='news_detail'),
-    path('project_detail/<str:title>', views.project_detail, name='project_detail'),
+    path('project_detail/<str:title>', views.get_project, name='project_detail'),
     path('veep', views.veep, name='veep'),
     path('vacancies/', views.vacancies, name='vacancies'),
     path('vacancy_detail/<str:title>', views.get_vacancy, name='vacancy_detail'),
     path('page_vacancy/<int:number_page>/', views.news, name='vacancy'),
     path('detail_news/<str:title>', views.get_news, name='detail_news'),
+    path('block/<str:title>', views.get_block, name='block'),
     path('page_news/<int:number_page>/', views.news, name='news'),
     path('page_contest/<int:number_page>/', views.contests, name='contests'),
     path('page_project/<int:number_page>/', views.projects, name='projects'),

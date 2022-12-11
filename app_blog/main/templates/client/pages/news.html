@@ -50,73 +50,73 @@
             </div>
     </div>
     
-    {% if news_page %}
-    <!-- Если Есть пагинация-->
-    {% if page_num > 1 and not error %}
-    <div class="d-flex mt-4 flex-wrap justify-content-center">
-              <nav class="ml-auto">
-                <ul class="pagination separated pagination-info">
-                   <!-- Если Есть Предыдущая страница-->
-                  {% if news_page.has_previous %}
-                    <li class="page-item">
-                      <a href="?&page={{news_page.previous_page_number}}" class="page-link">&laquo;</a>
-                    </li>
-                  {% else %}
-                    <li class="page-item disabled">
-                      <a href="" class="page-link">&laquo;</a>
-                    </li>
-                    <!-- Если количество странцы больше чем 3-->
-                    {% if news_page.number > 3%}
-                    <li class="page-item">
-                      <a class="page-link" href="?&page=1">1</a>
+     <!-- Если Есть пагинация-->
+     {% if page_num > 1 and not error %}
+     <div class="d-flex mt-4 flex-wrap justify-content-center">
+               <nav class="ml-auto">
+                 <ul class="pagination separated pagination-info" data-aos="fade-up">
+                    <!-- Если Есть Предыдущая страница-->
+                   {% if news_page.has_previous %}
+                     <li class="page-item">
+                       <a href="?&page={{news_page.previous_page_number}}" class="page-link">&laquo;</a>
                      </li>
-                        <!-- Если количество странцы больше чем 4-->
-                        {% if news_page.number > 4 %}
-                        <li class="page-item">
-                          <a class="page-link">...</a>
-                        </li>
-                        {% endif %}
-                    {% endif %}
-                 {% endif %}
-
-                  {% for page in news_page.paginator.page_range  %}
-                    {% if news_page.number  == page %}
-                    <li class="page-item {% if page == news_page.number %}active{% endif %}">
-                      <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
-                    </li>
-                   {% elif page > news_page.number|add:'-3' and page < news_page.number|add:'3' %}
-                   <li class="page-item {% if page == news_page.number %}active{% endif %}">
-                    <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
-                  </li>
-                    {% endif %}
-                  {% endfor %}
-                  {% if news_page.has_next %}
-                  <li class="page-item">
-                    <a href="?&page={{news_page.next_page_number}}" class="page-link">&raquo;</a>
-                  </li>
-                    {% if news_page.number < news_page.paginator.num_pages|add:'-3' %}
-                    <li class="page-item">
-                      <a class="page-link">...</a>
-                    </li>
-                      <li class="page-item">
-                        <a href="?&page={{ news_page.paginator.num_pages }}" class="page-link">{{ news_page.paginator.num_pages }}</a>
+                   {% else %}
+                     <li class="page-item disabled">
+                       <a href="" class="page-link">&laquo;</a>
+                     </li>
+                   {% endif %}
+                     <!-- Если номер текущей странцы больше чем 3-->
+                     {% if news_page.number > 3%}
+                     <li class="page-item">
+                       <a class="page-link" href="?&page=1">1</a>
                       </li>
-                    {% elif news_page.number < news_page.paginator.num_pages|add:'-2' %}
-                    <li class="page-item">
-                          <a href="?page={{ news_page.paginator.num_pages }}" class="page-link">{{ news_page.paginator.num_pages }}</a>
-                    </li>
-                    
-                    {% endif %}
-                  {% else %}
-                    <li class="page-item disabled">         
-                      <a href="" class="page-link">&raquo;</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              </nav>
-    </div>
-    {% endif %}
-    {% endif %}
+                         <!-- Если количество странцы больше чем 4-->
+                         {% if news_page.number > 4 %}
+                         <li class="page-item">
+                           <a class="page-link">...</a>
+                         </li>
+                         {% endif %}
+                     {% endif %}
+ 
+                   {% for page in news_page.paginator.page_range  %}
+                     {% if news_page.number  == page %}
+                     <li class="page-item {% if page == news_page.number %}active{% endif %}">
+                       <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                     </li>
+                    {% elif page > news_page.number|add:'-3' and page < news_page.number|add:'3' %}
+                    <li class="page-item {% if page == news_page.number %}active{% endif %}">
+                     <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                   </li>
+                     {% endif %}
+                   {% endfor %}
+                   {% if news_page.has_next %}
+ 
+                   {% comment %}номер текущей стр - news_page.number {% endcomment %}
+                   {% if news_page.number < news_page.paginator.num_pages|add:'-3' %}
+                     <li class="page-item">
+                       <a class="page-link">...</a>
+                     </li>
+                       <li class="page-item">
+                         <a href="?&page={{ news_page.paginator.num_pages }}" class="page-link">{{ news_page.paginator.num_pages }}</a>
+                       </li>
+                     {% elif news_page.number < news_page.paginator.num_pages|add:'-2' %}
+                     <li class="page-item">
+                           <a href="?page={{ news_page.paginator.num_pages }}" class="page-link">{{ news_page.paginator.num_pages }}</a>
+                     </li>
+                     
+                     {% endif %}
+                     <li class="page-item">
+                       <a href="?&page={{news_page.next_page_number}}" class="page-link">&raquo;</a>
+                     </li>
+                     {% else %}
+                       <li class="page-item disabled">         
+                         <a href="" class="page-link">&raquo;</a>
+                       </li>
+                     {% endif %}
+                 </ul>
+               </nav>
+     </div>
+     {% endif %}
     </section>
 </main>
 

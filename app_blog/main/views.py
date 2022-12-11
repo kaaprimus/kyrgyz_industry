@@ -162,7 +162,7 @@ def contests(request,number_page=1):
 
 def news(request):
     news= News.objects.order_by('-id')
-    per_page = 10
+    per_page = 2
     error = None
     count=news.count()
     
@@ -221,6 +221,21 @@ def get_news(request,title):
     photo=PhotosNews.objects.filter(Gallery_id=get_id_Gallery_News(title))
     context = {'news_detail': news_detail,'photo':photo,'news_title':news_title,'trans':trans}
     return render(request, "client/pages/news_detail.html", context)
+
+def get_block(request,title):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    if(title=="Направление НИОКР и инновационных проектов ОАО"):
+        return render(request, "client/pages/blockone.html", context)
+    if(title=="Направление промышленных отраслей ОАО"):
+        return render(request, "client/pages/blocktwo.html", context)
+    if(title=="Направление экономики и финансов ОАО"):
+        return render(request, "client/pages/blockthree.html", context)
+    if(title=="Направление внешнеэкономических связей и торговли ОАО"):
+        return render(request, "client/pages/blockfour.html", context)
+    if(title=="Направление руководителя аппарата ОАО"):
+        return render(request, "client/pages/blockfive.html", context)
+
 
 def get_project(request,title):
     trans = translate(language='ru')
@@ -293,7 +308,9 @@ def feedback(request):
 def hot_news(request):
     news_all = HotNews.objects.order_by('-id')
     error = False
-     # Получаем первую фотографию под новостями
+    
+    per_page = 1
+    # Получаем первую фотографию под новостями
     first_image = []
     for post in news_all:
         img = HotNewsPhoto.objects.filter(gallery = post.gallery).first()
@@ -302,8 +319,8 @@ def hot_news(request):
         else:
             first_image.append(img.url)
     
-    current_page_news = Paginator(news_all, per_page=10)
-    current_page_img = Paginator(first_image, per_page=10)
+    current_page_news = Paginator(news_all, per_page=per_page)
+    current_page_img = Paginator(first_image, per_page=per_page)
     
     page_num = current_page_news.num_pages
     try:
@@ -428,7 +445,7 @@ def authorization(request):
             return redirect('login_page')
     except:
         if username == "":
-            messages.error(request, "Введите ваш Логин или E-mail")
+            messages.error(request, "Введите Username или E-mail")
             return redirect('login_page')
         elif password == "":
             messages.error(request, "Введите пароль")
