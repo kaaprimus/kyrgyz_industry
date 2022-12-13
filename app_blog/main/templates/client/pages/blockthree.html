@@ -1,0 +1,114 @@
+{% extends 'client/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}Блоки{% endblock page_title %}
+
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{% translate "Направление экономики и финансов ОАО" %}</h2>
+          <ol>
+            <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
+          </ol>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="block-details" class="block-details" >
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4" style="margin:auto; width: 90%;" >
+            <div class="block-info">
+              <p style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Направление экономики и финансов ОАО" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "использует инструменты экономического анализа и оценки экономической эффективности реализуемых инновационных проектов. " %}</span></span></span></span></p>
+
+              <p style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Работа данного направления включает следующие виды деятельности" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "управленческие" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "оказание фискальной и защитной функций тарифного регулирования товаров (услуг) совместных предприятий ОАО;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "аналитические" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "анализ финансово-хозяйственной деятельности совместных предприятий ОАО, учет и отчетность по результатам бухгалтерской деятельности этих предприятий, контроль над целевым использованием выделяемых финансовых ресурсов;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "организационные" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "организация аукционов по продаже государственной доли акций совместных предприятий ОАО с целью наращивания собственного Уставного капитала." %}</span></span></span></span></li>
+              </ul>
+              
+              <p style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "В ходе выполнения указанных видов деятельности решаются следующие основные задачи" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "ведение бухгалтерского учета и представление бухгалтерской, управленческой и статистической отчетности о финансово-хозяйственной деятельности совместных предприятий ОАО;" %}</span></span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "осуществление платежей в наличной и безналичной форме в установленном порядке и инвентаризация основных фондов, оборотных средств и товарно-материальных ценностей, а также осуществление расчетов с контрагентами;" %}</span></span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Arial,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "подготовка кредитно-финансовых соглашений и договоров совместных предприятий ОАО с финансовыми институтами и фондами развития;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "внедрение эффективных механизмов взаимодействия с потенциальными партнерами на принципах государственно-частного партнерства;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "подготовка предложений по налоговым, таможенным и прочим преференциям для совместных предприятий ОАО;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "формирование венчурных фондов и предоставление особых финансовых стимулов и гарантий их инвесторам;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "внесение предложений по развитию рынка ценных бумаг;" %}</span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "консалтинговое и процедурное сопровождение деятельности совместных предприятий ОАО в вопросах фискальной политики;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "составление нормативной калькуляции товаров (услуг) совместных предприятий и контроль над внесением в нее текущих изменений в планово-расчетных ценах;" %}</span></span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "проведение аукционов по продаже государственной доли совместных предприятий ОАО;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "разработка плановых технико-экономических нормативов материальных и трудовых затрат, проектов оптовых и розничных цен на товары (услуги) совместных предприятий ОАО, тарифов на работы и услуги с учетом спроса и предложения в целях достижения запланированного объема прибыли;" %}</span></span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "взаимодействие с уполномоченными государственными органами в области фискальной политики и развития предпринимательства." %}</span></span></span></span></li>
+              </ul>
+              
+              <p style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Показателями эффективности работы направления является положительная динамика в" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "фондоотдаче при реализации инновационных проектов;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "росте возврата собственных инвестиций в производство;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="font-size:20px"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "увеличении размера Уставного капитала ОАО. " %}</span></span></span></li>
+              </ul>
+              
+            </div>
+          </div>
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+{% endblock content %}

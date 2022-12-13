@@ -1,0 +1,111 @@
+{% extends 'client/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}Блоки{% endblock page_title %}
+
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{% translate "Направление промышленных отраслей ОАО" %}</h2>
+          <ol>
+            <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
+          </ol>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="block-details" class="block-details" >
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4" style="margin:auto; width: 90%;" >
+            <div class="block-info">
+              <p style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><strong>{% translate "Направление промышленных отраслей ОАО" %}</strong>{% translate "занимается непосредственной реализацией инновационных проектов в обрабатывающей промышленности, оформленными в соответствии с утвержденными требованиями и получившими одобрение приказом ОАО." %}</span></span></span></p>
+
+                      <p style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><strong>{% translate "Работа данного направления включает следующие виды деятельности" %}</strong>:</span></span></span></p>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><strong>{% translate "управленческие" %}</strong>: {% translate "мониторинг процессов реализации инновационных проектов, стимулирование создания новых производств и модернизации действующих предприятий;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><strong>{% translate "аналитические" %}</strong>: {% translate "подготовка справок и предложений по корректировке инновационных проектов (если необходимо), анализ текущей ситуации во внутренней и внешней торговле;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><strong>{% translate "организационные" %}</strong>: {% translate "формирование промышленных кластеров, создание торгово-логистических центров, участие в инженерно-экономических расчетах." %}</span></span></span></li>
+                      </ul>
+
+                      <p style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><strong>{% translate "В ходе выполнения указанных видов деятельности решаются следующие основные задачи" %}</strong>:</span></span></span></p>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "административно-техническое сопровождение инновационных проектов, реализуемых на совместных предприятиях ОАО;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "участие во внутрикорпоративных бизнес-процессах и организационных структурах, формируемых в ОАО;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "взаимодействие с подрядчиками (субподрядчиками) и иными организациями, задействованными в реализации инновационных проектов;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "реализация государственной кластерной политики и продвижение кластерных инициатив на местах;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><span style="background-color:white">{% translate "формирование информационной базы данных по реализуемым инновационным проектам ОАО в обрабатывающей промышленности, включая &laquo;зелёную&raquo; индустрию;" %}</span></span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><span style="background-color:white">{% translate "поиск и расширение рынков сбыта товаров (услуг) совместных предприятий ОАО;" %}</span></span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "оценка состояния торгового баланса республики с учетом влияния производственной деятельности совместных предприятий ОАО;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><span style="background-color:white">{% translate "представление интересов ОАО в аппаратах Полномочных представителей Президента Кыргызской Республики в областях, местных государственных администрациях, территориальных подразделениях государственных органов, органах местного самоуправления." %}</span></span></span></span></li>
+                      </ul>
+
+                      <p style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px"><strong>{% translate "Показателями эффективности работы направления является положительная динамика в" %}</strong>:</span></span></span></p>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "удельном весе инновационных товаров (услуг) в общем объеме по отраслям отечественной обрабатывающей промышленности (&laquo;производство пищевых продуктов, напитков и табака&raquo;, &laquo;текстильное и швейное производство&raquo;, &laquo;производство кожи и меха, кожно-меховых изделий и производство обуви&raquo;, &laquo;производство машин и оборудования&raquo;, &laquo;производство электрооборудования и электронного оборудования&raquo;, &laquo;производство транспортных средств и оборудования&raquo;, &laquo;производство и распределение электроэнергии, газа и воды&raquo; и &laquo;прочие обрабатывающие производства&raquo;);" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "количестве новых и модернизации действующих совместных предприятий на базе утвержденных инновационных проектов (в том числе по регионам);" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "количестве созданных промышленных кластеров (в том числе по регионам);" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "динамике роста новых рабочих мест на совместных предприятиях ОАО (в том числе по регионам);" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "темпах роста производства товаров (услуг) по республике и регионам;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "возрастающей доле импортозамещения на внутреннем рынке товарами совместных предприятий ОАО;" %}</span></span></span></li>
+                      </ul>
+
+                      <ul>
+                        <li style="text-align:justify"><span style="color:#000000"><span style="font-family:Times New Roman,Times,serif"><span style="font-size:20px">{% translate "увеличении экспортных поставок товаров совместных предприятий ОАО. &nbsp;" %}</span></span></span></li>
+                      </ul>
+            </div>
+          </div>
+      </div>
+    </section><!-- End Portfolio Details Section -->
+  </main><!-- End #main -->
+{% endblock content %}
