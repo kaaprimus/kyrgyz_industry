@@ -1,7 +1,7 @@
 {% extends 'client/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block page_title %}About Company{% endblock page_title %}
+{% block page_title %}Блоки{% endblock page_title %}
 
 {% block content %}
 
@@ -18,72 +18,112 @@
         </div>
       </div>
     </section><!-- End Breadcrumbs -->
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details" >
+    <section id="block-details" class="block-details" >
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-4" style="margin:auto; width: 90%;" >
-            <div class="portfolio-info">
-            <p style="text-indent: 45px;line-height: 2.0;">
-                <strong>    Направление НИОКР и инновационных проектов ОАО</strong> действует в режиме планов, сроков и отчетности, исполняя роль менеджера инновационных проектов в аппарате ОАО.</p>
-                <strong><p style="text-indent: 45px">Работа данного направления включает следующие виды деятельности:</strong></p>
-                <li><strong>управленческие:</strong> управление инновационными программами и проектами;</li>
-                аналитические: подготовка прогнозов и программ инновационного развития, анализ текущей ситуация на рынках и прогнозы их развития, оценка состояния инновационной сферы и отслеживание мировых тенденций;
-                организационные: организация бизнес-среды, участие в проектировании и инженерно-экономических расчетах.
-            В процессе выполнения указанных видов деятельности решаются следующие основные задачи:
-                разработка и сопровождение программ инновационного развития республики;
-                отбор сегментов отечественного и зарубежного рынков, охват и привлечение целевой аудитории потенциальных потребителей товаров (услуг) ОАО;
-                анализ информации касательно мотивации потребителей на рынке, структуры потребления, обеспеченности аналогичными товарами (услугами) и тенденций спроса; 
-                разработка мер по соблюдению требований технического регламента Таможенного Союза и ЕАЭС по экологической и промышленной безопасности, предъявляемым к товарам (услугам), организация контроля по техническому регулированию и метрологии на совместных предприятиях ОАО, а также внедрение международных стандартов качества (ИСО, ХАССП  и др.);
-                тесное взаимодействие с научно-образовательными учреждениями, бизнес-инкубаторами, индустриальными и технологическими парками, технополисами и частным бизнесом в стране и за рубежом;
-                прогрессивное развитие инфраструктуры совместных предприятий ОАО, включая техническую, энергетическую, транспортно-логистическую, социальную и «зелёную» составляющие;
-                методическое обеспечение процесса коммерциализации результатов НИОКР;
-                поддержка научно-инновационного портала ОАО для входа в мировое научно-информационное пространство и получения доступа к разработкам мирового уровня;
-                аналитическая, информационная и консалтинговая поддержка совместных предприятий ОАО в освоении новых видов товаров (услуг); 
-                продвижение по цифровым каналам собственных товаров (услуг) ОАО;
-                формирование системы подготовки и переподготовки востребованных специалистов для конкретных рабочих мест на совместных предприятиях ОАО;
-                ведение реестра инновационных проектов единого формата и подготовка презентационных материалов по ним;
-                инжиниринговые услуги и трансфер инновационных технологий мирового уровня;
-                реализация функций стратегического брендинга и бренд-менеджмента;
-                формирование внутрикорпоративных бизнес-процессов и организационных структур в аппарате ОАО.
-            Показателями эффективности работы направления является положительная динамика в:
-                количестве инновационных проектов, одобренных внутренним приказом ОАО к внедрению;
-                количестве патентов, стартапов и «ноу-хау», переданных ОАО по линии трансфера технологий к производственному освоению;
-                количестве поддерживаемых ОАО бизнес-инкубаторов, центров поддержки технологий и инноваций, технопарков (в том числе виртуальных);
-                количестве договоров о сотрудничестве ОАО с научно-образовательными учреждениями в сфере инновационной деятельности; 
-                удельном весе инновационных товаров (услуг) ОАО на внутреннем рынке сбыта.
-           
+            <div class="block-info">
+              <p style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Направление НИОКР и инновационных проектов ОАО" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "действует в режиме планов, сроков и отчетности, исполняя роль менеджера инновационных проектов в аппарате ОАО." %}&nbsp; </span></span></span></span></p>
 
-
-            
-              <p><strong>{% translate "Основными направлениями промышленной политики, реализуемой ОАО являются:"%}<br></strong></p>
-              <p>{% translate "Формирование благоприятного инвестиционного и предпринимательского климата."%}<br>
-                {% translate "Наращивание промышленного производства неразрывно связано с объемами инвестиций, привлекаемыми в промышленный сектор. В качестве основных источников привлечения средств на ближайшую перспективу остаются средства юридических и физических лиц, поэтому деятельность ОАО направлена на привлечение инвестиций, снижение процедурной и административной нагрузки на инвесторов, уменьшение рисков при осуществлении запуска новых производств, стимулирование заинтересованности бизнес-сообщества в реализации инновационных проектов."%}</p></li>
-              <p>{% translate "Инновационно-технологическое развитие промышленности."%}<br>
-                {% translate "В первую очередь внимание ОАО направлено на производство наукоемкой и высокотехнологичной продукции"%} 
-                {% translate "несырьевого сектора экономики с высокой добавленной стоимостью. Поэтому ОАО ориентировано на"%} 
-                {% translate "всестороннее сотрудничество с научно-образовательными учреждениями, технопарками, бизнес-инкубаторами"%} 
-                {% translate "и предприятиями, активно занимающимися творческими изысканиями по созданию инновационной продукции."%}</p>
-              <p>{% translate "Обеспечение промышленных предприятий востребованными кадрами."%}<br>
-                {% translate "ОАО ориентирует свою деятельность на тесное взаимодействие с образовательными учреждениями высшего"%} 
-                {% translate "и среднего профессионального образования на базе долгосрочных договоров о сотрудничестве."%} 
-                {% translate "Инновационным производствам требуются работники с особыми навыками и умениями, которые можно"%} 
-                {% translate "обрести, введя соответствующие коррективы в учебные планы и программы, организовав производственные"%} 
-                {% translate "практики на конкретных рабочих местах и сориентировав научно-исследовательскую работу студентов на"%} 
-                {% translate "решение задач по профилю предприятия, на котором они намерены трудиться. Предприятия со своей стороны"%} 
-                {% translate "способны оплачивать стоимость обучения будущих или повышения квалификации действующих сотрудников."%}</p>
-              <p>{% translate "Продвижение продукции промышленных предприятий на рынках сбыта."%}<br>
-                {% translate "Маркетинговые исследования позволяют изучать конъюнктуру внутреннего и внешних рынков, потребности и"%} 
-                {% translate "запросы потребителей продукции и выявить перспективные отрасли и предприятия, способные решать вопросы"%} 
-                {% translate "импортозамещения и поставки выпускаемых товаров на экспорт."%}</p>
-              <p>{% translate "Создание промышленных кластеров."%}<br>
-                {% translate "К наиболее распространенным механизмам реализации государственной и региональной промышленной политики"%} 
-                {% translate "относится кластерная политика, основной целью которой является диверсификация промышленности в"%} 
-                {% translate "регионах, включая инновационные производства в машиностроении, электротехнике, электронике, фармацевтике,"%} 
-                {% translate "химической промышленности и др., основанные на эффективном использовании внутренних ресурсов и сырья."%}</p>
-              <p>{% translate "Оснащение промышленных предприятий энергоресурсами, инженерной и транспортной инфраструктурой."%}<br>
-                {% translate "ОАО первостепенное внимание уделяет вопросам снижения себестоимости транспортных перевозок, улучшению"%} 
-                {% translate "транспортных артерий в регионах и облегчению доступа к воде, системам канализации, электрификации и газификации промышленных объектов."%}</p>
+              <p style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Работа данного направления включает следующие виды деятельности" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "управленческие" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "управление инновационными программами и проектами;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "аналитические" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "подготовка прогнозов и программ инновационного развития, анализ текущей ситуация на рынках и прогнозы их развития, оценка состояния инновационной сферы и отслеживание мировых тенденций;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "организационные" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "организация бизнес-среды, участие в проектировании и инженерно-экономических расчетах." %}</span></span></span></span></li>
+              </ul>
+              
+              <p style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "В процессе выполнения указанных видов деятельности решаются следующие основные задачи" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "разработка и сопровождение программ инновационного развития республики;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "отбор сегментов отечественного и зарубежного рынков, охват и привлечение целевой аудитории потенциальных потребителей товаров (услуг) ОАО;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="background-color:white"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "анализ информации касательно мотивации потребителей на рынке, структуры потребления, обеспеченности аналогичными товарами (услугами) и тенденций спроса;" %}</span></span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "разработка мер по соблюдению требований технического регламента Таможенного Союза и ЕАЭС по экологической и промышленной безопасности, предъявляемым к товарам (услугам), организация контроля по техническому регулированию и метрологии на совместных предприятиях ОАО, а также внедрение международных стандартов качества (ИСО, ХАССП&nbsp; и др.);" %}</span></span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "тесное взаимодействие с научно-образовательными учреждениями, бизнес-инкубаторами, индустриальными и технологическими парками, технополисами и частным бизнесом в стране и за рубежом;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "прогрессивное развитие инфраструктуры совместных предприятий ОАО, включая техническую, энергетическую, транспортно-логистическую, социальную и &laquo;зелёную&raquo; составляющие;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="background-color:white"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "методическое" %}&nbsp;{% translate "обеспечение" %}&nbsp;процесса&nbsp;{% translate "коммерциализации" %}&nbsp;{% translate "результатов НИОКР;" %}</span></span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "поддержка научно-инновационного портала ОАО для входа в мировое научно-информационное пространство и получения доступа к разработкам мирового уровня;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "аналитическая, информационная и консалтинговая поддержка совместных предприятий ОАО в освоении новых видов товаров (услуг);" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "продвижение по цифровым каналам собственных товаров (услуг) ОАО;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "формирование системы подготовки и переподготовки востребованных специалистов для конкретных рабочих мест на совместных предприятиях ОАО;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "ведение реестра инновационных проектов единого формата и подготовка презентационных материалов по ним;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "инжиниринговые услуги и трансфер инновационных технологий мирового уровня;" %}</span></span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "реализация функций стратегического брендинга и бренд-менеджмента;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "формирование внутрикорпоративных бизнес-процессов и организационных структур в аппарате ОАО." %}</span></span></span></span></li>
+              </ul>
+              
+              <p style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Показателями эффективности работы направления является положительная динамика в" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "количестве инновационных проектов, одобренных внутренним приказом ОАО к внедрению;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "количестве патентов, стартапов и &laquo;ноу-хау&raquo;, переданных ОАО по линии трансфера технологий к производственному освоению;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "количестве поддерживаемых ОАО бизнес-инкубаторов, центров поддержки технологий и инноваций, технопарков (в том числе виртуальных);" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "количестве договоров о сотрудничестве ОАО с научно-образовательными учреждениями в сфере инновационной деятельности;" %}</span></span></span></span></li>
+              </ul>
+              
+              <ul>
+                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "удельном весе инновационных товаров (услуг) ОАО на внутреннем рынке сбыта." %}</span></span></span></li>
+              </ul>
+              
+              
             </div>
           </div>
       </div>
