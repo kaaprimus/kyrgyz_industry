@@ -301,3 +301,36 @@ class HotNewsForm(forms.ModelForm):
     class Meta:
         model = HotNews
         fields = '__all__'
+
+
+class InterviewsForm(ModelForm):
+    class Meta:
+        model = Interviews
+        fields = ['title', 'short_description', 'link']
+    
+        widgets = {
+            'title' : TextInput(
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название интервью","size" : 80, 'required': True}
+            ),
+            'short_description' : TextInput(
+                attrs = {"type" : "text", "class" : "form-control", "id" : "company", "placeholder" : "Краткое описание","size" : 130, 'required': True}
+            ),
+            'link' : TextInput(
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Ссылка на статью","size" : 2048, 'required': True}
+            ),
+        }
+
+
+class ReportsForm(ModelForm):
+    class Meta:
+        model = Reports
+        fields = ['title', 'short_description', 'url']
+    
+        widgets = {
+            'title' : TextInput(
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название интервью","size" : 80, 'required': True}
+            ),
+            'short_description' : TextInput(
+                attrs = {"type" : "text", "class" : "form-control", "id" : "company", "placeholder" : "Краткое описание","size" : 130, 'required': True}
+            ),
+        }

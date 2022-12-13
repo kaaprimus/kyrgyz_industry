@@ -93,6 +93,30 @@
             </ul>
           </div>
         </li>
+
+        <li class="nav-item" id="vacancies-panel">
+          <a class="nav-link" data-toggle="collapse" href="#interviews" aria-expanded="{% if expand_interviews %}true{% else %}false{% endif %}" aria-controls="interviews">
+            <span class="menu-title">Интервью</span>
+            <i class="icon-book-open menu-icon"></i>
+          </a>
+          <div class="collapse{% if expand_interviews %}show{% endif %}" id="interviews">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link {% if active_interviews %}active{% endif %}" href="{% url 'interviews_all' %}">Все Интервью</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item" id="reports-panel">
+          <a class="nav-link" data-toggle="collapse" href="#reports" aria-expanded="{% if expand_reports %}true{% else %}false{% endif %}" aria-controls="reports">
+            <span class="menu-title">Отчеты</span>
+            <i class="icon-book-open menu-icon"></i>
+          </a>
+          <div class="collapse{% if expand_reports %}show{% endif %}" id="reports">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link {% if active_reports %}active{% endif %}" href="{% url 'reports_all' %}">Все Отчеты</a></li>
+            </ul>
+          </div>
+        </li>
         
         <li class="nav-item nav-category"><span class="nav-link">Руководство</span></li>
         <li class="nav-item" id="management-panel">

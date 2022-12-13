@@ -14,27 +14,25 @@
       <ul>
         <li class="dropdown"><a href="{% url 'about_company' %}"><span>{% translate "О нас" %}</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="{% url 'about_company' %}">{% translate "Об обществе" %}</a></li>
+            <li><a href="{% url 'about_company' %}#about">{% translate "Об обществе" %}</a></li>
             <li><a href="{% url 'about_company' %}#team">{% translate "Руководство" %}</a></li>
-            <li><a href="#activity">{% translate "Блоки" %}</a></li>
+            <li><a href="{% url 'about_company'%}#activity">{% translate "Блоки" %}</a></li>
             <li><a href="#clients">{% translate "Наши пратнеры" %}</a></li>
             <li><a href="{% url 'about_company' %}#npa">{% translate "Нормативно-правовая база" %}</a></li>
-            <li><a href="{% url 'about_company' %}#contests">{% translate "Вакансии" %}</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="#"><span>{% translate "Инвесторам и партнерам" %}</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="#goals">{% translate "Инвестиционный кейс" %}</a></li>
-            <li><a href="#team">{% translate "Стратегия развития" %}</a></li>
-            <li><a href="{% url 'index' %}#portfolio">{% translate "Проекты и презентации" %}</a></li>
-            <li><a href="#about">{% translate "Отчеты и результаты" %}</a></li>
+            <li><a href="{% url 'invest'%}">{% translate "Инвестиционный кейс" %}</a></li>
+            <li><a href="{% url 'strategy' %}">{% translate "Стратегия развития" %}</a></li>
+            <li><a href="{% url 'projects' %}">{% translate "Проекты и презентации" %}</a></li>
+            <li><a href="{% url 'reports' %}">{% translate "Отчеты и результаты" %}</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="#"><span>{% translate "Пресс-центр" %}</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="{% url 'hot_news' %}">{% translate "Главные Событий" %}</a></li>
             <li><a href="{% url 'news' %}">{% translate "Пресс-релизы (новости)" %}</a></li>
-            <li><a href="#team">{% translate "Интервью" %}</a></li>
+            <li><a href="{% url 'interviews' %}">{% translate "Интервью" %}</a></li>
             <li><a href="{% url 'gallery' %}">{% translate "Фотогалерея" %}</a></li>
             <li><a href="#about">{% translate "Брифинг" %}</a></li>
           </ul>
@@ -43,10 +41,11 @@
           <ul>
             <li><a href="{% url 'index' %}#contests">{% translate "Конкурсы" %}</a></li>
             <li><a href="{% url 'contests' %}">{% translate "Архив конкурсов" %}</a></li>
+            <li><a href="{% url 'vacancies' %}">{% translate "Вакансии" %}</a></li>
           </ul>
         </li>
         <li><a class="nav-link scrollto" href="#contact">{% translate "Контакты" %}</a></li>
-        <li><a class="getstarted scrollto" href="{% url 'admin_panel' %}">{% translate "Конкурсы" %}</a></li>
+        <li><a class="getstarted scrollto" href="{% url 'feedback' %}">{% translate "Свяжитесь с нами" %}</a></li>
         <li class="dropdown"><a href="#"><span></span> <i class="ri-global-line"></i></a>
           <ul>
             {% get_current_language as LANGUAGE_CODE %}

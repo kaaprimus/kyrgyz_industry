@@ -25,39 +25,37 @@
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-8">
-            <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
-                {% for value in photo %}
-                <div class="swiper-slide">
-                    <img src="/{{ value.URL }}" alt="{{ value.Caption }}">
-                  </div>
-                  {% endfor %}        
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
-          {% for value in project %}
-          <div class="col-lg-4">
+          
+          {% for value in project_detail %}
+          <div class="col-lg-4" style="margin: auto; width: 90%;">
+            
             <div class="portfolio-info">
-              <h3>{% translate "Информация про новость"%}</h3>
+              <h3>{{ value.Title }}</h3>
               <ul>
                 <li><strong>{% translate "Заголовок"%}</strong>: {{ value.Title }}</li>
-                <li><strong>{% translate "Язык"%}</strong>: {{ value.Language }}</li>
-                <li><strong>{% translate "Дата публикации"%}</strong>: {{ value.Date_added }}</li>
-                <li><strong>Заголовок</strong>: {{ value.Title }}</li>
-                <li><strong>Язык</strong>: {{ value.Language }}</li>
-                <li><strong>Дата публикации</strong>: {{ value.Date_added|date:'j E Y'}} года</li>
               </ul>
-            </div>
-            <div class="portfolio-description">
-              <h2>{% translate "Описание новости"%}</h2>
-              <p>
-                {{ value.Description|safe }}
-            </p>
+              <div class="portfolio-description">
+                <h2>{% translate "Описание проекта"%}</h2>
+                <p>
+                  {{ value.Description|safe }}
+              </p>
+              </div>
             </div>
           </div>
           {% endfor %}
+        </div>
+
+        <div class="col-lg-8" style="margin: auto; width: 80%; height: 400px;">
+          <div class="portfolio-details-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+              {% for value in photo %}
+              <div class="swiper-slide">
+                  <img src="/{{ value.URL }}" alt="{{ value.Caption }}">
+                </div>
+                {% endfor %}        
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
         </div>
 
       </div>

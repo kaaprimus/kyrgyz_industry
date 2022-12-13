@@ -10,7 +10,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-        
+
         <div class="d-flex justify-content-between align-items-center">
           <h2>{% translate "Об обществе" %}</h2>
           <ol>
@@ -60,84 +60,6 @@
       </div>
     </section><!-- End About Us Section -->
 
-    <!-- ======= Testimonials Section -->
-    <section id="testimonials" class="testimonials section-bg">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "Наши Цели и Задачи" %}</h2>
-        </div>
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="{% static 'client/img/testimonials/investing.png' %}" class="testimonial-img" alt="">
-                  <h3>{% translate "Привлечение и стимулирование инвестиций" %}</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="{% static 'client/img/testimonials/commerce.png' %}" class="testimonial-img" alt="">
-                  <h3>{% translate "Оздоровление неплатежаспособных хозяйствующих субъектов" %}</h3>
-                  <h4>Designer</h4>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="{% static 'client/img/testimonials/company.png' %}" class="testimonial-img" alt="">
-                  <h3>{% translate "Создание современных предприятий" %}</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="{% static 'client/img/testimonials/teo.png' %}" class="testimonial-img" alt="">
-                  <h3>{% translate "Разработка ТЭО" %}</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="{% static 'client/img/testimonials/modernization.jpg' %}" class="testimonial-img" alt="">
-                  <h3>{% translate "Модернизация промышленности" %}</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                  <img src="{% static 'client/img/testimonials/activity.png' %}" class="testimonial-img" alt="">
-                  <h3>{% translate "Стимулирование деятельности промышленных предприятий" %}</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section> <!--Section -->
-
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container">
@@ -153,7 +75,7 @@
                     <div style="margin:auto; width: 23%" class="col-lg-3 col-md-6 d-flex align-items-stretch">
                       <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
-                          <img src="{% static 'client/img/team/president.jpeg' %}" class="img-fluid" alt="">
+                          <img src="/{{president.picture}}" class="img-fluid" alt="">
                           <div class="social">
                             <a href=""><i class="bi bi-twitter"></i></a>
                             <a href=""><i class="bi bi-facebook"></i></a>
@@ -180,12 +102,11 @@
         </div>
 
         <div class="row">
-
+          {% for man in veep %}
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            {% for man in management %}
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
-                <img src="{% static 'client/img/team/team-2.jpg' %}" class="img-fluid" alt="">
+                <img src="/{{man.picture}}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -198,12 +119,52 @@
                 <span>{{man.position}}</span>
               </div>
             </div>
-            {%endfor%}
+            
           </div>
+          {%endfor%}
         </div>
 
       </div>
     </section><!-- End Team Section -->
+
+        <!-- ======= Features Section ======= -->
+        <section id="activity" class="features">
+          <div class="container">
+    
+            <div class="section-title" data-aos="fade-up">
+              <h2>{% translate "Направления деятельности" %}</h2>
+              <p>{% translate "Основными направлениями промышленной политики, реализуемой ОАО являются:" %}</p>
+            </div>
+    
+            <div class="row" data-aos="fade-up" data-aos-delay="300">
+              <div class="col-md-6 pb-4">
+                <div class="icon-box">
+                  <i class="ri-store-line" style="color: #ffbb2c;"></i>
+                  <h3><a href="#">{% translate "производство технической, строительной и других видов продукции" %}</a></h3>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="icon-box">
+                  <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
+                  <h3><a href="#">{% translate "производство товаров народного потребления" %}</a></h3>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="icon-box">
+                  <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
+                  <h3><a href="#">{% translate "производство продуктов питания" %}</a></h3>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="icon-box">
+                  <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
+                  <h3><a href="#">{% translate "полиграфические услуги, организации средств массовой информации" %}</a></h3>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+        </section><!-- End Features Section -->
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="npa" class="portfolio-details">
@@ -223,64 +184,6 @@
 
       </div>
     </section><!-- End Portfolio Details Section -->
-
-    <!-- ======= Services Section ======= -->
-<section id="contests" class="services">
-  <div class="container">
-
-    <div class="section-title" data-aos="fade-up">
-      <h2>{% translate "Вакансии" %}</h2>
-    </div>
-
-    <div class="row">
-      {% for vacancy in currunt_page_vacancies %}
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-          <div class="icon"><i class="ri-currency-line"></i></div>
-          <h4 class="title"><a href="{% url 'vacancy_detail' vacancy.title %}">{{ vacancy.title }}</a></h4>
-          <p class="description">{{ vacancy.position }}</p>
-          <p class="description">{{ vacancy.salary }} сом</p>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-  <div class="d-flex mt-4 flex-wrap justify-content-center">
-    <nav class="ml-auto">
-      <ul class="pagination separated pagination-info">
-        {% if currunt_page_vacancies.has_previous %}
-          <li class="page-item">
-            <a href="/page_vacancies/{{ currunt_page_vacancies.previous_page_number }}/" class="page-link">&laquo;</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled">
-            <a href="" class="page-link">&laquo;</a>
-          </li>
-        {% endif %}
-        {% for page in currunt_page_vacancies.paginator.page_range %}
-          {% if page == currunt_page_vacancies.number %}
-            <li class="page-item active">
-              <a href="/page_vacancies/{{ page }}/" class="page-link">{{ page }}</a>
-            </li>
-          {% else %}
-            <li>
-              <a href="/page_vacancies/{{ page }}/" class="page-link">{{ page }}</a>
-            </li>
-          {% endif %}
-        {% endfor %}
-        {% if currunt_page_vacancies.has_next %}
-          <li class="page-item">
-            <a href="/page_vacancies/{{ currunt_page_vacancies.next_page_number }}/" class="page-link">&raquo;</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled">         
-            <a href="" class="page-link">&raquo;</a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
-</div>
-</section><!-- End Services Section -->
 
   </main><!-- End #main -->
 

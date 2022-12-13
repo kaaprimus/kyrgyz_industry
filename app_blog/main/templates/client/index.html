@@ -47,76 +47,8 @@
 
   <main id="main">
 
-    <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients clients">
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-2 col-md-4 col-6">
-            <img src="{% static 'client/img/clients/client-1.png' %}" class="img-fluid" alt="" data-aos="zoom-in">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6">
-            <img src="{% static 'client/img/clients/client-2.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6">
-            <img src="{% static 'client/img/clients/client-3.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6">
-            <img src="{% static 'client/img/clients/client-4.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="300">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6">
-            <img src="{% static 'client/img/clients/client-5.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="400">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6">
-            <img src="{% static 'client/img/clients/client-6.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="500">
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Clients Section -->
-
-    <!-- ======= About Us Section 
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "О НАС" %}</h2>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
-            <p>
-              {% translate "Основными направлениями промышленной политики, реализуемой ОАО являются:" %}
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> {% translate "Формирование благоприятного инвестиционного и предпринимательского климата." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Инновационно-технологическое развитие промышленности." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Обеспечение промышленных предприятий востребованными кадрами." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Продвижение продукции промышленных предприятий на рынках сбыта." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Создание промышленных кластеров." %}</li>
-              <li><i class="ri-check-double-line"></i> {% translate "Оснащение промышленных предприятий энергоресурсами, инженерной и транспортной инфраструктурой." %}</li>
-            </ul>
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
-            <p>
-              {% translate "Открытое Акционерное ОбществоОАО “Кыргызиндустрия” создано решением Кабинета Министров со 100% участием государства в его уставном капитале, который составляет 1 млрд. сомов." %}
-              {% translate "Учредителем и единственным акционером Общества является Кабинет Министров Кыргызской Республики. ОАО «Кыргызиндустрия» является коммерческой организацией, имеет юридический статус (обладает обособленным имуществом, имеет самостоятельный баланс, корреспондентские, расчетные, валютные и другие счета в банках Кыргызской Республики и за ее пределами)." %}
-            </p>
-            <a href="{% url 'about_company' %}" class="btn-learn-more">{% translate "Узнать Больше" %}</a>
-          </div>
-        </div>
-
-      </div>
-    </section> End About Us Section -->
-
-     <!-- ======= More Services Section ======= -->
+    
+     <!-- ======= News Section ======= -->
      <section id="more-services" class="more-services">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
@@ -165,47 +97,7 @@
       </div>
     </section><!-- End More Services Section -->
 
-
-    <!-- ======= Features Section ======= -->
-    <section id="activity" class="features">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "Направления деятельности" %}</h2>
-          <p>{% translate "Основными направлениями промышленной политики, реализуемой ОАО являются:" %}</p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="300">
-          <div class="col-md-6 pb-4">
-            <div class="icon-box">
-              <i class="ri-store-line" style="color: #ffbb2c;"></i>
-              <h3><a href="#">{% translate "производство технической, строительной и других видов продукции" %}</a></h3>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="icon-box">
-              <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-              <h3><a href="#">{% translate "производство товаров народного потребления" %}</a></h3>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="icon-box">
-              <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-              <h3><a href="#">{% translate "производство продуктов питания" %}</a></h3>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="icon-box">
-              <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-              <h3><a href="#">{% translate "полиграфические услуги, организации средств массовой информации" %}</a></h3>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Features Section -->
-
-    <!-- ======= Counts Section 
+    <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">
       <div class="container">
 
@@ -221,7 +113,7 @@
                   <div class="count-box">
                     <i class="ri-chrome-fill"></i>
                     <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Проведенные конкурсы" %}</strong></p>
+                    <p><strong>{% translate "Text" %}</strong> {% translate "Some text" %}</p>
                   </div>
                 </div>
 
@@ -229,7 +121,7 @@
                   <div class="count-box">
                     <i class="ri-chrome-fill"></i>
                     <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Активные конкурсы" %}</strong></p>
+                    <p><strong>{% translate "Text" %}</strong> {% translate "Some text" %}</p>
                   </div>
                 </div>
 
@@ -237,7 +129,7 @@
                   <div class="count-box">
                     <i class="ri-chrome-fill"></i>
                     <span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Реализованные проекты" %}</strong> </p>
+                    <p><strong>{% translate "Text" %}</strong> {% translate "Some text" %}</p>
                   </div>
                 </div>
 
@@ -245,16 +137,16 @@
                   <div class="count-box">
                     <i class="ri-chrome-fill"></i>
                     <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Выпушенные проекты" %}</strong> </p>
+                    <p><strong>{% translate "Text" %}</strong> {% translate "Some text" %}</p>
                   </div>
                 </div>
               </div>
-            </div> 
+            </div><!-- End .content-->
           </div>
         </div>
 
       </div>
-    </section> End Counts Section -->
+    </section><!-- End Counts Section -->
 
     {% comment %} <!-- ======= Services Section ======= -->
     <section id="contests" class="services">
@@ -300,6 +192,40 @@
       </div>
     </section><!-- End Services Section --> {% endcomment %}
 
+        <!-- ======= Clients Section ======= -->
+        <section id="clients" class="clients clients">
+          <div class="container">
+    
+            <div class="row">
+    
+              <div class="col-lg-2 col-md-4 col-6">
+                <img src="{% static 'client/img/clients/client-1.png' %}" class="img-fluid" alt="" data-aos="zoom-in">
+              </div>
+    
+              <div class="col-lg-2 col-md-4 col-6">
+                <img src="{% static 'client/img/clients/client-2.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+              </div>
+    
+              <div class="col-lg-2 col-md-4 col-6">
+                <img src="{% static 'client/img/clients/client-3.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
+              </div>
+    
+              <div class="col-lg-2 col-md-4 col-6">
+                <img src="{% static 'client/img/clients/client-4.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="300">
+              </div>
+    
+              <div class="col-lg-2 col-md-4 col-6">
+                <img src="{% static 'client/img/clients/client-5.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="400">
+              </div>
+    
+              <div class="col-lg-2 col-md-4 col-6">
+                <img src="{% static 'client/img/clients/client-6.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="500">
+              </div>
+    
+            </div>
+    
+          </div>
+        </section><!-- End Clients Section -->
    
 
     <!-- ======= Contact Section ======= -->
@@ -307,15 +233,50 @@
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "СВЯЖИТЕСЬ С НАМИ" %}</h2>
+          <h2>{% translate "Наши контакты" %}</h2>
         </div>
 
         <div class="row">
 
+          <div style="padding-bottom: 70px;">
+          <div style="float: none;display: inline-block; vertical-align: top; margin-right: -4px; float: left; margin-left: 10%;">
+            <ul>
+              <li><a href="{% url 'about_company' %}">{% translate "О нас" %}</a></li>
+              <ul>
+                <li><a href="{% url 'about_company' %}">{% translate "Об обществе" %}</a></li>
+                <li><a href="{% url 'index' %}#team">{% translate "Руководство" %}</a></li>
+                <li><a href="#about">{% translate "Блоки" %}</a></li>
+                <li><a href="#clients">{% translate "Наши пратнеры" %}</a></li>
+                <li><a href="#about">{% translate "Нормативно-правовая база" %}</a></li>
+              </ul>
+            </ul>
+            </div>
+          <div style="float: none; display: inline-block; vertical-align: top; margin-right: -4px; float: left; margin-left: 10%;">
+            <ul>
+              <li><a href="#">{% translate "Пресс-центр" %}</a></li>
+              <ul>
+                <li><a href="{% url 'index' %}#more-services">{% translate "Пресс-релизы (новости)" %}</a></li>
+                <li><a href="#team">{% translate "Интервью" %}</a></li>
+                <li><a href="{% url 'gallery' %}">{% translate "Фотогалерея" %}</a></li>
+                <li><a href="#about">{% translate "Брифинг" %}</a></li>
+              </ul>
+          </ul>
+        </div>
+        <div style="float: none; display: inline-block; vertical-align: top; margin-right: -4px; float: left; margin-left: 10%;">
+          <ul>
+            <li><a href="#">{% translate "Закупки" %}</a></li>
+            <ul>
+              <li><a href="{% url 'index' %}#contests">{% translate "Конкурсы" %}</a></li>
+              <li><a href="{% url 'contests' %}">{% translate "Архив конкурсов" %}</a></li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="contact-about">
               <h3>{% translate "ОАО «Кыргызиндустрия»" %}</h3>
-              <p>{% translate "ОАО «Кыргызиндустрия» создано постановлением Кабинета Министров Кыргызской Республики за №341 от 24 декабря 2021 года со 100% участием государства в его уставном капитале, который составляет 1 млрд. сомов." %}</p>
+              <p>{% translate "ОАО «Кыргызиндустрия» создано постановлением Кабинета Министров Кыргызской Республики за №341 от 24 декабря 2021 года со 100% участием государства в его уставном капитале." %}</p>
               <div class="social-links">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="https://www.facebook.com/KyrgyzIndustry" class="facebook"><i class="bi bi-facebook"></i></a>

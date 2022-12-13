@@ -85,9 +85,10 @@ def test_method(request):
     }
     
     return render(request, 'client/pages/img.html', context)
+
+
 def index(request):
     news= News.objects.order_by('-id')[:4]
-    contest= Contests.objects.order_by('-id')[:4]
     hot_news = HotNews.objects.order_by('-id')[:5]
     
     error = False
@@ -101,19 +102,16 @@ def index(request):
             first_image.append(img.URL)
     news_image_mixed = zip(news, first_image)   
     
-    project_ON_PROCCESS=Projects.objects.order_by('-id').filter(Status='В процессе')[:4]
-    project_HAS_FINISHED=Projects.objects.order_by('-id').filter(Status='Реализован')[:4]
-    project_NOT_FINISHED=Projects.objects.order_by('-id').filter(Status='Не реализован')[:4]
+    project_ON_PROCCESS=Projects.objects.order_by('-id').filter(Status='В перспективе')[:4]
+    project_HAS_FINISHED=Projects.objects.order_by('-id').filter(Status='Реализованные')[:4]
     project_all=Projects.objects.order_by('-id')[:8]
     photo=PhotosProject.objects.all()
     trans = translate(language='ru')
     context = {
         'trans':trans,
         'news_page':news_image_mixed,
-        'contest_page':contest,
         'project_ON_PROCCESS':project_ON_PROCCESS,
         'project_HAS_FINISHED':project_HAS_FINISHED,
-        'project_NOT_FINISHED':project_NOT_FINISHED,
         'project_all':project_all,
         'photo': photo,
         'hot_news' : hot_news,
@@ -121,22 +119,37 @@ def index(request):
         }
     return render(request, "client/index.html", context)
 
+def interviews(request, number_page=1):
+    trans = translate(language='ru')
+    interview = Interviews.objects.order_by('-id')
+    currunt_page_interview = Paginator(interview,8)
+    context = {
+        'currunt_page_interview': currunt_page_interview.page(number_page),
+        'trans':trans,
+        }
+    return render(request, "client/pages/interviews.html", context)
+
 def about_company(request, number_page=1):
     trans = translate(language='ru')
     vacancies= Vacancies.objects.order_by('-id')
     management= Management.objects.order_by('-id')
     president=Management.objects.get(position__startswith="Президент")
+    veep = Management.objects.filter(position__startswith="Вице-президент")
+    
     currunt_page_vacancies = Paginator(vacancies,4)
+    
     context = {
         'currunt_page_vacancies': currunt_page_vacancies.page(number_page),
         'trans':trans, 
         'management':management,
-        'president':president
+        'veep':veep,
+        'president':president,
         }
     return render(request, "client/pages/about_company.html", context)
 
 def about_us_full_info(request):
     trans = translate(language='ru')
+    context = {'trans':trans}
     return render(request, "client/pages/about_us_full_info.html", context)
 
 def blog_detail(request):
@@ -150,18 +163,20 @@ def team(request):
 
 def president(request):
     trans = translate(language='ru')
-    context = {'trans':trans}
+    
+    president = Management.objects.get(position__startswith="Президент")
+
+    context = {
+        'trans':trans,
+        'president':president,
+        }
+
     return render(request, "client/pages/president.html", context)
 
 def inner_page(request):
     trans = translate(language='ru')
     context = {'trans':trans}
     return render(request, "client/pages/inner-page.html", context)
-
-def gallery(request):
-    trans = translate(language='ru')
-    context = {'trans':trans}
-    return render(request, "client/pages/gallery.html", context)
 
 def contests(request,number_page=1):
     trans = translate(language='ru')
@@ -218,13 +233,48 @@ def news(request):
                }
     return render(request, "client/pages/news.html", context)
 
-def projects(request,number_page=1):
-    project= Projects.objects.order_by('-id')
-    count=project.count()
-    currunt_page_news = Paginator(project,8)
-    photo=PhotosProject.objects.all()
+def projects(request):
+    projects= Projects.objects.order_by('-id')
+    error = False
+
+    per_page = 4
+     # Получаем первую фотографию под новостями
+    first_image = []
+    for post in projects:
+        img = PhotosProject.objects.filter(Gallery = post.Gallery_id).first()
+        if img is None:
+            error = True
+        else:
+            first_image.append(img.URL)
+    
+    current_page_projects = Paginator(projects, per_page=per_page)
+    current_page_img = Paginator(first_image, per_page=per_page)
+    
+    page_num = current_page_projects.num_pages
+    try:
+        page = request.GET.get("page", 1)
+        posts = current_page_projects.page(page)
+        page = request.GET.get("page", 1)
+        images = current_page_img.page(page)
+
+    except (PageNotAnInteger, TypeError):
+        posts = current_page_projects.page(1)
+        images = current_page_img.page(1)
+        
+    except EmptyPage:
+        posts = current_page_projects.page(current_page_projects.num_pages)
+        images = current_page_img.page(current_page_img.num_pages)
+    
+    news_image_mixed = zip(posts, images)
+
     trans = translate(language='ru')
-    context = {'project_page':currunt_page_news.page(number_page),'photo':photo,'count':count,'trans':trans}
+    context = {        
+        'projects_page': posts,
+        'trans':trans, 
+        'all_projects' : news_image_mixed,
+        'page_num' : page_num,
+        'error' : error,
+    }
     return render(request, "client/pages/projects.html", context)
 
 def get_news(request,title):
@@ -234,6 +284,22 @@ def get_news(request,title):
     photo=PhotosNews.objects.filter(Gallery_id=get_id_Gallery_News(title))
     context = {'news_detail': news_detail,'photo':photo,'news_title':news_title,'trans':trans}
     return render(request, "client/pages/news_detail.html", context)
+
+def investors(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/investors.html", context)
+
+def strategy(request):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    return render(request, "client/pages/strategy.html", context)
+
+def reports(request):
+    trans = translate(language='ru')
+    reports_all = Reports.objects.order_by('-id')
+    context = {'trans':trans, 'reports_all':reports_all}
+    return render(request, "client/pages/reports.html", context)
 
 def get_project(request,title):
     trans = translate(language='ru')
@@ -256,12 +322,6 @@ def get_id_Gallery_project(title):
     for val in project_detail:
         id=val.Gallery_id
     return id
-
-
-def project_detail(request):
-    trans = translate(language='ru')
-    context = {'trans':trans}
-    return render(request, "client/pages/project_detail.html", context)
 
 def veep(request):
     trans = translate(language='ru')
@@ -287,17 +347,23 @@ def get_vacancy(request,title):
     context = {'vacancy_detail': vacancy_detail,'vacancy_title':vacancy_title,'trans':trans}
     return render(request, "client/pages/vacancy_detail.html", context)
 
+#Страница Фотогалерея 
 def gallery_page(request,number_page=1):
     trans = translate(language='ru')
     news_photo=PhotosNews.objects.order_by('-id')
-    projects_photo=PhotosProject.objects.order_by('-id')
     gallery_page = Paginator(news_photo,4)
-    context = {'gallery_page': gallery_page.page(number_page),'trans':trans, 'news_photo':news_photo}
+    projects_photo=PhotosProject.objects.order_by('-id')
+    context = {'gallery_page': gallery_page.page(number_page),'trans':trans, 'news_photo':news_photo, 'projects_photo':projects_photo}
     return render(request, "client/pages/gallery.html", context)
+
 
 # Карта сайта 
 def sitemap(request):
     return render(request, "client/pages/sitemap.html", {})
+
+# Свяжитесь с нами
+def feedback(request):
+    return render(request, "client/pages/feedback.html", {})
 
 def hot_news(request):
     news_all = HotNews.objects.order_by('-id')
@@ -898,6 +964,8 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectView, Cr
 class ProjectUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectView, UpdateView):
     login_url = "login_page"
     template_name = "admin/pages/project/project_form.html"
+    success_url = reverse_lazy("projects_create")
+    success_message = "Запись успешно обновлено!"
     
     
 def projects_delete(request, id):
@@ -966,6 +1034,53 @@ def contests_delete(request, id):
             messages.error(request, e)
             return redirect("contests_delete")
     return render(request, "admin/pages/contests/contests_confirm_delete.html", context)
+
+
+class InterviewsView(View):
+    model = Interviews
+    form_class = InterviewsForm
+    active_panel = "interviews-panel"
+    extra_context = {
+        "is_active" : active_panel,
+        "active_interviews" : "active",
+        "expand_interviews" : "show",
+        }
+    
+class InterviewsListView(LoginRequiredMixin, InterviewsView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/interviews/interviews_list.html"
+    
+
+class InterviewsCreateView(LoginRequiredMixin, SuccessMessageMixin, InterviewsView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/interviews/interviews_form.html'
+    success_url = reverse_lazy("interviews_create")
+    success_message = "Запись успешно добавлена!"
+        
+class InterviewsUpdateView(LoginRequiredMixin, SuccessMessageMixin, InterviewsView, UpdateView):
+    login_url = 'login_page'
+    success_url = reverse_lazy("interviews_all")
+    template_name = 'admin/pages/interviews/interviews_edit.html'
+    success_message = "Запись успешно обновлена!"
+    
+    
+def interviews_delete(request, id):
+    context = {}
+    obj = get_object_or_404(Interviews, id = id)
+    if request.method =="POST":
+        
+        try:
+            # delete object
+            obj.delete()
+            # after deleting redirect to
+            # home page
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("interviews_all")
+        except Exception as e:
+            messages.error(request, "Не удалось удалить запись, повторите попытку!")
+            return redirect("interviews_all")
+ 
+    return render(request, "admin/pages/interviews/interviews_confirm_delete.html", context)  
 
 
 class ManagementView(View):
@@ -1251,5 +1366,55 @@ def hotnews_delete(request, id):
             messages.error(request, "Не удалось удалить запись, повторите попытку!")
             return redirect("hotnews_delete")
  
-    return render(request, "admin/pages/hotnews/hotnews_confirm_delete.html", context)   
+    return render(request, "admin/pages/hotnews/hotnews_confirm_delete.html", context)  
+
+
+class ReportsView(View):
+    model = Reports
+    form_class = ReportsForm
+    active_panel = "reports-panel"
+    success_url = reverse_lazy("hotnews_create")
+    extra_context = {
+        "is_active" : active_panel,
+        "active_reports" : "active",
+        "expand_reports" : "show",
+        }
+    
+class ReportsListView(LoginRequiredMixin, ReportsView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/reports/reports_list.html"
+    paginate_by = 10
+
+class ReportsCreateView(LoginRequiredMixin, SuccessMessageMixin, ReportsView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/reports/reports_form.html'
+    success_message = "Запись успешно Добавлена!"  
+
+class ReportsUpdateView(LoginRequiredMixin, SuccessMessageMixin, ReportsView, UpdateView):
+    login_url = "login_page"
+    template_name = "admin/pages/reports/reports_form.html"
+    success_url = reverse_lazy("reports_all")
+    success_message = "Запись успешно Обновлена!"  
+    
+def reports_delete(request, id):
+    context = {
+            "is_active" : "reports-panel",
+            "active_reports" : "active",
+            "expand_reports" : "show",
+    }
+    obj = get_object_or_404(ReportsView, id = id)
+    if request.method =="POST":
+        
+        try:
+            # delete object
+            obj.delete()
+            # after deleting redirect to
+            # home page
+            messages.success(request, "Запись успешно удалено!")
+            return redirect("reports_all")
+        except Exception as e:
+            messages.error(request, "Не удалось удалить запись, повторите попытку!")
+            return redirect("reports_delete")
+ 
+    return render(request, "admin/pages/reports/reports_confirm_delete.html", context)    
 

@@ -76,6 +76,8 @@ class PhotosProject(models.Model):
             output_size = (800, 600)
             image.thumbnail(output_size)
             image.save(self.URL.path)
+        elif image.width < 800 or image.height < 600:
+            return 'Размер фотографии не подходит! Минимальный размер 800х600'
     class Meta:
         ordering = ['-id']
     
@@ -109,9 +111,8 @@ class Contest_Status_Choice(models.TextChoices):
     NOT_FINISHED = "Не Проведён", "Не Проведён"
     
 class Project_Status_Choice(models.TextChoices):
-    ON_PROCCESS = "В процессе", "В процессе"
-    HAS_FINISHED = "Реализован", "Реализован"
-    NOT_FINISHED = "Не реализован", "Не реализован"
+    ON_PROCCESS = "В перспективе", "В перспективе"
+    HAS_FINISHED = "Реализованные", "Реализованные"
 
 class Vacancy_Status_Choice(models.TextChoices):
     TRUE = "Актуально", "Актуально"
@@ -287,6 +288,27 @@ class HotNews(models.Model):
     def __str__(self) -> str:
         return self.title
     
+    class Meta: 
+        ordering = ['-id']
+
+class Interviews(models.Model):
+    title = models.CharField(verbose_name='Название интервью', max_length=80)
+    short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
+    link = models.CharField(verbose_name='Ссылка на статью', max_length=2048)
+
+class Reports(models.Model):
+    title = models.CharField(verbose_name='Название отчета', max_length=80)
+    short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
+    url = models.FileField(
+        verbose_name='Путь файла',
+        upload_to=get_file_path, 
+        validators=[FileExtensionValidator(['pdf','doc'])]
+        )
+    
+    path_url = "static/client/img/reports/"
+    
+    def __str__(self) -> str:
+        return self.caption
     class Meta: 
         ordering = ['-id']
     

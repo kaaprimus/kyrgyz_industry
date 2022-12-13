@@ -1,0 +1,69 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">Добавление новой Интервью</h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'interviews_all' %}">Интервью</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Добавить новую запись</li>
+        </ol>
+      </nav>
+    </div>
+    {% if messages %} {% for message in messages %}
+    {% if message.tags == "error" %}
+        <div class="alert alert-danger" role="alert">{{message}}</div>
+    {% elif message.tags == "success" %}
+    <div class="alert alert-success" role="alert">{{message}}</div>
+    {% endif %}
+    {% endfor %}
+  {% endif %}
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Добавить новую запись</h4>
+            <form class="forms-sample" method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}" class="font-weight-bold">Заголовок</label>
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.short_description.id_for_label }}" class="font-weight-bold">Описание</label>
+                {{ form.short_description }}
+                {{ form.short_description.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.link.id_for_label }}" class="font-weight-bold">Ссылка</label>
+                {{ form.link }}
+                {{ form.link.errors }}
+            </div>
+
+            {% url 'interviews_all' as interview %}
+            <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
+            <a href="{{interview}}"  class="btn btn-light">Отменить</a>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block custom_js%}
+<!-- plugins:js -->
+<script src="{% static 'admin-panel/vendors/js/vendor.bundle.base.js' %}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="{% static 'admin-panel/js/off-canvas.js' %}"></script>
+<script src="{% static 'admin-panel/js/misc.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page -->
+<!-- End custom js for this page -->
+{% endblock custom_js %}

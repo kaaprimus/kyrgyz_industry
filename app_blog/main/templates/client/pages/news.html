@@ -23,20 +23,12 @@
       <div class="section-title" data-aos="fade-up">
         <h2>{% translate "Архив новостей" %}</h2>
       </div>
-              <div class="row">
+              <div class="row" style="margin: auto;">
               {% if not error %}
                 {% for value, img in all_news %}
-                  <div class="col-md-6 d-flex align-items-stretch mt-3">
-                    <div class="card" style='background-image: url("/{{img}}");' data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="">{{ value.Title }}</a></h5>
-                        <p class="card-text">{{ value.Short_Description }}</p>
-                      <div class="read-more"><a href="{% url 'detail_news' value.Title %}">
-                        <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <li>
+                  <a href="{% url 'news_detail' value.Title %}">{{value.Title}}</a>
+                </li>
               {% empty %}
                 <div class="section-title" data-aos="fade-up">
                   <h4>{% translate "Нет новостей" %}</h4>

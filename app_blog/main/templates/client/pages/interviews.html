@@ -12,10 +12,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{% translate "Фотогалерея" %}</h2>
+          <h2>{% translate "Интервью" %}</h2>
           <ol>
             <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
-            <li>{% translate "Фотогалерея"%}</li>
+            <li>{% translate "Интервью"%}</li>
           </ol>
         </div>
 
@@ -26,35 +26,10 @@
 <section id="portfolio" class="portfolio">
     <div class="container">
 
-      <div class="row" data-aos="fade-up" data-aos-delay="200">
-        <div class="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">{% translate "Все" %}</li>
-            <li data-filter=".filter-app">{% translate "Новости" %}</li>
-            <li data-filter=".filter-card">{% translate "Проекты" %}</li>
-          </ul>
-        </div>
-      </div>
-
       <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
 
-        {% for value in news_photo %}
+        {% for value in currunt_page_interview %}
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="/{{ value.URL }}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>{{ value.Caption }}</h4>
-              <div class="portfolio-links">
-                <a href="/{{ value.URL }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ value.Caption }}"><i class='bx bx-collapse-alt'></i></a>
-                <a href="{% url 'detail_news' value.Caption %}" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-        
-        {% for value in projects_photo %}
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
           <div class="portfolio-wrap">
             <img src="/{{ value.URL }}" class="img-fluid" alt="">
             <div class="portfolio-info">
@@ -62,7 +37,7 @@
               <p>{{ value.title }}</p>
               <div class="portfolio-links">
                 <a href="/{{ value.URL }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ value.Caption }}"><i class='bx bx-collapse-alt'></i></a>
-                <a href="{% url 'project_detail' value.Caption %}" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
+                <a href="" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
               </div>
             </div>
           </div>
@@ -71,33 +46,33 @@
 
       </div>
 
-      {% if gallery_page %}
+      {% if currunt_page_interview %}
     <div class="d-flex mt-4 flex-wrap justify-content-center">
               <nav class="ml-auto">
                 <ul class="pagination separated pagination-info">
-                  {% if gallery_page.has_previous %}
+                  {% if currunt_page_interview.has_previous %}
                     <li class="page-item">
-                      <a href="/gallery_page/{{ gallery_page.previous_page_number }}/" class="page-link">&laquo;</a>
+                      <a href="/currunt_page_interview/{{ currunt_page_interview.previous_page_number }}/" class="page-link">&laquo;</a>
                     </li>
                   {% else %}
                     <li class="page-item disabled">
                       <a href="" class="page-link">&laquo;</a>
                     </li>
                   {% endif %}
-                  {% for page in gallery_page.paginator.page_range %}
-                    {% if page == gallery_page.number %}
+                  {% for page in currunt_page_interview.paginator.page_range %}
+                    {% if page == currunt_page_interview.number %}
                       <li class="page-item active">
-                        <a href="/gallery_page/{{ page }}/" class="page-link">{{ page }}</a>
+                        <a href="/currunt_page_interview/{{ page }}/" class="page-link">{{ page }}</a>
                       </li>
                     {% else %}
                       <li>
-                        <a href="/gallery_page/{{ page }}/" class="page-link">{{ page }}</a>
+                        <a href="/currunt_page_interview/{{ page }}/" class="page-link">{{ page }}</a>
                       </li>
                     {% endif %}
                   {% endfor %}
-                  {% if gallery_page.has_next %}
+                  {% if currunt_page_interview.has_next %}
                     <li class="page-item">
-                      <a href="/gallery_page/{{ gallery_page.next_page_number }}/" class="page-link">&raquo;</a>
+                      <a href="/gallery_page/{{ currunt_page_interview.next_page_number }}/" class="page-link">&raquo;</a>
                     </li>
                   {% else %}
                     <li class="page-item disabled">         

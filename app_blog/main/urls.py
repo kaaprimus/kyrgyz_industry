@@ -90,6 +90,18 @@ urlpatterns = [
     path('admin-panel/hotnews/create/', views.HotNewsCreateView.as_view(), name='hotnews_create'),
     path('admin-panel/hotnews/update/<int:pk>/', views.HotNewsUpdateView.as_view(), name='hotnews_update'),
     path('admin-panel/hotnews/delete/<int:id>/', views.hotnews_delete, name='hotnews_delete'),
+
+    # Interviews View
+    path('admin-panel/interviews/', views.InterviewsListView.as_view(), name='interviews_all'),
+    path('admin-panel/interviews/create/', views.InterviewsCreateView.as_view(), name='interviews_create'),
+    path('admin-panel/interviews/update/<int:pk>/', views.InterviewsUpdateView.as_view(), name='interviews_update'),
+    path('admin-panel/interviews/delete/<int:id>/', views.interviews_delete, name='interviews_delete'),
+
+    # Report View
+    path('admin-panel/reports/', views.ReportsListView.as_view(), name='reports_all'),
+    path('admin-panel/reports/create/', views.ReportsCreateView.as_view(), name='reports_create'),
+    path('admin-panel/reports/update/<int:pk>/', views.ReportsUpdateView.as_view(), name='reports_update'),
+    path('admin-panel/reports/delete/<int:id>/', views.reports_delete, name='reports_delete'),
     
     # Static Pages
     path('about_company', views.about_company, name='about_company'),
@@ -99,12 +111,16 @@ urlpatterns = [
     path('gallery_page/<int:number_page>/', views.gallery_page, name='gallery'),
     path('news/', views.news, name='news'),
     path('projects/', views.projects, name='projects'),
+    path('invest/', views.investors, name='invest'),
+    path('strategy/', views.strategy, name='strategy'),
+    path('reports/', views.reports, name='reports'),
     path('contests', views.contests, name='contests'),
     path('send_message/', views.send_message),
     path('news_detail/<str:title>', views.get_news, name='news_detail'),
-    path('project_detail/<str:title>', views.project_detail, name='project_detail'),
+    path('project_detail/<str:title>', views.get_project, name='project_detail'),
     path('veep', views.veep, name='veep'),
     path('vacancies/', views.vacancies, name='vacancies'),
+    path('interviews/', views.interviews, name='interviews'),
     path('vacancy_detail/<str:title>', views.get_vacancy, name='vacancy_detail'),
     path('page_vacancy/<int:number_page>/', views.news, name='vacancy'),
     path('detail_news/<str:title>', views.get_news, name='detail_news'),
@@ -113,7 +129,7 @@ urlpatterns = [
     path('page_project/<int:number_page>/', views.projects, name='projects'),
     path('documents_npa', views.npa, name='documents_npa'),
     path('sitemap/', views.sitemap, name = 'sitemap'),
-    
+    path('feedback', views.feedback, name = 'feedback'),
     # Новые добавленные страницы
     path('team/', views.team, name = 'team'),
     path('main_events/', views.hot_news, name='hot_news'),
