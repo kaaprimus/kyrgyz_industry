@@ -14,7 +14,7 @@
             <li><a href="{% url 'index' %}">{% translate "Главная" %}</a></li>
             <li>{% translate "Новости"%}</li>
           </ol>
-          <form class="form-inline my-2 my-lg-0">
+          <form class="form-inline my-2 my-lg-0 pt-2">
             <input class="form-control mr-sm-2" name="search" action="{% url 'reports' %}" type="search" placeholder="Поиск" aria-label="Search">
           </form>
         </div>
@@ -25,18 +25,23 @@
       <div class="section-title" data-aos="fade-up">
         <h2>{% translate "Архив новостей" %}</h2>
       </div>
-              <div class="row">
-              {% if not error %}
-                {% for value, img in all_news %}
-                <li>
-                  <a href="{% url 'news_detail' value.Title %}">{{value.Title}}</a>
-                </li>
-              {% empty %}
-                <div class="section-title" data-aos="fade-up">
-                  <h4>{% translate "Нет новостей" %}</h4>
-                </div>
-                {% endfor %}
-            {% else %}
+      {% if not error %}
+      {% for value, img in all_news %}
+      <a href="{% url 'news_detail' value.Title %}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-2 mt-3 text-primary news-link">{{value.Title}}</h5>
+          <small class="text-muted">{{value.Date_added}}</small>
+        </div>
+        <p class="mb-1">{{value.Short_Description}}</p>
+        <hr>
+        <small class="text-muted"></small>
+      </a>
+      {% empty %}
+      <div class="section-title" data-aos="fade-up">
+        <h4>{% translate "Нет новостей" %}</h4>
+      </div>
+      {%endfor%}
+      {% else %}
               <div class="section-title" data-aos="fade-up">
                 <h5 class="text-danger">{% translate "Ошибка: В какой-то галереи не добавлены не одной фотографии" %}</h5>
               </div>

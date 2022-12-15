@@ -6,6 +6,8 @@ from ckeditor.fields import RichTextField
 from PIL import Image
 import uuid
 import os
+import re
+from django import forms
 
 # Языки
 class LanguageChoice(models.TextChoices):
@@ -13,7 +15,14 @@ class LanguageChoice(models.TextChoices):
     KG = "Кыргызча", "Кыргызча"
     EN = "English", "English"
     CH = "中国人", "中国人"
-    
+
+#Функция для проверки одинаковых названий   
+def check_title_similar(title):
+        news_title = title
+        if re.search(news_title, title):
+            raise forms.ValidationError('Запись с таким названием уже существует!')
+        else:
+            return title
   
 # Категория проектов
 class ProjectCategory(models.Model):
@@ -28,7 +37,7 @@ class ProjectCategory(models.Model):
 
 #Галерея 
 class GalleryProject(models.Model):
-    Name=models.CharField(max_length=50,verbose_name="Название галереи")
+    Name=models.CharField(max_length=50,verbose_name="Название галереи", validators=[check_title_similar])
 
     class Meta:
         db_table="galleryProject" 
@@ -39,7 +48,7 @@ class GalleryProject(models.Model):
 
 
 class GalleryNews(models.Model):
-    Name=models.CharField(max_length=50,verbose_name="Название галереи")
+    Name=models.CharField(max_length=50,verbose_name="Название галереи", validators=[check_title_similar])
 
     class Meta:
         db_table="galleryNews" 
@@ -119,8 +128,9 @@ class Vacancy_Status_Choice(models.TextChoices):
     FALSE = "Данная вакансия не актуальна", "Данная вакансия не актуальна"
 
 # Проекты
+
 class Projects(models.Model):
-    Title=models.CharField(max_length=70,verbose_name="Заголовок проекта")
+    Title=models.CharField(max_length=70,verbose_name="Заголовок проекта", validators=[check_title_similar])
     Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
@@ -151,7 +161,7 @@ class Projects(models.Model):
 # Конкурсы
 
 class Contests(models.Model):
-    Title=models.CharField(max_length=40,verbose_name="Название конкурса")
+    Title=models.CharField(max_length=40,verbose_name="Название конкурса", validators=[check_title_similar])
     Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
     Document = models.FileField(
                                 verbose_name="Документ", 
@@ -180,7 +190,7 @@ class Contests(models.Model):
 # Новости
 
 class News(models.Model):
-    Title=models.CharField(max_length=100,verbose_name="Заголовок новости")
+    Title=models.CharField(max_length=100,verbose_name="Заголовок новости", validators=[check_title_similar])
     Short_Description = models.CharField(max_length=170,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
@@ -223,8 +233,9 @@ class Management(models.Model):
         return self.full_name
 
 # Вакансии
+
 class Vacancies(models.Model):
-    title = models.CharField(max_length=70, verbose_name="Заголовок")
+    title = models.CharField(max_length=70, verbose_name="Заголовок", validators=[check_title_similar])
     company = models.CharField(max_length=70, verbose_name = "Компания")
     Language=models.CharField(
                                max_length = 10, 
@@ -247,7 +258,7 @@ class Vacancies(models.Model):
 # Горячие новости
 
 class HotNewsGallery(models.Model):
-    name = models.CharField(max_length=50, verbose_name='Название галереи')
+    name = models.CharField(max_length=50, verbose_name='Название галереи', validators=[check_title_similar])
 
     def __str__(self) -> str:
         return self.name
@@ -272,8 +283,9 @@ class HotNewsPhoto(models.Model):
     class Meta: 
         ordering = ['-id']
         
+#Главные события
 class HotNews(models.Model):
-    title = models.CharField(verbose_name='Название событии', max_length=70)
+    title = models.CharField(verbose_name='Название событии', max_length=70, validators=[check_title_similar])
     short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
     description = RichTextField()
     Language=models.CharField(
@@ -291,13 +303,20 @@ class HotNews(models.Model):
     class Meta: 
         ordering = ['-id']
 
+#Проверка на валидность ссылки
+def check_link_validate(link):
+        if re.search("^<iframe.*</iframe>$", link):
+            return link
+        else:
+            raise forms.ValidationError('Ссылка не действительна!')
+
 class Interviews(models.Model):
-    title = models.CharField(verbose_name='Название интервью', max_length=80)
-    short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
-    link = models.CharField(verbose_name='Ссылка на статью', max_length=2048)
+    title = models.CharField(verbose_name='Название ссылки', max_length=80, validators=[check_title_similar])
+    link = models.CharField(verbose_name='Ссылка на статью', max_length=2048, validators=[check_link_validate])
+
 
 class Reports(models.Model):
-    title = models.CharField(verbose_name='Название отчета', max_length=80)
+    title = models.CharField(verbose_name='Название отчета', max_length=80, validators=[check_title_similar])
     short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
     url = models.FileField(
         verbose_name='Путь файла',
