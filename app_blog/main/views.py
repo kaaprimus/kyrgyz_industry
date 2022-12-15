@@ -88,9 +88,24 @@ def test_method(request):
     return render(request, 'client/pages/img.html', context)
 
 
+# Получаем выбранный язык для фильтрации
+def get_lang(trans):
+    if trans == 'en':
+        lang = 'English'
+    elif trans == 'zh-hans':
+        lang = '中国人'
+    elif trans == 'ky':
+        lang = 'Кыргызча'
+    else:
+        lang = 'Русский'
+    return lang
+       
+
 def index(request):
-    news= News.objects.order_by('-id')[:4]
-    hot_news = HotNews.objects.order_by('-id')[:5]
+    trans = translate(language='ru')
+    
+    news = News.objects.filter(Language = get_lang(trans=trans)).order_by('-id')[:4]
+    hot_news = HotNews.objects.filter(Language = get_lang(trans=trans)).order_by('-id')[:5]
     
     error = False
     # Получаем первую фотографию под новостями
@@ -102,19 +117,10 @@ def index(request):
         else:
             first_image.append(img.URL)
     news_image_mixed = zip(news, first_image)   
-    
-    project_ON_PROCCESS=Projects.objects.order_by('-id').filter(Status='В перспективе')[:4]
-    project_HAS_FINISHED=Projects.objects.order_by('-id').filter(Status='Реализованные')[:4]
-    project_all=Projects.objects.order_by('-id')[:8]
-    photo=PhotosProject.objects.all()
-    trans = translate(language='ru')
+ 
     context = {
         'trans':trans,
         'news_page':news_image_mixed,
-        'project_ON_PROCCESS':project_ON_PROCCESS,
-        'project_HAS_FINISHED':project_HAS_FINISHED,
-        'project_all':project_all,
-        'photo': photo,
         'hot_news' : hot_news,
         "error" : error
         }
@@ -458,10 +464,9 @@ def translate(language):
     cur_language = get_language()
     try:
         activate(language)
-        text = gettext('hello')
     finally:
         activate(cur_language)
-    return text
+    return cur_language
 
 def error_404(request, exception):
    context = {}
@@ -1082,11 +1087,11 @@ class InterviewsCreateView(LoginRequiredMixin, SuccessMessageMixin, InterviewsVi
     template_name = 'admin/pages/interviews/interviews_form.html'
     success_url = reverse_lazy("interviews_create")
     success_message = "Запись успешно добавлена!"
-        
+ 
 class InterviewsUpdateView(LoginRequiredMixin, SuccessMessageMixin, InterviewsView, UpdateView):
     login_url = 'login_page'
     success_url = reverse_lazy("interviews_all")
-    template_name = 'admin/pages/interviews/interviews_edit.html'
+    template_name = 'admin/pages/interviews/interviews_form.html'
     success_message = "Запись успешно обновлена!"
     
     

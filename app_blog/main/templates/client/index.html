@@ -20,7 +20,7 @@
               <h1 data-aos="fade-up">{% translate "ОАО «Кыргызиндустрия»" %}</h1>
               <h2 data-aos="fade-up" data-aos-delay="400">{% translate "создано постановлением Кабинета Министров Кыргызской Республики за №341 от 24 декабря 2021 года со 100% участием государства в его уставном капитале." %}</h2>
               <div data-aos="fade-up" data-aos-delay="800">
-                <a href="#portfolio" class="btn-get-started scrollto">{% translate "Наши Проекты" %}</a>
+                <a href="{% url 'projects' %}" class="btn-get-started scrollto">{% translate "Наши Проекты" %}</a>
               </div>
             </li>
             {% for hotnews in hot_news%}
@@ -42,11 +42,9 @@
         </div>
       </div>
     </div>
-
   </section><!-- End Hero -->
 
   <main id="main">
-
     
      <!-- ======= News Section ======= -->
      <section id="more-services" class="more-services">
@@ -73,17 +71,17 @@
             <div class="section-title" data-aos="fade-up">
               <h4>{% translate "Нет новостей" %}</h4>
             </div>
-            <script type="text/javascript">
-              function func() {
-          if (document.getElementById("titlenews")) { 
-              //Записываем ссылку на элемент в переменную obj
-              var obj = document.getElementById("titlenews"); 
-              //Если css-свойство display не block, то: 
-                obj.style.display = "none";
-          }
-          }
-            func();
-          </script>
+                <script type="text/javascript">
+                  function func() {
+                      if (document.getElementById("titlenews")) { 
+                          //Записываем ссылку на элемент в переменную obj
+                          var obj = document.getElementById("titlenews"); 
+                          //Если css-свойство display не block, то: 
+                            obj.style.display = "none";
+                      }
+                      }
+                        func();
+              </script>
             {% endfor %}
             {% else %}
             <div class="section-title" data-aos="fade-up">
@@ -92,11 +90,15 @@
             {% endif %}
           </div> 
         {% if news_page  and not error %}
-        <a href="{% url 'news' %}" id="more-news" class="btn-learn-more" data-aos="fade-up" data-aos-delay="300">{% translate "Показать больше" %}</a>
+        <div class="col-12 d-flex justify-content-center">
+          <a href="{% url 'news' %}" id="more-news" class="btn-learn-more" data-aos="fade-up" data-aos-delay="300">{% translate "Показать больше" %}</a>
+        </div>
+       
         {% endif %}
       </div>
     </section><!-- End More Services Section -->
 
+    {% comment %}
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">
       <div class="container">
@@ -109,35 +111,20 @@
           <div class="col-xl-7 d-flex align-items-stretch pt-4 pt-xl-0" data-aos="fade-left" data-aos-delay="300">
             <div class="content d-flex flex-column justify-content-center">
               <div class="row">
-                <div class="col-md-6 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="ri-chrome-fill"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Text" %}</strong> {% translate "Some text" %}</p>
-                  </div>
-                </div>
 
                 <div class="col-md-6 d-md-flex align-items-md-stretch">
                   <div class="count-box">
                     <i class="ri-chrome-fill"></i>
                     <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Text" %}</strong> {% translate "Some text" %}</p>
+                    <p><strong>{% translate "Реализованные" %}</strong> {% translate "Проекты" %}</p>
                   </div>
                 </div>
 
                 <div class="col-md-6 d-md-flex align-items-md-stretch">
                   <div class="count-box">
                     <i class="ri-chrome-fill"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Text" %}</strong> {% translate "Some text" %}</p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="ri-chrome-fill"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Text" %}</strong> {% translate "Some text" %}</p>
+                    <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>{% translate "Количество созданных" %} <strong>{% translate "Рабочих мест" %}</strong></p>
                   </div>
                 </div>
               </div>
@@ -147,132 +134,80 @@
 
       </div>
     </section><!-- End Counts Section -->
-
-    {% comment %} <!-- ======= Services Section ======= -->
-    <section id="contests" class="services">
+    {% endcomment %}
+    <hr>
+     <!-- ======= Clients Section ======= -->
+     <section id="clients" class="clients">
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "Конкурсы" %}</h2>
-          <p id="titlecontets">{% translate "Архив конкурсов" %}</p>
+          <h2>{% translate "Наши партнеры" %}</h2>
         </div>
-        <div class="row">
-          {% for contest in contest_page %}
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="bx bx-file"></i>
-              </div>
-              <h4 class="title"><a href="">{{ contest.Status }}</a></h4>
-              <p class="description">{{ contest.Short_Description }}</p>
-              <div class="read-more"><a href="/{{contest.Document }}">
-                <i class="bi bi-arrow-right"></i> {% translate "Читать" %}</a>
-              </div>
+
+        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in">
+              <img src="{% static 'client/img/clients/client-1.png' %}" class="img-fluid" alt="">
             </div>
           </div>
-          {% empty %}
-          <div class="section-title" data-aos="fade-up">
-            <h4>{% translate "Нет конкурсов" %}</h4>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="100">
+              <img src="{% static 'client/img/clients/client-2.png' %}" class="img-fluid" alt="">
+            </div>
           </div>
-          <script type="text/javascript">
-            function func() {
-        if (document.getElementById("titlecontets")) { 
-            //Записываем ссылку на элемент в переменную obj
-            var obj = document.getElementById("titlecontets"); 
-            //Если css-свойство display не block, то: 
-              obj.style.display = "none";
-        }
-        }
-          func();
-        </script>
-          {% endfor %}
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="150">
+              <img src="{% static 'client/img/clients/client-3.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="200">
+              <img src="{% static 'client/img/clients/client-4.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="250">
+              <img src="{% static 'client/img/clients/client-5.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="300">
+              <img src="{% static 'client/img/clients/client-6.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="350">
+              <img src="{% static 'client/img/clients/client-7.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="client-logo">
+              <img src="{% static 'client/img/clients/client-8.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
         </div>
-        {% if contest_page %}
-        <a href="{% url 'contests' %}" id="more-news" class="btn-learn-more">{% translate "Показать больше" %}</a>
-        {% endif %}
+
       </div>
-    </section><!-- End Services Section --> {% endcomment %}
-
-        <!-- ======= Clients Section ======= -->
-        <section id="clients" class="clients clients">
-          <div class="container">
-    
-            <div class="row">
-    
-              <div class="col-lg-2 col-md-4 col-6">
-                <img src="{% static 'client/img/clients/client-1.png' %}" class="img-fluid" alt="" data-aos="zoom-in">
-              </div>
-    
-              <div class="col-lg-2 col-md-4 col-6">
-                <img src="{% static 'client/img/clients/client-2.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
-              </div>
-    
-              <div class="col-lg-2 col-md-4 col-6">
-                <img src="{% static 'client/img/clients/client-3.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="200">
-              </div>
-    
-              <div class="col-lg-2 col-md-4 col-6">
-                <img src="{% static 'client/img/clients/client-4.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="300">
-              </div>
-    
-              <div class="col-lg-2 col-md-4 col-6">
-                <img src="{% static 'client/img/clients/client-5.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="400">
-              </div>
-    
-              <div class="col-lg-2 col-md-4 col-6">
-                <img src="{% static 'client/img/clients/client-6.png' %}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="500">
-              </div>
-    
-            </div>
-    
-          </div>
-        </section><!-- End Clients Section -->
+    </section><!-- End Clients Section -->
    
-
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "Наши контакты" %}</h2>
+          <h2>{% translate "контакты" %}</h2>
         </div>
 
         <div class="row">
-
-          <div style="padding-bottom: 70px;">
-          <div style="float: none;display: inline-block; vertical-align: top; margin-right: -4px; float: left; margin-left: 10%;">
-            <ul>
-              <li><a href="{% url 'about_company' %}">{% translate "О нас" %}</a></li>
-              <ul>
-                <li><a href="{% url 'about_company' %}">{% translate "Об обществе" %}</a></li>
-                <li><a href="{% url 'index' %}#team">{% translate "Руководство" %}</a></li>
-                <li><a href="#about">{% translate "Блоки" %}</a></li>
-                <li><a href="#clients">{% translate "Наши пратнеры" %}</a></li>
-                <li><a href="#about">{% translate "Нормативно-правовая база" %}</a></li>
-              </ul>
-            </ul>
-            </div>
-          <div style="float: none; display: inline-block; vertical-align: top; margin-right: -4px; float: left; margin-left: 10%;">
-            <ul>
-              <li><a href="#">{% translate "Пресс-центр" %}</a></li>
-              <ul>
-                <li><a href="{% url 'index' %}#more-services">{% translate "Пресс-релизы (новости)" %}</a></li>
-                <li><a href="#team">{% translate "Интервью" %}</a></li>
-                <li><a href="{% url 'gallery' %}">{% translate "Фотогалерея" %}</a></li>
-                <li><a href="#about">{% translate "Брифинг" %}</a></li>
-              </ul>
-          </ul>
-        </div>
-        <div style="float: none; display: inline-block; vertical-align: top; margin-right: -4px; float: left; margin-left: 10%;">
-          <ul>
-            <li><a href="#">{% translate "Закупки" %}</a></li>
-            <ul>
-              <li><a href="{% url 'index' %}#contests">{% translate "Конкурсы" %}</a></li>
-              <li><a href="{% url 'contests' %}">{% translate "Архив конкурсов" %}</a></li>
-            </ul>
-          </ul>
-        </div>
-      </div>
-
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="contact-about">
               <h3>{% translate "ОАО «Кыргызиндустрия»" %}</h3>

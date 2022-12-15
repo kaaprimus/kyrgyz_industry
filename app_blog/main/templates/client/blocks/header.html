@@ -34,17 +34,15 @@
             <li><a href="{% url 'news' %}">{% translate "Пресс-релизы (новости)" %}</a></li>
             <li><a href="{% url 'interviews' %}">{% translate "Интервью" %}</a></li>
             <li><a href="{% url 'gallery' %}">{% translate "Фотогалерея" %}</a></li>
-            <li><a href="#about">{% translate "Брифинг" %}</a></li>
+            <li><a href="{% url 'hot_news' %}">{% translate "Брифинг" %}</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="#"><span>{% translate "Закупки" %}</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="{% url 'index' %}#contests">{% translate "Конкурсы" %}</a></li>
-            <li><a href="{% url 'contests' %}">{% translate "Архив конкурсов" %}</a></li>
+            <li><a href="{% url 'contests' %}">{% translate "Конкурсы" %}</a></li>
             <li><a href="{% url 'vacancies' %}">{% translate "Вакансии" %}</a></li>
           </ul>
         </li>
-        <li><a class="nav-link scrollto" href="#contact">{% translate "Контакты" %}</a></li>
         <li><a class="getstarted scrollto" href="{% url 'feedback' %}">{% translate "Свяжитесь с нами" %}</a></li>
         <li class="dropdown"><a href="#"><span></span> <i class="ri-global-line"></i></a>
           <ul>
