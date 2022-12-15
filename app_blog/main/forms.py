@@ -4,6 +4,7 @@ from .models import *
 from django.forms import ModelForm, DateTimeInput, TextInput, Textarea, DateInput
 from django import forms
 from django.contrib.auth.models import User
+import re
 
 
 # News
@@ -306,19 +307,21 @@ class HotNewsForm(forms.ModelForm):
 class InterviewsForm(ModelForm):
     class Meta:
         model = Interviews
-        fields = ['title', 'short_description', 'link']
+        fields = ['title', 'link']
     
-        widgets = {
-            'title' : TextInput(
-                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название интервью","size" : 80, 'required': True}
-            ),
-            'short_description' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "company", "placeholder" : "Краткое описание","size" : 130, 'required': True}
-            ),
-            'link' : TextInput(
-                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Ссылка на статью","size" : 2048, 'required': True}
-            ),
-        }
+    title = forms.CharField(max_length=80, required=True, widget=TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Введите название ссылки", "size" : 80}
+    )),
+    link = forms.CharField(max_length=2080, required=True, widget=TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "link", "placeholder" : "Введите ссылку", "size" : 2080}
+    ))
+
+    def check_for_empty(self):
+        title = self.cleaned_data.get("title")
+        link = self.cleaned_data.get("link")
+        if title == "" == "" or link == "":
+            raise forms.ValidationError('Это поле обязательное!')
+        return title 
 
 
 class ReportsForm(ModelForm):

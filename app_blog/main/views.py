@@ -120,15 +120,41 @@ def index(request):
         }
     return render(request, "client/index.html", context)
 
-def interviews(request, number_page=1):
+
+
+
+
+def interviews(request):
     trans = translate(language='ru')
-    interview = Interviews.objects.order_by('-id')
-    currunt_page_interview = Paginator(interview,8)
+    posts = Interviews.objects.order_by('-id')
+
+    per_page = 6
+    currunt_page_interview = Paginator(posts,8)
+
+    currunt_page_interview = Paginator(posts, per_page=per_page)
+    
+    page_num = currunt_page_interview.num_pages
+    try:
+        page = request.GET.get("page", 1)
+        posts = currunt_page_interview.page(page)
+
+    except (PageNotAnInteger, TypeError):
+        posts = currunt_page_interview.page(1)
+        
+    except EmptyPage:
+        posts = currunt_page_interview.page(currunt_page_interview.num_pages)  
+
     context = {
-        'currunt_page_interview': currunt_page_interview.page(number_page),
+        'posts':posts,
+        'paginator': currunt_page_interview,
+        'all_interviews':posts,
         'trans':trans,
+        'page_num':page_num,
         }
     return render(request, "client/pages/interviews.html", context)
+
+
+
 
 def about_company(request, number_page=1):
     trans = translate(language='ru')
@@ -253,7 +279,7 @@ def projects(request):
     else:
         posts = Projects.objects.all().order_by("-id")
 
-    per_page = 4
+    per_page = 6
      # Получаем первую фотографию под новостями
     first_image = []
     for post in posts:

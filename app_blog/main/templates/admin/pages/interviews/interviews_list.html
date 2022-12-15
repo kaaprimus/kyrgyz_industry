@@ -35,9 +35,7 @@
                         <thead>
                           <tr>
                             <th class="font-weight-bold">№</th>
-                            <th class="font-weight-bold">Заголовок</th>
-                            <th class="font-weight-bold">Описание</th>
-                            <th class="font-weight-bold">Ссылки</th>
+                            <th class="font-weight-bold">Название ссылки</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -45,8 +43,6 @@
                           <tr>
                             <td>{{forloop.counter}}</td>
                             <td class="td-title" >{{interview.title }}</td>
-                            <td class="text-danger">{{interview.short_description}}</td>
-                            <td><label class="badge badge-warning">{{interview.link}}</label></td>
                             <td class="edit-delete-icons">
                               <a href="{% url 'interviews_update' interview.id %}"><i class="icon-pencil"></i></a> |
                               <a href="{% url 'interviews_delete' interview.id %}" class="text-danger"><i class="icon-trash"></i></a>

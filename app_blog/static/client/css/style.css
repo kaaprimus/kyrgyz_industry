@@ -18,6 +18,11 @@ a {
   text-decoration: none;
 }
 
+.news-link:hover {
+  color: #204156 !important;
+  text-decoration: none;
+}
+
 a:hover {
   color: #5faee3;
   text-decoration: none;

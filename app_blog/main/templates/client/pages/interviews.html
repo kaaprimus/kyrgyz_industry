@@ -26,62 +26,77 @@
 <section id="portfolio" class="portfolio">
     <div class="container">
 
-      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
-
-        {% for value in currunt_page_interview %}
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="/{{ value.URL }}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>{{ value.Caption }}</h4>
-              <p>{{ value.title }}</p>
-              <div class="portfolio-links">
-                <a href="/{{ value.URL }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ value.Caption }}"><i class='bx bx-collapse-alt'></i></a>
-                <a href="" title="More Details"><i class='bx bx-right-arrow-alt'></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
+        {% for value in all_interviews %}
+           {{value.link|safe}}
         {% endfor %}
 
-      </div>
-
-      {% if currunt_page_interview %}
-    <div class="d-flex mt-4 flex-wrap justify-content-center">
-              <nav class="ml-auto">
-                <ul class="pagination separated pagination-info">
-                  {% if currunt_page_interview.has_previous %}
-                    <li class="page-item">
-                      <a href="/currunt_page_interview/{{ currunt_page_interview.previous_page_number }}/" class="page-link">&laquo;</a>
-                    </li>
-                  {% else %}
-                    <li class="page-item disabled">
-                      <a href="" class="page-link">&laquo;</a>
-                    </li>
-                  {% endif %}
-                  {% for page in currunt_page_interview.paginator.page_range %}
-                    {% if page == currunt_page_interview.number %}
-                      <li class="page-item active">
-                        <a href="/currunt_page_interview/{{ page }}/" class="page-link">{{ page }}</a>
+       
+       <!-- Если Есть пагинация-->
+     {% if page_num > 1 and not error %}
+     <div class="d-flex mt-4 flex-wrap justify-content-center">
+               <nav class="ml-auto">
+                 <ul class="pagination separated pagination-info" data-aos="fade-up">
+                    <!-- Если Есть Предыдущая страница-->
+                   {% if posts.has_previous %}
+                     <li class="page-item">
+                       <a href="?&page={{posts.previous_page_number}}" class="page-link">&laquo;</a>
+                     </li>
+                   {% else %}
+                     <li class="page-item disabled">
+                       <a href="" class="page-link">&laquo;</a>
+                     </li>
+                   {% endif %}
+                     <!-- Если номер текущей странцы больше чем 3-->
+                     {% if posts.number > 3%}
+                     <li class="page-item">
+                       <a class="page-link" href="?&page=1">1</a>
                       </li>
-                    {% else %}
-                      <li>
-                        <a href="/currunt_page_interview/{{ page }}/" class="page-link">{{ page }}</a>
-                      </li>
-                    {% endif %}
-                  {% endfor %}
-                  {% if currunt_page_interview.has_next %}
-                    <li class="page-item">
-                      <a href="/gallery_page/{{ currunt_page_interview.next_page_number }}/" class="page-link">&raquo;</a>
-                    </li>
-                  {% else %}
-                    <li class="page-item disabled">         
-                      <a href="" class="page-link">&raquo;</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              </nav>
-    </div>
+                         <!-- Если количество странцы больше чем 4-->
+                         {% if posts.number > 4 %}
+                         <li class="page-item">
+                           <a class="page-link">...</a>
+                         </li>
+                         {% endif %}
+                     {% endif %}
+ 
+                   {% for page in posts.paginator.page_range  %}
+                     {% if posts.number  == page %}
+                     <li class="page-item {% if page == posts.number %}active{% endif %}">
+                       <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                     </li>
+                    {% elif page > posts.number|add:'-3' and page < posts.number|add:'3' %}
+                    <li class="page-item {% if page == posts.number %}active{% endif %}">
+                     <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                   </li>
+                     {% endif %}
+                   {% endfor %}
+                   {% if posts.has_next %}
+ 
+                   {% comment %}номер текущей стр - posts.number {% endcomment %}
+                   {% if posts.number < posts.paginator.num_pages|add:'-3' %}
+                     <li class="page-item">
+                       <a class="page-link">...</a>
+                     </li>
+                       <li class="page-item">
+                         <a href="?&page={{ posts.paginator.num_pages }}" class="page-link">{{ posts.paginator.num_pages }}</a>
+                       </li>
+                     {% elif posts.number < posts.paginator.num_pages|add:'-2' %}
+                     <li class="page-item">
+                           <a href="?page={{ posts.paginator.num_pages }}" class="page-link">{{ posts.paginator.num_pages }}</a>
+                     </li>
+                     
+                     {% endif %}
+                     <li class="page-item">
+                       <a href="?&page={{posts.next_page_number}}" class="page-link">&raquo;</a>
+                     </li>
+                     {% else %}
+                       <li class="page-item disabled">         
+                         <a href="" class="page-link">&raquo;</a>
+                       </li>
+                     {% endif %}
+                 </ul>
+               </nav>
+     </div>
     {% endif %}
 
     </div>
@@ -89,4 +104,16 @@
 
 </main><!-- End #main -->
 
+
 {% endblock content %}
+
+{% block custom_js%}
+<script src="{% static 'client/vendor/jquery/jquery.min.js' %}"></script>
+
+<script>
+  $(document).ready(function(){
+    $('iframe').width(420);
+    $('iframe').height(320);
+  })
+</script>
+{% endblock custom_js%}

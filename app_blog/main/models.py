@@ -6,6 +6,8 @@ from ckeditor.fields import RichTextField
 from PIL import Image
 import uuid
 import os
+import re
+from django import forms
 
 # Языки
 class LanguageChoice(models.TextChoices):
@@ -291,10 +293,17 @@ class HotNews(models.Model):
     class Meta: 
         ordering = ['-id']
 
+
+def check_link_validate(link):
+        if re.search("^<iframe.*</iframe>$", link):
+            return link
+        else:
+            raise forms.ValidationError('Ссылка не действительна!')
+
 class Interviews(models.Model):
     title = models.CharField(verbose_name='Название интервью', max_length=80)
-    short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
-    link = models.CharField(verbose_name='Ссылка на статью', max_length=2048)
+    link = models.CharField(verbose_name='Ссылка на статью', max_length=2048, validators=[check_link_validate])
+
 
 class Reports(models.Model):
     title = models.CharField(verbose_name='Название отчета', max_length=80)
