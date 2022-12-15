@@ -26,6 +26,7 @@ from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
+from django.db.models import Q
 
 
 
@@ -189,21 +190,29 @@ def contests(request,number_page=1):
 
 
 def news(request):
-    news= News.objects.order_by('-id')
-    per_page = 2
+    posts= News.objects.order_by('-id')
+    per_page = 12
     error = None
-    count=news.count()
+    count=posts.count()
+
+    #Поиск новостей по ключевому слову
+    search_posts = request.GET.get('search')
+
+    if search_posts:
+        posts = News.objects.filter(Q(Title__icontains=search_posts) | Q(Short_Description__icontains=search_posts))
+    else:
+        posts = News.objects.all().order_by("-Date_added")
     
     # Получаем первую фотографию под новостями
     first_image = []
-    for post in news:
+    for post in posts:
         img = PhotosNews.objects.filter(Gallery = post.Gallery).first()
         if img is None:
             error = True
         else:
             first_image.append(img.URL)
     
-    current_page_news = Paginator(news, per_page=per_page)
+    current_page_news = Paginator(posts, per_page=per_page)
     current_page_img = Paginator(first_image, per_page=per_page)
     
     page_num = current_page_news.num_pages
@@ -234,20 +243,27 @@ def news(request):
     return render(request, "client/pages/news.html", context)
 
 def projects(request):
-    projects= Projects.objects.order_by('-id')
+    posts= Projects.objects.order_by('-id')
     error = False
+
+    search_projects = request.GET.get('search')
+
+    if search_projects:
+        posts = Projects.objects.filter(Q(Title__icontains=search_projects) | Q(Short_Description__icontains=search_projects))
+    else:
+        posts = Projects.objects.all().order_by("-id")
 
     per_page = 4
      # Получаем первую фотографию под новостями
     first_image = []
-    for post in projects:
+    for post in posts:
         img = PhotosProject.objects.filter(Gallery = post.Gallery_id).first()
         if img is None:
             error = True
         else:
             first_image.append(img.URL)
     
-    current_page_projects = Paginator(projects, per_page=per_page)
+    current_page_projects = Paginator(posts, per_page=per_page)
     current_page_img = Paginator(first_image, per_page=per_page)
     
     page_num = current_page_projects.num_pages
@@ -277,6 +293,8 @@ def projects(request):
     }
     return render(request, "client/pages/projects.html", context)
 
+
+
 def get_news(request,title):
     trans = translate(language='ru')
     news_detail=News.objects.filter(Title=title)
@@ -297,8 +315,16 @@ def strategy(request):
 
 def reports(request):
     trans = translate(language='ru')
-    reports_all = Reports.objects.order_by('-id')
-    context = {'trans':trans, 'reports_all':reports_all}
+    posts = Reports.objects.order_by('-id')
+
+    search_report = request.GET.get('search')
+
+    if search_report:
+        posts = Reports.objects.filter(Q(title__icontains=search_report) | Q(short_description__icontains=search_report))
+    else:
+        posts = Reports.objects.all().order_by("-id")
+
+    context = {'trans':trans, 'reports_all':posts}
     return render(request, "client/pages/reports.html", context)
 
 def get_project(request,title):

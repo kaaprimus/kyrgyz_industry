@@ -12,11 +12,14 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{% translate "Отчеты и результаты" %}</h2>
           <ol>
             <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
             <li>{% translate "Отчеты и результаты" %}</li>
           </ol>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" name="search" action="{% url 'reports' %}" type="search" placeholder="Поиск" aria-label="Search">
+
+          </form>
         </div>
 
       </div>
@@ -37,6 +40,16 @@
         </div>
 
       </div>
+      {% empty %}
+      <section id="npa" class="portfolio-details"></section>
+      <div class="container">
+        <div class="row gy-4 mb-5">
+          <div class="col-lg-4" style="margin: auto; width: 90%;">
+            <div class="portfolio-info" style="text-align: center;">
+              <h3>{% translate "Нет таких данных!" %}</h3>
+            </div>
+          </div>
+        </div>
       {%endfor%}
     </section><!-- End Portfolio Details Section -->
 
