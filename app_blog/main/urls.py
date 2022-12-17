@@ -130,6 +130,7 @@ urlpatterns = [
     path('documents_npa', views.npa, name='documents_npa'),
     path('sitemap/', views.sitemap, name = 'sitemap'),
     path('feedback', views.feedback, name = 'feedback'),
+    path('block/<str:title>', views.get_block, name='block'),
 
     # Новые добавленные страницы
     path('team/', views.team, name = 'team'),

@@ -1,24 +1,31 @@
 {% extends 'client/base.html' %}
 {% load static %}
 {% load i18n %}
-
-
 {% block page_title %}Кыргызиндустрия{% endblock page_title%}
 
 {% block content %}
- 
+
   <main id="main">
-    
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{% translate "Контакты" %}</h2>
+          <ol>
+            <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
+            <li>{% translate "Контакты" %}</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
-
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "СВЯЖИТЕСЬ С НАМИ" %}</h2>
         </div>
-
         <div class="row">
-
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="contact-about">
               <h3>{% translate "ОАО «Кыргызиндустрия»" %}</h3>
