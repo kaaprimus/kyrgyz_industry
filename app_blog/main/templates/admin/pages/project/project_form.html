@@ -13,14 +13,23 @@
         </ol>
       </nav>
     </div>
-    {% if messages %} {% for message in messages %}
-    {% if message.tags == "error" %}
-        <div class="alert alert-danger" role="alert">{{message}}</div>
-    {% elif message.tags == "success" %}
-    <div class="alert alert-success" role="alert">{{message}}</div>
+    {% if messages %} 
+        {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div class="alert alert-danger alert-dismissible" role="alert">{{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% elif message.tags == "success" %}
+            <div class="alert alert-success alert-dismissible" role="alert">{{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            {% endif %}
+        {% endfor %}
     {% endif %}
-    {% endfor %}
-  {% endif %}
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">

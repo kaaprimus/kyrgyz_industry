@@ -135,7 +135,6 @@ def interviews(request):
     posts = Interviews.objects.order_by('-id')
 
     per_page = 6
-    currunt_page_interview = Paginator(posts,8)
 
     currunt_page_interview = Paginator(posts, per_page=per_page)
     
@@ -166,7 +165,12 @@ def about_company(request, number_page=1):
     trans = translate(language='ru')
     vacancies= Vacancies.objects.order_by('-id')
     management= Management.objects.order_by('-id')
-    president=Management.objects.get(position__startswith="Президент")
+    
+    not_exist = False
+    try:
+        president=Management.objects.get(position__startswith="Президент")
+    except Management.DoesNotExist:
+        not_exist = True
     veep = Management.objects.filter(position__startswith="Вице-президент")
     
     currunt_page_vacancies = Paginator(vacancies,4)
@@ -176,6 +180,7 @@ def about_company(request, number_page=1):
         'trans':trans, 
         'management':management,
         'veep':veep,
+        "not_exist" : not_exist,
         'president':president,
         }
     return render(request, "client/pages/about_company.html", context)
@@ -424,11 +429,14 @@ def feedback(request):
     return render(request, "client/pages/feedback.html", {})
 
 def hot_news(request):
+    
+    
     news_all = HotNews.objects.order_by('-id')
     error = False
     
     per_page = 1
-     # Получаем первую фотографию под новостями
+    
+    # Получаем первую фотографию под новостями
     first_image = []
     for post in news_all:
         img = HotNewsPhoto.objects.filter(gallery = post.gallery).first()
@@ -827,6 +835,7 @@ class ProjectCategoryListView(LoginRequiredMixin, ProjectCategoryView, ListView)
 class ProjectCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectCategoryView, CreateView):
     login_url = "login_page"
     template_name = "admin/pages/project-category/category_form.html" 
+    success_url = reverse_lazy("projectcategory_create")
     success_message = "Запись успешно Добавлено!" 
     
 class ProjectCategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectCategoryView, UpdateView):
