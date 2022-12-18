@@ -31,7 +31,7 @@
     </div>
 
     <div class="row">
-      {% for vacancy in currunt_page_vacancies %}
+      {% for vacancy in page_vacancies %}
       <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
         <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
           <div class="icon"><i class="ri-currency-line"></i></div>
@@ -40,44 +40,79 @@
           <p class="description">{{ vacancy.salary }} сом</p>
         </div>
       </div>
+      {% empty %}
+      <div class="section-title" data-aos="fade-up">
+        <h4>{% translate "Нет Вакансии" %}</h4>
+      </div>
       {% endfor %}
     </div>
   </div>
+  {% if page_num > 1 %}
   <div class="d-flex mt-4 flex-wrap justify-content-center">
-    <nav class="ml-auto">
-      <ul class="pagination separated pagination-info">
-        {% if currunt_page_vacancies.has_previous %}
-          <li class="page-item">
-            <a href="/page_vacancies/{{ currunt_page_vacancies.previous_page_number }}/" class="page-link">&laquo;</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled">
-            <a href="" class="page-link">&laquo;</a>
-          </li>
-        {% endif %}
-        {% for page in currunt_page_vacancies.paginator.page_range %}
-          {% if page == currunt_page_vacancies.number %}
-            <li class="page-item active">
-              <a href="/page_vacancies/{{ page }}/" class="page-link">{{ page }}</a>
+      <nav class="ml-auto">
+        <ul class="pagination separated pagination-info" data-aos="fade-up">
+           <!-- Если Есть Предыдущая страница-->
+          {% if page_vacancies.has_previous %}
+            <li class="page-item">
+              <a href="?&page={{page_vacancies.previous_page_number}}" class="page-link">&laquo;</a>
             </li>
           {% else %}
-            <li>
-              <a href="/page_vacancies/{{ page }}/" class="page-link">{{ page }}</a>
+            <li class="page-item disabled">
+              <a href="" class="page-link">&laquo;</a>
             </li>
           {% endif %}
-        {% endfor %}
-        {% if currunt_page_vacancies.has_next %}
-          <li class="page-item">
-            <a href="/page_vacancies/{{ currunt_page_vacancies.next_page_number }}/" class="page-link">&raquo;</a>
+            <!-- Если номер текущей странцы больше чем 3-->
+            {% if page_vacancies.number > 3%}
+            <li class="page-item">
+              <a class="page-link" href="?&page=1">1</a>
+             </li>
+                <!-- Если количество странцы больше чем 4-->
+                {% if page_vacancies.number > 4 %}
+                <li class="page-item">
+                  <a class="page-link">...</a>
+                </li>
+                {% endif %}
+            {% endif %}
+
+          {% for page in page_vacancies.paginator.page_range  %}
+            {% if page_vacancies.number  == page %}
+            <li class="page-item {% if page == page_vacancies.number %}active{% endif %}">
+              <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+            </li>
+           {% elif page > page_vacancies.number|add:'-3' and page < page_vacancies.number|add:'3' %}
+           <li class="page-item {% if page == page_vacancies.number %}active{% endif %}">
+            <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
           </li>
-        {% else %}
-          <li class="page-item disabled">         
-            <a href="" class="page-link">&raquo;</a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
-</div>
+            {% endif %}
+          {% endfor %}
+          {% if page_vacancies.has_next %}
+
+          {% comment %}номер текущей стр - page_vacancies.number {% endcomment %}
+          {% if page_vacancies.number < page_vacancies.paginator.num_pages|add:'-3' %}
+            <li class="page-item">
+              <a class="page-link">...</a>
+            </li>
+              <li class="page-item">
+                <a href="?&page={{ page_vacancies.paginator.num_pages }}" class="page-link">{{ page_vacancies.paginator.num_pages }}</a>
+              </li>
+            {% elif page_vacancies.number < page_vacancies.paginator.num_pages|add:'-2' %}
+            <li class="page-item">
+                  <a href="?page={{ page_vacancies.paginator.num_pages }}" class="page-link">{{ page_vacancies.paginator.num_pages }}</a>
+            </li>
+            
+            {% endif %}
+            <li class="page-item">
+              <a href="?&page={{page_vacancies.next_page_number}}" class="page-link">&raquo;</a>
+            </li>
+            {% else %}
+              <li class="page-item disabled">         
+                <a href="" class="page-link">&raquo;</a>
+              </li>
+            {% endif %}
+        </ul>
+      </nav>
+   </div>
+{% endif %}
 </section><!-- End Services Section -->
 
 </main><!-- End #main -->

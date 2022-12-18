@@ -143,6 +143,7 @@ class ProjectCategoryForm(ModelForm):
                     attrs= {"type" : "text", "class" : "form-control", "id" : "name", "placeholder" : "Название категории"}           
                                )
         } 
+        
 class ContestForm(ModelForm):
     class Meta:
         model = Contests

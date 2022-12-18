@@ -325,7 +325,7 @@ class Reports(models.Model):
         validators=[FileExtensionValidator(['pdf','doc'])]
         )
     
-    path_url = "static/client/img/reports/"
+    path_url = "static/client/docs/reports/"
     
     def __str__(self) -> str:
         return self.caption

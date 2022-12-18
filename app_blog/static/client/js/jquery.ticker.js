@@ -420,7 +420,7 @@
 		controls: false,
 		titleText: false,	
 		direction: 'ltr',	
-		pauseOnItems: 10000,
+		pauseOnItems: 15000,
 		fadeInSpeed: 600,
 		fadeOutSpeed: 600
 	};	
