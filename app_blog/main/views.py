@@ -527,13 +527,14 @@ def send_message(request):
     
     sucs=True
     if request.method == 'POST':
-        settings.EMAIL_HOST_USER=request.POST.get('email', '')
-        settings.EMAIL_HOST_PASSWORD=''
+        settings.EMAIL_HOST_USER='zenisbekovk04@gmail.com'
+        settings.EMAIL_HOST_PASSWORD='zwhojtjglgpyguxw'
+
         Name = request.POST.get('name', '')
-        
         message = request.POST.get('message', '')
         from_email = request.POST.get('email', '')
         subject = "Сообщение от пользователей" 
+        to_email='zenisbekovk04@gmail.com'
         try:
             
             body = {
@@ -543,7 +544,7 @@ def send_message(request):
 		    }
 	    
             messageAll = "\n".join(body.values())
-            send_mail(subject, messageAll, from_email, ['To'])
+            send_mail(subject, messageAll, from_email, to_email)
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
         except:
@@ -551,7 +552,7 @@ def send_message(request):
             sucs=False
     if(sucs==True):
         messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
-    return redirect ('/')
+    return redirect ('feedback')
 
 @csrf_exempt
 def login_page(request):
