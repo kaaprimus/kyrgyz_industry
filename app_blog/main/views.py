@@ -1503,11 +1503,11 @@ class HotNewsImageUpdateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsIma
     
 def hotnewsimage_delete(request, id):
     context = {
-        "is_active" : "hotnews-panel",
-        "active_hotnews_image" : "active",
-        "expand_hotnews" : "show",
+        "is_active" : "projects-panel",
+        "active_project_image" : "active",
+        "expand_projects" : "show",
     }
-    obj = get_object_or_404(HotNewsPhoto, id = id)
+    obj = get_object_or_404(PhotosProject, id = id)
     if request.method =="POST":
         try:
             if len(obj.url) > 0:
@@ -1578,11 +1578,12 @@ def hotnews_delete(request, id):
     return render(request, "admin/pages/hotnews/hotnews_confirm_delete.html", context)  
 
 
+
 class ReportsView(View):
     model = Reports
     form_class = ReportsForm
     active_panel = "reports-panel"
-    success_url = reverse_lazy("hotnews_create")
+    success_url = reverse_lazy("reports_create")
     extra_context = {
         "is_active" : active_panel,
         "active_reports" : "active",

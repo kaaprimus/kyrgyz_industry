@@ -327,6 +327,12 @@ class Interviews(models.Model):
 class Reports(models.Model):
     title = models.CharField(verbose_name='Название отчета', max_length=80, unique=True,error_messages={'unique':"Отчет с таким названием уже существует!"})
     short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
+    Language=models.CharField(
+                               max_length = 10, 
+                               choices = LanguageChoice.choices,
+                               default = LanguageChoice.RU,
+                               verbose_name = "Язык"
+                               )
     url = models.FileField(
         verbose_name='Путь файла',
         upload_to=get_file_path, 

@@ -39,6 +39,9 @@ h6 {
 /*--------------------------------------------------------------
 # Custom css
 --------------------------------------------------------------*/
+.btn-refresh :hover{
+  color: #3498db;
+}
 
 .spinner-box{
   z-index: 10;
@@ -52,7 +55,7 @@ h6 {
 
 .search-form{
   display: flex;
-  margin-left: 66%;
+  margin-left: 65%;
 }
 
 .back-to-top i {
