@@ -16,14 +16,6 @@ class LanguageChoice(models.TextChoices):
     EN = "English", "English"
     CH = "中国人", "中国人"
 
-#Функция для проверки одинаковых названий   
-def check_title_similar(title):
-    print(title)
-    news_title = title
-    if re.search(news_title, title):
-        raise forms.ValidationError('Запись с таким названием уже существует!')
-    else:
-        return title
 
 # Категория проектов
 class ProjectCategory(models.Model):

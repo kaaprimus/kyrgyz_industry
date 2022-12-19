@@ -42,3 +42,4 @@ app_blog/static/client/img/hot_news/1ce84e38-9663-4c33-b042-748d686f84d5__20796_
 app_blog/static/client/img/hot_news/10a658b5-8228-4129-a4fa-b13baf0f8260__2021-12-12_2.png
 app_blog/static/client/img/hot_news/baa07f6f-92bb-42e4-8719-7ceb05870944__techindustry.jpg
 app_blog/db.sqlite3
+app_blog/main/__pycache__/urls.cpython-310.pyc
