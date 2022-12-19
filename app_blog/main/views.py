@@ -87,6 +87,20 @@ def test_method(request):
     
     return render(request, 'client/pages/img.html', context)
 
+# Блоки
+def get_block(request,title):
+    trans = translate(language='ru')
+    context = {'trans':trans}
+    if(title=="Направление НИОКР и инновационных проектов ОАО"):
+        return render(request, "client/pages/blockone.html", context)
+    if(title=="Направление промышленных отраслей ОАО"):
+        return render(request, "client/pages/blocktwo.html", context)
+    if(title=="Направление экономики и финансов ОАО"):
+        return render(request, "client/pages/blockthree.html", context)
+    if(title=="Направление внешнеэкономических связей и торговли ОАО"):
+        return render(request, "client/pages/blockfour.html", context)
+    if(title=="Направление руководителя аппарата ОАО"):
+        return render(request, "client/pages/blockfive.html", context)
 
 def index(request):
     news= News.objects.order_by('-id')[:4]
@@ -1346,11 +1360,11 @@ class HotNewsImageUpdateView(LoginRequiredMixin, SuccessMessageMixin, HotNewsIma
     
 def hotnewsimage_delete(request, id):
     context = {
-        "is_active" : "projects-panel",
-        "active_project_image" : "active",
-        "expand_projects" : "show",
+        "is_active" : "hotnews-panel",
+        "active_hotnews_image" : "active",
+        "expand_hotnews" : "show",
     }
-    obj = get_object_or_404(PhotosProject, id = id)
+    obj = get_object_or_404(HotNewsPhoto, id = id)
     if request.method =="POST":
         try:
             if len(obj.url) > 0:

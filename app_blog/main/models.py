@@ -18,8 +18,12 @@ class LanguageChoice(models.TextChoices):
 
 #Функция для проверки одинаковых названий   
 def check_title_similar(title):
-        news_title = title
-        if re.search(news_title, title):
+        news = News.objects.all()
+
+        for value in news:
+            news_title = value.Title
+
+        if re.search(title, news_title):
             raise forms.ValidationError('Запись с таким названием уже существует!')
         else:
             return title
@@ -40,7 +44,7 @@ class GalleryProject(models.Model):
     Name=models.CharField(max_length=50,verbose_name="Название галереи", validators=[check_title_similar])
 
     class Meta:
-        db_table="galleryProject" 
+        db_table="galleryProject"
         ordering = ['-id']
         
     def __str__(self) -> str:
@@ -51,7 +55,7 @@ class GalleryNews(models.Model):
     Name=models.CharField(max_length=50,verbose_name="Название галереи", validators=[check_title_similar])
 
     class Meta:
-        db_table="galleryNews" 
+        db_table="galleryNews"
         ordering = ['-id']
     def __str__(self) -> str:
         return self.Name   
@@ -86,7 +90,7 @@ class PhotosProject(models.Model):
             image.thumbnail(output_size)
             image.save(self.URL.path)
         elif image.width < 800 or image.height < 600:
-            return 'Размер фотографии не подходит! Минимальный размер 800х600'
+            raise forms.ValidationError('Размер фотографии не подходит! Минимальный размер 800x600')
     class Meta:
         ordering = ['-id']
     
@@ -111,6 +115,8 @@ class PhotosNews(models.Model):
             output_size = (600, 400)
             image.thumbnail(output_size)
             image.save(self.URL.path)
+        elif image.width < 800 or image.height < 600:
+            raise ValidationError("Размер фотографии не подходит! Минимальный размер 800x600")
             
     class Meta:
         ordering = ['-id']
