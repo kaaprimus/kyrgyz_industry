@@ -30,8 +30,8 @@
           </div>
           <div class="row">
             {% for contest in contest_page %}
-            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-              <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-md-6 col-lg-4 mb-3">
+              <div class="icon-box h-100" data-aos="fade-up" data-aos-delay="100">
                 <div class="icon"><i class="bx bx-file"></i></div>
                 <h4 class="title"><a href="">{{ contest.Status }}</a></h4>
                 <p class="description">{{ contest.Short_Description }}</p>
@@ -47,45 +47,72 @@
             {% endfor %}
           </div>
         </div>
-        {% if contest_page %}
-        {% if count > 8 %}
-        <div class="d-flex mt-4 flex-wrap justify-content-center">
-          <nav class="ml-auto">
-            <ul class="pagination separated pagination-info">
-              {% if contest_page.has_previous %}
-                <li class="page-item">
-                  <a href="/page_contest/{{ contest_page.previous_page_number }}/" class="page-link">&laquo;</a>
-                </li>
-              {% else %}
-                <li class="page-item disabled">
-                  <a href="" class="page-link">&laquo;</a>
-                </li>
-              {% endif %}
-              {% for page in contest_page.paginator.page_range %}
-                {% if page == contest_page.number %}
-                  <li class="page-item active">
-                    <a href="/page_contest/{{ page }}/" class="page-link">{{ page }}</a>
-                  </li>
-                {% else %}
-                  <li>
-                    <a href="/page_contest/{{ page }}/" class="page-link">{{ page }}</a>
-                  </li>
-                {% endif %}
-              {% endfor %}
-              {% if contest_page.has_next %}
-                <li class="page-item">
-                  <a href="/page_contest/{{ contest_page.next_page_number }}/" class="page-link">&raquo;</a>
-                </li>
-              {% else %}
-                <li class="page-item disabled">         
-                  <a href="" class="page-link">&raquo;</a>
-                </li>
-                {% endif %}
-              {% endif %}
-            </ul>
-          </nav>
-</div>
-        {% endif %}
+        {% if page_num > 1 %}
+           <div class="d-flex mt-4 flex-wrap justify-content-center">
+               <nav class="ml-auto">
+                 <ul class="pagination separated pagination-info" data-aos="fade-up">
+                    <!-- Если Есть Предыдущая страница-->
+                   {% if contest_page.has_previous %}
+                     <li class="page-item">
+                       <a href="?&page={{contest_page.previous_page_number}}" class="page-link">&laquo;</a>
+                     </li>
+                   {% else %}
+                     <li class="page-item disabled">
+                       <a href="" class="page-link">&laquo;</a>
+                     </li>
+                   {% endif %}
+                     <!-- Если номер текущей странцы больше чем 3-->
+                     {% if contest_page.number > 3%}
+                     <li class="page-item">
+                       <a class="page-link" href="?&page=1">1</a>
+                      </li>
+                         <!-- Если количество странцы больше чем 4-->
+                         {% if contest_page.number > 4 %}
+                         <li class="page-item">
+                           <a class="page-link">...</a>
+                         </li>
+                         {% endif %}
+                     {% endif %}
+ 
+                   {% for page in contest_page.paginator.page_range  %}
+                     {% if contest_page.number  == page %}
+                     <li class="page-item {% if page == contest_page.number %}active{% endif %}">
+                       <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                     </li>
+                    {% elif page > contest_page.number|add:'-3' and page < contest_page.number|add:'3' %}
+                    <li class="page-item {% if page == news_page.number %}active{% endif %}">
+                     <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                   </li>
+                     {% endif %}
+                   {% endfor %}
+                   {% if contest_page.has_next %}
+ 
+                   {% comment %}номер текущей стр - contest_page.number {% endcomment %}
+                   {% if contest_page.number < contest_page.paginator.num_pages|add:'-3' %}
+                     <li class="page-item">
+                       <a class="page-link">...</a>
+                     </li>
+                       <li class="page-item">
+                         <a href="?&page={{ contest_page.paginator.num_pages }}" class="page-link">{{ contest_page.paginator.num_pages }}</a>
+                       </li>
+                     {% elif contest_page.number < contest_page.paginator.num_pages|add:'-2' %}
+                     <li class="page-item">
+                           <a href="?page={{ contest_page.paginator.num_pages }}" class="page-link">{{ contest_page.paginator.num_pages }}</a>
+                     </li>
+                     
+                     {% endif %}
+                     <li class="page-item">
+                       <a href="?&page={{contest_page.next_page_number}}" class="page-link">&raquo;</a>
+                     </li>
+                     {% else %}
+                       <li class="page-item disabled">         
+                         <a href="" class="page-link">&raquo;</a>
+                       </li>
+                     {% endif %}
+                 </ul>
+               </nav>
+            </div>
+         {% endif %}
         
       </section><!-- End Services Section -->
 

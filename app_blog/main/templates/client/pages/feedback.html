@@ -1,62 +1,31 @@
 {% extends 'client/base.html' %}
 {% load static %}
 {% load i18n %}
-
-
 {% block page_title %}Кыргызиндустрия{% endblock page_title%}
 
 {% block content %}
-{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <ul id="suggestion">
-            <li class="item">
-              <h1 data-aos="fade-up">{% translate "ОАО «Кыргызиндустрия»" %}</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400">{% translate "создано постановлением Кабинета Министров Кыргызской Республики за №341 от 24 декабря 2021 года со 100% участием государства в его уставном капитале, который составляет 1 млрд. сомов." %}</h2>
-              <!-- <div data-aos="fade-up" data-aos-delay="800">
-                <a href="#portfolio" class="btn-get-started scrollto">{% translate "Наши Проекты" %}</a>
-              </div> -->
-            </li>
-            <!-- {% for hotnews in hot_news%}
-            <li class="item"> 
-              <h1 data-aos="fade-up">{{ hotnews.title}}</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400">{{ hotnews.short_description}}</h2>
-              <div data-aos="fade-up" data-aos-delay="800">
-                <a href="{% url 'hot_news_detail' hotnews.title %}" class="btn-get-started scrollto">{% translate "Читать дальше" %}</a>
-              </div>
-            </li>
-            {% endfor %} -->
-          </ul>  
-         
-         
-        
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
-          <img src="{% static 'client/img/hero-img.png' %}" class="img-fluid animated" alt="">
-        </div>
-      </div>
-    </div>
-
-  </section><!-- End Hero -->
 
   <main id="main">
-    
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{% translate "Контакты" %}</h2>
+          <ol>
+            <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
+            <li>{% translate "Контакты" %}</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
-
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "СВЯЖИТЕСЬ С НАМИ" %}</h2>
         </div>
-
         <div class="row">
-
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="contact-about">
               <h3>{% translate "ОАО «Кыргызиндустрия»" %}</h3>

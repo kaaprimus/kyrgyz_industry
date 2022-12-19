@@ -14,24 +14,25 @@
       </nav>
     </div>
    
-    {% if messages %} {% for message in messages %}
+    {% if messages %} 
+      {% for message in messages %}
         {% if message.tags == "error" %}
             <div class="alert alert-danger alert-dismissible" role="alert">{{message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         {% elif message.tags == "success" %}
-        <div class="alert alert-success alert-dismissible" role="alert">{{message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
+            <div class="alert alert-success alert-dismissible" role="alert">{{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         {% endif %}
-        {% endfor %}
+      {% endfor %}
     {% endif %}
     <div class="col-12 grid-margin stretch-card">
-        <div class="card">
+        <div class="card shadow-lg">
         <div class="card-body">
             <h4 class="card-title">{% if request.path == url_path %}Добавить{% else%}Изменить{% endif %} запись</h4>
             <form class="forms-sample" method="POST" enctype="multipart/form-data">
@@ -54,16 +55,23 @@
                     {{ form.date_birth }}
                 </div>
                 <div class="col form-group">
-                    <label for=" {{ form.education.id_for_label }}" class="font-weight-bold">Образования:</label>
-                    {{ form.education }}
-                    {{ form.education.errors }}
+                    <label for=" {{ form.mail_link.id_for_label }}" class="font-weight-bold">Почта:</label>
+                    {{ form.mail_link }}
+                    {{ form.mail_link.errors }}
                 </div>
             </div>
-           
-            <div class="form-group">
-                <label for="{{ form.speciality.id_for_label }}" class="font-weight-bold">Специальность</label>
-                {{ form.speciality }}
-                {{ form.speciality.errors }}
+
+            <div class="form-row">
+                <div class="col form-group">
+                    <label for="{{ form.instagram_link.id_for_label }}" class="font-weight-bold">Инстаграм:</label>
+                    {{ form.instagram_link }}
+                    {{ form.instagram_link.errors }}
+                </div>
+                <div class="col form-group">
+                    <label for=" {{ form.facebook_link.id_for_label }}" class="font-weight-bold">Facebook:</label>
+                    {{ form.facebook_link }}
+                    {{ form.facebook_link.errors }}
+                </div>
             </div>
 
             <div class="form-group">

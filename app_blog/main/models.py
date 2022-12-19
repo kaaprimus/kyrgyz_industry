@@ -30,7 +30,7 @@ def check_title_similar(title):
   
 # Категория проектов
 class ProjectCategory(models.Model):
-    Name=models.CharField(max_length=70,verbose_name="Название категории")
+    Name=models.CharField(max_length=70,verbose_name="Название категории",unique=True,error_messages={'unique':"Категория с таким названием уже существует!"})
     
     class Meta:
         db_table="projectCategory" 
@@ -41,7 +41,7 @@ class ProjectCategory(models.Model):
 
 #Галерея 
 class GalleryProject(models.Model):
-    Name=models.CharField(max_length=50,verbose_name="Название галереи", validators=[check_title_similar])
+    Name=models.CharField(max_length=50,verbose_name="Название галереи", unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
 
     class Meta:
         db_table="galleryProject"
@@ -52,7 +52,7 @@ class GalleryProject(models.Model):
 
 
 class GalleryNews(models.Model):
-    Name=models.CharField(max_length=50,verbose_name="Название галереи", validators=[check_title_similar])
+    Name=models.CharField(max_length=50,verbose_name="Название галереи", unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
 
     class Meta:
         db_table="galleryNews"
@@ -136,7 +136,7 @@ class Vacancy_Status_Choice(models.TextChoices):
 # Проекты
 
 class Projects(models.Model):
-    Title=models.CharField(max_length=70,verbose_name="Заголовок проекта", validators=[check_title_similar])
+    Title=models.CharField(max_length=70,verbose_name="Заголовок проекта", unique=True,error_messages={'unique':"Проект с таким названием уже существует!"})
     Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
@@ -167,7 +167,7 @@ class Projects(models.Model):
 # Конкурсы
 
 class Contests(models.Model):
-    Title=models.CharField(max_length=40,verbose_name="Название конкурса", validators=[check_title_similar])
+    Title=models.CharField(max_length=40,verbose_name="Название конкурса", unique=True,error_messages={'unique':"Конкурс с таким названием уже существует!"})
     Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
     Document = models.FileField(
                                 verbose_name="Документ", 
@@ -196,7 +196,7 @@ class Contests(models.Model):
 # Новости
 
 class News(models.Model):
-    Title=models.CharField(max_length=100,verbose_name="Заголовок новости", validators=[check_title_similar])
+    Title=models.CharField(max_length=100,verbose_name="Заголовок новости", unique=True,error_messages={'unique':"Новость с таким названием уже существует!"})
     Short_Description = models.CharField(max_length=170,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
@@ -217,10 +217,13 @@ class Management(models.Model):
     full_name = models.CharField(max_length = 60, verbose_name = "ФИО Сотрудника")
     position = models.CharField(max_length = 70, verbose_name = "Должность")
     date_birth = models.DateField(verbose_name='Дата рождения', default=now)
-    education = models.CharField(max_length=255, verbose_name='Образования')
-    speciality = models.CharField(max_length=
-                                  255, verbose_name='Специальность')
+
     about = RichTextField(verbose_name="Биография сотрудника")
+
+    mail_link = models.CharField(max_length=2080, verbose_name='Ссылка на почту', null=True)
+    instagram_link = models.CharField(max_length=2080, verbose_name='Ссылка на инстаграм', null=True)
+    facebook_link = models.CharField(max_length=2080, verbose_name='Ссылка на facebook', null=True)
+
     language=models.CharField(
                                max_length = 10, 
                                choices = LanguageChoice.choices,
@@ -241,7 +244,7 @@ class Management(models.Model):
 # Вакансии
 
 class Vacancies(models.Model):
-    title = models.CharField(max_length=70, verbose_name="Заголовок", validators=[check_title_similar])
+    title = models.CharField(max_length=70, verbose_name="Заголовок", unique=True,error_messages={'unique':"Вакансия уже существует!"})
     company = models.CharField(max_length=70, verbose_name = "Компания")
     Language=models.CharField(
                                max_length = 10, 
@@ -264,7 +267,7 @@ class Vacancies(models.Model):
 # Горячие новости
 
 class HotNewsGallery(models.Model):
-    name = models.CharField(max_length=50, verbose_name='Название галереи', validators=[check_title_similar])
+    name = models.CharField(max_length=50, verbose_name='Название галереи', unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
 
     def __str__(self) -> str:
         return self.name
@@ -291,7 +294,7 @@ class HotNewsPhoto(models.Model):
         
 #Главные события
 class HotNews(models.Model):
-    title = models.CharField(verbose_name='Название событии', max_length=70, validators=[check_title_similar])
+    title = models.CharField(verbose_name='Название событии', max_length=70, unique=True,error_messages={'unique':"Событие с таким названием уже существует!"})
     short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
     description = RichTextField()
     Language=models.CharField(
@@ -317,12 +320,12 @@ def check_link_validate(link):
             raise forms.ValidationError('Ссылка не действительна!')
 
 class Interviews(models.Model):
-    title = models.CharField(verbose_name='Название ссылки', max_length=80, validators=[check_title_similar])
+    title = models.CharField(verbose_name='Название ссылки', max_length=80, unique=True,error_messages={'unique':"Такая запись уже существует!"})
     link = models.CharField(verbose_name='Ссылка на статью', max_length=2048, validators=[check_link_validate])
 
 
 class Reports(models.Model):
-    title = models.CharField(verbose_name='Название отчета', max_length=80, validators=[check_title_similar])
+    title = models.CharField(verbose_name='Название отчета', max_length=80, unique=True,error_messages={'unique':"Отчет с таким названием уже существует!"})
     short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
     url = models.FileField(
         verbose_name='Путь файла',
@@ -330,7 +333,7 @@ class Reports(models.Model):
         validators=[FileExtensionValidator(['pdf','doc'])]
         )
     
-    path_url = "static/client/img/reports/"
+    path_url = "static/client/docs/reports/"
     
     def __str__(self) -> str:
         return self.caption

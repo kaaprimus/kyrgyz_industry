@@ -1,7 +1,7 @@
 {% extends 'client/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block page_title %}About Company{% endblock page_title %}
+{% block page_title %}О компании{% endblock page_title %}
 
 {% block content %}
 
@@ -60,73 +60,91 @@
       </div>
     </section><!-- End About Us Section -->
 
-    <!-- ======= Team Section ======= -->
+
+    {% if not_exist %}
     <section id="team" class="team section-bg">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
           <h2>{% translate "Руководство" %}</h2>
-          <p>Президент</p>
+          <p>{% translate "Президент" %}</p>
         </div>
         <div class="row gy-4">
-          <div class="col-lg-4" style="margin:auto; width: 100%;" >
+          <div class="col-lg-12">
             <section id="team" class="team section-bg">
-                <div class="container">
-          
-                    <div style="margin:auto; width: 23%" class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                      <div class="member" data-aos="fade-up" data-aos-delay="100">
-                        <div class="member-img">
-                          <img src="/{{president.picture}}" class="img-fluid" alt="">
-                          <div class="social">
-                            <a href=""><i class="bi bi-twitter"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
-                          </div>
-                        </div>
-                        <div class="member-info">
-                         <a href="{% url 'president' %}"><h4>{{president.full_name}}</h4></a>
-                          <span>{{president.position}}</span>
-                        </div>
-                      </div>
+                <div class="container d-flex justify-content-center">
+                    <div class="col-lg-3 col-md-6 align-items-stretch">
+                        <p class="text-center text-danger">{% translate "В БД не существует запись в должности Президента, либо на выбранном языке не добавлены записи." %}</p>
                     </div>
                  </div>
-                </div>
-              </div>
-           </section><!-- End Team Section -->
-          </section> 
-              <!-- ======= Team Section ======= -->
+            </section>
+          </div>
+        </div>
+      </div>
+    </section> 
+    {% else %}
+    <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
-          <h2>Вице Президенты</h2>
+          <h2 class="team-title">{% translate "Руководство" %}</h2>
+          <p>{% translate "Президент" %}</p>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            <div class="col-lg-4 col-md-6">
+              <div class="member" data-aos="fade-up" data-aos-delay="100">
+                <div class="member-img">
+                  <img src="/{{president.picture}}" class="img-fluid w-100" alt="Изображение Президента ОАО">
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <a href="{% url 'president' %}"><h4>{{president.full_name}}</h4></a>
+                  <span>{{president.position}}</span>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section> 
+
+    <section id="team" class="team section-bg">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2 class="team-title">{% translate "Вице Президенты" %}</h2>
         </div>
 
         <div class="row">
           {% for man in veep %}
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="col-lg-3 col-md-6">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
-                <img src="/{{man.picture}}" class="img-fluid" alt="">
+                <img src="/{{man.picture}}" class="img-fluid w-100" alt="man.position">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="#"><i class="bi bi-envelope"></i></a>
+                  <a href="#"><i class="bi bi-facebook"></i></a>
+                  <a href="#"><i class="bi bi-instagram"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <a href="{% url 'veep' %}"><h4>{{man.full_name}}</h4></a>
+                <a href="{% url 'veep' man.id %}"><h4>{{man.full_name}}</h4></a>
                 <span>{{man.position}}</span>
               </div>
             </div>
-            
           </div>
+          {% empty %}
+            <div class="col-lg-12 col-md-6">
+              <p class="text-center">{% translate "Нет сотрудников" %}</p>
+            </div>
           {%endfor%}
         </div>
 
       </div>
-    </section><!-- End Team Section -->
-
+    </section>
+    <!-- End Team Section -->
+    {% endif %}
         <!-- ======= Features Section ======= -->
         <section id="activity" class="features">
           <div class="container">
@@ -140,30 +158,35 @@
               <div class="col-md-6 pb-4">
                 <div class="icon-box">
                   <i class="ri-rocket-fill" style="color: #ffbb2c;"></i>
-                  <h3><a href="{% url 'block' 'Направление НИОКР и инновационных проектов ОАО' %}">{% translate "Направление НИОКР и инновационных проектов ОАО" %}</a></h3                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="icon-box">
-                  <i class="ri-building-line" style="color: #5578ff;"></i>
-                  <h3><a href="{% url 'block' 'Направление промышленных отраслей ОАО' %}">{% translate "Направление промышленных отраслей ОАО" %}</a></h3>                </div>
+                  <h3><a href="{% url 'block' 'Направление НИОКР и инновационных проектов ОАО' %}">{% translate "Направление НИОКР и инновационных проектов ОАО" %}</a></h3>                
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="icon-box">
+                  <i class="ri-building-line" style="color: #5578ff;"></i>
+                  <h3><a href="{% url 'block' 'Направление промышленных отраслей ОАО' %}">{% translate "Направление промышленных отраслей ОАО" %}</a></h3>                
+                </div>
+                </div>
+              <div class="col-md-6">
+                <div class="icon-box">
                   <i class="ri-money-dollar-box-line" style="color: #e80368;"></i>
-                  <h3><a href="{% url 'block' 'Направление экономики и финансов ОАО' %}">{% translate "Направление экономики и финансов ОАО" %}</a></h3>                </div>
+                  <h3><a href="{% url 'block' 'Направление экономики и финансов ОАО' %}">{% translate "Направление экономики и финансов ОАО" %}</a></h3>                
+                </div>
               </div>
               <div class="col-md-6">
                 <div class="icon-box">
                   <i class="ri-shopping-basket-line" style="color: #e361ff;"></i>
-                  <h3><a href="{% url 'block' 'Направление внешнеэкономических связей и торговли ОАО' %}">{% translate "Направление внешнеэкономических связей и торговли ОАО" %}</a></h3>                </div>
+                  <h3><a href="{% url 'block' 'Направление внешнеэкономических связей и торговли ОАО' %}">{% translate "Направление внешнеэкономических связей и торговли ОАО" %}</a></h3>                
+                </div>
               </div>
               <div class="col-md-6 mt-4">
                 <div class="icon-box">
                   <i class="ri-user-2-fill" style="color: #111111;"></i>
-                  <h3><a href="{% url 'block' 'Направление руководителя аппарата ОАО' %}">{% translate "Направление руководителя аппарата ОАО" %}</a></h3>              </div>
+                  <h3><a href="{% url 'block' 'Направление руководителя аппарата ОАО' %}">{% translate "Направление руководителя аппарата ОАО" %}</a></h3>              
+                </div>
             </div>
     
+          </div>
           </div>
         </section><!-- End Features Section -->
 

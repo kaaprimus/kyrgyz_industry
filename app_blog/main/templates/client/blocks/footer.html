@@ -1,26 +1,59 @@
-<footer id="footer">
-    <div class="container">
-      <div class="row d-flex align-items-center">
-        <div class="col-lg-6 text-lg-left text-center">
-          <div class="copyright">
-            &copy; Copyright <strong>ОАО Кыргызиндустрия</strong>. Все права защищены
+{% load i18n %}
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row aboutus-footer-links">
+
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>{% translate "О нас" %}</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'index' %}">{% translate "Главная" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about_company'%}#about">{% translate "О нас" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about_company' %}#team">{% translate "Руководство" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about_company' %}#activity">{% translate "Блоки" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about_company' %}#clients">{% translate "Наши партнеры" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about_company' %}#npa">{% translate "Нормативно-правовая база" %}</a></li>
+            </ul>
           </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
-            Разработчики <a href="mailto:ajzigit24@gmail.com">AKA {{Y}}</a>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>{% translate "Инвесторам и партнерам" %}</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'invest' %}">{% translate "Инвестиционный кейс" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'strategy' %}">{% translate "Стратегия развития" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'projects' %}">{% translate "Проекты и презентации" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'reports' %}">{% translate "Отчеты и результаты" %}</a></li>
+            </ul>
           </div>
-        </div>
-        <div class="col-lg-6">
-          <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-            <a href="{% url 'sitemap' %}" class="scrollto">Карта Сайта</a>
-            <a href="{% url 'about_company' %}" class="scrollto">Общество</a>
-            <a href="#">Политика конфиденциальности</a>
-            <a href="#">Условия использования</a>
-          </nav>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>{% translate "Пресс-центр" %}</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'news' %}">{% translate "Пресс-релизы" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'interviews' %}">{% translate "Интервью" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'gallery' %}">{% translate "Фотогалерея" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'hot_news' %}">{% translate "Брифинг" %}</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>{% translate "Закупки" %}</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'contests' %}">{% translate "Конкурсы" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'vacancies' %}">{% translate "Вакансии" %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'sitemap' %}">{% translate "Карта сайта" %}</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </footer>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>{% translate "ОАО Кыргызиндустрия" %}</span></strong>. {% translate "Все права защищены" %}
+      </div>
+      <div class="credits">
+        {% translate "Разработчики" %} <a href="mailto:ajzigit24@gmail.com">AKA {{Y}}</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->

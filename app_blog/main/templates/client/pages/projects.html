@@ -9,15 +9,16 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-stretch">
           <ol>
             <li><a href="{% url 'index' %}">{% translate "Главная" %}</a></li>
-            <li>{% translate "Проекты"%}</li>
+            <li>{% translate "Новости"%}</li>
           </ol>
-          <form class="form-inline my-2 my-lg-0">
+          <form class="search-form">
             <input class="form-control mr-sm-2" name="search" action="{% url 'reports' %}" type="search" placeholder="Поиск" aria-label="Search">
-
-          </form> 
+            <button class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
+            <button class="btn btn-outline-danger"><i class="bi bi-arrow-counterclockwise"></i><a href="{% url 'news' %}"></a></button>
+          </form>
         </div>
       </div>
     </section>

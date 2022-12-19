@@ -143,6 +143,7 @@ class ProjectCategoryForm(ModelForm):
                     attrs= {"type" : "text", "class" : "form-control", "id" : "name", "placeholder" : "Название категории"}           
                                )
         } 
+        
 class ContestForm(ModelForm):
     class Meta:
         model = Contests
@@ -233,13 +234,17 @@ class ManagementForm(forms.ModelForm):
     date_birth = forms.DateField(required=True, widget= DateInput(
                     attrs = {"type" : "date", "class" : "form-control", "id" : "date_birth"}
                 ))
-    education = forms.CharField( max_length= 60, required=True, widget= TextInput(
-                    attrs = {"type" : "text", "class" : "form-control", "id" : "education", "placeholder" : "Введите Образование","size" : 60, 'required': True}
-                ),
-    )
-    speciality = forms.CharField(max_length=30, required=True, widget= TextInput(
-                    attrs = {"type" : "text", "class" : "form-control", "id" : "speciality", "placeholder" : "Введите Специальность","size" : 30, 'required': True}
-                ))
+    mail_link = forms.CharField(max_length=2080, required=False, widget=forms.TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "mail_link", "placeholder" : "Введите ссылку", "size" : 2080}
+    ))
+
+    instagram_link = forms.CharField(max_length=2080, required=False, widget=forms.TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "instagram_link", "placeholder" : "Введите ссылку", "size" : 2080}
+    ))
+
+    facebook_link = forms.CharField(max_length=2080, required=False, widget=forms.TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "fasebook_link", "placeholder" : "Введите ссылку", "size" : 2080}
+    ))
     
     about = forms.Textarea(attrs = {"class" : "form-control", "id" : "about", "placeholder" : "Биография",'required': True})
     
@@ -253,6 +258,14 @@ class ManagementForm(forms.ModelForm):
     class Meta:
         model = Management
         fields = '__all__'
+
+    def check_for_empty(self):
+        full_name = self.cleaned_data.get("full_name")
+        position = self.cleaned_data.get("position")
+
+        if full_name == "" == "" or position == "":
+            raise forms.ValidationError('Это поле обязательное!')
+        return full_name 
         
         
 class HotNewsGalleryForm(forms.ModelForm):
