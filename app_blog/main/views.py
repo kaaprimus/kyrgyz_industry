@@ -205,6 +205,18 @@ def get_translated_position(language):
         
     return position
 
+def get_advisor(language):
+    if language == "en":
+        position = "advisor"
+    elif language == "zh-hans":
+        position = "顾问"
+    elif language == "ru":
+        position = "Советник"
+    else:
+        position = "Кеңешчи"
+
+    return position
+
 def about_company(request):
     trans = translate(language='ru')
 
@@ -217,8 +229,12 @@ def about_company(request):
     except Management.DoesNotExist:
         not_exist = True
     try:
-        veep = Management.objects.filter(position__startswith=get_translated_position(language=trans))[:4]
-    except:
+        veep = Management.objects.filter(position__startswith=get_translated_position(language=trans))[:5]
+    except Management.DoesNotExist:
+        not_exist = True
+    try:
+        advisor = Management.objects.filter(position__startswith=get_advisor(language=trans))
+    except Management.DoesNotExist:
         not_exist = True
     
     context = {
@@ -226,7 +242,8 @@ def about_company(request):
         'veep':veep,
         "not_exist" : not_exist,
         'president':president,
-        'actual_url':actual_url
+        'actual_url':actual_url,
+        'advisor':advisor
         }
     return render(request, "client/pages/about_company.html", context)
 
@@ -256,6 +273,23 @@ def president(request):
         }
 
     return render(request, "client/pages/president.html", context)
+
+def advisor(request):
+    trans = translate(language='ru')
+
+    not_exist = False
+    try:
+        advisor = Management.objects.get(position__startswith=get_advisor(language=trans))
+    except Management.DoesNotExist:
+        not_exist = True
+        
+    context = {
+        'trans':trans,
+        'president':advisor,
+        "not_exist" : not_exist
+        }
+
+    return render(request, "client/pages/advisors.html", context)
 
 
 def contests(request):

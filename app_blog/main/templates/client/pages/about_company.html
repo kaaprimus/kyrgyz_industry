@@ -73,7 +73,7 @@
             <section id="team" class="team section-bg">
                 <div class="container d-flex justify-content-center">
                     <div class="col-lg-3 col-md-6 align-items-stretch">
-                        <p class="text-center text-danger">{% translate "В БД не существует запись в должности Президента, либо на выбранном языке не добавлены записи." %}</p>
+                        <p class="text-center text-danger">{% translate "В БД не существует запись с должностью «Президент», либо на выбранном языке не добавлена запись." %}</p>
                     </div>
                  </div>
             </section>
@@ -90,12 +90,12 @@
           <p>{% translate "Президент" %}</p>
         </div>
         <div class="row gy-4 justify-content-center">
-            <div class="col-lg-4 col-md-6">
-              <div class="member" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-3 col-md-6">
+              <div class="member w-100 h-100" data-aos="fade-up" data-aos-delay="100">
                 <div class="member-img">
                   <img src="/{{president.picture}}" class="img-fluid w-100" alt="Изображение Президента ОАО">
                   <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-envelope"></i></a>
                     <a href=""><i class="bi bi-facebook"></i></a>
                     <a href=""><i class="bi bi-instagram"></i></a>
                   </div>
@@ -108,18 +108,46 @@
             </div>
         </div>
       </div>
-    </section> 
 
-    <section id="team" class="team section-bg">
       <div class="container">
         <div class="section-title" data-aos="fade-up">
-          <h2 class="team-title">{% translate "Вице Президенты" %}</h2>
+          <h2 class="team-title pt-4">{% translate "Советники" %}</h2>
+        </div>
+        <div class="row gy-2 justify-content-center">
+          {% for man in advisor %}
+            <div class="col-lg-2 col-md-6">
+              <div class="member w-100 h-100" data-aos="fade-up" data-aos-delay="100">
+                <div class="member-img">
+                  <img src="/{{man.picture}}" class="img-fluid w-100" alt="Изображение Президента ОАО">
+                  <div class="social">
+                    <a href=""><i class="bi bi-envelope"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <a href="{% url 'advisors' man.id %}"><h4>{{man.full_name}}</h4></a>
+                  <span>{{man.position}}</span>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="col-lg-12 col-md-6">
+              <p class="text-center">{% translate "Нет сотрудников" %}</p>
+            </div>
+          {%endfor%}
+        </div>
+      </div>
+   
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2 class="team-title pt-4">{% translate "Вице-Президенты" %}</h2>
         </div>
 
-        <div class="row">
+        <div class="row justify-content-center">
           {% for man in veep %}
-          <div class="col-lg-3 col-md-6">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-2 col-md-6">
+            <div class="member w-100 h-100" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
                 <img src="/{{man.picture}}" class="img-fluid w-100" alt="man.position">
                 <div class="social">
@@ -145,6 +173,8 @@
     </section>
     <!-- End Team Section -->
     {% endif %}
+
+
         <!-- ======= Features Section ======= -->
         <section id="activity" class="features">
           <div class="container">
@@ -189,6 +219,74 @@
           </div>
           </div>
         </section><!-- End Features Section -->
+
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>{% translate "Наши партнеры" %}</h2>
+        </div>
+
+        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo d-block text-center" data-aos="zoom-in" data-aos-delay="100">
+              <div class="h2"><a class="font-monospace text-dark" href="#clients"><strong>Your Logo</strong></a></div>
+              <strong class="text-success">name</strong>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo d-block text-center" data-aos="zoom-in" data-aos-delay="100">
+              <div class="h2"><a href="#clients"><strong>Your Logo</strong></a></div>
+              <strong class="text-danger">Incorrect</strong>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo text-center" data-aos="zoom-in" data-aos-delay="100">
+              <div class="h2"><a class="your-logo" href="#clients">Your Logo</a></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo text-center" data-aos="zoom-in" data-aos-delay="100">
+              <div class="h2"><a class="font-italic text-danger" href="#clients">Company Name</a></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="250">
+              <img src="{% static 'client/img/clients/client-5.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="300">
+              <img src="{% static 'client/img/clients/client-6.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in" data-aos-delay="350">
+              <img src="{% static 'client/img/clients/client-7.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-xs-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="client-logo">
+              <img src="{% static 'client/img/clients/client-8.png' %}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+  <hr>
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="npa" class="portfolio-details">

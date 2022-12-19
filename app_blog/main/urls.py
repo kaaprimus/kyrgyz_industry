@@ -119,6 +119,7 @@ urlpatterns = [
     path('news_detail/<str:title>', views.get_news, name='news_detail'),
     path('project_detail/<str:title>', views.get_project, name='project_detail'),
     path('veep/<int:id>', views.veep, name='veep'),
+    path('advisor/<int:id>', views.veep, name='advisors'),
     path('vacancies/', views.vacancies, name='vacancies'),
     path('interviews/', views.interviews, name='interviews'),
     path('vacancy_detail/<str:title>', views.get_vacancy, name='vacancy_detail'),
