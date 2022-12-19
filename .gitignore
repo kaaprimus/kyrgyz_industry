@@ -29,3 +29,16 @@ app_blog/db.sqlite3
 app_blog/static/client/docs/contest/70f2259e-251b-41bf-84b6-5d97c0c844dc__Third-Party-Notices.pdf
 app_blog/static/client/docs/contest/c008d081-59bf-4835-8bd3-712756baabf2__Third-Party-Notices.pdf
 app_blog/static/client/docs/contest/ea7c78eb-19b9-499b-a92a-621db403ba02__Third-Party-Notices.pdf
+app_blog/main/__pycache__/forms.cpython-310.pyc
+app_blog/main/__pycache__/models.cpython-310.pyc
+app_blog/main/__pycache__/views.cpython-310.pyc
+app_blog/main/migrations/0003_alter_gallerynews_name_alter_galleryproject_name_and_more.py
+app_blog/main/migrations/__pycache__/0003_alter_gallerynews_name_alter_galleryproject_name_and_more.cpython-310.pyc
+app_blog/main/__pycache__/forms.cpython-310.pyc
+app_blog/main/__pycache__/models.cpython-310.pyc
+app_blog/main/__pycache__/views.cpython-310.pyc
+app_blog/static/client/img/hot_news/1a444bbd-3392-4e0b-9904-b01d02af2ccf__12852.jpg
+app_blog/static/client/img/hot_news/1ce84e38-9663-4c33-b042-748d686f84d5__20796_1642074444_lg.jpg
+app_blog/static/client/img/hot_news/10a658b5-8228-4129-a4fa-b13baf0f8260__2021-12-12_2.png
+app_blog/static/client/img/hot_news/baa07f6f-92bb-42e4-8719-7ceb05870944__techindustry.jpg
+app_blog/db.sqlite3

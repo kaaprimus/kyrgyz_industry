@@ -15,7 +15,7 @@
           <div class="content-wrapper">
             <div class="row purchace-popup" id="purchace-popup">
               <div class="col-12 stretch-card grid-margin">
-                <div class="card card-secondary">
+                <div class="card card-secondary shadow-lg">
                   <span class="card-body d-lg-flex align-items-center">
                     <p class="mb-lg-0">
                       <span class="text-dark" style="margin-right: 5px; font-weight: 600;">Полезные советы:</span>
@@ -35,29 +35,35 @@
             <!-- Quick Action Toolbar Starts-->
             <div class="row quick-action-toolbar">
               <div class="col-md-12 grid-margin">
-                <div class="card">
+                <div class="card shadow-lg">
                   <div class="card-header d-block d-md-flex">
                     <h5 class="mb-0">Быстрые действии</h5>
                     <p class="ml-auto mb-0"><i class="icon-bulb"></i></p>
                   </div>
                   <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <a href="{% url 'hotnews_create' %}" class="btn px-0"><i class="icon-book-open mr-2"></i>Добавить Событии</a>
+                      <a href="{% url 'hotnews_create' %}" class="btn px-0" title="Добавить событии"><i class="icon-fire mr-2"></i>Добавить событии</a>
                     </div>
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <a href="{% url 'news_create'%}" class="btn px-0"> <i class="icon-book-open mr-2"></i>Добавить новости</a>
+                      <a href="{% url 'news_create'%}" class="btn px-0" title="Добавить новости"> <i class="icon-book-open mr-2"></i>Добавить новости</a>
                     </div>
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <a href="{% url 'projects_create' %}" class="btn px-0"><i class="icon-folder mr-2"></i>Добавить проект</a>
+                      <a href="{% url 'projects_create' %}" class="btn px-0" title="Добавить проект"><i class="icon-layers mr-2"></i>Добавить проект</a>
                     </div>
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <a href="{% url 'interviews_create' %}" class="btn px-0"><i class="icon-book-open mr-2"></i>Добавить Интервью</a>
+                      <a href="{% url 'interviews_create' %}" class="btn px-0" title="Добавить интервью"><i class="icon-link mr-2"></i>Добавить интервью</a>
                     </div>
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <a href="{% url 'vacancies_create' %}" class="btn px-0"><i class="icon-user mr-2"></i>Добавить Вакансию</a>
+                      <a href="{% url 'vacancies_create' %}" class="btn px-0" title="Добавить вакансию"><i class="icon-grid mr-2"></i>Добавить вакансию</a>
                     </div>
                     <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                      <a href="{% url 'management_create' %}" class="btn px-0"><i class="icon-user mr-2"></i>Добавить сотрудника</a>
+                      <a href="{% url 'management_create' %}" class="btn px-0" title="Добавить сотрудника"><i class="icon-people mr-2"></i>Добавить сотрудника</a>
+                    </div>
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <a href="{% url 'management_create' %}" class="btn px-0" title="Добавить конкурса"><i class="icon-chart mr-2"></i>Добавить конкурса</a>
+                    </div>
+                    <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                      <a href="{% url 'management_create' %}" class="btn px-0" title="Добавить отчеты"><i class="icon-pie-chart mr-2"></i>Добавить отчеты</a>
                     </div>
                   </div>
                 </div>
@@ -67,11 +73,11 @@
 
             <div class="row">
               <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
+                <div class="card shadow-lg">
                   <div class="card-body">
                     <div class="d-sm-flex align-items-center mb-4">
                       <h4 class="card-title mb-sm-0">Последние События</h4>
-                      <a href="#" class="text-dark ml-auto mb-3 mb-sm-0"> Все События</a>
+                      <a href="#" class="text-dark ml-auto mb-3 mb-sm-0">Все События</a>
                     </div>
                     <div class="table-responsive border rounded p-1">
                       {% if hotnews_list %}

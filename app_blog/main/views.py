@@ -131,12 +131,24 @@ def index(request):
             error = True
         else:
             first_image.append(img.URL)
+            
+    hotnews_error = False     
+    hot_news_img = []
+    for post in hot_news:
+        img = HotNewsPhoto.objects.filter(gallery = post.gallery).first()
+        print(img)
+        if img is None:
+            error = True
+        else:
+            hot_news_img.append(img.url)
+            
     news_image_mixed = zip(news, first_image)   
+    hot_news_mixed = zip(hot_news, hot_news_img)   
  
     context = {
         'trans':trans,
         'news_page':news_image_mixed,
-        'hot_news' : hot_news,
+        'hot_news' : hot_news_mixed,
         "error" : error
         }
     return render(request, "client/index.html", context)
@@ -1421,7 +1433,7 @@ def hotnewsimage_delete(request, id):
         "active_project_image" : "active",
         "expand_projects" : "show",
     }
-    obj = get_object_or_404(PhotosProject, id = id)
+    obj = get_object_or_404(HotNewsPhoto, id = id)
     if request.method =="POST":
         try:
             if len(obj.url) > 0:
