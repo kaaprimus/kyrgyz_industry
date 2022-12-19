@@ -129,13 +129,25 @@ def index(request):
             error = True
         else:
             first_image.append(img.URL)
+            
+    hotnews_error = False     
+    hot_news_img = []
+    for post in hot_news:
+        img = HotNewsPhoto.objects.filter(gallery = post.gallery).first()
+        print(img)
+        if img is None:
+            error = True
+        else:
+            hot_news_img.append(img.url)
+            
     news_image_mixed = zip(news, first_image)   
+    hot_news_mixed = zip(hot_news, hot_news_img)   
  
     context = {
         'trans':trans,
         'news_page':news_image_mixed,
-        'hot_news' : hot_news,
-        "error" : error,
+        'hot_news' : hot_news_mixed,
+        "error" : error
         }
     return render(request, "client/index.html", context)
 
@@ -662,13 +674,14 @@ def send_message(request):
     
     sucs=True
     if request.method == 'POST':
-        settings.EMAIL_HOST_USER=request.POST.get('email', '')
-        settings.EMAIL_HOST_PASSWORD=''
+        settings.EMAIL_HOST_USER='zenisbekovk04@gmail.com'
+        settings.EMAIL_HOST_PASSWORD='zwhojtjglgpyguxw'
+
         Name = request.POST.get('name', '')
-        
         message = request.POST.get('message', '')
         from_email = request.POST.get('email', '')
         subject = "Сообщение от пользователей" 
+        to_email='zenisbekovk04@gmail.com'
         try:
             
             body = {
@@ -678,7 +691,7 @@ def send_message(request):
 		    }
 	    
             messageAll = "\n".join(body.values())
-            send_mail(subject, messageAll, from_email, ['To'])
+            send_mail(subject, messageAll, from_email, to_email)
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
         except:
@@ -686,7 +699,7 @@ def send_message(request):
             sucs=False
     if(sucs==True):
         messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
-    return redirect ('/')
+    return redirect ('feedback')
 
 @csrf_exempt
 def login_page(request):
@@ -1507,7 +1520,7 @@ def hotnewsimage_delete(request, id):
         "active_project_image" : "active",
         "expand_projects" : "show",
     }
-    obj = get_object_or_404(PhotosProject, id = id)
+    obj = get_object_or_404(HotNewsPhoto, id = id)
     if request.method =="POST":
         try:
             if len(obj.url) > 0:

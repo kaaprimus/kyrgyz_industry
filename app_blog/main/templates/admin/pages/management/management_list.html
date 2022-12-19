@@ -54,7 +54,7 @@
                           <tr>
                             <td>{{forloop.counter}}</td>
                             <td class="td-title" >{{management.full_name }}</td>
-                            <td class="text-danger">{{management.position}}</td>
+                            <td class="text-info"><div class="badge badge-info">{{management.position}}</div></td>
                             <td class="edit-delete-icons">
                               <a href="{% url 'management_update' management.id %}"><i class="icon-pencil"></i></a> |
                               <a href="{% url 'management_delete' management.id %}" class="text-danger"><i class="icon-trash"></i></a>

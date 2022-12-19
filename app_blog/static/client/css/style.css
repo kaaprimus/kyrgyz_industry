@@ -53,9 +53,56 @@ h6 {
   width: 100%;
 }
 
-.search-form{
-  display: flex;
-  margin-left: 65%;
+.hot-img{
+  height: 600px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .hot-img{
+    height: 300px;
+  }
+  /* Swiper slides */
+/* .hotnews-slider .swiper-slide {
+	position: relative;
+} */
+.caption .hot-news-container h3{
+  font-size: 16px;
+
+} 
+.caption{
+  top: 50% !important;
+  left: 10% !important;
+}
+.caption .hot-news-container p{
+  font-size: 12px;
+}
+.hotnews-slider .swiper-pagination .swiper-pagination-bullet{
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.hotnews-slider .next:after,
+.hotnews-slider .prev:after{
+    font-size: 30px !important;
+}
+} 
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  z-index: 996;
+  background: #3498db;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  transition: all 0.4s;
 }
 
 .back-to-top i {
@@ -397,9 +444,10 @@ h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+
 #hero {
   width: 100%;
-  height: 70vh;
+  /* height: 70vh; */
   margin-top: 70px;
 }
 
@@ -461,9 +509,6 @@ h6 {
 }
 
 @media (max-width: 991px) {
-  #hero {
-    height: 100vh;
-  }
 
   #hero .animated {
     -webkit-animation: none;
@@ -1161,6 +1206,28 @@ section {
 /*--------------------------------------------------------------
 # Portfolio Details
 --------------------------------------------------------------*/
+/* Swiper slides */
+.hotnews-slider .swiper-slide {
+	position: relative;
+}
+.caption{
+  width: 80%;
+  position: absolute;
+  top: 70%;
+	left: 5%;
+  color: #FFF;
+	z-index: 999;
+	transform: translateY(-50%);
+  background:rgba(0, 0, 0, .7);
+  border-radius: 15px;
+}
+.hotnews-slider .swiper-pagination .swiper-pagination-bullet{
+  width: 18px;
+  height: 18px;
+  opacity: .8;
+  border: 1px solid #026bf5;
+}
+
 .portfolio-details {
   padding-top: 40px;
 }

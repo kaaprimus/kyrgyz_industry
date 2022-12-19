@@ -10,11 +10,11 @@
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
           <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Админ-Панель Кыргызиндустрия</h5>
           <ul class="navbar-nav navbar-nav-right ml-auto">
-            <form class="search-form d-none d-md-block" action="#">
+            <!-- <form class="search-form d-none d-md-block" action="#">
               <i class="icon-magnifier"></i>
               <input type="search" class="form-control" placeholder="Найти..." title="Search here">
-            </form>
-            <li class="nav-item"><a href="{% url 'contests_all' %}" class="nav-link"><i class="icon-chart"></i></a></li>
+            </form> -->
+            <li class="nav-item"><a href="{% url 'contests_all' %}" class="nav-link" title="Открыть конкурсы"><i class="icon-chart"></i></a></li>
             {% comment %} <li class="nav-item dropdown language-dropdown d-none d-sm-flex align-items-center">
               <a class="nav-link d-flex align-items-center dropdown-toggle" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="d-inline-flex mr-3">
@@ -34,7 +34,7 @@
               </div>
             </li> {% endcomment %}
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
-              <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false" title="Настроить профили">
                 <img class="img-xs rounded-circle ml-2" src="{% static 'admin-panel/images/requirements/admin.png' %}" alt="Profile image"> <span class="font-weight-normal">Администратор </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <a class="dropdown-item" href="{% url 'update_profile' %}"><i class="dropdown-item-icon icon-user text-primary"></i> Профиль</a>

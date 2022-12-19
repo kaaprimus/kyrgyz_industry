@@ -29,9 +29,9 @@
      
      
         <li class="nav-item" id="hotnews-panel">
-          <a class="nav-link" data-toggle="collapse" href="#hotnews" aria-expanded="{% if expand_hotnews %}true{% else %}false{% endif %}" aria-controls="ui-basic">
+          <a class="nav-link" data-toggle="collapse" href="#hotnews" aria-expanded="{% if expand_hotnews %}true{% else %}false{% endif %}" aria-controls="hotnews">
             <span class="menu-title">Главные события</span>
-            <i class="icon-book-open menu-icon"></i>
+            <i class="icon-fire menu-icon"></i>
           </a>
           <div class="collapse {% if expand_hotnews %}show{% endif %}" id="hotnews">
             <ul class="nav flex-column sub-menu">
@@ -43,11 +43,11 @@
         </li>
 
         <li class="nav-item" id="news-panel">
-          <a class="nav-link" data-toggle="collapse" href="#news" aria-expanded="{% if expand_news %}true{% else %}false{% endif %}" aria-controls="ui-basic">
+          <a class="nav-link" data-toggle="collapse" href="#news" aria-expanded="{% if expand_news %}true{% else %}false{% endif %}" aria-controls="news">
             <span class="menu-title">Новости</span>
             <i class="icon-book-open menu-icon"></i>
           </a>
-          <div class="collapse{% if expand_news %}show{% endif %}" id="news">
+          <div class="collapse {% if expand_news %}show{% endif %}" id="news">
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link {% if active_news_gallery %}active{% endif %}" href="{% url 'newsgallery_all' %}">Галерея</a></li>
               <li class="nav-item"> <a class="nav-link {% if active_news_image %}active{% endif %}" href="{% url 'newsimage_all' %}">Фотографии</a></li>
@@ -85,7 +85,7 @@
         <li class="nav-item" id="vacancies-panel">
           <a class="nav-link" data-toggle="collapse" href="#vacanciese" aria-expanded="{% if expand_vacancies %}true{% else %}false{% endif %}" aria-controls="vacanciese">
             <span class="menu-title">Вакансии</span>
-            <i class="icon-book-open menu-icon"></i>
+            <i class="icon-grid menu-icon"></i>
           </a>
           <div class="collapse{% if expand_vacancies %}show{% endif %}" id="vacanciese">
             <ul class="nav flex-column sub-menu">
@@ -94,12 +94,12 @@
           </div>
         </li>
 
-        <li class="nav-item" id="vacancies-panel">
+        <li class="nav-item" id="interviews-panel">
           <a class="nav-link" data-toggle="collapse" href="#interviews" aria-expanded="{% if expand_interviews %}true{% else %}false{% endif %}" aria-controls="interviews">
             <span class="menu-title">Интервью</span>
-            <i class="icon-book-open menu-icon"></i>
+            <i class="icon-link menu-icon"></i>
           </a>
-          <div class="collapse{% if expand_interviews %}show{% endif %}" id="interviews">
+          <div class="collapse {% if expand_interviews %}show{% endif %}" id="interviews">
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link {% if active_interviews %}active{% endif %}" href="{% url 'interviews_all' %}">Все Интервью</a></li>
             </ul>
@@ -109,9 +109,9 @@
         <li class="nav-item" id="reports-panel">
           <a class="nav-link" data-toggle="collapse" href="#reports" aria-expanded="{% if expand_reports %}true{% else %}false{% endif %}" aria-controls="reports">
             <span class="menu-title">Отчеты</span>
-            <i class="icon-book-open menu-icon"></i>
+            <i class="icon-pie-chart menu-icon"></i>
           </a>
-          <div class="collapse{% if expand_reports %}show{% endif %}" id="reports">
+          <div class="collapse {% if expand_reports %}show{% endif %}" id="reports">
             <ul class="nav flex-column sub-menu">
               <li class="nav-item"> <a class="nav-link {% if active_reports %}active{% endif %}" href="{% url 'reports_all' %}">Все Отчеты</a></li>
             </ul>
@@ -122,7 +122,7 @@
         <li class="nav-item" id="management-panel">
           <a href="{% url 'management_all' %}" class="nav-link {% if active_management %}active{% endif %}">
             <span class="menu-title">Персоналы</span>
-            <i class="icon-doc menu-icon"></i>
+            <i class="icon-people menu-icon"></i>
           </a>
         </li>
         <li class="nav-item pro-upgrade">

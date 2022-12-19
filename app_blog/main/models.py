@@ -15,18 +15,6 @@ class LanguageChoice(models.TextChoices):
     KG = "Кыргызча", "Кыргызча"
     EN = "English", "English"
     CH = "中国人", "中国人"
-
-#Функция для проверки одинаковых названий   
-def check_title_similar(title):
-        news = News.objects.all()
-
-        for value in news:
-            news_title = value.Title
-
-        if re.search(title, news_title):
-            raise forms.ValidationError('Запись с таким названием уже существует!')
-        else:
-            return title
   
 # Категория проектов
 class ProjectCategory(models.Model):
@@ -41,7 +29,7 @@ class ProjectCategory(models.Model):
 
 #Галерея 
 class GalleryProject(models.Model):
-    Name=models.CharField(max_length=50,verbose_name="Название галереи", unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
+    Name=models.CharField(max_length=70,verbose_name="Название галереи", unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
 
     class Meta:
         db_table="galleryProject"
@@ -52,7 +40,7 @@ class GalleryProject(models.Model):
 
 
 class GalleryNews(models.Model):
-    Name=models.CharField(max_length=50,verbose_name="Название галереи", unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
+    Name=models.CharField(max_length=70,verbose_name="Название галереи", unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
 
     class Meta:
         db_table="galleryNews"
@@ -73,7 +61,7 @@ def get_file_path(instance, filename):
 # Фото 
 class PhotosProject(models.Model):
     URL=models.ImageField(verbose_name="Путь к картинке", upload_to = get_file_path)
-    Caption=models.CharField(max_length=70,verbose_name="Название картинки")
+    Caption=models.CharField(max_length=110,verbose_name="Название картинки")
     Gallery=models.ForeignKey("galleryProject",on_delete=models.RESTRICT,verbose_name="Галерея")
     
     path_url = "static/client/img/projects/"
@@ -85,12 +73,12 @@ class PhotosProject(models.Model):
     def save(self, *args, **kwargs):
         super(PhotosProject, self).save(*args, **kwargs)
         image = Image.open(self.URL.path)
-        if image.width > 800 or image.height > 600:
+        if image.width > 1000 and image.height > 600:
             output_size = (800, 600)
             image.thumbnail(output_size)
             image.save(self.URL.path)
-        elif image.width < 800 or image.height < 600:
-            raise forms.ValidationError('Размер фотографии не подходит! Минимальный размер 800x600')
+        else:
+            raise forms.ValidationError("Размер фотографии не подходит! Минимальный размер 800x600")
     class Meta:
         ordering = ['-id']
     
@@ -111,12 +99,12 @@ class PhotosNews(models.Model):
     def save(self, *args, **kwargs):
         super(PhotosNews, self).save(*args, **kwargs)
         image = Image.open(self.URL.path)
-        if image.width > 600 or image.height > 400:
+        if image.width > 800 and image.height > 400:
             output_size = (600, 400)
             image.thumbnail(output_size)
             image.save(self.URL.path)
-        elif image.width < 800 or image.height < 600:
-            raise ValidationError("Размер фотографии не подходит! Минимальный размер 800x600")
+        else:
+            raise forms.ValidationError("Размер фотографии не подходит! Минимальный размер 800x400")
             
     class Meta:
         ordering = ['-id']
@@ -136,8 +124,8 @@ class Vacancy_Status_Choice(models.TextChoices):
 # Проекты
 
 class Projects(models.Model):
-    Title=models.CharField(max_length=70,verbose_name="Заголовок проекта", unique=True,error_messages={'unique':"Проект с таким названием уже существует!"})
-    Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
+    Title=models.CharField(max_length=120,verbose_name="Заголовок проекта", unique=True,error_messages={'unique':"Проект с таким названием уже существует!"})
+    Short_Description = models.CharField(max_length=200,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
     # Язык проекта
@@ -197,7 +185,7 @@ class Contests(models.Model):
 
 class News(models.Model):
     Title=models.CharField(max_length=100,verbose_name="Заголовок новости", unique=True,error_messages={'unique':"Новость с таким названием уже существует!"})
-    Short_Description = models.CharField(max_length=170,verbose_name="Краткое описание")
+    Short_Description = models.CharField(max_length=200,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
     Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
     Language= models.CharField(
@@ -276,7 +264,7 @@ class HotNewsGallery(models.Model):
         ordering = ['-id']
         
 class HotNewsPhoto(models.Model):
-    caption = models.CharField(verbose_name='Название фотографии', max_length=50)
+    caption = models.CharField(verbose_name='Название фотографии', max_length=70)
     url = models.ImageField(
         verbose_name='Путь картинки',
         upload_to=get_file_path, 
@@ -289,13 +277,23 @@ class HotNewsPhoto(models.Model):
     
     def __str__(self) -> str:
         return self.caption
+    
+    def save(self, *args, **kwargs):
+        super(HotNewsPhoto, self).save(*args, **kwargs)
+        image = Image.open(self.url.path)
+        if image.width > 1200 and image.height > 500:
+            output_size = (1140, 500)
+            image.thumbnail(output_size)
+            image.save(self.url.path)
+        else:
+            raise forms.ValidationError("Размер фотографии не подходит! Минимальный размер 1200x500")
     class Meta: 
         ordering = ['-id']
         
 #Главные события
 class HotNews(models.Model):
-    title = models.CharField(verbose_name='Название событии', max_length=70, unique=True,error_messages={'unique':"Событие с таким названием уже существует!"})
-    short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
+    title = models.CharField(verbose_name='Название событии', max_length=150, unique=True,error_messages={'unique':"Событие с таким названием уже существует!"})
+    short_description = models.CharField(verbose_name='Краткое описание', max_length=220)
     description = RichTextField()
     Language=models.CharField(
                                max_length = 10, 
@@ -336,7 +334,7 @@ class Reports(models.Model):
     url = models.FileField(
         verbose_name='Путь файла',
         upload_to=get_file_path, 
-        validators=[FileExtensionValidator(['pdf','doc'])]
+        validators=[FileExtensionValidator(['pdf','doc', 'docx'])]
         )
     
     path_url = "static/client/docs/reports/"

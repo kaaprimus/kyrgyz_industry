@@ -18,7 +18,7 @@ class NewsForm(ModelForm):
                 attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название новости","size" : 100, 'required': True}
             ),
             'Short_Description' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 170, 'required': True}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 200, 'required': True}
             ),
             'Description' : Textarea(
                 attrs = {"class" : "form-control", "id" : "description", "placeholder" : "Полное содержание", 'required': True}
@@ -277,8 +277,8 @@ class HotNewsGalleryForm(forms.ModelForm):
         fields = '__all__'
 
 class HotNewsImageForm(forms.ModelForm):
-    caption = forms.CharField(max_length=50, required=True, widget=TextInput(
-        attrs={"type" : "text", "class" : "form-control", "id" : "caption", "placeholder" : "Введите название фотографии", "size" : 50}
+    caption = forms.CharField(max_length=70, required=True, widget=TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "caption", "placeholder" : "Введите название фотографии", "size" : 70}
     ))
     gallery = forms.ModelChoiceField(queryset=HotNewsGallery.objects.all(), 
                                      widget=forms.Select(attrs={"class" : "form-control", "id" : "gallery"}))
@@ -288,11 +288,11 @@ class HotNewsImageForm(forms.ModelForm):
         fields = '__all__'
 
 class HotNewsForm(forms.ModelForm):
-    title = forms.CharField(max_length=70, required=True, widget=TextInput(
-        attrs={"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Введите название новости", "size" : 70}
+    title = forms.CharField(max_length=150, required=True, widget=TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Введите название новости", "size" : 150}
     ))
-    short_description = forms.CharField(max_length=120, required=True, widget=TextInput(
-        attrs={"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Введите краткое описание", "size" : 120}
+    short_description = forms.CharField(max_length=220, required=True, widget=TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Введите краткое описание", "size" : 220}
     ))
     
     description = forms.Textarea(
@@ -324,18 +324,11 @@ class InterviewsForm(ModelForm):
     
     title = forms.CharField(max_length=80, required=True, widget=TextInput(
         attrs={"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Введите название ссылки", "size" : 80}
-    )),
+    ))
+    
     link = forms.CharField(max_length=2080, required=True, widget=TextInput(
         attrs={"type" : "text", "class" : "form-control", "id" : "link", "placeholder" : "Введите ссылку", "size" : 2080}
     ))
-
-    def check_for_empty(self):
-        title = self.cleaned_data.get("title")
-        link = self.cleaned_data.get("link")
-        if title == "" == "" or link == "":
-            raise forms.ValidationError('Это поле обязательное!')
-        return title 
-
 
 class ReportsForm(ModelForm):
     class Meta:
