@@ -29,7 +29,6 @@ from django.contrib.auth.views import PasswordChangeView
 from django.db.models import Q
 
 
-
 """ 
     Таски:
         Client:
@@ -88,7 +87,7 @@ def test_method(request):
     return render(request, 'client/pages/img.html', context)
 
 
-#Блоки
+# Блоки
 def get_block(request,title):
     trans = translate(language='ru')
     context = {'trans':trans}
@@ -120,8 +119,8 @@ def get_lang(trans):
 def index(request):
     trans = translate(language='ru')
     
-    news = News.objects.filter(Language = get_lang(trans=trans)).order_by('-id')[:4]
-    hot_news = HotNews.objects.filter(Language = get_lang(trans=trans)).order_by('-id')[:5]
+    news = News.objects.filter(Language = get_lang(trans=trans)).order_by('-Date_added')[:4]
+    hot_news = HotNews.objects.filter(Language = get_lang(trans=trans)).order_by('-pub_date')[:5]
     
     error = False
     # Получаем первую фотографию под новостями
@@ -144,14 +143,11 @@ def index(request):
 
 
 
-
-
 def interviews(request):
     trans = translate(language='ru')
     posts = Interviews.objects.order_by('-id')
 
     per_page = 6
-    currunt_page_interview = Paginator(posts,8)
 
     currunt_page_interview = Paginator(posts, per_page=per_page)
     
@@ -176,22 +172,42 @@ def interviews(request):
     return render(request, "client/pages/interviews.html", context)
 
 
+def get_president_position(language):
+    if language == "en":
+        position = "President"
+    elif language == "zh-hans":
+        position = "总统"
+    else:
+        position = "Президент"
+        
+    return position
 
+def get_translated_position(language):
+    if language == "en":
+        position = "Vice President"
+    elif language == "zh-hans":
+        position = "副总统"
+    else:
+        position = "Вице-президент"
+        
+    return position
 
-def about_company(request, number_page=1):
+def about_company(request):
     trans = translate(language='ru')
-    vacancies= Vacancies.objects.order_by('-id')
-    management= Management.objects.order_by('-id')
-    president=Management.objects.get(position__startswith="Президент")
-    veep = Management.objects.filter(position__startswith="Вице-президент")
     
-    currunt_page_vacancies = Paginator(vacancies,4)
+    president = None
+    not_exist = False
+    try:
+        president = Management.objects.get(position__startswith=get_president_position(language=trans))  
+    except Management.DoesNotExist:
+        not_exist = True
+    
+    veep = Management.objects.filter(position__startswith=get_translated_position(language=trans))[:4]
     
     context = {
-        'currunt_page_vacancies': currunt_page_vacancies.page(number_page),
         'trans':trans, 
-        'management':management,
         'veep':veep,
+        "not_exist" : not_exist,
         'president':president,
         }
     return render(request, "client/pages/about_company.html", context)
@@ -201,55 +217,62 @@ def about_us_full_info(request):
     context = {'trans':trans}
     return render(request, "client/pages/about_us_full_info.html", context)
 
-def blog_detail(request):
-    trans = translate(language='ru')
-    context = {'trans':trans}
-    return render(request, "client/pages/blog_detail.html", context)
-
-def team(request):
-    return render(request, "client/pages/team.html", {})
-
-
 def president(request):
     trans = translate(language='ru')
-    
-    president = Management.objects.get(position__startswith="Президент")
-
+    not_exist = False
+    try:
+        president = Management.objects.get(position__startswith=get_president_position(language=trans))
+    except Management.DoesNotExist:
+        not_exist = True
+        
     context = {
         'trans':trans,
         'president':president,
+        "not_exist" : not_exist
         }
 
     return render(request, "client/pages/president.html", context)
 
-def inner_page(request):
-    trans = translate(language='ru')
-    context = {'trans':trans}
-    return render(request, "client/pages/inner-page.html", context)
 
-def contests(request,number_page=1):
+def contests(request):
+    per_page = 6
     trans = translate(language='ru')
-    contest= Contests.objects.order_by('-id')
-    count=contest.count()
-    currunt_page_news = Paginator(contest,8)
-    context = {'contest_page': currunt_page_news.page(number_page),'count':count,'trans':trans}
+    contest= Contests.objects.all().filter(Language = get_lang(trans=trans)).order_by('-Date_added')
+    paginator = Paginator(contest, per_page=per_page)    
+    
+    pag_num = paginator.num_pages
+    try:
+        page = request.GET.get("page", 1)   
+        contest = paginator.page(page) 
+    except (PageNotAnInteger, TypeError):
+        contest = paginator.page(1)
+    except EmptyPage:
+        contest = paginator.page(pag_num)
+        
+    context = {
+        'contest_page': contest,
+        'page_num':pag_num,
+        'trans':trans
+        }
     return render(request, "client/pages/contests.html", context)
 
 
 
 def news(request):
-    posts= News.objects.order_by('-id')
-    per_page = 12
     error = None
-    count=posts.count()
-
-    #Поиск новостей по ключевому слову
+    trans = translate(language='ru')
+    
+    per_page = 12
+    
+    # Поиск новостей по ключевому слову
     search_posts = request.GET.get('search')
 
     if search_posts:
         posts = News.objects.filter(Q(Title__icontains=search_posts) | Q(Short_Description__icontains=search_posts))
     else:
-        posts = News.objects.all().order_by("-Date_added")
+        posts = News.objects.all().filter(Language = get_lang(trans=trans)).order_by("-Date_added")
+        
+    count=posts.count()
     
     # Получаем первую фотографию под новостями
     first_image = []
@@ -279,7 +302,6 @@ def news(request):
         images = current_page_img.page(current_page_img.num_pages)
     
     news_image_mixed = zip(posts, images)   
-    trans = translate(language='ru')
     context = { 
                'news_page': posts,
                'trans':trans, 
@@ -291,15 +313,14 @@ def news(request):
     return render(request, "client/pages/news.html", context)
 
 def projects(request):
-    posts= Projects.objects.order_by('-id')
+    trans = translate(language='ru')
     error = False
-
     search_projects = request.GET.get('search')
 
     if search_projects:
         posts = Projects.objects.filter(Q(Title__icontains=search_projects) | Q(Short_Description__icontains=search_projects))
     else:
-        posts = Projects.objects.all().order_by("-id")
+        posts = Projects.objects.all().filter(Language = get_lang(trans=trans)).order_by("-id")
 
     per_page = 6
      # Получаем первую фотографию под новостями
@@ -331,7 +352,6 @@ def projects(request):
     
     news_image_mixed = zip(posts, images)
 
-    trans = translate(language='ru')
     context = {        
         'projects_page': posts,
         'trans':trans, 
@@ -345,10 +365,15 @@ def projects(request):
 
 def get_news(request,title):
     trans = translate(language='ru')
-    news_detail=News.objects.filter(Title=title)
-    news_title=News.objects.get(Title=title)
-    photo=PhotosNews.objects.filter(Gallery_id=get_id_Gallery_News(title))
-    context = {'news_detail': news_detail,'photo':photo,'news_title':news_title,'trans':trans}
+    
+    news_detail = News.objects.filter(Title=title)
+    news_title = News.objects.get(Title=title)
+    photo = PhotosNews.objects.filter(Gallery_id=get_id_Gallery_News(title))
+    context = {
+        'news_detail': news_detail,
+        'photo':photo,
+        'news_title':news_title,
+        'trans':trans}
     return render(request, "client/pages/news_detail.html", context)
 
 def investors(request):
@@ -407,18 +432,39 @@ def npa(request):
     context = {'trans':trans}
     return render(request, "client/pages/NPA.html", context)
 
-def vacancies(request, number_page=1):
+def vacancies(request):
     trans = translate(language='ru')
-    contest= Vacancies.objects.order_by('-id')
-    currunt_page_vacancies = Paginator(contest,4)
-    context = {'currunt_page_vacancies': currunt_page_vacancies.page(number_page),'trans':trans}
+    per_page = 10
+    vacancies = Vacancies.objects.all().filter(Language = get_lang(trans=trans)).order_by('-pub_date')
+    
+    paginator = Paginator(vacancies, per_page = per_page)
+    page_num = paginator.num_pages
+    
+    try:
+        page = request.GET.get("page", 1)
+        vacancies = paginator.page(page)
+        
+    except (PageNotAnInteger, TypeError):
+        vacancies = paginator.page(1)
+    except EmptyPage:
+        vacancies = paginator.page(page_num)
+        
+    context = {
+               'page_vacancies': vacancies,
+               'trans':trans,
+               "page_num" : page_num
+               }
     return render(request, "client/pages/vacancies.html", context)
-# 703 47 05 64
+
 def get_vacancy(request,title):
     trans = translate(language='ru')
     vacancy_detail=Vacancies.objects.filter(title=title)
     vacancy_title=Vacancies.objects.get(title=title)
-    context = {'vacancy_detail': vacancy_detail,'vacancy_title':vacancy_title,'trans':trans}
+    context = {
+        'vacancy_detail': vacancy_detail,
+        'vacancy_title':vacancy_title,
+        'trans':trans
+        }
     return render(request, "client/pages/vacancy_detail.html", context)
 
 #Страница Фотогалерея 
@@ -440,11 +486,14 @@ def feedback(request):
     return render(request, "client/pages/feedback.html", {})
 
 def hot_news(request):
+    
+    
     news_all = HotNews.objects.order_by('-id')
     error = False
     
     per_page = 1
-     # Получаем первую фотографию под новостями
+    
+    # Получаем первую фотографию под новостями
     first_image = []
     for post in news_all:
         img = HotNewsPhoto.objects.filter(gallery = post.gallery).first()
@@ -844,6 +893,7 @@ class ProjectCategoryListView(LoginRequiredMixin, ProjectCategoryView, ListView)
 class ProjectCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectCategoryView, CreateView):
     login_url = "login_page"
     template_name = "admin/pages/project-category/category_form.html" 
+    success_url = reverse_lazy("projectcategory_create")
     success_message = "Запись успешно Добавлено!" 
     
 class ProjectCategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectCategoryView, UpdateView):
@@ -1082,7 +1132,7 @@ class ContestListView(LoginRequiredMixin, ContestView, ListView):
     template_name = "admin/pages/contests/contests_list.html"
     
 
-class ContestCreateView(LoginRequiredMixin, SuccessMessageMixin, ContestView, ListView):
+class ContestCreateView(LoginRequiredMixin, SuccessMessageMixin, ContestView, CreateView):
     login_url = "login_page"
     template_name = "admin/pages/contests/contests_form.html"
     success_url = reverse_lazy("contests_create")
