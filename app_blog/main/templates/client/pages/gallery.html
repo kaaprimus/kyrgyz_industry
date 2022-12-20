@@ -29,8 +29,7 @@
       <div class="row" data-aos="fade-up" data-aos-delay="200">
         <div class="col-lg-12 d-flex justify-content-center">
           <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">{% translate "Все" %}</li>
-            <li data-filter=".filter-app">{% translate "Новости" %}</li>
+            <li id="start-click" data-filter=".filter-app" class="filter-active">{% translate "Новости" %}</li>
             <li data-filter=".filter-card">{% translate "Проекты" %}</li>
           </ul>
         </div>
@@ -40,7 +39,7 @@
 
         {% for value in news_photo %}
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
+          <div class="portfolio-wrap w-100 h-100">
             <img src="/{{ value.URL }}" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>{{ value.Caption }}</h4>
@@ -54,7 +53,7 @@
         
         {% for value in projects_photo %}
         <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
+          <div class="portfolio-wrap w-100 h-100">
             <img src="/{{ value.URL }}" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>{{ value.Caption }}</h4>
@@ -69,47 +68,88 @@
 
       </div>
 
-      {% if gallery_page %}
-    <div class="d-flex mt-4 flex-wrap justify-content-center">
-              <nav class="ml-auto">
-                <ul class="pagination separated pagination-info">
-                  {% if gallery_page.has_previous %}
-                    <li class="page-item">
-                      <a href="/gallery_page/{{ gallery_page.previous_page_number }}/" class="page-link">&laquo;</a>
-                    </li>
-                  {% else %}
-                    <li class="page-item disabled">
-                      <a href="" class="page-link">&laquo;</a>
-                    </li>
-                  {% endif %}
-                  {% for page in gallery_page.paginator.page_range %}
-                    {% if page == gallery_page.number %}
-                      <li class="page-item active">
-                        <a href="/gallery_page/{{ page }}/" class="page-link">{{ page }}</a>
+      {% if page_num > 1 and not error %}
+     <div class="d-flex mt-4 flex-wrap justify-content-center">
+               <nav class="ml-auto">
+                 <ul class="pagination separated pagination-info" data-aos="fade-up">
+                    <!-- Если Есть Предыдущая страница-->
+                   {% if news_photo.has_previous %}
+                     <li class="page-item">
+                       <a href="?&page={{news_photo.previous_page_number}}" class="page-link">&laquo;</a>
+                     </li>
+                   {% else %}
+                     <li class="page-item disabled">
+                       <a href="" class="page-link">&laquo;</a>
+                     </li>
+                   {% endif %}
+                     <!-- Если номер текущей странцы больше чем 3-->
+                     {% if news_photo.number > 3%}
+                     <li class="page-item">
+                       <a class="page-link" href="?&page=1">1</a>
                       </li>
-                    {% else %}
-                      <li>
-                        <a href="/gallery_page/{{ page }}/" class="page-link">{{ page }}</a>
-                      </li>
-                    {% endif %}
-                  {% endfor %}
-                  {% if gallery_page.has_next %}
-                    <li class="page-item">
-                      <a href="/gallery_page/{{ gallery_page.next_page_number }}/" class="page-link">&raquo;</a>
-                    </li>
-                  {% else %}
-                    <li class="page-item disabled">         
-                      <a href="" class="page-link">&raquo;</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              </nav>
-    </div>
-    {% endif %}
+                         <!-- Если количество странцы больше чем 4-->
+                         {% if news_photo.number > 4 %}
+                         <li class="page-item">
+                           <a class="page-link">...</a>
+                         </li>
+                         {% endif %}
+                     {% endif %}
+ 
+                   {% for page in news_photo.paginator.page_range  %}
+                     {% if news_photo.number  == page %}
+                     <li class="page-item {% if page == news_photo.number %}active{% endif %}">
+                       <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                     </li>
+                    {% elif page > news_photo.number|add:'-3' and page < news_photo.number|add:'3' %}
+                    <li class="page-item {% if page == news_photo.number %}active{% endif %}">
+                     <a href="?&page={{ page }}" class="page-link">{{ page }}</a>
+                   </li>
+                     {% endif %}
+                   {% endfor %}
+                   {% if news_photo.has_next %}
+ 
+                   {% comment %}номер текущей стр - news_photo.number {% endcomment %}
+                   {% if news_photo.number < news_photo.paginator.news_photo|add:'-3' %}
+                     <li class="page-item">
+                       <a class="page-link">...</a>
+                     </li>
+                       <li class="page-item">
+                         <a href="?&page={{ news_photo.paginator.num_pages }}" class="page-link">{{ news_photo.paginator.num_pages }}</a>
+                       </li>
+                     {% elif news_photo.number < news_photo.paginator.num_pages|add:'-2' %}
+                     <li class="page-item">
+                           <a href="?page={{ news_photo.paginator.num_pages }}" class="page-link">{{ news_photo.paginator.num_pages }}</a>
+                     </li>
+                     
+                     {% endif %}
+                     <li class="page-item">
+                       <a href="?&page={{news_photo.next_page_number}}" class="page-link">&raquo;</a>
+                     </li>
+                     {% else %}
+                       <li class="page-item disabled">         
+                         <a href="" class="page-link">&raquo;</a>
+                       </li>
+                     {% endif %}
+                 </ul>
+               </nav>
+     </div>
+     {% endif %}
 
     </div>
   </section><!-- End Portfolio Section -->
 
 </main><!-- End #main -->
 
+
+
 {% endblock content %}
+
+{% block custom_js %}
+<script src="{% static 'client/vendor/jquery/jquery.min.js' %}"></script>
+<script>
+  $(document).ready(function(){
+    let li = $("#portfolio-flters li").eq(0);
+    li.click()
+  })
+</script>
+{% endblock %}

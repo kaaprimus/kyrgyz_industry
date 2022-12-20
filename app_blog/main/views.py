@@ -85,12 +85,12 @@ def test_method(request):
     }
     
     return render(request, 'client/pages/img.html', context)
-
-
+    
 # Блоки
 def get_block(request,title):
+    actual_url = request.path.split('/')[2]
     trans = translate(language='ru')
-    context = {'trans':trans}
+    context = {'trans':trans, 'actual_url':actual_url}
     if(title=="Направление НИОКР и инновационных проектов ОАО"):
         return render(request, "client/pages/blockone.html", context)
     if(title=="Направление промышленных отраслей ОАО"):
@@ -101,7 +101,6 @@ def get_block(request,title):
         return render(request, "client/pages/blockfour.html", context)
     if(title=="Направление руководителя аппарата ОАО"):
         return render(request, "client/pages/blockfive.html", context)
-
 
 # Получаем выбранный язык для фильтрации
 def get_lang(trans):
@@ -114,7 +113,6 @@ def get_lang(trans):
     else:
         lang = 'Русский'
     return lang
-       
 
 def index(request):
     trans = translate(language='ru')
@@ -153,13 +151,15 @@ def index(request):
         }
     return render(request, "client/index.html", context)
 
-
+    
 
 def interviews(request):
     trans = translate(language='ru')
     posts = Interviews.objects.order_by('-id')
 
     per_page = 6
+    
+    actual_url = request.path.split('/')[2]
 
     currunt_page_interview = Paginator(posts, per_page=per_page)
     
@@ -180,6 +180,7 @@ def interviews(request):
         'all_interviews':posts,
         'trans':trans,
         'page_num':page_num,
+        'actual_url':actual_url
         }
     return render(request, "client/pages/interviews.html", context)
 
@@ -204,8 +205,22 @@ def get_translated_position(language):
         
     return position
 
+def get_advisor(language):
+    if language == "en":
+        position = "advisor"
+    elif language == "zh-hans":
+        position = "顾问"
+    elif language == "ru":
+        position = "Советник"
+    else:
+        position = "Кеңешчи"
+
+    return position
+
 def about_company(request):
     trans = translate(language='ru')
+
+    actual_url = request.path.split('/')[2]
     
     president = None
     not_exist = False
@@ -213,24 +228,38 @@ def about_company(request):
         president = Management.objects.get(position__startswith=get_president_position(language=trans))  
     except Management.DoesNotExist:
         not_exist = True
-    
-    veep = Management.objects.filter(position__startswith=get_translated_position(language=trans))[:4]
+    try:
+        veep = Management.objects.filter(position__startswith=get_translated_position(language=trans))[:5]
+    except Management.DoesNotExist:
+        not_exist = True
+    try:
+        advisor = Management.objects.filter(position__startswith=get_advisor(language=trans))
+    except Management.DoesNotExist:
+        not_exist = True
     
     context = {
         'trans':trans, 
         'veep':veep,
         "not_exist" : not_exist,
         'president':president,
+        'actual_url':actual_url,
+        'advisor':advisor
         }
     return render(request, "client/pages/about_company.html", context)
 
 def about_us_full_info(request):
+    actual_url = request.path.split('/')[2]
+
     trans = translate(language='ru')
-    context = {'trans':trans}
+    context = {
+        'trans':trans,
+        'actual_url':actual_url
+    }
     return render(request, "client/pages/about_us_full_info.html", context)
 
 def president(request):
     trans = translate(language='ru')
+
     not_exist = False
     try:
         president = Management.objects.get(position__startswith=get_president_position(language=trans))
@@ -245,9 +274,28 @@ def president(request):
 
     return render(request, "client/pages/president.html", context)
 
+def advisor(request):
+    trans = translate(language='ru')
+
+    not_exist = False
+    try:
+        advisor = Management.objects.get(position__startswith=get_advisor(language=trans))
+    except Management.DoesNotExist:
+        not_exist = True
+        
+    context = {
+        'trans':trans,
+        'president':advisor,
+        "not_exist" : not_exist
+        }
+
+    return render(request, "client/pages/advisors.html", context)
+
 
 def contests(request):
     per_page = 6
+    actual_url = request.path.split('/')[2]
+
     trans = translate(language='ru')
     contest= Contests.objects.all().filter(Language = get_lang(trans=trans)).order_by('-Date_added')
     paginator = Paginator(contest, per_page=per_page)    
@@ -264,7 +312,8 @@ def contests(request):
     context = {
         'contest_page': contest,
         'page_num':pag_num,
-        'trans':trans
+        'trans':trans,
+        'actual_url':actual_url
         }
     return render(request, "client/pages/contests.html", context)
 
@@ -273,6 +322,8 @@ def contests(request):
 def news(request):
     error = None
     trans = translate(language='ru')
+
+    actual_url = request.path.split('/')[2]
     
     per_page = 12
     
@@ -320,7 +371,8 @@ def news(request):
                'all_news' : news_image_mixed,
                'page_num' : page_num,
                "error" : error,
-               'count':count
+               'count':count,
+               'actual_url':actual_url
                }
     return render(request, "client/pages/news.html", context)
 
@@ -328,6 +380,8 @@ def projects(request):
     trans = translate(language='ru')
     error = False
     search_projects = request.GET.get('search')
+
+    actual_url = request.path.split('/')[2]
 
     if search_projects:
         posts = Projects.objects.filter(Q(Title__icontains=search_projects) | Q(Short_Description__icontains=search_projects))
@@ -370,6 +424,7 @@ def projects(request):
         'all_projects' : news_image_mixed,
         'page_num' : page_num,
         'error' : error,
+        'actual_url':actual_url
     }
     return render(request, "client/pages/projects.html", context)
 
@@ -377,25 +432,33 @@ def projects(request):
 
 def get_news(request,title):
     trans = translate(language='ru')
+
+    actual_url = 'news'
     
-    news_detail = News.objects.filter(Title=title)
-    news_title = News.objects.get(Title=title)
+    news_detail = News.objects.filter(Title=title, Language = get_lang(trans=trans))
+    news_title = News.objects.get(Title=title, Language=get_lang(trans=trans))
+
     photo = PhotosNews.objects.filter(Gallery_id=get_id_Gallery_News(title))
     context = {
         'news_detail': news_detail,
         'photo':photo,
         'news_title':news_title,
-        'trans':trans}
+        'trans':trans,
+        'actual_url':actual_url
+        }
     return render(request, "client/pages/news_detail.html", context)
 
 def investors(request):
     trans = translate(language='ru')
-    context = {'trans':trans}
+    actual_url = request.path.split('/')[2]
+
+    context = {'trans':trans, 'actual_url':actual_url}
     return render(request, "client/pages/investors.html", context)
 
 def strategy(request):
     trans = translate(language='ru')
-    context = {'trans':trans}
+    actual_url = request.path.split('/')[2]
+    context = {'trans':trans, 'actual_url':actual_url}
     return render(request, "client/pages/strategy.html", context)
 
 def reports(request):
@@ -404,20 +467,30 @@ def reports(request):
 
     search_report = request.GET.get('search')
 
+    actual_url = request.path.split('/')[2]
+
     if search_report:
         posts = Reports.objects.filter(Q(title__icontains=search_report) | Q(short_description__icontains=search_report))
     else:
-        posts = Reports.objects.all().order_by("-id")
+        posts = Reports.objects.filter(language = get_lang(trans=trans))
 
-    context = {'trans':trans, 'reports_all':posts}
+    context = {'trans':trans, 'reports_all':posts, 'actual_url':actual_url}
     return render(request, "client/pages/reports.html", context)
 
 def get_project(request,title):
     trans = translate(language='ru')
-    project_detail=Projects.objects.filter(Title=title)
-    project_title=Projects.objects.get(Title=title)
+    actual_url = 'projects'
+
+    project_detail=Projects.objects.filter(Title=title, Language=get_lang(trans=trans))
+    project_title=Projects.objects.get(Title=title, Language = get_lang(trans=trans))
     photo=PhotosProject.objects.filter(Gallery_id=get_id_Gallery_project(title))
-    context = {'project_detail': project_detail,'photo':photo,'project_title':project_title,'trans':trans}
+    context = {
+        'project_detail': project_detail,
+        'photo':photo,
+        'project_title':project_title,
+        'trans':trans,
+        'actual_url':actual_url
+        }
     return render(request, "client/pages/project_detail.html", context)
 
 def get_id_Gallery_News(title):
@@ -434,19 +507,29 @@ def get_id_Gallery_project(title):
         id=val.Gallery_id
     return id
 
-def veep(request):
+def veep(request, id):
     trans = translate(language='ru')
-    context = {'trans':trans}
-    return render(request, "client/pages/veep.html", context)
 
-def npa(request):
-    trans = translate(language='ru')
-    context = {'trans':trans}
-    return render(request, "client/pages/NPA.html", context)
+    actual_url = 'about_company'
+
+    not_exist = False
+    try:
+        post = Management.objects.get(id=id)
+    except Management.DoesNotExist:
+        not_exist = True
+    context = {
+        'trans':trans,
+        'posts':post,
+        'actual_url':actual_url
+        }
+    return render(request, "client/pages/veep.html", context)
 
 def vacancies(request):
     trans = translate(language='ru')
     per_page = 10
+
+    actual_url = request.path.split('/')[2]
+
     vacancies = Vacancies.objects.all().filter(Language = get_lang(trans=trans)).order_by('-pub_date')
     
     paginator = Paginator(vacancies, per_page = per_page)
@@ -464,14 +547,17 @@ def vacancies(request):
     context = {
                'page_vacancies': vacancies,
                'trans':trans,
-               "page_num" : page_num
+               "page_num" : page_num,
+               'actual_url':actual_url
                }
     return render(request, "client/pages/vacancies.html", context)
 
 def get_vacancy(request,title):
     trans = translate(language='ru')
+
     vacancy_detail=Vacancies.objects.filter(title=title)
     vacancy_title=Vacancies.objects.get(title=title)
+
     context = {
         'vacancy_detail': vacancy_detail,
         'vacancy_title':vacancy_title,
@@ -480,25 +566,58 @@ def get_vacancy(request,title):
     return render(request, "client/pages/vacancy_detail.html", context)
 
 #Страница Фотогалерея 
-def gallery_page(request,number_page=1):
+def gallery_page(request):
     trans = translate(language='ru')
-    news_photo=PhotosNews.objects.order_by('-id')
-    gallery_page = Paginator(news_photo,4)
+
+    actual_url = request.path.split('/')[2]
+
+    per_page = 6
     projects_photo=PhotosProject.objects.order_by('-id')
-    context = {'gallery_page': gallery_page.page(number_page),'trans':trans, 'news_photo':news_photo, 'projects_photo':projects_photo}
+    news_photo=PhotosNews.objects.order_by('-id')
+    
+    paginator_projects = Paginator(projects_photo, per_page = per_page)
+    paginator_news = Paginator(news_photo, per_page = per_page)
+
+    page_num = paginator_projects.num_pages
+    page_num = paginator_news.num_pages
+    
+    try:
+        page = request.GET.get("page", 1)
+        projects_photo = paginator_projects.page(page)
+        news_photo = paginator_news.page(page)
+        
+    except (PageNotAnInteger, TypeError):
+        projects_photo = paginator_projects.page(1)
+        news_photo = paginator_news.page(1)
+    except EmptyPage:
+        projects_photo = paginator_projects.page(page_num)
+        news_photo = paginator_news.page(page_num)
+
+    news_projects_mixed = zip(projects_photo, news_photo)
+        
+    context = {
+        'pages': news_projects_mixed,
+        'trans':trans, 
+        'news_photo':news_photo, 
+        'projects_photo':projects_photo,
+        "page_num" : page_num,
+        'actual_url':actual_url
+        }
     return render(request, "client/pages/gallery.html", context)
 
 
 # Карта сайта 
 def sitemap(request):
-    return render(request, "client/pages/sitemap.html", {})
+    actual_url = request.path.split('/')[2]
+    return render(request, "client/pages/sitemap.html", {'actual_url':actual_url})
 
 # Свяжитесь с нами
 def feedback(request):
-    return render(request, "client/pages/feedback.html", {})
+    actual_url = request.path.split('/')[2]
+    return render(request, "client/pages/feedback.html", {'actual_url':actual_url})
 
 def hot_news(request):
-    
+    actual_url = request.path.split('/')[2]
     
     news_all = HotNews.objects.order_by('-id')
     error = False
@@ -539,7 +658,8 @@ def hot_news(request):
                'trans':trans, 
                'all_news' : news_image_mixed,
                'page_num' : page_num,
-               "error" : error
+               "error" : error,
+               'actual_url':actual_url
                }
     return render(request, "client/pages/hot_news.html", context)
 
@@ -1505,11 +1625,12 @@ def hotnews_delete(request, id):
     return render(request, "admin/pages/hotnews/hotnews_confirm_delete.html", context)  
 
 
+
 class ReportsView(View):
     model = Reports
     form_class = ReportsForm
     active_panel = "reports-panel"
-    success_url = reverse_lazy("hotnews_create")
+    success_url = reverse_lazy("reports_create")
     extra_context = {
         "is_active" : active_panel,
         "active_reports" : "active",

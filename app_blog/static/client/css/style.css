@@ -39,6 +39,20 @@ h6 {
 /*--------------------------------------------------------------
 # Custom css
 --------------------------------------------------------------*/
+.btn-refresh :hover{
+  color: #3498db;
+}
+
+.your-logo {
+  font-family: Permanent Marker; 
+  font-weight: bold;
+  color: #0b792c;
+}
+
+.search-form {
+  display: flex;
+  margin-left: 65%;
+}
 
 .spinner-box{
   z-index: 10;
@@ -83,7 +97,41 @@ h6 {
 .hotnews-slider .prev:after{
     font-size: 30px !important;
 }
-} 
+
+.section-title {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.section-title h2 {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  color: #222222;
+}
+
+.section-title h2::before,
+.section-title h2::after {
+  content: "";
+  width: 50px;
+  height: 2px;
+  background: #3498db;
+  display: inline-block;
+}
+
+.section-title h2::before {
+  margin: 0 15px 10px 0;
+}
+
+.section-title h2::after {
+  margin: 0 0 10px 15px;
+}
+
+.section-title p {
+  margin: 15px 0 0 0;
+}
+}
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -118,12 +166,83 @@ h6 {
   opacity: 1;
 }
 
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  z-index: 996;
+  background: #3498db;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  transition: all 0.4s;
+}
+
+.aboutus-footer-links{
+  padding-left: 12%;
+}
+
 /*--------------------------------------------------------------
 # Disable AOS delay on mobile
 --------------------------------------------------------------*/
 @media screen and (max-width: 768px) {
   [data-aos-delay] {
     transition-delay: 0 !important;
+  }
+
+  .search-form{
+    display: flex;
+    margin-left: 0%;
+  }
+
+  .news-link:hover {
+    color: #204156 !important;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #5faee3;
+    text-decoration: none;
+  }
+
+  .section-title {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  
+  .section-title h2 {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    color: #222222;
+  }
+  
+  .section-title h2::before,
+  .section-title h2::after {
+    content: "";
+    width: 50px;
+    height: 2px;
+    background: #3498db;
+    display: inline-block;
+  }
+  
+  .section-title h2::before {
+    margin: 0 15px 10px 0;
+  }
+  
+  .section-title h2::after {
+    margin: 0 0 10px 15px;
+  }
+  
+  .section-title p {
+    margin: 15px 0 0 0;
   }
 }
 

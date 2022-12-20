@@ -1,7 +1,7 @@
 {% extends 'client/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block page_title %}{% translate "Фотогалерея" %}{% endblock page_title %}
+{% block page_title %}{% translate "Интервью" %}{% endblock page_title %}
 
 {% block content %}
 
@@ -12,7 +12,6 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{% translate "Интервью" %}</h2>
           <ol>
             <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
             <li>{% translate "Интервью"%}</li>
@@ -21,7 +20,6 @@
 
       </div>
     </section><!-- End Breadcrumbs -->
-
 <!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio">
     <div class="container">

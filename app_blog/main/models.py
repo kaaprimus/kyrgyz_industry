@@ -15,16 +15,7 @@ class LanguageChoice(models.TextChoices):
     KG = "Кыргызча", "Кыргызча"
     EN = "English", "English"
     CH = "中国人", "中国人"
-
-#Функция для проверки одинаковых названий   
-def check_title_similar(title):
-    print(title)
-    news_title = title
-    if re.search(news_title, title):
-        raise forms.ValidationError('Запись с таким названием уже существует!')
-    else:
-        return title
-
+  
 # Категория проектов
 class ProjectCategory(models.Model):
     Name=models.CharField(max_length=70,verbose_name="Название категории",unique=True,error_messages={'unique':"Категория с таким названием уже существует!"})
@@ -41,7 +32,7 @@ class GalleryProject(models.Model):
     Name=models.CharField(max_length=70,verbose_name="Название галереи", unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
 
     class Meta:
-        db_table="galleryProject" 
+        db_table="galleryProject"
         ordering = ['-id']
         
     def __str__(self) -> str:
@@ -52,7 +43,7 @@ class GalleryNews(models.Model):
     Name=models.CharField(max_length=70,verbose_name="Название галереи", unique=True,error_messages={'unique':"Галерея с таким названием уже существует!"})
 
     class Meta:
-        db_table="galleryNews" 
+        db_table="galleryNews"
         ordering = ['-id']
     def __str__(self) -> str:
         return self.Name   
@@ -212,12 +203,15 @@ class News(models.Model):
 # Руководство    
 class Management(models.Model):
     full_name = models.CharField(max_length = 60, verbose_name = "ФИО Сотрудника")
-    position = models.CharField(max_length = 70, verbose_name = "Должность")
+    position = models.CharField(max_length = 255, verbose_name = "Должность")
     date_birth = models.DateField(verbose_name='Дата рождения', default=now)
-    education = models.CharField(max_length=255, verbose_name='Образования')
-    speciality = models.CharField(max_length=
-                                  255, verbose_name='Специальность')
+
     about = RichTextField(verbose_name="Биография сотрудника")
+
+    mail_link = models.CharField(max_length=2080, verbose_name='Ссылка на почту', null=True)
+    instagram_link = models.CharField(max_length=2080, verbose_name='Ссылка на инстаграм', null=True)
+    facebook_link = models.CharField(max_length=2080, verbose_name='Ссылка на facebook', null=True)
+
     language=models.CharField(
                                max_length = 10, 
                                choices = LanguageChoice.choices,
@@ -331,6 +325,12 @@ class Interviews(models.Model):
 class Reports(models.Model):
     title = models.CharField(verbose_name='Название отчета', max_length=80, unique=True,error_messages={'unique':"Отчет с таким названием уже существует!"})
     short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
+    language=models.CharField(
+                               max_length = 10, 
+                               choices = LanguageChoice.choices,
+                               default = LanguageChoice.RU,
+                               verbose_name = "Язык",
+                               )
     url = models.FileField(
         verbose_name='Путь файла',
         upload_to=get_file_path, 
