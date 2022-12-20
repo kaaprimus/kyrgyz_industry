@@ -49,6 +49,11 @@ h6 {
   color: #0b792c;
 }
 
+.search-form {
+  display: flex;
+  margin-left: 65%;
+}
+
 .spinner-box{
   z-index: 10;
 }

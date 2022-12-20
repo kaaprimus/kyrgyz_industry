@@ -472,7 +472,7 @@ def reports(request):
     if search_report:
         posts = Reports.objects.filter(Q(title__icontains=search_report) | Q(short_description__icontains=search_report))
     else:
-        posts = Reports.objects.filter(Language = get_lang(trans=trans))
+        posts = Reports.objects.filter(language = get_lang(trans=trans))
 
     context = {'trans':trans, 'reports_all':posts, 'actual_url':actual_url}
     return render(request, "client/pages/reports.html", context)

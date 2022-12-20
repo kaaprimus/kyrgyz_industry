@@ -333,7 +333,7 @@ class InterviewsForm(ModelForm):
 class ReportsForm(ModelForm):
     class Meta:
         model = Reports
-        fields = ['title', 'short_description', 'url']
+        fields = ['title', 'short_description','language', 'url']
     
         widgets = {
             'title' : TextInput(
@@ -342,4 +342,8 @@ class ReportsForm(ModelForm):
             'short_description' : TextInput(
                 attrs = {"type" : "text", "class" : "form-control", "id" : "company", "placeholder" : "Краткое описание","size" : 130, 'required': True}
             ),
+            'language' : forms.Select(
+                attrs={"class": "form-control", 'required': True,  "id" : "language"},
+                choices=LanguageChoice.choices
+            )
         }

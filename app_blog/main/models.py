@@ -203,7 +203,7 @@ class News(models.Model):
 # Руководство    
 class Management(models.Model):
     full_name = models.CharField(max_length = 60, verbose_name = "ФИО Сотрудника")
-    position = models.CharField(max_length = 70, verbose_name = "Должность")
+    position = models.CharField(max_length = 255, verbose_name = "Должность")
     date_birth = models.DateField(verbose_name='Дата рождения', default=now)
 
     about = RichTextField(verbose_name="Биография сотрудника")
@@ -325,11 +325,11 @@ class Interviews(models.Model):
 class Reports(models.Model):
     title = models.CharField(verbose_name='Название отчета', max_length=80, unique=True,error_messages={'unique':"Отчет с таким названием уже существует!"})
     short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
-    Language=models.CharField(
+    language=models.CharField(
                                max_length = 10, 
                                choices = LanguageChoice.choices,
                                default = LanguageChoice.RU,
-                               verbose_name = "Язык"
+                               verbose_name = "Язык",
                                )
     url = models.FileField(
         verbose_name='Путь файла',

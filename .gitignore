@@ -51,3 +51,14 @@ app_blog/static/client/img/team/73d454f6-dc5c-4e43-b8d6-ce6eece099af__profile.jp
 app_blog/main/__pycache__/urls.cpython-310.pyc
 app_blog/main/__pycache__/views.cpython-310.pyc
 .gitignore
+app_blog/app_blog/__pycache__/settings.cpython-310.pyc
+app_blog/main/__pycache__/admin.cpython-310.pyc
+app_blog/main/__pycache__/admin.cpython-310.pyc
+app_blog/main/__pycache__/forms.cpython-310.pyc
+app_blog/main/__pycache__/models.cpython-310.pyc
+app_blog/main/__pycache__/urls.cpython-310.pyc
+app_blog/main/__pycache__/views.cpython-310.pyc
+app_blog/static/client/docs/reports/4518ae4a-b88a-467a-bf05-b146aacacdd8__JavaEE8_Platform_Spec_F_XFKxDS3.pdf
+app_blog/static/client/docs/reports/be6246c9-03e1-4341-9549-d47abff5c9f0__JavaEE8_Platform_Spec_F_HuJtosd.pdf
+app_blog/static/client/docs/reports/c2f4f273-919f-4ba9-8fc2-9f8b14d14ef6__Эрнисов_Айдар.pdf
+.gitignore
