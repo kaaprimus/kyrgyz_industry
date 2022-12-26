@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'main',
     'rosetta',
     'ckeditor',
+    'crispy_forms',
 ]
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,9 +84,9 @@ WSGI_APPLICATION = 'app_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'kg_industr',
-        'USER': 'Userr',
-        'PASSWORD': '123456',
+        'NAME': 'KG_INDUSTRY',
+        'USER': 'User',
+        'PASSWORD': '12345',
         'HOST': '127.0.0.1',
         'PORT': '1433',
         'OPTIONS': {
@@ -155,12 +156,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER =''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD =''

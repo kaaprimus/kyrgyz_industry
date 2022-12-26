@@ -64,6 +64,7 @@
           <div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <form method="post" role="form" class="frm" action="send_message/">
               {% csrf_token %}
+              
               <div class="form-group">
                 <input type="text" name="name" class="form-control" id="name" placeholder="{% translate "Имя" %}" required>
               </div>
@@ -76,24 +77,17 @@
               <div class="form-group">
                 <textarea class="form-control" name="message" rows="5" placeholder="{% translate "Сообщение ..." %}" required></textarea>
               </div>
-            
                 {% for message in messages %}
                 {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
                 <div class="alert alert-success">
-  
                   {{ message }}
-  
                 </div>
                 {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
                 <div class="alert alert-danger">
-  
                   {{ message }}
-  
                 </div>
                 {% endif %}
-  
                 {% endfor %}
-            
               <div class="text-center"><button type="submit">{% translate "Отправить" %}</button></div>
             </form>
           </div>

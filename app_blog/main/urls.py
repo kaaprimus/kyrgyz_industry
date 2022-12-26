@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -12,6 +12,12 @@ urlpatterns = [
     path(r'admin-panel/profile/update/^/change_password/', views.ChangePasswordView.as_view(), name = 'change_password'),
     path('admin-panel/main/', views.AdminMain.as_view(), name='admin_panel'),
     
+    # Reset password
+
+    path("accounts/password_reset/", views.password_reset_request, name="password_reset"),
+    path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name="admin/pages/user/password_reset_done.html"), name='password_reset_done'),
+    path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="admin/pages/user/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name="admin/pages/user/password_reset_complete.html"), name='password_reset_complete'),
     # News View
     path('admin-panel/news/all/', views.NewsListView.as_view(), name='news_all'),
     path('admin-panel/news/create/', views.NewsCreateView.as_view(), name='news_create'),

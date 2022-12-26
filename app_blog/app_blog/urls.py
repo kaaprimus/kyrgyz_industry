@@ -21,12 +21,14 @@ from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
 from django.conf.urls import handler400, handler500, handler403
 from main import views
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path(_('admin/'), views.AdminMain.as_view()),
+    
 ]
 
 urlpatterns += i18n_patterns (
-    path('', include('main.urls'))
+    path('', include('main.urls')),
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:
