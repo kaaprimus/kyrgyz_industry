@@ -42,9 +42,13 @@ INSTALLED_APPS = [
     'main',
     'rosetta',
     'ckeditor',
+<<<<<<< HEAD
     'analytical',
+=======
+    'crispy_forms',
+>>>>>>> 0dde13c9db88658a0d943bec25e7b684faebfb8d
 ]
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,9 +87,16 @@ YANDEX_METRICA_COUNTER_ID = '90695866'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'mssql',
+        'NAME': 'KG_INDUSTRY',
+        'USER': 'User',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
+        'PORT': '1433',
+        'OPTIONS': {
+            'driver': 'SQL Server Native Client 11.0',
+        },
+    },
 }
 
 # Password validation
@@ -147,12 +158,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER =''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD =''

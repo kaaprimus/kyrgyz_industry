@@ -27,8 +27,11 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
 from django.db.models import Q
-
-
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
 """ 
     Таски:
         Client:
@@ -69,6 +72,38 @@ from django.db.models import Q
             
             Оптимизация Кода
 """
+
+
+def password_reset_request(request):
+    settings.EMAIL_HOST_USER='zenisbekovk04@gmail.com'
+    settings.EMAIL_HOST_PASSWORD='zwhojtjglgpyguxw'
+    if request.method == "POST":
+        password_reset_form = UserPasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data['email']
+            associated_users = User.objects.filter(Q(email=data))
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Запрос на сброс данных"
+                    email_template_name = "admin/pages/user/password_reset_email.html"
+                    c = {
+                        "email":user.email,
+                        'domain':'http://127.0.0.1:8000',
+                        'site_name': 'Website',
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http',
+                        }
+                    email = render_to_string(email_template_name, c)
+                    print(email)
+                    try:
+                        send_mail(subject, email, 'zenisbekovk04@gmail.com' , [user.email], fail_silently=False)
+                    except BadHeaderError:
+                        return HttpResponse('Invalid header found.')
+                    return redirect ("/accounts/password_reset/done/")
+    password_reset_form = UserPasswordResetForm()
+    return render(request=request, template_name="admin/pages/user/password_reset.html", context={"password_reset_form":password_reset_form})
 
 # Функция для тестировки
 def test_method(request):
@@ -609,7 +644,7 @@ def gallery_page(request):
 # Карта сайта 
 def sitemap(request):
     actual_url = request.path.split('/')[2]
-    return render(request, "client/pages/sitemap.html", {'actual_url':actual_url})
+    return render(request, "client/pages/sitemap.hsendtml", {'actual_url':actual_url})
 
 # Свяжитесь с нами
 def feedback(request):
@@ -724,6 +759,7 @@ def send_message(request):
     
     sucs=True
     if request.method == 'POST':
+        
         settings.EMAIL_HOST_USER='zenisbekovk04@gmail.com'
         settings.EMAIL_HOST_PASSWORD='zwhojtjglgpyguxw'
 
@@ -731,7 +767,7 @@ def send_message(request):
         message = request.POST.get('message', '')
         from_email = request.POST.get('email', '')
         subject = "Сообщение от пользователей" 
-        to_email='zenisbekovk04@gmail.com'
+        to_email=['aidar.ernisov01@gmail.com']
         try:
             
             body = {
@@ -739,16 +775,17 @@ def send_message(request):
                 'from_email': "Эл.адрес: " + from_email,
 			    'message': "Сообщение: " + message,
 		    }
-	    
+            
             messageAll = "\n".join(body.values())
             send_mail(subject, messageAll, from_email, to_email)
         except BadHeaderError:
-            return HttpResponse('Invalid header found.')
-        except:
+            return HttpResponse('Неправильный ввод данных')
+        except :
             messages.add_message(request, messages.ERROR, 'Неправильный эл.адрес')
             sucs=False
     if(sucs==True):
         messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
+        return redirect ('feedback')
     return redirect ('feedback')
 
 @csrf_exempt
@@ -800,7 +837,7 @@ class ProfileView(View):
     form_class = UpdateUserForm
     success_url = reverse_lazy('update_profile')
     
-    
+
 class ProfileUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProfileView, UpdateView):
     login_url = "login_page"
     success_message = "Данные успешно изменены"
