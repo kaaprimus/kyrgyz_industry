@@ -1,0 +1,38 @@
+{% extends 'client/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}Страница не найдена{% endblock page_title %}
+
+
+{% block content %}
+<main id="main">
+      <!-- ======= Breadcrumbs Section ======= -->
+      <section class="breadcrumbs">
+        <div class="container">
+  
+          <div class="d-flex justify-content-between align-items-center">
+            <ol>
+              <li><a href="{% url 'index' %}">Главная</a></li>
+              <li>404</li>
+            </ol>
+          </div>
+  
+        </div>
+      </section><!-- End Breadcrumbs Section -->
+  
+      <section class="inner-page">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>{% translate "Страница не найдена" %}</h2>
+            </div>
+            <div class="d-flex w-100 justify-content-center">
+                <h5 class="mb-2 mt-3 text-danger news-link">Ошибка 404: Нет такой страницы</h5>
+            </div>
+            <div class="d-flex mt-3 justify-content-center">
+                <a href="{% url 'sitemap' %}" data-aos="fade-up" data-aos-delay="300">{% translate "Перейти на Карту сайта" %}</a>
+             </div>
+        </div>
+      </section>
+</main><!-- End #main -->
+    
+{% endblock content %}

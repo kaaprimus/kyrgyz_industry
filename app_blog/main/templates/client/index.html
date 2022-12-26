@@ -5,67 +5,71 @@
 
 {% block page_title %}Кыргызиндустрия{% endblock page_title%}
 
+{% block other_pages_style %} {% endblock other_pages_style %}
+      
+
 {% block content %}
 {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+  
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 h-100 hotnews-slider swiper shadow rounded-2">
-        <div class="col-12 swiper-wrapper align-items-center">
-          {% for news, img in hot_news %}
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="hero-container">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-            <div class="swiper-slide">
-              <a href="{% url 'hot_news_detail' news.title %}">
-               <img src="/{{ img }}" class="w-100 hot-img">
-               <div class="caption">
-                  <div class="hot-news-container p-3">
-                      <h3>{{news.title}}</h3>
-                      <p>{{news.short_description}}</p>
-                      <p class="text-end">Дата публикации: <strong>{{news.pub_date}}</strong></p>
-                  </div>
-               </div>
-              </a>
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url({% static 'client/img/slider/slide-2.jpg' %});">
+          <div class="carousel-container">
+            <div class="carousel-content">
+              <h2 class="animate__animated animate__fadeInDown"><span>{% translate "ОАО «Кыргызиндустрия»" %}</span></h2>
+              <p class="animate__animated animate__fadeInUp">{% translate "ОАО «Кыргызиндустрия» создано постановлением Кабинета Министров Кыргызской Республики за №341 от 24 декабря 2021 года со 100% участием государства в его уставном капитале." %}</p>
+              <a href="{% url 'about_company' %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">{% translate "Узнать больше" %}</a>
             </div>
-          {% endfor %}
+          </div>
         </div>
-        <div class="swiper-button-prev prev"></div>
-	        <div class="swiper-button-next next"></div>  
-        <div class="swiper-pagination"></div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item" style="background-image: url({% static 'client/img/slider/slide-3.jpg' %});">
+          <div class="carousel-container">
+            <div class="carousel-content">
+              <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+              <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">{% translate "Читать дальше" %}</a>
+            </div>
+          </div>
         </div>
-        <!-- <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <ul id="suggestion">
-            <li class="item">
-              <h1 data-aos="fade-up">{% translate "ОАО «Кыргызиндустрия»" %}</h1>
-              <h1>{{actual_url}}</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400">{% translate "создано постановлением Кабинета Министров Кыргызской Республики за №341 от 24 декабря 2021 года со 100% участием государства в его уставном капитале." %}</h2>
-              <div data-aos="fade-up" data-aos-delay="800">
-                <a href="{% url 'projects' %}" class="btn-get-started scrollto">{% translate "Наши Проекты" %}</a>
-              </div>
-            </li>
-            {% for hotnews in hot_news%}
-            <li class="item"> 
-              <h1 data-aos="fade-up">{{ hotnews.title}}</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400">{{ hotnews.short_description}}</h2>
-              <div data-aos="fade-up" data-aos-delay="800">
-                <a href="{% url 'hot_news_detail' hotnews.title %}" class="btn-get-started scrollto">{% translate "Читать дальше" %}</a>
-              </div>
-            </li>
-            {% endfor %}
-          </ul>  
-         
-         
-        
+
+        <!-- Slide 3 -->
+        <div class="carousel-item" style="background-image: url({% static 'client/img/slider/slide-4.jpg' %});">
+          <div class="carousel-container">
+            <div class="carousel-content">
+              <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+              <p class="animate__animated animate__adeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+              <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">{% translate "Читать дальше" %}</a>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
-          <img src="{% static 'client/img/hero-img.png' %}" class="img-fluid animated" alt="">
-        </div> -->
+
       </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon ri-arrow-left-line" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon ri-arrow-right-line" aria-hidden="true"></span>
+      </a>
+
     </div>
-  </section><!-- End Hero -->
+  </div>
+</section><!-- End Hero -->
+
+
 
   <main id="main">
     
@@ -158,70 +162,99 @@
       </div>
     </section><!-- End Counts Section -->
     {% endcomment %}
-    <hr>
-     <!-- ======= Clients Section ======= -->
-     <section id="clients" class="clients">
-      <div class="container">
+     <!-- ======= Counts Section ======= -->
+     <section id="counts" class="counts">
+      <div class="container position-relative">
 
-        <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "Наши партнеры" %}</h2>
+        <div class="text-center title">
+          <h3>Чего мы достигли на данный момент</h3>
+          <p>Iusto et labore modi qui sapiente xpedita tempora et aut non ipsum consequatur illo.</p>
         </div>
 
-        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+        <div class="row counters">
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in">
-              <img src="{% static 'client/img/clients/client-1.png' %}" class="img-fluid" alt="">
-            </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+            <p>{% translate "Реализованные Проекты" %}</p>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="100">
-              <img src="{% static 'client/img/clients/client-2.png' %}" class="img-fluid" alt="">
-            </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+            <p>{% translate "Количество созданных Рабочих мест" %}</p>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="150">
-              <img src="{% static 'client/img/clients/client-3.png' %}" class="img-fluid" alt="">
-            </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+            <p>{% translate "Проекты в Перспективе" %}</p>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="200">
-              <img src="{% static 'client/img/clients/client-4.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="250">
-              <img src="{% static 'client/img/clients/client-5.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="300">
-              <img src="{% static 'client/img/clients/client-6.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="350">
-              <img src="{% static 'client/img/clients/client-7.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="client-logo">
-              <img src="{% static 'client/img/clients/client-8.png' %}" class="img-fluid" alt="">
-            </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Еще что-то</p>
           </div>
 
         </div>
 
       </div>
-    </section><!-- End Clients Section -->
-   
+    </section><!-- End Counts Section -->
+
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services section-bg">
+        <div class="container">
+  
+          <div class="section-title">
+            <h2>{% translate "Наши проекты" %}</h2>
+            <p>Реализованные Проекты</p>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Кыргызкыш" ' %}</a></h4>
+                <p>{% translate "Завод по производству строительного кирпича" %}</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4 mt-lg-0">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Кыргызчеттранс" ' %}</a></h4>
+                <p>Транспортно-логистическая компания</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Би Кей Медикеар" ' %}</a></h4>
+                <p>{% translate "Производство медицинских пластырей" %} </p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Кыргызтопчу"' %}</a></h4>
+                <p>{% translate "Производство швейной фурнитуры (пуговицы и молнии)" %}</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Кыргызтемирмык"' %}</a></h4>
+                <p>{% translate "Производство изготовления гвоздей." %}</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">Еще какой-то проект</a></h4>
+                <p>{% translate "Завод по производству строительного кирпича" %}</p>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </section><!-- End Services Section -->
+    
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
@@ -236,10 +269,10 @@
               <h3>{% translate "ОАО «Кыргызиндустрия»" %}</h3>
               <p>{% translate "ОАО «Кыргызиндустрия» создано постановлением Кабинета Министров Кыргызской Республики за №341 от 24 декабря 2021 года со 100% участием государства в его уставном капитале." %}</p>
               <div class="social-links">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="https://www.facebook.com/KyrgyzIndustry" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="https://www.instagram.com/kyrgyzindustry" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="https://www.youtube.com/channel/UCnHPUWY4Q-bPm2EMt-99-9g" class="youtube"><i class="bi bi-youtube"></i></a>
+                <a href="#" class="twitter" target="_blank"><i class="bi bi-twitter"></i></a>
+                <a href="https://www.facebook.com/KyrgyzIndustry" class="facebook" target="_blank"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/kyrgyzindustry" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCnHPUWY4Q-bPm2EMt-99-9g" class="youtube" target="_blank"><i class="bi bi-youtube"></i></a>
               </div>
             </div>
           </div>
@@ -266,27 +299,7 @@
             </div>
           </div>
 
-          <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
-            {% comment %} <form method="post" role="form" class="php-email-form">
-              <div class="form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="{% translate "Имя" %}" required>
-              </div>
-              <div class="form-group">
-                <input type="number" class="form-control" name="subject" id="subject" placeholder="{% translate "Номер Телефона" %}" required>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" name="email" id="email" placeholder="E-mail" required>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="{% translate "Сообщение ..." %}" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">{% translate "Отправить" %}</button></div>
-            </form> {% endcomment %}
+          <div class="col-lg-5 col-md-12 yandex-map" data-aos="fade-up" data-aos-delay="300">
             <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A09bfc1dbae904e7d973d68617001bb7a3425b92e85385c19cde82e2b3eae920d&amp;width=500&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
           </div>
 
@@ -303,9 +316,9 @@
   <script src="{% static 'client/js/jquery.ticker.js' %}"></script>
    
   <script type="text/javascript">
-      $(function () {
-        $('#suggestion').ticker();
-      });	
+      // $(function () {
+      //   $('#suggestion').ticker();
+      // });	
 </script>
 
   {% endblock custom_js%}
