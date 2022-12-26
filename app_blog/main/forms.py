@@ -2,11 +2,8 @@ from .models import *
 from django.forms import ModelForm, DateTimeInput, TextInput, Textarea, DateInput
 from django import forms
 from django.contrib.auth.models import User
-<<<<<<< HEAD
-=======
 import re
 from django.contrib.auth.forms import PasswordResetForm,SetPasswordForm
->>>>>>> 0dde13c9db88658a0d943bec25e7b684faebfb8d
 
 class UserPasswordResetForm(PasswordResetForm):
     email = forms.EmailField(label='', widget=forms.EmailInput(attrs={

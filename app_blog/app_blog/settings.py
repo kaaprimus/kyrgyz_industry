@@ -42,11 +42,7 @@ INSTALLED_APPS = [
     'main',
     'rosetta',
     'ckeditor',
-<<<<<<< HEAD
-    'analytical',
-=======
     'crispy_forms',
->>>>>>> 0dde13c9db88658a0d943bec25e7b684faebfb8d
 ]
 CRISPY_TEMPLATE_PACK = 'uni_form'
 MIDDLEWARE = [
@@ -87,16 +83,9 @@ YANDEX_METRICA_COUNTER_ID = '90695866'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'KG_INDUSTRY',
-        'USER': 'User',
-        'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
-        'PORT': '1433',
-        'OPTIONS': {
-            'driver': 'SQL Server Native Client 11.0',
-        },
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Password validation
