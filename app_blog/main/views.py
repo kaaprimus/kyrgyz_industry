@@ -107,7 +107,7 @@ def password_reset_request(request):
 
 # Функция для тестировки
 def test_method(request):
-    news= News.objects.order_by('-id')[:4]
+    news= News.objects.order_by('-id')[:2]
     print(news)
     arr = []
     for s in news:
