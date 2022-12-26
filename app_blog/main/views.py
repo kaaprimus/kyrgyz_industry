@@ -843,10 +843,10 @@ class AdminMain(LoginRequiredMixin, ListView):
     model = HotNews
     paginate_by = 5
     template_name = "admin/admin.html"
-    count = HotNews.objects.count()
+    #count = HotNews.objects.count()
     extra_context = {
            "is_active" : "main-panel",
-           "all_entries" : count,
+          # "all_entries" : count,
     }
 
 @login_required
