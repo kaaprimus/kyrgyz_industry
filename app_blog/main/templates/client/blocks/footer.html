@@ -42,6 +42,11 @@
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'contests' %}">{% translate "Конкурсы" %}</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'vacancies' %}">{% translate "Вакансии" %}</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="{% url 'sitemap' %}">{% translate "Карта сайта" %}</a></li>
+              <li class="mt-sm-3 mt-lg-5 "> 
+                <a href="https://metrika.yandex.ru/stat/?id=90695866&amp;from=informer"
+                target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/90695866/3_1_FFFFFFFF_EFEFEFFF_0_uniques"
+                style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="90695866" data-lang="ru" /></a>
+               </li>
             </ul>
           </div>
         </div>
@@ -50,10 +55,10 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>{% translate "ОАО Кыргызиндустрия" %}</span></strong>. {% translate "Все права защищены" %}
+        &copy; Copyright <strong><span>{% translate "ОАО Кыргызиндустрия" %} {% now 'Y' %}</span></strong>. {% translate "Все права защищены" %}
       </div>
       <div class="credits">
-        {% translate "Разработчики" %} <a href="mailto:ajzigit24@gmail.com">AKA {{Y}}</a>
+        {% translate "Разработчики" %} <a href="mailto:ajzigit24@gmail.com">КАА</a>
       </div>
     </div>
   </footer><!-- End Footer -->

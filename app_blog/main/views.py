@@ -108,7 +108,7 @@ def password_reset_request(request):
 
 # Функция для тестировки
 def test_method(request):
-    news= News.objects.order_by('-id')[:4]
+    news= News.objects.order_by('-id')[:2]
     print(news)
     arr = []
     for s in news:
@@ -727,17 +727,33 @@ def translate(language):
         activate(cur_language)
     return cur_language
 
+def error_400(request, exception = None):
+   context = {}
+   response = render(request,'client/pages/errors/400.html', context)
+   response.status_code = 400
+   return response
+
+def error_403(request, exception = None):
+   context = {}
+   response = render(request,'client/pages/errors/403.html', context)
+   response.status_code = 403
+   return response
+
 def error_404(request, exception):
    context = {}
-   return render(request,'admin/404.html', context)
+   response = render(request,'client/pages/errors/404.html', context)
+   
+   response.status_code = 404
+   return response
 
-def error_500(request):
-   context = {}
-   return render(request,'admin/500.html', context)
 
-def error_503(request):
+def error_500(request, exception = None):
    context = {}
-   return render(request,'admin/503.html', context)
+   response = render(request,'client/pages/errors/500.html', context)
+   response.status_code = 500
+   
+   return response
+
 
 
 def send_message(request):
