@@ -10,121 +10,26 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
+        {% for block in blocks %}
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{% translate "Направление НИОКР и инновационных проектов ОАО" %}</h2>
+          <h2>{{ block.title }}</h2>
           <ol>
             <li><a href="{% url 'index'%}">{% translate "Главная" %}</a></li>
+            <li>{% translate "Блок" %}</li>
           </ol>
         </div>
+        {%endfor%}
       </div>
     </section><!-- End Breadcrumbs -->
     <section id="block-details" class="block-details" >
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-4" style="margin:auto; width: 90%;" >
+            {% for block in blocks %}
             <div class="block-info">
-              <p style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Направление НИОКР и инновационных проектов ОАО" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate " действует в режиме планов, сроков и отчетности, исполняя роль менеджера инновационных проектов в аппарате ОАО." %}&nbsp; </span></span></span></span></p>
-
-              <p style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Работа данного направления включает следующие виды деятельности" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "управленческие" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "управление инновационными программами и проектами;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "аналитические" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "подготовка прогнозов и программ инновационного развития, анализ текущей ситуация на рынках и прогнозы их развития, оценка состояния инновационной сферы и отслеживание мировых тенденций;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "организационные" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">: {% translate "организация бизнес-среды, участие в проектировании и инженерно-экономических расчетах." %}</span></span></span></span></li>
-              </ul>
-              
-              <p style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "В процессе выполнения указанных видов деятельности решаются следующие основные задачи" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "разработка и сопровождение программ инновационного развития республики;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "отбор сегментов отечественного и зарубежного рынков, охват и привлечение целевой аудитории потенциальных потребителей товаров (услуг) ОАО;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="background-color:white"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "анализ информации касательно мотивации потребителей на рынке, структуры потребления, обеспеченности аналогичными товарами (услугами) и тенденций спроса;" %}</span></span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "разработка мер по соблюдению требований технического регламента Таможенного Союза и ЕАЭС по экологической и промышленной безопасности, предъявляемым к товарам (услугам), организация контроля по техническому регулированию и метрологии на совместных предприятиях ОАО, а также внедрение международных стандартов качества (ИСО, ХАССП&nbsp; и др.);" %}</span></span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "тесное взаимодействие с научно-образовательными учреждениями, бизнес-инкубаторами, индустриальными и технологическими парками, технополисами и частным бизнесом в стране и за рубежом;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "прогрессивное развитие инфраструктуры совместных предприятий ОАО, включая техническую, энергетическую, транспортно-логистическую, социальную и &laquo;зелёную&raquo; составляющие;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="background-color:white"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "методическое" %}&nbsp;{% translate "обеспечение" %}&nbsp;процесса&nbsp;{% translate "коммерциализации" %}&nbsp;{% translate "результатов НИОКР;" %}</span></span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "поддержка научно-инновационного портала ОАО для входа в мировое научно-информационное пространство и получения доступа к разработкам мирового уровня;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "аналитическая, информационная и консалтинговая поддержка совместных предприятий ОАО в освоении новых видов товаров (услуг);" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "продвижение по цифровым каналам собственных товаров (услуг) ОАО;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "формирование системы подготовки и переподготовки востребованных специалистов для конкретных рабочих мест на совместных предприятиях ОАО;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "ведение реестра инновационных проектов единого формата и подготовка презентационных материалов по ним;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="background-color:white"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "инжиниринговые услуги и трансфер инновационных технологий мирового уровня;" %}</span></span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "реализация функций стратегического брендинга и бренд-менеджмента;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "формирование внутрикорпоративных бизнес-процессов и организационных структур в аппарате ОАО." %}</span></span></span></span></li>
-              </ul>
-              
-              <p style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "Показателями эффективности работы направления является положительная динамика в" %}</span></strong><span style="font-family:&quot;Times New Roman&quot;,serif">:</span></span></span></span></p>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "количестве инновационных проектов, одобренных внутренним приказом ОАО к внедрению;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "количестве патентов, стартапов и &laquo;ноу-хау&raquo;, переданных ОАО по линии трансфера технологий к производственному освоению;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "количестве поддерживаемых ОАО бизнес-инкубаторов, центров поддержки технологий и инноваций, технопарков (в том числе виртуальных);" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:Calibri,sans-serif"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "количестве договоров о сотрудничестве ОАО с научно-образовательными учреждениями в сфере инновационной деятельности;" %}</span></span></span></span></li>
-              </ul>
-              
-              <ul>
-                <li style="text-align:justify"><span style="color:#000000"><span style="font-size:20px"><span style="font-family:&quot;Times New Roman&quot;,serif">{% translate "удельном весе инновационных товаров (услуг) ОАО на внутреннем рынке сбыта." %}</span></span></span></li>
-              </ul>
-              
-              
+              {{ block.blockbody|safe }}
             </div>
+            {%endfor%}
           </div>
       </div>
     </section><!-- End Portfolio Details Section -->

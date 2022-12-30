@@ -1,0 +1,82 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"><Блоки></h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Блоки</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Обновление</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Изменить Блок</h4>
+            <p class="card-description"> Форма изменение Блока </p>
+            <form class="forms-sample" method="POST">
+            {% csrf_token %}
+            {% if messages %}
+            <div class="form-group">
+            <div class="col-12">
+                {% for message in messages %}
+                    <div class="text-center alert alert-{{ message.tags }}">
+                        {{ message|safe }}
+                    </div>
+                 {% endfor %}
+            </div>
+            </div>
+            {% endif %}
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}" class="font-weight-bold">Заголовок</label>
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
+            <div class="form-group">
+                <div class="col form-group">
+                    <label for=" {{ form.language.id_for_label }}" class="font-weight-bold">Выберите Язык:</label>
+                    {{ form.language }}
+                </div>
+            </div>
+         
+            
+            <div class="form-row">
+                <div class="form-group">
+               <p><label for="{{ form.blockbody.id_for_label }}" class="font-weight-bold">Описание</label></p>
+                {{ form.media }}
+                {{ form.blockbody }}
+                {{ form.blockbody.errors }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.icon.id_for_label }}" class="font-weight-bold">Иконка</label>
+                {{ form.icon }}
+                {{ form.icon.errors }}
+            </div>
+            {% url 'blocks_all' as block %}
+            <button type="submit" class="btn btn-primary mr-2">Обновить</button>
+            <a href="{{block}}"  class="btn btn-light">Отменить</a>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block custom_js%}
+<!-- plugins:js -->
+<script src="{% static 'admin-panel/vendors/js/vendor.bundle.base.js' %}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="{% static 'admin-panel/js/off-canvas.js' %}"></script>
+<script src="{% static 'admin-panel/js/misc.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page -->
+<!-- End custom js for this page -->
+{% endblock custom_js %}

@@ -241,6 +241,29 @@ class VacanciesForm(ModelForm):
         }
         
 
+# Блоки
+class BlocksForm(ModelForm):
+    class Meta:
+        model = Blocks
+        fields = ['title', 'blockbody', 'language','icon']
+    
+        widgets = {
+            'title' : TextInput(
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название блока","size" : 110, 'required': True}
+                ),
+            'blockbody' : Textarea(
+                attrs = {"class" : "form-control", "id" : "description", "placeholder" : "Полное содержание", 'required': True}
+                ),
+            'language' : forms.Select(
+                attrs={"class": "form-control", 'required': True,  "id" : "language"},
+                choices=LanguageChoice.choices
+            ),
+            'icon' : TextInput(
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "icons", "placeholder" : "Введите название иконки","size" : 110, 'required': True}
+                ),
+        }
+        
+
 # Форма для профиля   
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(max_length=100,
