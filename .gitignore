@@ -2,7 +2,6 @@
 Структура сайта ОАО.docx
 Industry.mdf
 my_env
-/app_blog/app_blog/settings.py
 app_blog/app_blog/settings.py
 app_blog/app_blog/__pycache__/__init__.cpython-310.pyc
 app_blog/app_blog/__pycache__/settings.cpython-310.pyc
@@ -30,7 +29,8 @@ app_blog/static/client/docs/contest/70f2259e-251b-41bf-84b6-5d97c0c844dc__Third-
 app_blog/static/client/docs/contest/c008d081-59bf-4835-8bd3-712756baabf2__Third-Party-Notices.pdf
 app_blog/static/client/docs/contest/ea7c78eb-19b9-499b-a92a-621db403ba02__Third-Party-Notices.pdf
 app_blog/app_blog/__pycache__/settings.cpython-310.pyc
-
+app_blog/main/__pycache__/
+app_blog/main/migrations
 app_blog/main/__pycache__/admin.cpython-310.pyc
 app_blog/main/__pycache__/forms.cpython-310.pyc
 app_blog/main/__pycache__/models.cpython-310.pyc

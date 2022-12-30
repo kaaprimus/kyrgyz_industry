@@ -13,7 +13,6 @@ urlpatterns = [
     path('admin-panel/main/', views.AdminMain.as_view(), name='admin_panel'),
     
     # Reset password
-
     path("accounts/password_reset/", views.password_reset_request, name="password_reset"),
     path('accounts/password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name="admin/pages/user/password_reset_done.html"), name='password_reset_done'),
     path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="admin/pages/user/password_reset_confirm.html"), name='password_reset_confirm'),
@@ -74,6 +73,11 @@ urlpatterns = [
     path('admin-panel/vacancies/update/<int:pk>/', views.VacanciesUpdateView.as_view(), name='vacancies_update'),
     path('admin-panel/vacancies/delete/<int:id>/', views.vacancies_delete, name='vacancies_delete'),
     
+    # Blocks View
+    path('admin-panel/blocks/', views.BlocksListView.as_view(), name='blocks_all'),
+    path('admin-panel/blocks/create/', views.BlocksCreateView.as_view(), name='blocks_create'),
+    path('admin-panel/blocks/update/<int:pk>/', views.BlocksUpdateView.as_view(), name='blocks_update'),    
+
     # HotNews - Gallery  View
     path('admin-panel/gallery/hotnews/', views.HotNewsGalleryListView.as_view(), name='hotnewsgallery_all'),
     path('admin-panel/gallery/hotnews/create/', views.HotNewsGalleryCreateView.as_view(), name='hotnewsgallery_create'),
@@ -131,7 +135,7 @@ urlpatterns = [
     path('page_project/<int:number_page>/', views.projects, name='projects'),
     path('sitemap/', views.sitemap, name = 'sitemap'),
     path('feedback', views.feedback, name = 'feedback'),
-    path('block/<str:title>', views.get_block, name='block'),
+    path('block_detail/<str:titleblock>', views.get_block_detail, name='block_detail'),
     # Новые добавленные страницы
     path('main_events/', views.hot_news, name='hot_news'),
     path('main_events_detail/<str:title>', views.hot_news_detail, name='hot_news_detail'),

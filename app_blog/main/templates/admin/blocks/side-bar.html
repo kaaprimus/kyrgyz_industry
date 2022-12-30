@@ -93,6 +93,18 @@
           </div>
         </li>
 
+        <li class="nav-item" id="blocks-panel">
+          <a class="nav-link" data-toggle="collapse" href="#blocks" aria-expanded="{% if expand_blocks %}true{% else %}false{% endif %}" aria-controls="blocks">
+            <span class="menu-title">Блоки</span>
+            <i class="icon-grid menu-icon"></i>
+          </a>
+          <div class="collapse{% if expand_blocks %}show{% endif %}" id="blocks">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link {% if active_blocks %}active{% endif %}" href="{% url 'blocks_all' %}">Все блоки</a></li>
+            </ul>
+          </div>
+        </li>
+
         <li class="nav-item" id="interviews-panel">
           <a class="nav-link" data-toggle="collapse" href="#interviews" aria-expanded="{% if expand_interviews %}true{% else %}false{% endif %}" aria-controls="interviews">
             <span class="menu-title">Интервью</span>

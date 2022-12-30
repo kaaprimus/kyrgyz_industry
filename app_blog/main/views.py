@@ -1,4 +1,6 @@
 import os
+import smtplib
+from validate_email import validate_email
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout 
 from django.shortcuts import get_object_or_404
@@ -73,11 +75,11 @@ from django.template.loader import render_to_string
             Оптимизация Кода
 """
 
-
 def password_reset_request(request):
     settings.EMAIL_HOST_USER='zenisbekovk04@gmail.com'
     settings.EMAIL_HOST_PASSWORD='zwhojtjglgpyguxw'
     if request.method == "POST":
+        print("nen")
         password_reset_form = UserPasswordResetForm(request.POST)
         if password_reset_form.is_valid():
             data = password_reset_form.cleaned_data['email']
@@ -100,7 +102,9 @@ def password_reset_request(request):
                     try:
                         send_mail(subject, email, 'zenisbekovk04@gmail.com' , [user.email], fail_silently=False)
                     except BadHeaderError:
+                        print("nen2")
                         return HttpResponse('Invalid header found.')
+                    print("nen2")
                     return redirect ("/accounts/password_reset/done/")
     password_reset_form = UserPasswordResetForm()
     return render(request=request, template_name="admin/pages/user/password_reset.html", context={"password_reset_form":password_reset_form})
@@ -122,20 +126,11 @@ def test_method(request):
     return render(request, 'client/pages/img.html', context)
     
 # Блоки
-def get_block(request,title):
-    actual_url = request.path.split('/')[2]
+def get_block_detail(request,titleblock):
     trans = translate(language='ru')
-    context = {'trans':trans, 'actual_url':actual_url}
-    if(title=="Направление НИОКР и инновационных проектов ОАО"):
-        return render(request, "client/pages/blockone.html", context)
-    if(title=="Направление промышленных отраслей ОАО"):
-        return render(request, "client/pages/blocktwo.html", context)
-    if(title=="Направление экономики и финансов ОАО"):
-        return render(request, "client/pages/blockthree.html", context)
-    if(title=="Направление внешнеэкономических связей и торговли ОАО"):
-        return render(request, "client/pages/blockfour.html", context)
-    if(title=="Направление руководителя аппарата ОАО"):
-        return render(request, "client/pages/blockfive.html", context)
+    blockslen = Blocks.objects.filter(language = get_lang(trans=trans),title=titleblock)
+    context = {'trans':trans, 'blocks':blockslen}
+    return render(request, "client/pages/blockone.html", context)
 
 # Получаем выбранный язык для фильтрации
 def get_lang(trans):
@@ -254,7 +249,7 @@ def get_advisor(language):
 
 def about_company(request):
     trans = translate(language='ru')
-
+    blocks = Blocks.objects.all().filter(language = get_lang(trans=trans))     
     actual_url = request.path.split('/')[2]
     
     president = None
@@ -278,7 +273,8 @@ def about_company(request):
         "not_exist" : not_exist,
         'president':president,
         'actual_url':actual_url,
-        'advisor':advisor
+        'advisor':advisor,
+        'blocks':blocks
         }
     return render(request, "client/pages/about_company.html", context)
 
@@ -464,15 +460,11 @@ def projects(request):
     return render(request, "client/pages/projects.html", context)
 
 
-
 def get_news(request,title):
     trans = translate(language='ru')
-
     actual_url = 'news'
-    
     news_detail = News.objects.filter(Title=title, Language = get_lang(trans=trans))
     news_title = News.objects.get(Title=title, Language=get_lang(trans=trans))
-
     photo = PhotosNews.objects.filter(Gallery_id=get_id_Gallery_News(title))
     context = {
         'news_detail': news_detail,
@@ -482,6 +474,9 @@ def get_news(request,title):
         'actual_url':actual_url
         }
     return render(request, "client/pages/news_detail.html", context)
+
+
+
 
 def investors(request):
     trans = translate(language='ru')
@@ -756,7 +751,6 @@ def error_500(request, exception = None):
 
 
 def send_message(request):
-    
     sucs=True
     if request.method == 'POST':
         
@@ -765,28 +759,33 @@ def send_message(request):
 
         Name = request.POST.get('name', '')
         message = request.POST.get('message', '')
-        from_email = request.POST.get('email', '')
+        to_email = 'zenisbekovk04@gmail.com'
+        request.POST.get('email', '')
+        from_email ='zenisbekovk04@gmail.com'
         subject = "Сообщение от пользователей" 
-        to_email=['aidar.ernisov01@gmail.com']
-        try:
-            
-            body = {
-			    'Name: ': "От кого: "+ Name, 
-                'from_email': "Эл.адрес: " + from_email,
-			    'message': "Сообщение: " + message,
-		    }
-            
-            messageAll = "\n".join(body.values())
-            send_mail(subject, messageAll, from_email, to_email)
-        except BadHeaderError:
-            return HttpResponse('Неправильный ввод данных')
-        except :
+        valid=validate_email(from_email,verify=True)
+        if valid==True:
+            try:
+                body = {
+                    'Name: ': "От кого: "+ Name, 
+                    'from_email': "Эл.адрес: " + from_email,
+                    'message': "Сообщение: " + message,
+                }
+                messageAll = "\n".join(body.values())
+                send_mail(subject, messageAll, to_email, [from_email],fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Неправильный ввод данных')
+            except smtplib.SMTPException:
+                messages.add_message(request, messages.ERROR, 'Ошибка при отправлении,попробуйте еще раз!')
+                return redirect ('feedback')
+            messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
+            return redirect ('feedback')
+        else:
             messages.add_message(request, messages.ERROR, 'Неправильный эл.адрес')
-            sucs=False
-    if(sucs==True):
-        messages.add_message(request, messages.SUCCESS, 'Ваше сообщение отправлено!')
-        return redirect ('feedback')
+            
+            return redirect ('feedback')
     return redirect ('feedback')
+
 
 @csrf_exempt
 def login_page(request):
@@ -1415,6 +1414,37 @@ class VacanciesUpdateView(LoginRequiredMixin, SuccessMessageMixin, VacanciesView
     template_name = 'admin/pages/vacancies/vacancies_edit.html'
     success_message = "Запись успешно обновлена!"
     
+
+# Блоки
+class BlocksView(View):
+    model = Blocks
+    form_class = BlocksForm
+    active_panel = "blocks-panel"
+    extra_context = {
+        "is_active" : active_panel,
+        "active_blocks" : "active",
+        "expand_blocks" : "show",
+        }
+    
+class BlocksListView(LoginRequiredMixin, BlocksView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/blocks/block_list.html"
+    
+
+class BlocksCreateView(LoginRequiredMixin, SuccessMessageMixin, BlocksView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/blocks/block_form.html'
+    success_url = reverse_lazy("blocks_create")
+    success_message = "Запись успешно добавлена!"
+        
+
+
+class BlocksUpdateView(LoginRequiredMixin, SuccessMessageMixin, BlocksView, UpdateView):
+    login_url = 'login_page'
+    success_url = reverse_lazy("blocks_all")
+    template_name = 'admin/pages/blocks/block_edit.html'
+    success_message = "Запись успешно обновлена!"
+
     
 def vacancies_delete(request, id):
     context = {}

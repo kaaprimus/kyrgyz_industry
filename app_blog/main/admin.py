@@ -8,6 +8,8 @@ admin.site.register(GalleryProject)
 admin.site.register(Contests)
 admin.site.register(GalleryNews)
 admin.site.register(HotNews)
+admin.site.register(Blocks)
+
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):

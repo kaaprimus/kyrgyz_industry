@@ -241,6 +241,18 @@ class Vacancies(models.Model):
     )
     email_company = models.EmailField(max_length = 40)
 
+
+# Блоки
+class Blocks(models.Model):
+    title = models.CharField(max_length=70, verbose_name="Заголовок", unique=True,error_messages={'unique':"Такой блок уже существует!"})
+    blockbody = RichTextField(verbose_name = "Блок")
+    language=models.CharField(
+                               max_length = 10, 
+                               choices = LanguageChoice.choices,
+                               default = LanguageChoice.RU,
+                               verbose_name = "Язык"
+                               )
+    icon=models.CharField(max_length=100, verbose_name="Название иконки")
 # Горячие новости
 
 class HotNewsGallery(models.Model):
