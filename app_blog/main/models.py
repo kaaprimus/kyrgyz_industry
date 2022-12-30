@@ -16,16 +16,6 @@ class LanguageChoice(models.TextChoices):
     EN = "English", "English"
     CH = "中国人", "中国人"
   
-# Категория проектов
-class ProjectCategory(models.Model):
-    Name=models.CharField(max_length=70,verbose_name="Название категории",unique=True,error_messages={'unique':"Категория с таким названием уже существует!"})
-    
-    class Meta:
-        db_table="projectCategory" 
-        ordering = ["-id"]
-
-    def __str__(self) -> str:
-        return self.Name
 
 #Галерея 
 class GalleryProject(models.Model):
@@ -52,8 +42,7 @@ class GalleryNews(models.Model):
 # Функция для кодировки название файла
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
-    filename_start = filename.replace('.'+ext,'')
-
+    filename_start = filename.replace(filename,'_f')
     filename = "%s__%s.%s" % (uuid.uuid4(),filename_start, ext)
     return os.path.join(instance.path_url, filename)
 
@@ -61,7 +50,7 @@ def get_file_path(instance, filename):
 # Фото 
 class PhotosProject(models.Model):
     URL=models.ImageField(verbose_name="Путь к картинке", upload_to = get_file_path)
-    Caption=models.CharField(max_length=110,verbose_name="Название картинки")
+    Caption=models.CharField(max_length=200,verbose_name="Название картинки")
     Gallery=models.ForeignKey("galleryProject",on_delete=models.RESTRICT,verbose_name="Галерея")
     
     path_url = "static/client/img/projects/"
@@ -73,12 +62,10 @@ class PhotosProject(models.Model):
     def save(self, *args, **kwargs):
         super(PhotosProject, self).save(*args, **kwargs)
         image = Image.open(self.URL.path)
-        if image.width > 1000 and image.height > 600:
+        if image.width > 1000 or image.height > 600:
             output_size = (800, 600)
             image.thumbnail(output_size)
             image.save(self.URL.path)
-        else:
-            raise forms.ValidationError("Размер фотографии не подходит! Минимальный размер 800x600")
     class Meta:
         ordering = ['-id']
     
@@ -87,7 +74,7 @@ class PhotosNews(models.Model):
     URL=models.ImageField(verbose_name="Путь картинки", 
                          upload_to = get_file_path,
                          validators = [validate_image_file_extension])
-    Caption=models.CharField(max_length=70,verbose_name="Название картинки")
+    Caption=models.CharField(max_length=200,verbose_name="Название картинки")
     Gallery=models.ForeignKey("galleryNews",on_delete=models.RESTRICT,verbose_name="Галерея")
     
     path_url = "static/client/img/news/"
@@ -99,12 +86,11 @@ class PhotosNews(models.Model):
     def save(self, *args, **kwargs):
         super(PhotosNews, self).save(*args, **kwargs)
         image = Image.open(self.URL.path)
-        if image.width > 800 and image.height > 400:
+        if image.width > 800 or image.height > 400:
             output_size = (600, 400)
             image.thumbnail(output_size)
             image.save(self.URL.path)
-        else:
-            raise forms.ValidationError("Размер фотографии не подходит! Минимальный размер 800x400")
+       
             
     class Meta:
         ordering = ['-id']
@@ -127,7 +113,7 @@ class Projects(models.Model):
     Title=models.CharField(max_length=120,verbose_name="Заголовок проекта", unique=True,error_messages={'unique':"Проект с таким названием уже существует!"})
     Short_Description = models.CharField(max_length=200,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
-    Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
+    Date_added=models.DateField(verbose_name="Дата публикации", default=now)
     # Язык проекта
     Language=models.CharField(
                                max_length = 10, 
@@ -140,11 +126,6 @@ class Projects(models.Model):
         on_delete=models.RESTRICT,
         verbose_name="Галерея"
         )
-    Category=models.ForeignKey(
-        "projectCategory",
-        on_delete=models.RESTRICT,
-        verbose_name="Категория"
-        )
     Status = models.CharField(
         max_length = 20,
         choices = Project_Status_Choice.choices,
@@ -155,13 +136,13 @@ class Projects(models.Model):
 # Конкурсы
 
 class Contests(models.Model):
-    Title=models.CharField(max_length=40,verbose_name="Название конкурса", unique=True,error_messages={'unique':"Конкурс с таким названием уже существует!"})
-    Short_Description = models.CharField(max_length=110,verbose_name="Краткое описание")
+    Title=models.CharField(max_length=150,verbose_name="Название конкурса", unique=True,error_messages={'unique':"Конкурс с таким названием уже существует!"})
+    Short_Description = models.CharField(max_length=250,verbose_name="Краткое описание")
     Document = models.FileField(
                                 verbose_name="Документ", 
                                 upload_to=get_file_path, 
                                 validators=[FileExtensionValidator(allowed_extensions=["pdf", "doc", "docx"])])
-    Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
+    Date_added=models.DateField(verbose_name="Дата публикации", default=now)
     Language=models.CharField(
                                max_length = 10, 
                                choices = LanguageChoice.choices,
@@ -203,7 +184,7 @@ class News(models.Model):
 # Руководство    
 class Management(models.Model):
     full_name = models.CharField(max_length = 60, verbose_name = "ФИО Сотрудника")
-    position = models.CharField(max_length = 255, verbose_name = "Должность")
+    position = models.CharField(max_length = 200, verbose_name = "Должность")
     date_birth = models.DateField(verbose_name='Дата рождения', default=now)
 
     about = RichTextField(verbose_name="Биография сотрудника")
@@ -224,6 +205,14 @@ class Management(models.Model):
         validators = [validate_image_file_extension]
         )
     
+    def save(self, *args, **kwargs):
+        super(Management, self).save(*args, **kwargs)
+        image = Image.open(self.picture.path)
+        if image.width > 600 and image.height > 600:
+            output_size = (600, 600)
+            image.thumbnail(output_size)
+            image.save(self.picture.path)
+   
     path_url = "static/client/img/team/"
     
     def __str__(self):

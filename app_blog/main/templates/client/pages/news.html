@@ -9,7 +9,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container col-lg-12">
-        <div class="d-flex align-items-stretch">
+        <div class="d-flex justify-content-between  align-items-stretch">
           <ol>
             <li><a href="{% url 'index' %}">{% translate "Главная" %}</a></li>
             <li>{% translate "Новости"%}</li>
@@ -33,8 +33,8 @@
       {% if not error %}
       {% for value, img in all_news %}
       <a href="{% url 'news_detail' value.Title %}" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-2 mt-3 text-primary news-link">{{value.Title}}</h5>
+        <div class="d-flex w-100 justify-content-between news-container">
+          <h5 class="mb-2 mt-3 news-link">{{value.Title}}</h5>
           <small class="text-muted">{{value.Date_added}}</small>
         </div>
         <p class="mb-1">{{value.Short_Description}}</p>

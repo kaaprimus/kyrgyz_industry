@@ -42,11 +42,6 @@ urlpatterns = [
     path('admin-panel/contests/update/<int:pk>/', views.ContestUpdateView.as_view(), name='contests_update'),
     path('admin-panel/contests/delete/<int:id>/', views.contests_delete, name='contests_delete'),
     
-     # Project-Category View
-    path('admin-panel/category/projects/', views.ProjectCategoryListView.as_view(), name='projectcategory_all'),
-    path('admin-panel/category/projects/create/', views.ProjectCategoryCreateView.as_view(), name='projectcategory_create'),
-    path('admin-panel/category/projects/update/<int:pk>/', views.ProjectCategoryUpdateView.as_view(), name='projectcategory_update'),
-    path('admin-panel/category/projects/delete/<int:id>/', views.projectcategory_delete, name='projectcategory_delete'),
     
     # Project-Image View
     path('admin-panel/image/projects/', views.ProjectImageListView.as_view(), name='projectimage_all'),

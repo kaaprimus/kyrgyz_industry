@@ -22,10 +22,10 @@
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
-        <div class="row gy-4">
+        <div class="row gy-4 justify-content-center">
           
           {% for value in project_detail %}
-          <div class="col-lg-4" style="margin: auto; width: 90%;">
+          <div class="col-lg-12">
             
             <div class="portfolio-info">
               <h3>{{ value.Title }}</h3>
@@ -37,9 +37,8 @@
             </div>
           </div>
           {% endfor %}
-        </div>
 
-        <div class="col-lg-8" style="margin: auto; width: 80%; height: 400px;">
+        <div class="col-lg-8">
           <div class="portfolio-details-slider swiper">
             <div class="swiper-wrapper align-items-center">
               {% for value in photo %}
@@ -51,9 +50,9 @@
             <div class="swiper-pagination"></div>
           </div>
         </div>
-
       </div>
-    </section><!-- End Portfolio Details Section -->
+    </div>
+  </section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->
   {% endblock content %}

@@ -1,7 +1,7 @@
 {% extends 'client/base.html' %}
 {% load i18n %}
 {% load static %}
-{% block page_title %}{% translate "Пресс-релизы" %}{% endblock page_title %}
+{% block page_title %}{% translate "Проекты" %}{% endblock page_title %}
 
 {% block content %}
 
@@ -9,10 +9,10 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-        <div class="d-flex align-items-stretch">
+        <div class="d-flex justify-content-between align-items-stretch">
           <ol>
             <li><a href="{% url 'index' %}">{% translate "Главная" %}</a></li>
-            <li>{% translate "Новости"%}</li>
+            <li>{% translate "Проекты и Презентации"%}</li>
           </ol>
           <form class="search-form">
             <input class="form-control mr-sm-2" name="search" action="{% url 'reports' %}" type="search" placeholder="Поиск" aria-label="Search">
@@ -28,7 +28,7 @@
     <section id="more-services" class="more-services">
     <div class="container">
       <div class="section-title" data-aos="fade-up">
-        <h2>{% translate "Архив проектов" %}</h2>
+        <h2>{% translate "Проекты" %}</h2>
       </div>
       
               <div class="row">

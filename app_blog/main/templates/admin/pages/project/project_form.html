@@ -43,12 +43,17 @@
                 {{ form.Title.errors }}
             </div>
             <div class="form-group">
-               <p><label for="{{ form.Description.id_for_label }}" class="font-weight-bold">Описание</label></p>
+                <p><label for="{{ form.Description.id_for_label }}" class="font-weight-bold">Краткое Описание</label></p>
+                 {{ form.media }}
+                 {{ form.Short_Description }}
+                 {{ form.Short_Description.errors }}
+             </div>
+            <div class="form-group">
+               <p><label for="{{ form.Description.id_for_label }}" class="font-weight-bold">Полное Описание</label></p>
                 {{ form.media }}
                 {{ form.Description }}
                 {{ form.Description.errors }}
             </div>
-            
             <div class="form-row">
                 <div class="col form-group">
                     <label for="{{ form.Date_added.id_for_label }}" class="font-weight-bold">Выберите дату:</label>
@@ -57,29 +62,28 @@
                 <div class="col form-group">
                     <label for=" {{ form.Language.id_for_label }}" class="font-weight-bold">Выберите Язык:</label>
                     {{ form.Language }}
+                    {{ form.Language.errors }}
                 </div>
             </div>
            
-            <div class="form-group">
-                <label for="{{ form.Gallery.id_for_label }}" class="font-weight-bold">Выберите галерею:</label>
-                {{ form.Gallery }}
-                {{ form.Gallery.errors }}
-            </div>
+           
 
             <div class="form-row">
                 <div class="col form-group">
-                    <label for="{{ form.Category.id_for_label }}" class="font-weight-bold">Выберите Категорию:</label>
-                    {{ form.Category }}
+                    <label for="{{ form.Gallery.id_for_label }}" class="font-weight-bold">Выберите галерею:</label>
+                    {{ form.Gallery }}
+                    {{ form.Gallery.errors }}
                 </div>
                 <div class="col form-group">
                     <label for=" {{ form.Status.id_for_label }}" class="font-weight-bold">Выберите Статус:</label>
                     {{ form.Status }}
+                    {{ form.Status.errors }}
                 </div>
             </div>
          
             {% url 'projects_all' as projects %}
             <button type="submit" class="btn btn-primary mr-2">Сохранить</button>
-            <a href="{{projects_all}}"  class="btn btn-light">Отменить</a>
+            <a href="{{projects}}"  class="btn btn-light">Отменить</a>
             </form>
         </div>
         </div>

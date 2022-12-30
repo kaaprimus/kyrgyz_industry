@@ -47,7 +47,7 @@ class NewsForm(ModelForm):
     
         widgets = {
             'Title' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название новости","size" : 100, 'required': True}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название новости","size" : 120, 'required': True}
             ),
             'Short_Description' : TextInput(
                 attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 200, 'required': True}
@@ -99,7 +99,7 @@ class NewsImageForm(ModelForm):
         
         widgets = {
             'Caption' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "image-caption", "placeholder" : "Описание изображении", "size" : 110, 'required': False}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "image-caption", "placeholder" : "Описание изображении", "size" : 200, 'required': False}
             ),
             'Gallery' : forms.Select(
                 attrs={"class": "form-control", 'required': True, "id" : "gallery"}
@@ -128,7 +128,7 @@ class ProjectImageForm(ModelForm):
         
         widgets = {
             'Caption' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "image-caption", "placeholder" : "Описание изображении", "size" : 110, 'required': False}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "image-caption", "placeholder" : "Описание изображении", "size" : 200, 'required': False}
             ),
             'Gallery' : forms.Select(
                 attrs={"class": "form-control", 'required': True, "id" : "gallery"}
@@ -138,16 +138,19 @@ class ProjectImageForm(ModelForm):
 class ProjectForm(ModelForm):
     class Meta:
         model = Projects
-        fields = ['Title',  'Description', 'Date_added', 'Language', 'Gallery', 'Category', 'Status']
+        fields = ['Title', 'Short_Description', 'Description', 'Date_added', 'Language', 'Gallery', 'Status']
         widgets = {
             'Title' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Заговолок проекта","size" : 70, 'required': True}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Введите название проекта","size" : 120, 'required': True}
+            ),
+             'Short_Description' : TextInput(
+                attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Введите краткое описание","size" : 200, 'required': True}
             ),
             'Description' : Textarea(
                 attrs = {"class" : "form-control", "id" : "description", "placeholder" : "Полное содержание", 'required': True}
                 ),
-            'Date_added' : DateTimeInput(
-                attrs={'type': 'datetime-local', "class" : "form-control", "id" : "date_created", "required" : False}
+            'Date_added' : DateInput(
+                attrs={'type': 'date', "class" : "form-control", "id" : "Date_added", "required" : False}
                 ),
             'Language' : forms.Select(
                 attrs={"class": "form-control", 'required': True,  "id" : "language"},
@@ -156,39 +159,25 @@ class ProjectForm(ModelForm):
             'Gallery' : forms.Select(
                 attrs={"class": "form-control", 'required': True, "id" : "gallery"}
             ),
-            'Category' : forms.Select(
-                attrs= {"class": "form-control", 'required': True, "id" : "Category"}
-                ), 
             'Status' : forms.Select(
                 attrs ={ "class": "form-control", 'required': True, "id" : "Status"},
                 choices= Project_Status_Choice.choices
                 )
         }
 
-class ProjectCategoryForm(ModelForm):
-    class Meta:
-        model = ProjectCategory
-        fields = '__all__'    
-
-        widgets = {
-            'Name' : TextInput(  
-                    attrs= {"type" : "text", "class" : "form-control", "id" : "name", "placeholder" : "Название категории"}           
-                               )
-        } 
-        
 class ContestForm(ModelForm):
     class Meta:
         model = Contests
         fields = '__all__'
         widgets = {
             'Title' : TextInput(
-                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название конкурса","size" : 40, 'required': True}
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название конкурса","size" : 150, 'required': True}
                 ),
             'Short_Description' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 110, 'required': True}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "short_description", "placeholder" : "Краткое описание", "size" : 250, 'required': True}
             ),
             'Date_added' : DateTimeInput(
-                    attrs={'type': 'datetime-local', "class" : "form-control", "id" : "date_created", "required" : False}
+                    attrs={'type': 'date', "class" : "form-control", "id" : "date_created", "required" : False}
                     ),
             'Language' : forms.Select(
                     attrs={"class": "form-control", 'required': True,  "id" : "language"},
@@ -256,11 +245,11 @@ class UpdateUserForm(forms.ModelForm):
     
 # Сотрудники    
 class ManagementForm(forms.ModelForm):
-    full_name = forms.CharField(max_length=40, required=True, widget=forms.TextInput(
-        attrs={"type" : "text", "class" : "form-control", "id" : "fullname", "placeholder" : "Введите ФИО Сотрудника", "size" : 40}
+    full_name = forms.CharField(max_length=60, required=True, widget=forms.TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "fullname", "placeholder" : "Введите ФИО Сотрудника", "size" : 60}
     ))
-    position = forms.CharField(max_length=70, required=True, widget=forms.TextInput(
-        attrs={"type" : "text", "class" : "form-control", "id" : "position", "placeholder" : "Введите Должность", "size" : 70}
+    position = forms.CharField(max_length=200, required=True, widget=forms.TextInput(
+        attrs={"type" : "text", "class" : "form-control", "id" : "position", "placeholder" : "Введите Должность", "size" : 200}
     ))
     
     date_birth = forms.DateField(required=True, widget= DateInput(

@@ -37,9 +37,9 @@
         <div class="carousel-item" style="background-image: url({% static 'client/img/slider/slide-3.jpg' %});">
           <div class="carousel-container">
             <div class="carousel-content">
-              <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">{% translate "Читать дальше" %}</a>
+              <h2 class="animate__animated animate__fadeInDown">Цели и задачи ОАО «Кыргызиндустрия»</h2>
+              <p class="animate__animated animate__fadeInUp">отвечают стратегии новой экономической политики, которая нацелена на использование экономического потенциала страны на базе инновационных методов и технологий в реальном секторе отечественной экономики.</p>
+              <a href="{% url 'about_us_full_info' %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">{% translate "Читать дальше" %}</a>
             </div>
           </div>
         </div>
@@ -48,9 +48,9 @@
         <div class="carousel-item" style="background-image: url({% static 'client/img/slider/slide-4.jpg' %});">
           <div class="carousel-container">
             <div class="carousel-content">
-              <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-              <p class="animate__animated animate__adeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">{% translate "Читать дальше" %}</a>
+              <h2 class="animate__animated animate__fadeInDown">Создание ОАО «Кыргызиндустрия»</h2>
+              <p class="animate__animated animate__adeInUp"> позволяет решить целый комплекс задач, диктуемых современными условиями ведения предпринимательства: повысит эффективность оперативного управления, увеличит инвестиционную привлекательность бизнеса, снизит производственные издержки, улучшит управление рисками и др.</p>
+              <a href="{% url 'about_us_full_info' %}" class="btn-get-started scrollto animate__animated animate__fadeInUp">{% translate "Читать дальше" %}</a>
             </div>
           </div>
         </div>
@@ -94,6 +94,9 @@
                 </div>
               </div>
             </div>
+            <div class="col-12 d-flex justify-content-center mt-3 more-news aos-init aos-animate" data-aos="fade-up">
+              <a href="{% url 'news' %}" id="more-news" class="btn-learn-more" >{% translate "Показать больше" %}</a>
+            </div>
             {% empty %}
             <div class="section-title" data-aos="fade-up">
               <h4>{% translate "Нет новостей" %}</h4>
@@ -116,12 +119,8 @@
             </div>
             {% endif %}
           </div> 
-        {% if news_page  and not error %}
-        <div class="col-12 d-flex justify-content-center">
-          <a href="{% url 'news' %}" id="more-news" class="btn-learn-more" data-aos="fade-up" data-aos-delay="300">{% translate "Показать больше" %}</a>
-        </div>
+      
        
-        {% endif %}
       </div>
     </section><!-- End More Services Section -->
 

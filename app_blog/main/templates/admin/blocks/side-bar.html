@@ -62,7 +62,6 @@
           </a>
           <div class="collapse{% if expand_projects %}show{% endif %}" id="projects">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link {% if active_project_category %}active{% endif %}" href="{% url 'projectcategory_all' %}">Категории</a></li>
               <li class="nav-item"> <a class="nav-link {% if active_project_gallery %}active{% endif %}" href="{% url 'projectgallery_all' %}">Галерея</a></li>
               <li class="nav-item"> <a class="nav-link {% if active_project_image %}active{% endif %}" href="{% url 'projectimage_all' %}">Фотографии</a></li>
               <li class="nav-item"> <a class="nav-link {% if active_projects %}active{% endif %}" href="{% url 'projects_all' %}">Проекты</a></li>

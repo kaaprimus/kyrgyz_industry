@@ -17,7 +17,6 @@
       error: function(error){
         setTimeout( () => {
           spinnerBox.classList.add("not-visible");
-          alert("Что-то пошло не так повторите попытку");
         }, 500);
       }
     });

@@ -264,11 +264,11 @@ def about_company(request):
     except Management.DoesNotExist:
         not_exist = True
     try:
-        veep = Management.objects.filter(position__startswith=get_translated_position(language=trans))[:5]
+        veep = Management.objects.filter(position__startswith=get_translated_position(language=trans)).order_by('id')[:4]
     except Management.DoesNotExist:
         not_exist = True
     try:
-        advisor = Management.objects.filter(position__startswith=get_advisor(language=trans))
+        advisor = Management.objects.filter(position__startswith=get_advisor(language=trans)).order_by('id')[:4]
     except Management.DoesNotExist:
         not_exist = True
     
@@ -1056,62 +1056,6 @@ def newsimage_delete(request, id):
 ---- End News-Image Views
 """    
 
-"""
----- Project-Category Views
-""" 
-class ProjectCategoryView(View):
-    model = ProjectCategory
-    form_class = ProjectCategoryForm
-    success_url = reverse_lazy("projectcategory_all")
-    active_panel = "projects-panel"
-    extra_context = {
-        "is_active" : active_panel,
-        "active_project_category" : "active",
-        "expand_projects" : "show",
-    }
-    
-class ProjectCategoryListView(LoginRequiredMixin, ProjectCategoryView, ListView):
-    login_url = "login_page"
-    template_name = "admin/pages/project-category/category_list.html"
-    paginate_by = 10
- 
-class ProjectCategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, ProjectCategoryView, CreateView):
-    login_url = "login_page"
-    template_name = "admin/pages/project-category/category_form.html" 
-    success_url = reverse_lazy("projectcategory_create")
-    success_message = "Запись успешно Добавлено!" 
-    
-class ProjectCategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, ProjectCategoryView, UpdateView):
-    login_url = "login_page"
-    template_name = "admin/pages/project-category/category_form.html"
-    success_message = "Запись успешно обновлено!" 
-    
-def projectcategory_delete(request, id):
-    context = {
-        "is_active" : "projects-panel",
-        "active_project_gallery" : "active",
-        "expand_projects" : "show",
-    }
-    obj = get_object_or_404(ProjectCategory, id = id)
-    if request.method =="POST":
-        try:
-        # delete object
-            obj.delete()
-        # after deleting redirect to
-        # home page
-            messages.success(request, "Запись успешно удалено!")
-            return redirect("projectcategory_all")
-        except RestrictedError:
-            messages.error(request, "Вы не сможете удалить эту категорию, так как это связано с одним или несколькими проектами")
-            return redirect("projectcategory_all")
-        except Exception as e:
-            messages.error(request, e)
-            return redirect("projectcategory_all")
-    return render(request, "admin/pages/project-category/category_confirm_delete.html", context)
-
-"""
----- End Project-Category Views
-""" 
 
 """
 ---- Project-Gallery Views
@@ -1297,7 +1241,7 @@ def projects_delete(request, id):
             messages.error(request, "Не удалось удалить запись, повторите попытку!")
             return redirect("projects_all")
  
-    return render(request, "admin/pages/projects/project_confirm_delete.html", context)      
+    return render(request, "admin/pages/project/project_confirm_delete.html", context)      
 """
 ---- Contest Views
 """  

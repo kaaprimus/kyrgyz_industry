@@ -22,11 +22,7 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details" >
-      <div class="container">
-
-        <div class="row gy-4">
+    
           <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
       <div class="container">
@@ -109,35 +105,6 @@
         </div>
       </div>
 
-      <div class="container">
-        <div class="section-title" data-aos="fade-up">
-          <h2 class="team-title pt-4">{% translate "Советники" %}</h2>
-        </div>
-        <div class="row gy-2 justify-content-center">
-          {% for man in advisor %}
-            <div class="col-lg-2 col-md-6">
-              <div class="member w-100 h-100" data-aos="fade-up" data-aos-delay="100">
-                <div class="member-img">
-                  <img src="/{{man.picture}}" class="img-fluid w-100" alt="Изображение Президента ОАО">
-                  <div class="social">
-                    <a href=""><i class="bi bi-envelope"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <a href="{% url 'advisors' man.id %}"><h4>{{man.full_name}}</h4></a>
-                  <span>{{man.position}}</span>
-                </div>
-              </div>
-            </div>
-            {% empty %}
-            <div class="col-lg-12 col-md-6">
-              <p class="text-center">{% translate "Нет сотрудников" %}</p>
-            </div>
-          {%endfor%}
-        </div>
-      </div>
    
       <div class="container">
         <div class="section-title" data-aos="fade-up">
@@ -146,7 +113,7 @@
 
         <div class="row justify-content-center">
           {% for man in veep %}
-          <div class="col-lg-2 col-md-6">
+          <div class="col-lg-3 col-md-6">
             <div class="member w-100 h-100" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
                 <img src="/{{man.picture}}" class="img-fluid w-100" alt="man.position">
@@ -168,7 +135,36 @@
             </div>
           {%endfor%}
         </div>
+      </div>
 
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2 class="team-title pt-4">{% translate "Советники" %}</h2>
+        </div>
+        <div class="row gy-2 justify-content-center">
+          {% for man in advisor %}
+            <div class="col-lg-3 col-md-6">
+              <div class="member w-100 h-100" data-aos="fade-up" data-aos-delay="100">
+                <div class="member-img">
+                  <img src="/{{man.picture}}" class="img-fluid w-100" alt="Изображение Президента ОАО">
+                  <div class="social">
+                    <a href=""><i class="bi bi-envelope"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <a href="{% url 'advisors' man.id %}"><h4>{{man.full_name}}</h4></a>
+                  <span>{{man.position}}</span>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="col-lg-12 col-md-6">
+              <p class="text-center">{% translate "Нет сотрудников" %}</p>
+            </div>
+          {%endfor%}
+        </div>
       </div>
     </section>
     <!-- End Team Section -->
@@ -221,72 +217,63 @@
         </section><!-- End Features Section -->
 
 
-    <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>{% translate "Наши Проекты" %}</h2>
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services section-bg d-inline-block w-100">
+        <div class="container">
+  
+          <div class="section-title">
+            <h2>{% translate "Наши проекты" %}</h2>
+            <p>Реализованные Проекты</p>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Кыргызкыш" ' %}</a></h4>
+                <p>{% translate "Завод по производству строительного кирпича" %}</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4 mt-lg-0">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Кыргызчеттранс" ' %}</a></h4>
+                <p>Транспортно-логистическая компания</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Би Кей Медикеар" ' %}</a></h4>
+                <p>{% translate "Производство медицинских пластырей" %} </p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Кыргызтопчу"' %}</a></h4>
+                <p>{% translate "Производство швейной фурнитуры (пуговицы и молнии)" %}</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">{% translate 'ОсОО "Кыргызтемирмык"' %}</a></h4>
+                <p>{% translate "Производство изготовления гвоздей." %}</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-4">
+              <div class="icon-box">
+                <i class="bi bi-activity"></i>
+                <h4><a href="#">Еще какой-то проект</a></h4>
+                <p>{% translate "Завод по производству строительного кирпича" %}</p>
+              </div>
+            </div>
+          </div>
+  
         </div>
+      </section><!-- End Services Section -->
 
-        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo d-block text-center" data-aos="zoom-in" data-aos-delay="100">
-              <div class="h2"><a class="font-monospace text-dark" href="#clients"><strong>Your Logo</strong></a></div>
-              <strong class="text-success">name</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo d-block text-center" data-aos="zoom-in" data-aos-delay="100">
-              <div class="h2"><a href="#clients"><strong>Your Logo</strong></a></div>
-              <strong class="text-danger">Incorrect</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo text-center" data-aos="zoom-in" data-aos-delay="100">
-              <div class="h2"><a class="your-logo" href="#clients">Your Logo</a></div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo text-center" data-aos="zoom-in" data-aos-delay="100">
-              <div class="h2"><a class="font-italic text-danger" href="#clients">Company Name</a></div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="250">
-              <img src="{% static 'client/img/clients/client-5.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="300">
-              <img src="{% static 'client/img/clients/client-6.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="350">
-              <img src="{% static 'client/img/clients/client-7.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="client-logo">
-              <img src="{% static 'client/img/clients/client-8.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Clients Section -->
-
-  <hr>
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="npa" class="portfolio-details">

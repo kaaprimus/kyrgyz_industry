@@ -17,7 +17,9 @@ a {
   color: #3498db;
   text-decoration: none;
 }
-
+.news-link{
+  color: #3498db;
+}
 .news-link:hover {
   color: #204156 !important;
   text-decoration: none;
@@ -44,8 +46,12 @@ h6 {
   width: 100%;
   max-width: 100% !important;
 }
-.btn-refresh :hover{
-  color: #3498db;
+.btn-outline-dark:hover{
+  background-color: #3498db !important;
+  border-color: #3498db !important;
+}
+.btn-refresh:hover{
+  color: #3498db !important;
 }
 
 .your-logo {
@@ -56,7 +62,6 @@ h6 {
 
 .search-form {
   display: flex;
-  margin-left: 65%;
 }
 
 .spinner-box{
@@ -67,75 +72,6 @@ h6 {
 }
 .img-team{
   width: 100%;
-}
-
-.hot-img{
-  height: 600px;
-}
-
-
-@media screen and (max-width: 768px) {
-  .hot-img{
-    height: 300px;
-  }
-  /* Swiper slides */
-/* .hotnews-slider .swiper-slide {
-	position: relative;
-} */
-.caption .hot-news-container h3{
-  font-size: 16px;
-
-} 
-.caption{
-  top: 50% !important;
-  left: 10% !important;
-}
-.caption .hot-news-container p{
-  font-size: 12px;
-}
-.hotnews-slider .swiper-pagination .swiper-pagination-bullet{
-  width: 12px !important;
-  height: 12px !important;
-}
-
-.hotnews-slider .next:after,
-.hotnews-slider .prev:after{
-    font-size: 30px !important;
-}
-
-.section-title {
-  text-align: center;
-  padding-bottom: 20px;
-}
-
-.section-title h2 {
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  position: relative;
-  color: #222222;
-}
-
-.section-title h2::before,
-.section-title h2::after {
-  content: "";
-  width: 50px;
-  height: 2px;
-  background: #3498db;
-  display: inline-block;
-}
-
-.section-title h2::before {
-  margin: 0 15px 10px 0;
-}
-
-.section-title h2::after {
-  margin: 0 0 10px 15px;
-}
-
-.section-title p {
-  margin: 15px 0 0 0;
-}
 }
 
 /*--------------------------------------------------------------
@@ -202,10 +138,13 @@ h6 {
   }
 
   .search-form{
-    display: flex;
-    margin-left: 0%;
+    padding-top: 10px;
+  
   }
-
+  .search-form .form-control{
+    font-size: 14px !important;
+  }
+ 
   .news-link:hover {
     color: #204156 !important;
     text-decoration: none;
@@ -222,7 +161,7 @@ h6 {
   }
   
   .section-title h2 {
-    font-size: 20px;
+    font-size: 25px !important;
     font-weight: bold;
     text-transform: uppercase;
     position: relative;
@@ -232,7 +171,7 @@ h6 {
   .section-title h2::before,
   .section-title h2::after {
     content: "";
-    width: 50px;
+    width: 40px !important;
     height: 2px;
     background: #3498db;
     display: inline-block;
@@ -248,6 +187,10 @@ h6 {
   
   .section-title p {
     margin: 15px 0 0 0;
+  }
+
+  .news-container{
+    flex-direction: column;
   }
 }
 
@@ -761,7 +704,26 @@ h6 {
     padding: 30px 0;
     position: relative;
   }
-  
+.section-title h2::before,
+.section-title h2::after {
+  content: "";
+  width: 50px;
+  height: 2px;
+  background: #3498db;
+  display: inline-block;
+}
+
+.section-title h2::before {
+  margin: 0 15px 10px 0;
+}
+
+.section-title h2::after {
+  margin: 0 0 10px 15px;
+}
+
+.section-title p {
+  margin: 15px 0 0 0;
+}
   .section-title h2 {
     font-size: 32px;
     font-weight: 700;
@@ -873,6 +835,7 @@ h6 {
   margin-bottom: 0;
 }
 
+.more-news .btn-learn-more,
 .about .content .btn-learn-more {
   font-family: "Raleway", sans-serif;
   font-weight: 600;
@@ -889,13 +852,18 @@ h6 {
   margin-top: 6px;
   border: 2px solid #3498db;
 }
-
+.more-news .btn-learn-more:hover,
 .about .content .btn-learn-more:hover {
   background: #3498db;
   color: #fff;
   text-decoration: none;
 }
 
+.more-news .btn-learn-more:hover{
+  background: #3498db;
+  color: #fff;
+  text-decoration: none;
+}
   /*--------------------------------------------------------------
   # Counts
   --------------------------------------------------------------*/
@@ -980,6 +948,88 @@ h6 {
 }
 
 .services .icon-box:hover h4 a {
+  color: #3498db;
+}
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.contests .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.contests .icon-box::before {
+  content: "";
+  position: absolute;
+  background: #e1f0fa;
+  right: -60px;
+  top: -40px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+.contests .icon-box:hover::before {
+  background: #3498db;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+}
+
+.contests .icon {
+  margin: 0 auto 20px auto;
+  padding-top: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background: #3498db;
+  transition: all 0.3s ease-in-out;
+}
+
+.contests .icon i {
+  font-size: 36px;
+  line-height: 1;
+  color: #fff;
+}
+.contests .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.contests .title a {
+  color: #111;
+}
+
+.contests .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+
+.contests .icon-box:hover .title a,
+.contests .icon-box:hover .description,
+.contests .icon-box:hover .read-more a{
+  color: #fff !important;
+}
+
+.contests .icon-box:hover .icon {
+  background: #fff;
+}
+
+.contests .icon-box:hover .icon i {
   color: #3498db;
 }
 
