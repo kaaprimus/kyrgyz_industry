@@ -168,7 +168,7 @@ class News(models.Model):
     Title=models.CharField(max_length=100,verbose_name="Заголовок новости", unique=True,error_messages={'unique':"Новость с таким названием уже существует!"})
     Short_Description = models.CharField(max_length=200,verbose_name="Краткое описание")
     Description=RichTextField(verbose_name="Описание")
-    Date_added=models.DateTimeField(verbose_name="Дата публикации", default=now)
+    Date_added=models.DateField(verbose_name="Дата публикации", default=now)
     Language= models.CharField(
                                max_length = 10, 
                                choices = LanguageChoice.choices,
