@@ -107,6 +107,16 @@ urlpatterns = [
     path('admin-panel/reports/create/', views.ReportsCreateView.as_view(), name='reports_create'),
     path('admin-panel/reports/update/<int:pk>/', views.ReportsUpdateView.as_view(), name='reports_update'),
     path('admin-panel/reports/delete/<int:id>/', views.reports_delete, name='reports_delete'),
+
+    # Statictics View
+    path('admin-panel/statistics/', views.StatisticsListView.as_view(), name = 'statistics_all'),
+    path('admin-panel/statistics/create/', views.StatisticsCreateView.as_view(), name ='statistics_create'),
+    path('admin-panel/statistics/update/<int:pk>/', views.StatisticsUpdateView.as_view(), name ='statistics_update'),
+
+    # Regulations View
+    path('admin-panel/regulations/', views.RegulationsListView.as_view(), name = 'regulations_all'),
+    path('admin-panel/regulations/create/', views.RegulationsCreateView.as_view(), name ='regulations_create'),
+    path('admin-panel/regulations/update/<int:pk>/', views.RegulationsUpdateView.as_view(), name ='regulations_update'),
     
     # Static Pages
     path('about_company', views.about_company, name='about_company'),

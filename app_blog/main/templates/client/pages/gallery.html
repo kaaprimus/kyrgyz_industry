@@ -39,9 +39,9 @@
 
         {% for value in news_photo %}
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap w-100 h-100">
+          <div class="portfolio-wrap">
             <img src="/{{ value.URL }}" class="img-fluid" alt="">
-            <div class="portfolio-info">
+            <div class="portfolio-info"> 
               <h4>{{ value.Caption }}</h4>
               <div class="portfolio-links">
                 <a href="/{{ value.URL }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ value.Caption }}"><i class='bx bx-collapse-alt'></i></a>
@@ -53,7 +53,7 @@
         
         {% for value in projects_photo %}
         <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap w-100 h-100">
+          <div class="portfolio-wrap">
             <img src="/{{ value.URL }}" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>{{ value.Caption }}</h4>
@@ -147,9 +147,9 @@
 {% block custom_js %}
 <script src="{% static 'client/vendor/jquery/jquery.min.js' %}"></script>
 <script>
-  $(document).ready(function(){
-    let li = $("#portfolio-flters li").eq(0);
-    li.click()
-  })
+  window.onload=function(){
+    document.getElementById("start-click").click();
+  };
+    
 </script>
 {% endblock %}

@@ -14,15 +14,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
   
 
-<!-- ======= Hero Section ======= -->
 <section id="hero">
   <div class="hero-container">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-
       <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-
       <div class="carousel-inner" role="listbox">
-        <!-- Slide 1 -->
         <div class="carousel-item active" style="background-image: url({% static 'client/img/slider/slide-2.jpg' %});">
           <div class="carousel-container">
             <div class="carousel-content">
@@ -32,8 +28,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Slide 2 -->
         <div class="carousel-item" style="background-image: url({% static 'client/img/slider/slide-3.jpg' %});">
           <div class="carousel-container">
             <div class="carousel-content">
@@ -43,8 +37,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Slide 3 -->
         <div class="carousel-item" style="background-image: url({% static 'client/img/slider/slide-4.jpg' %});">
           <div class="carousel-container">
             <div class="carousel-content">
@@ -54,7 +46,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
@@ -67,9 +58,7 @@
 
     </div>
   </div>
-</section><!-- End Hero -->
-
-
+</section>
 
   <main id="main">
     
@@ -94,9 +83,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 d-flex justify-content-center mt-3 more-news aos-init aos-animate" data-aos="fade-up">
-              <a href="{% url 'news' %}" id="more-news" class="btn-learn-more" >{% translate "Показать больше" %}</a>
-            </div>
+           
             {% empty %}
             <div class="section-title" data-aos="fade-up">
               <h4>{% translate "Нет новостей" %}</h4>
@@ -113,6 +100,9 @@
                         func();
               </script>
             {% endfor %}
+            <div class="col-12 d-flex justify-content-center mt-3 more-news aos-init aos-animate" data-aos="fade-up">
+              <a href="{% url 'news' %}" id="more-news" class="btn-learn-more" >{% translate "Показать больше" %}</a>
+            </div>
             {% else %}
             <div class="section-title" data-aos="fade-up">
               <h5 class="text-danger">{% translate "Ошибка: В какой-то галереи не добавлены не одной фотографии" %}</h5>
@@ -122,45 +112,8 @@
       
        
       </div>
-    </section><!-- End More Services Section -->
+    </section>
 
-    {% comment %}
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
-      <div class="container">
-
-        <div class="row">
-          <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-xl-start" data-aos="fade-right" data-aos-delay="150">
-            <img src="{% static 'client/img/counts-img.svg' %}" alt="" class="img-fluid">
-          </div>
-
-          <div class="col-xl-7 d-flex align-items-stretch pt-4 pt-xl-0" data-aos="fade-left" data-aos-delay="300">
-            <div class="content d-flex flex-column justify-content-center">
-              <div class="row">
-
-                <div class="col-md-6 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="ri-chrome-fill"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
-                    <p><strong>{% translate "Реализованные" %}</strong> {% translate "Проекты" %}</p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 d-md-flex align-items-md-stretch">
-                  <div class="count-box">
-                    <i class="ri-chrome-fill"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>{% translate "Количество созданных" %} <strong>{% translate "Рабочих мест" %}</strong></p>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End .content-->
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Counts Section -->
-    {% endcomment %}
      <!-- ======= Counts Section ======= -->
      <section id="counts" class="counts">
       <div class="container position-relative">
@@ -255,6 +208,7 @@
       </section><!-- End Services Section -->
     
     <!-- ======= Contact Section ======= -->
+    <!--
     <section id="contact" class="contact">
       <div class="container">
 
@@ -276,27 +230,6 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="info">
-              <div>
-                <i class="ri-map-pin-line"></i>
-                <p>{% translate "г. Бишкек, пр. Чуй, 106" %}</p>
-              </div>
-
-              <div>
-                <a href="mailto:kyrgyzindustry@gmail.com">
-                <i class="ri-mail-send-line"></i>
-                <p>kyrgyzindustry@gmail.com</p>
-                </a>
-              </div>
-
-              <div>
-                <i class="ri-phone-line"></i>
-                <p>+996 (312) 665252</p>
-              </div>
-
-            </div>
-          </div>
 
           <div class="col-lg-5 col-md-12 yandex-map" data-aos="fade-up" data-aos-delay="300">
             <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A09bfc1dbae904e7d973d68617001bb7a3425b92e85385c19cde82e2b3eae920d&amp;width=500&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
@@ -305,7 +238,7 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section>-- End Contact Section -->
 
   </main><!-- End #main -->
 

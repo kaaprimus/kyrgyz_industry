@@ -324,8 +324,8 @@ class Interviews(models.Model):
 
 
 class Reports(models.Model):
-    title = models.CharField(verbose_name='Название отчета', max_length=80, unique=True,error_messages={'unique':"Отчет с таким названием уже существует!"})
-    short_description = models.CharField(verbose_name='Краткое описание', max_length=130)
+    title = models.CharField(verbose_name='Название отчета', max_length=120, unique=True,error_messages={'unique':"Отчет с таким названием уже существует!"})
+    short_description = models.CharField(verbose_name='Краткое описание', max_length=200)
     language=models.CharField(
                                max_length = 10, 
                                choices = LanguageChoice.choices,
@@ -344,4 +344,29 @@ class Reports(models.Model):
         return self.caption
     class Meta: 
         ordering = ['-id']
+        
+        
+class Statistic(models.Model):
+    completed_projects = models.IntegerField(verbose_name='Завершенные проекты')
+    work_places = models.IntegerField(verbose_name='Рабочие места')
+    projects_in_perspective = models.IntegerField(verbose_name='Проекты в перспективе')
+    something_else = models.IntegerField(verbose_name='Что-то другое')
+
+
+class Regulations(models.Model):
+    title = models.CharField(verbose_name='Название Документа', max_length=250, unique=True,error_messages={'unique':"Файл с таким названием уже существует!"})
+    language=models.CharField(
+                               max_length = 10, 
+                               choices = LanguageChoice.choices,
+                               default = LanguageChoice.RU,
+                               verbose_name = "Язык",
+                               )
+    url = models.FileField(
+        
+        verbose_name='Путь файла',
+        upload_to=get_file_path, 
+        validators=[FileExtensionValidator(['pdf','doc', 'docx'])]
+        )
+
+    path_url = "static/client/docs/reports/"
     

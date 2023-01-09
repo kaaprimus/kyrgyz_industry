@@ -381,10 +381,47 @@ class ReportsForm(ModelForm):
     
         widgets = {
             'title' : TextInput(
-                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название интервью","size" : 80, 'required': True}
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название интервью","size" : 120, 'required': True}
             ),
             'short_description' : TextInput(
-                attrs = {"type" : "text", "class" : "form-control", "id" : "company", "placeholder" : "Краткое описание","size" : 130, 'required': True}
+                attrs = {"type" : "text", "class" : "form-control", "id" : "company", "placeholder" : "Краткое описание","size" : 200, 'required': True}
+            ),
+            'language' : forms.Select(
+                attrs={"class": "form-control", 'required': True,  "id" : "language"},
+                choices=LanguageChoice.choices
+            )
+        }
+        
+        
+class StatisticsForm(ModelForm):
+    class Meta:
+        model = Statistic
+        fields = ['completed_projects', 'work_places','projects_in_perspective', 'something_else']
+    
+        completed_projects = forms.IntegerField(required=True, widget=forms.NumberInput(
+        attrs={'type':'number', 'min': '0', 'max': '10000', 'step': '1'},
+        ))
+
+        work_places = forms.IntegerField(required=True, widget=forms.NumberInput(
+        attrs={'type':'number', 'min': '0', 'max': '10000', 'step': '1'},
+        ))
+
+        projects_in_perspective = forms.IntegerField(required=True, widget=forms.NumberInput(
+        attrs={'type':'number', 'min': '0', 'max': '10000', 'step': '1'},
+        ))
+
+        something_else = forms.IntegerField(required=True, widget=forms.NumberInput(
+        attrs={'type':'number', 'min': '0', 'max': '10000', 'step': '1'},
+        ))
+
+class RegulationsForm(ModelForm):
+    class Meta:
+        model = Regulations
+        fields = ['title', 'language', 'url']
+    
+        widgets = {
+            'title' : TextInput(
+                    attrs = {"type" : "text", "class" : "form-control", "id" : "title", "placeholder" : "Название интервью","size" : 250, 'required': True}
             ),
             'language' : forms.Select(
                 attrs={"class": "form-control", 'required': True,  "id" : "language"},

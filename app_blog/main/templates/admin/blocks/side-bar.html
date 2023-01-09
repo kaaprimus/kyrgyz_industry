@@ -82,51 +82,37 @@
         </li>
 
         <li class="nav-item" id="vacancies-panel">
-          <a class="nav-link" data-toggle="collapse" href="#vacanciese" aria-expanded="{% if expand_vacancies %}true{% else %}false{% endif %}" aria-controls="vacanciese">
+          <a class="nav-link" href="{% url 'vacancies_all' %}" aria-expanded="{% if expand_vacancies %}true{% else %}false{% endif %}" aria-controls="vacanciese">
             <span class="menu-title">Вакансии</span>
             <i class="icon-grid menu-icon"></i>
           </a>
-          <div class="collapse{% if expand_vacancies %}show{% endif %}" id="vacanciese">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link {% if active_vacancies %}active{% endif %}" href="{% url 'vacancies_all' %}">Все вакансии</a></li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="nav-item" id="blocks-panel">
-          <a class="nav-link" data-toggle="collapse" href="#blocks" aria-expanded="{% if expand_blocks %}true{% else %}false{% endif %}" aria-controls="blocks">
-            <span class="menu-title">Блоки</span>
-            <i class="icon-grid menu-icon"></i>
-          </a>
-          <div class="collapse{% if expand_blocks %}show{% endif %}" id="blocks">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link {% if active_blocks %}active{% endif %}" href="{% url 'blocks_all' %}">Все блоки</a></li>
-            </ul>
-          </div>
         </li>
 
         <li class="nav-item" id="interviews-panel">
-          <a class="nav-link" data-toggle="collapse" href="#interviews" aria-expanded="{% if expand_interviews %}true{% else %}false{% endif %}" aria-controls="interviews">
+          <a class="nav-link" href="{% url 'interviews_all' %}" aria-expanded="{% if expand_interviews %}true{% else %}false{% endif %}" aria-controls="interviews">
             <span class="menu-title">Интервью</span>
             <i class="icon-link menu-icon"></i>
           </a>
-          <div class="collapse {% if expand_interviews %}show{% endif %}" id="interviews">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link {% if active_interviews %}active{% endif %}" href="{% url 'interviews_all' %}">Все Интервью</a></li>
-            </ul>
-          </div>
         </li>
 
         <li class="nav-item" id="reports-panel">
-          <a class="nav-link" data-toggle="collapse" href="#reports" aria-expanded="{% if expand_reports %}true{% else %}false{% endif %}" aria-controls="reports">
+          <a class="nav-link" href="{% url 'reports_all' %}" aria-expanded="{% if expand_reports %}true{% else %}false{% endif %}" aria-controls="reports">
             <span class="menu-title">Отчеты</span>
             <i class="icon-pie-chart menu-icon"></i>
           </a>
-          <div class="collapse {% if expand_reports %}show{% endif %}" id="reports">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link {% if active_reports %}active{% endif %}" href="{% url 'reports_all' %}">Все Отчеты</a></li>
-            </ul>
-          </div>
+        </li>
+
+        <li class="nav-item" id="statistics-panel">
+          <a class="nav-link" href="{% url 'statistics_all' %}" aria-expanded="{% if expand_statistics %}true{% else %}false{% endif %}" aria-controls="statistics">
+            <span class="menu-title">Статистика</span>
+            <i class="icon-chart menu-icon"></i>
+          </a>
+        </li>
+        <li class="nav-item" id="regulations-panel">
+          <a class="nav-link" href="{% url 'regulations_all' %}" aria-expanded="{% if expand_regulations %}true{% else %}false{% endif %}" aria-controls="regulations">
+            <span class="menu-title">НПА</span>
+            <i class="icon-chart menu-icon"></i>
+          </a>
         </li>
         
         <li class="nav-item nav-category"><span class="nav-link">Руководство</span></li>

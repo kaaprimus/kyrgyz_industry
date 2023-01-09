@@ -265,7 +265,7 @@ msgstr "Read"
 #: .\main\templates\client\index.html:127
 #: .\main\templates\client\pages\news.html:41
 msgid "Нет новостей"
-msgstr "No news"
+msgstr "Not news"
 
 #: .\main\templates\client\index.html:143
 #: .\main\templates\client\index.html:302

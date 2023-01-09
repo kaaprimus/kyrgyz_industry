@@ -40,12 +40,12 @@ msgstr ""
 
 #: .\main\templates\client\blocks\header.html:7
 msgid "Открытое Акционерное Общество"
-msgstr ""
+msgstr "Ачык Акционердик Коому"
 
 #: .\main\templates\client\blocks\header.html:15
 #: .\main\templates\client\pages\sitemap.html:30
 msgid "О нас"
-msgstr ""
+msgstr "Биз жөнүндө"
 
 #: .\main\templates\client\blocks\header.html:17
 #: .\main\templates\client\pages\about_company.html:15

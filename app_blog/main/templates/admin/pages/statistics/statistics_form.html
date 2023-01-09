@@ -1,0 +1,83 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+{% block content %}
+
+{% url "reports_create"  as url_path %}
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">{% if request.path == url_path %}Добавление{% else%}Изменение{% endif %}  Статистику</h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'reports_all' %}">Статистика</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{% if request.path == url_path %}Добавить{% else%}Изменить{% endif %} запись</li>
+        </ol>
+      </nav>
+    </div>
+    {% if messages %} 
+        {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div class="alert alert-danger alert-dismissible" role="alert">{{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% elif message.tags == "success" %}
+            <div class="alert alert-success alert-dismissible" role="alert">{{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card shadow-lg">
+        <div class="card-body">
+            <h4 class="card-title">{% if request.path == url_path %}Добавить{% else%}Изменить{% endif %} Запись</h4>
+            <form class="forms-sample" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.completed_projects.id_for_label }}" class="font-weight-bold">Количество Реализованных проектов:</label>
+                {{ form.completed_projects }}
+                {{ form.completed_projects.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.work_places.id_for_label }}" class="font-weight-bold">Количество созданных рабочих мест:</label>
+                {{ form.work_places }}
+                {{ form.work_places.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.short_description.id_for_label }}" class="font-weight-bold">Проекты в Перспективе:</label>
+                {{ form.projects_in_perspective }}
+                {{ form.projects_in_perspective.errors }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.short_description.id_for_label }}" class="font-weight-bold">Еще что-то:</label>
+                {{ form.something_else }}
+                {{ form.something_else.errors }}
+            </div>
+            <div class="form-group">
+                {% url 'statistics_all' as statistics %}
+                <button txype="submit" class="btn btn-primary mr-2">Сохранить</button>
+                <a href="{% url 'statistics_all'%}"  class="btn btn-light">Отменить</a>
+            </div>
+         </form>
+       
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block custom_js%}
+<!-- plugins:js -->
+<script src="{% static 'admin-panel/vendors/js/vendor.bundle.base.js' %}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="{% static 'admin-panel/js/off-canvas.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page -->
+<!-- End custom js for this page -->
+{% endblock custom_js %}

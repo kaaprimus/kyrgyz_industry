@@ -227,7 +227,7 @@ def get_president_position(language):
 
 def get_translated_position(language):
     if language == "en":
-        position = "Vice President"
+        position = "Vice-President"
     elif language == "zh-hans":
         position = "副总统"
     else:
@@ -237,7 +237,7 @@ def get_translated_position(language):
 
 def get_advisor(language):
     if language == "en":
-        position = "advisor"
+        position = "Advisor"
     elif language == "zh-hans":
         position = "顾问"
     elif language == "ru":
@@ -1686,7 +1686,7 @@ def reports_delete(request, id):
             "active_reports" : "active",
             "expand_reports" : "show",
     }
-    obj = get_object_or_404(ReportsView, id = id)
+    obj = get_object_or_404(Reports, id = id)
     if request.method =="POST":
         
         try:
@@ -1701,4 +1701,61 @@ def reports_delete(request, id):
             return redirect("reports_delete")
  
     return render(request, "admin/pages/reports/reports_confirm_delete.html", context)    
+
+
+class StatisticsView(View):
+    model = Statistic
+    form_class = StatisticsForm
+    active_panel = "statistics-panel"
+    success_url = reverse_lazy("statistics_create")
+    extra_context = {
+        "is_active" : active_panel,
+        "active_statistics" : "active",
+        "expand_statistics" : "show",
+        }
+    
+class StatisticsListView(LoginRequiredMixin, StatisticsView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/statistics/statistics_list.html"
+    paginate_by = 10
+
+class StatisticsCreateView(LoginRequiredMixin, SuccessMessageMixin, StatisticsView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/statistics/statistics_form.html'
+    success_message = "Запись успешно Добавлена!"  
+
+class StatisticsUpdateView(LoginRequiredMixin, SuccessMessageMixin, StatisticsView, UpdateView):
+    login_url = "login_page"
+    template_name = "admin/pages/statistics/statistics_form.html"
+    success_url = reverse_lazy("statistics_all")
+    success_message = "Запись успешно Обновлена!"
+
+
+class RegulationsView(View):
+    model = Regulations
+    form_class = RegulationsForm
+    active_panel = "regulations-panel"
+    success_url = reverse_lazy("regulations_create")
+    extra_context = {
+        "is_active" : active_panel,
+        "active_regulations" : "active",
+        "expand_regulations" : "show",
+        }
+    
+class RegulationsListView(LoginRequiredMixin, RegulationsView, ListView):
+    login_url = "login_page"
+    template_name = "admin/pages/regulations/regulations_list.html"
+    paginate_by = 10
+
+class RegulationsCreateView(LoginRequiredMixin, SuccessMessageMixin, RegulationsView, CreateView):
+    login_url = 'login_page'
+    template_name = 'admin/pages/regulations/regulations_form.html'
+    success_message = "Запись успешно Добавлена!"  
+
+class RegulationsUpdateView(LoginRequiredMixin, SuccessMessageMixin, RegulationsView, UpdateView):
+    login_url = "login_page"
+    template_name = "admin/pages/regulations/regulations_form.html"
+    success_url = reverse_lazy("regulations_all")
+    success_message = "Запись успешно Обновлена!"
+ 
 
