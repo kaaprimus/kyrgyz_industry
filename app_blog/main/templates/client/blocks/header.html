@@ -30,7 +30,7 @@
             <li><a href="{% url 'about_company' %}#about">{% translate "Об обществе" %}</a></li>
             <li><a href="{% url 'about_company' %}#team">{% translate "Руководство" %}</a></li>
             <li><a href="{% url 'about_company'%}#activity">{% translate "Блоки" %}</a></li>
-            <li><a href="#clients">{% translate "Наши пратнеры" %}</a></li>
+            <li><a href="{% url 'vacancies' %}">{% translate "Вакансии" %}</a></li>
             <li><a href="{% url 'about_company' %}#npa">{% translate "Нормативно-правовая база" %}</a></li>
           </ul>
         </li>
@@ -38,7 +38,7 @@
           <ul>
             <li><a href="{% url 'invest'%}">{% translate "Инвестиционный кейс" %}</a></li>
             <li><a href="{% url 'strategy' %}">{% translate "Стратегия развития" %}</a></li>
-            <li><a href="{% url 'projects' %}">{% translate "Проекты и презентации" %}</a></li>
+            <li><a href="{% url 'projects' %}">{% translate "Наши проекты" %}</a></li>
             <li><a href="{% url 'reports' %}">{% translate "Отчеты и результаты" %}</a></li>
           </ul>
         </li>
@@ -53,7 +53,6 @@
         <li class="dropdown"><a href="#"><span>{% translate "Закупки" %}</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
             <li><a href="{% url 'contests' %}">{% translate "Конкурсы" %}</a></li>
-            <li><a href="{% url 'vacancies' %}">{% translate "Вакансии" %}</a></li>
           </ul>
         </li>
         <li><a class="nav-link" href="{% url 'feedback' %}">{% translate "Свяжитесь с нами" %}</a></li>

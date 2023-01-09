@@ -55,8 +55,8 @@ class NewsForm(ModelForm):
             'Description' : Textarea(
                 attrs = {"class" : "form-control", "id" : "description", "placeholder" : "Полное содержание", 'required': True}
                 ),
-            'Date_added' : DateTimeInput(
-                attrs={'type': 'datetime-local', "class" : "form-control", "id" : "date_created", "required" : False}
+            'Date_added' : DateInput(
+                attrs={'type': 'date', "class" : "form-control", "id" : "date_created", "required" : False}
                 ),
             'Language' : forms.Select(
                 attrs={"class": "form-control", 'required': True,  "id" : "language"},

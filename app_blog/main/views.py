@@ -76,10 +76,10 @@ from django.template.loader import render_to_string
 """
 
 def password_reset_request(request):
-    settings.EMAIL_HOST_USER='zenisbekovk04@gmail.com'
-    settings.EMAIL_HOST_PASSWORD='zwhojtjglgpyguxw'
+    settings.EMAIL_HOST_USER='kyrgyzindustry.portal.01@gmail.com'
+    settings.EMAIL_HOST_PASSWORD='jenpktauntyqbeum'
     if request.method == "POST":
-        print("nen")
+        
         password_reset_form = UserPasswordResetForm(request.POST)
         if password_reset_form.is_valid():
             data = password_reset_form.cleaned_data['email']
@@ -98,13 +98,13 @@ def password_reset_request(request):
                         'protocol': 'http',
                         }
                     email = render_to_string(email_template_name, c)
-                    print(email)
+                    
                     try:
                         send_mail(subject, email, 'zenisbekovk04@gmail.com' , [user.email], fail_silently=False)
                     except BadHeaderError:
-                        print("nen2")
+                        
                         return HttpResponse('Invalid header found.')
-                    print("nen2")
+                    
                     return redirect ("/accounts/password_reset/done/")
     password_reset_form = UserPasswordResetForm()
     return render(request=request, template_name="admin/pages/user/password_reset.html", context={"password_reset_form":password_reset_form})
@@ -754,14 +754,13 @@ def send_message(request):
     sucs=True
     if request.method == 'POST':
         
-        settings.EMAIL_HOST_USER='zenisbekovk04@gmail.com'
-        settings.EMAIL_HOST_PASSWORD='zwhojtjglgpyguxw'
+        settings.EMAIL_HOST_USER='kyrgyzindustry.portal.01@gmail.com'
+        settings.EMAIL_HOST_PASSWORD='jenpktauntyqbeum'
 
         Name = request.POST.get('name', '')
         message = request.POST.get('message', '')
-        to_email = 'zenisbekovk04@gmail.com'
-        request.POST.get('email', '')
-        from_email ='zenisbekovk04@gmail.com'
+        to_email = 'kyrgyzindustry.portal.01@gmail.com'
+        from_email =request.POST.get('email', '')
         subject = "Сообщение от пользователей" 
         valid=validate_email(from_email,verify=True)
         if valid==True:
