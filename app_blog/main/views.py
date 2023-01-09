@@ -146,7 +146,14 @@ def get_lang(trans):
 
 def index(request):
     trans = translate(language='ru')
-    
+
+    stat = None
+    not_exist = False
+    try:
+        stat = Statistic.objects.get()  
+    except Statistic.DoesNotExist:
+        not_exist = True
+
     news = News.objects.filter(Language = get_lang(trans=trans)).order_by('-Date_added')[:4]
     hot_news = HotNews.objects.filter(Language = get_lang(trans=trans)).order_by('-pub_date')[:5]
     
@@ -177,7 +184,9 @@ def index(request):
         'trans':trans,
         'news_page':news_image_mixed,
         'hot_news' : hot_news_mixed,
-        "error" : error
+        "error" : error,
+        'not_exist':not_exist,
+        'stat':stat
         }
     return render(request, "client/index.html", context)
 
@@ -246,6 +255,14 @@ def get_advisor(language):
         position = "Кеңешчи"
 
     return position
+
+def get_status(Status):
+    if Status == "Реализованные":
+        status = "Реализованные"
+    elif Status == "В перспективе":
+        status = "В перспективе"
+
+    return status
 
 def about_company(request):
     trans = translate(language='ru')
@@ -417,7 +434,7 @@ def projects(request):
     if search_projects:
         posts = Projects.objects.filter(Q(Title__icontains=search_projects) | Q(Short_Description__icontains=search_projects))
     else:
-        posts = Projects.objects.all().filter(Language = get_lang(trans=trans)).order_by("-id")
+        posts = Projects.objects.all().filter(Language = get_lang(trans=trans), Status = 'Реализованные').order_by("-id")
 
     per_page = 6
      # Получаем первую фотографию под новостями
@@ -638,15 +655,24 @@ def gallery_page(request):
 
 # npa 
 def npa(request):
+    trans = translate(language='ru')
+    actual_url = request.path.split('/')[2]
+
+    doc = None
     error = False
+
     try:
-        doc = Regulations.objects.last()
+        doc=Regulations.objects.get(language = get_lang(trans=trans))
     except Exception as e:
         error = True
+
     context = {
-        "document":doc
+        "document":doc,
+        "actual_url":actual_url,
+        'trans':trans,
     }
     return render(request, 'client/pages/NPA.html', context)
+
 # Карта сайта 
 def sitemap(request):
     actual_url = request.path.split('/')[2]
