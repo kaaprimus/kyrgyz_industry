@@ -122,6 +122,7 @@ urlpatterns = [
     path('about_company', views.about_company, name='about_company'),
     path('about_us_full_info', views.about_us_full_info, name='about_us_full_info'),
     path('president', views.president, name='president'),
+    path('npa/', views.npa, name='npa'),
     path('gallery/', views.gallery_page, name='gallery'),
     path('gallery_page/<int:number_page>/', views.gallery_page, name='gallery'),
     path('news/', views.news, name='news'),

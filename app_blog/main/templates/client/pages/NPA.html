@@ -15,30 +15,28 @@
           <h2>{{vacancy_title.title}}</h2>
           <ol>
             <li><a href="{% url 'index'%}">{% translate "Главная"%}</a></li>
-            <li><a href="{% url 'documents_npa'%}">{% translate "Нормативно правовые акты"%}</a></li>
+            <li>{% translate "Нормативно правовые акты"%}</li>
           </ol>
         </div>
       </div>
     </section><!-- End Breadcrumbs -->
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
+    <section id="npa" class="portfolio-details">
       <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-4" style="margin: auto; width: 80%;">
-            <div class="portfolio-info" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm-12 col-lg-12">
+            <div class="portfolio-info text-center portfolio-info-sm">
               <h3>{% translate "Нормативно правовые акты"%}</h3>
-              <p>{% translate "Типовой порядок организации и осуществления закупок государственными и муниципальными предприятиями, хозяйственными обществами, где 50 и более процентов доли участия в уставном капитале принадлежит государству, в том числе их дочерними хозяйственными обществами"%}</p>
+              <p class="text-justify">{% translate "Типовой порядок организации и осуществления закупок государственными и муниципальными предприятиями, хозяйственными обществами, где 50 и более процентов доли участия в уставном капитале принадлежит государству, в том числе их дочерними хозяйственными обществами"%}</p>
               <p>
                 
             </p>
-            <a href="{% static 'documents/Типовой-порядок.pdf' %}" class="btn-learn-more">{% translate "Документ" %}</a>
+            <a href="/{{document.url}}" class="btn-learn-more">{% translate "Документ" %}</a>
             </div>
           </div>
         </div>
 
       </div>
     </section><!-- End Portfolio Details Section -->
-
   </main><!-- End #main -->
 
 

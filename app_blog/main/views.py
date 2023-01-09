@@ -636,10 +636,21 @@ def gallery_page(request):
     return render(request, "client/pages/gallery.html", context)
 
 
+# npa 
+def npa(request):
+    error = False
+    try:
+        doc = Regulations.objects.last()
+    except Exception as e:
+        error = True
+    context = {
+        "document":doc
+    }
+    return render(request, 'client/pages/NPA.html', context)
 # Карта сайта 
 def sitemap(request):
     actual_url = request.path.split('/')[2]
-    return render(request, "client/pages/sitemap.hsendtml", {'actual_url':actual_url})
+    return render(request, "client/pages/sitemap.html", {'actual_url':actual_url})
 
 # Свяжитесь с нами
 def feedback(request):
